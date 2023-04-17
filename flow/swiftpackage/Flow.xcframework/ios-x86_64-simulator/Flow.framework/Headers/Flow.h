@@ -6,9 +6,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class FlowChainId, FlowChainIdCanary, FlowChainIdCustom, FlowChainIdEmulator, FlowChainIdMainnet, FlowChainIdSandboxnet, FlowChainIdTestnet, FlowCadenceValue, FlowAccount, FlowBlock, FlowBlockHeader, FlowCollection, FlowBlockEvents, FlowExecutionResult, FlowTransaction, FlowTransactionResult, FlowKotlinThrowable, FlowKotlinArray<T>, FlowKotlinException, FlowKotlinRuntimeException, FlowKotlinIllegalArgumentException, FlowRLPType, FlowKotlinByteArray, FlowRLPElement, FlowRLPList, FlowApiBaseCompanion, FlowKtor_client_coreHttpClient, FlowBase64ByteArrayCompanion, FlowBase64ByteArray, FlowBigDecimalCadenceSerializer, FlowBignumBigDecimal, FlowBigIntegerCadenceSerializer, FlowBignumBigInteger, FlowByteCadenceSerializer, FlowCadenceCompanion, FlowCadenceType, FlowCadenceCapabilityCompanion, FlowCadenceCapability, FlowCadenceValueAddressValue, FlowCadenceValueArrayValue, FlowCadenceValueBooleanValue, FlowCadenceValueCapabilityValue, FlowCadenceValueContractValue, FlowCadenceCompositeValue, FlowCadenceValueDictionaryValue, FlowCadenceDictionaryFieldEntry, FlowCadenceValueFix64Value, FlowCadenceValueIntValue, FlowCadenceValueInt128Value, FlowCadenceValueInt16Value, FlowCadenceValueInt256Value, FlowCadenceValueInt32Value, FlowCadenceValueInt64Value, FlowCadenceValueInt8Value, FlowCadenceValueOptionalValue, FlowCadenceValuePathValue, FlowCadencePath, FlowCadencePathDomain, FlowCadenceValueStringValue, FlowCadenceValueStructValue, FlowCadenceValueTypeValue, FlowCadenceKind, FlowCadenceTypeEntry, FlowCadenceValueUFix64Value, FlowCadenceValueUIntValue, FlowCadenceValueUInt128Value, FlowCadenceValueUInt16Value, FlowCadenceValueUInt256Value, FlowCadenceValueUInt32Value, FlowCadenceValueUInt64Value, FlowCadenceValueUInt8Value, FlowCadenceValueVoidValue, FlowCadenceValueWord16Value, FlowCadenceValueWord32Value, FlowCadenceValueWord64Value, FlowCadenceValueWord8Value, FlowCadenceCompositeAttributeCompanion, FlowCadenceCompositeAttribute, FlowCadenceCompositeValueCompanion, FlowKotlinPair<__covariant A, __covariant B>, FlowCadenceDictionaryFieldEntryCompanion, FlowCadenceKindCompanion, FlowCadencePathCompanion, FlowKotlinEnumCompanion, FlowKotlinEnum<E>, FlowCadencePathDomainCompanion, FlowCadenceTypeCompanion, FlowCadenceTypeEntryCompanion, FlowCadenceValueCompanion, FlowCadenceValueAddressValueCompanion, FlowCadenceValueArrayValueCompanion, FlowCadenceValueBooleanValueCompanion, FlowCadenceValueCapabilityValueCompanion, FlowKotlinx_serialization_jsonJsonElement, FlowKotlinx_serialization_jsonJson, FlowCadenceValueContractValueCompanion, FlowCadenceValueDictionaryValueCompanion, FlowCadenceValueEnumValueCompanion, FlowCadenceValueEnumValue, FlowCadenceValueEventValueCompanion, FlowCadenceValueEventValue, FlowCadenceValueFix64ValueCompanion, FlowCadenceValueInt128ValueCompanion, FlowCadenceValueInt16ValueCompanion, FlowCadenceValueInt256ValueCompanion, FlowCadenceValueInt32ValueCompanion, FlowCadenceValueInt64ValueCompanion, FlowCadenceValueInt8ValueCompanion, FlowCadenceValueIntValueCompanion, FlowCadenceValueOptionalValueCompanion, FlowCadenceValuePathValueCompanion, FlowCadenceValueResourceValueCompanion, FlowCadenceValueResourceValue, FlowCadenceValueStringValueCompanion, FlowCadenceValueStructValueCompanion, FlowCadenceValueTypeValueCompanion, FlowCadenceValueUFix64ValueCompanion, FlowCadenceValueUInt128ValueCompanion, FlowCadenceValueUInt16ValueCompanion, FlowCadenceValueUInt256ValueCompanion, FlowCadenceValueUInt32ValueCompanion, FlowCadenceValueUInt64ValueCompanion, FlowCadenceValueUInt8ValueCompanion, FlowCadenceValueUIntValueCompanion, FlowKotlinUnit, FlowCadenceValueVoidValueCompanion, FlowCadenceValueWord16ValueCompanion, FlowCadenceValueWord32ValueCompanion, FlowCadenceValueWord64ValueCompanion, FlowCadenceValueWord8ValueCompanion, FlowCadenceTypeSerializer, FlowDoubleCadenceSerializer, FlowFixedPointFormatter, FlowIntCadenceSerializer, FlowLongCadenceSerializer, FlowShortCadenceSerializer, FlowUByteCadenceSerializer, FlowUIntCadenceSerializer, FlowULongCadenceSerializer, FlowUShortCadenceSerializer, FlowAccountExpandable, FlowAccountPublicKey, FlowLinks, FlowAccountCompanion, FlowAccountExpandableCompanion, FlowSigningAlgorithm, FlowHashingAlgorithm, FlowAccountPublicKeyCompanion, FlowAggregatedSignatureCompanion, FlowAggregatedSignature, FlowBase64HexSerializer, FlowBase64UFT8Serializer, FlowBlockExpandable, FlowBlockPayload, FlowBlockCompanion, FlowEvent, FlowBlockEventsCompanion, FlowBlockExpandableCompanion, FlowBlockHeaderCompanion, FlowBlockHeightOneOfCompanion, FlowBlockHeightOneOf, FlowCollectionGuarantee, FlowBlockSeal, FlowBlockPayloadCompanion, FlowBlockSealCompanion, FlowCadenceBase64Serializer, FlowChunkCompanion, FlowChunk, FlowCollectionExpandable, FlowCollectionCompanion, FlowCollectionExpandableCompanion, FlowCollectionGuaranteeCompanion, FlowDomainTag, FlowDomainTagAccountProof, FlowDomainTagCustom, FlowDomainTagTransaction, FlowDomainTagUser, FlowErrorCompanion, FlowError, FlowEventCompanion, FlowExecutionResultCompanion, FlowHashingAlgorithmCompanion, FlowLinksCompanion, FlowProposalKeyCompanion, FlowProposalKey, FlowScriptsPostRequestCompanion, FlowScriptsPostRequest, FlowScriptsPostResponseCompanion, FlowScriptsPostResponse, FlowSigningAlgorithmCompanion, FlowTransactionSignature, FlowTransactionExpandable, FlowTransactionCompanion, FlowTransactionExecutionCompanion, FlowTransactionExecution, FlowTransactionExpandableCompanion, FlowTransactionStatus, FlowTransactionResultCompanion, FlowTransactionSignatureCompanion, FlowTransactionStatusCompanion, FlowFlowApi, FlowKotlinByteIterator, FlowBignumBigIntegerCompanion, FlowBignumBigIntegerQuotientAndRemainder, FlowBignumSign, FlowBignumBigIntegerBigIntegerRange, FlowBignumBigIntegerSqareRootAndRemainder, FlowBignumModularBigInteger, FlowKotlinIllegalStateException, FlowKtor_client_coreHttpClientEngineConfig, FlowKtor_client_coreHttpClientConfig<T>, FlowKtor_eventsEvents, FlowKtor_client_coreHttpReceivePipeline, FlowKtor_client_coreHttpRequestPipeline, FlowKtor_client_coreHttpResponsePipeline, FlowKtor_client_coreHttpSendPipeline, FlowKotlinx_serialization_coreSerializersModule, FlowKotlinx_serialization_coreSerialKind, FlowKotlinNothing, FlowBignumBigDecimalCompanion, FlowBignumDecimalMode, FlowBignumRoundingMode, FlowKotlinx_serialization_jsonJsonElementCompanion, FlowKotlinx_serialization_jsonJsonDefault, FlowKotlinx_serialization_jsonJsonConfiguration, FlowBignumModularBigIntegerCompanion, FlowBignumModularQuotientAndRemainder, FlowKtor_client_coreHttpRequestData, FlowKtor_client_coreHttpResponseData, FlowKotlinx_coroutines_coreCoroutineDispatcher, FlowKtor_client_coreProxyConfig, FlowKtor_utilsAttributeKey<T>, FlowKtor_eventsEventDefinition<T>, FlowKtor_utilsPipelinePhase, FlowKtor_utilsPipeline<TSubject, TContext>, FlowKtor_client_coreHttpReceivePipelinePhases, FlowKtor_client_coreHttpResponse, FlowKtor_client_coreHttpRequestPipelinePhases, FlowKtor_client_coreHttpRequestBuilder, FlowKtor_client_coreHttpResponsePipelinePhases, FlowKtor_client_coreHttpResponseContainer, FlowKtor_client_coreHttpClientCall, FlowKtor_client_coreHttpSendPipelinePhases, FlowBignumDecimalModeCompanion, FlowKtor_httpUrl, FlowKtor_httpHttpMethod, FlowKtor_httpOutgoingContent, FlowKtor_httpHttpStatusCode, FlowKtor_utilsGMTDate, FlowKtor_httpHttpProtocolVersion, FlowKotlinAbstractCoroutineContextElement, FlowKotlinx_coroutines_coreCoroutineDispatcherKey, FlowKtor_httpHeadersBuilder, FlowKtor_client_coreHttpRequestBuilderCompanion, FlowKtor_httpURLBuilder, FlowKtor_utilsTypeInfo, FlowKtor_client_coreHttpClientCallCompanion, FlowKtor_httpUrlCompanion, FlowKtor_httpURLProtocol, FlowKtor_httpHttpMethodCompanion, FlowKtor_httpContentType, FlowKotlinCancellationException, FlowKtor_httpHttpStatusCodeCompanion, FlowKtor_utilsGMTDateCompanion, FlowKtor_utilsWeekDay, FlowKtor_utilsMonth, FlowKtor_httpHttpProtocolVersionCompanion, FlowKotlinAbstractCoroutineContextKey<B, E>, FlowKtor_ioMemory, FlowKtor_ioChunkBuffer, FlowKtor_ioBuffer, FlowKtor_ioByteReadPacket, FlowKtor_utilsStringValuesBuilderImpl, FlowKtor_httpURLBuilderCompanion, FlowKtor_httpURLProtocolCompanion, FlowKtor_httpHeaderValueParam, FlowKtor_httpHeaderValueWithParametersCompanion, FlowKtor_httpHeaderValueWithParameters, FlowKtor_httpContentTypeCompanion, FlowKtor_utilsWeekDayCompanion, FlowKtor_utilsMonthCompanion, FlowKtor_ioMemoryCompanion, FlowKtor_ioBufferCompanion, FlowKtor_ioChunkBufferCompanion, FlowKtor_ioInputCompanion, FlowKtor_ioInput, FlowKtor_ioByteReadPacketCompanion, FlowKotlinKTypeProjection, FlowKotlinx_coroutines_coreAtomicDesc, FlowKotlinx_coroutines_coreLockFreeLinkedListNodePrepareOp, FlowKotlinKVariance, FlowKotlinKTypeProjectionCompanion, FlowKotlinx_coroutines_coreAtomicOp<__contravariant T>, FlowKotlinx_coroutines_coreOpDescriptor, FlowKotlinx_coroutines_coreLockFreeLinkedListNode, FlowKotlinx_coroutines_coreLockFreeLinkedListNodeAbstractAtomicDesc, FlowKotlinx_coroutines_coreLockFreeLinkedListNodeAddLastDesc<T>, FlowKotlinx_coroutines_coreLockFreeLinkedListNodeRemoveFirstDesc<T>;
+@class FlowChainId, FlowChainIdCanary, FlowChainIdCustom, FlowChainIdEmulator, FlowChainIdMainnet, FlowChainIdSandboxnet, FlowChainIdTestnet, FlowCadenceValue, FlowAccount, FlowBlock, FlowBlockHeader, FlowCollection, FlowBlockEvents, FlowExecutionResult, FlowTransaction, FlowTransactionResult, FlowKotlinThrowable, FlowKotlinArray<T>, FlowKotlinException, FlowKotlinRuntimeException, FlowKotlinIllegalArgumentException, FlowRLPType, FlowKotlinByteArray, FlowRLPElement, FlowRLPList, FlowApiBaseCompanion, FlowKtor_client_coreHttpClient, FlowBase64ByteArrayCompanion, FlowBase64ByteArray, FlowBigDecimalCadenceSerializer, FlowBignumBigDecimal, FlowBigIntegerCadenceSerializer, FlowBignumBigInteger, FlowByteCadenceSerializer, FlowCadenceCompanion, FlowCadenceType, FlowCadenceCapabilityCompanion, FlowCadenceCapability, FlowCadenceValueAddressValue, FlowCadenceValueArrayValue, FlowCadenceValueBooleanValue, FlowCadenceValueCapabilityValue, FlowCadenceValueContractValue, FlowCadenceCompositeValue, FlowCadenceValueDictionaryValue, FlowCadenceDictionaryFieldEntry, FlowCadenceValueFix64Value, FlowCadenceValueIntValue, FlowCadenceValueInt128Value, FlowCadenceValueInt16Value, FlowCadenceValueInt256Value, FlowCadenceValueInt32Value, FlowCadenceValueInt64Value, FlowCadenceValueInt8Value, FlowCadenceValueOptionalValue, FlowCadenceValuePathValue, FlowCadencePath, FlowCadencePathDomain, FlowCadenceValueStringValue, FlowCadenceValueStructValue, FlowCadenceValueTypeValue, FlowCadenceKind, FlowCadenceTypeEntry, FlowCadenceValueUFix64Value, FlowCadenceValueUIntValue, FlowCadenceValueUInt128Value, FlowCadenceValueUInt16Value, FlowCadenceValueUInt256Value, FlowCadenceValueUInt32Value, FlowCadenceValueUInt64Value, FlowCadenceValueUInt8Value, FlowCadenceValueVoidValue, FlowCadenceValueWord16Value, FlowCadenceValueWord32Value, FlowCadenceValueWord64Value, FlowCadenceValueWord8Value, FlowCadenceCompositeAttributeCompanion, FlowCadenceCompositeAttribute, FlowCadenceCompositeValueCompanion, FlowKotlinPair<__covariant A, __covariant B>, FlowCadenceDictionaryFieldEntryCompanion, FlowCadenceKindCompanion, FlowCadencePathCompanion, FlowKotlinEnumCompanion, FlowKotlinEnum<E>, FlowCadencePathDomainCompanion, FlowCadenceTypeCompanion, FlowCadenceTypeEntryCompanion, FlowCadenceValueCompanion, FlowCadenceValueAddressValueCompanion, FlowCadenceValueArrayValueCompanion, FlowCadenceValueBooleanValueCompanion, FlowCadenceValueCapabilityValueCompanion, FlowKotlinx_serialization_jsonJsonElement, FlowKotlinx_serialization_jsonJson, FlowCadenceValueContractValueCompanion, FlowCadenceValueDictionaryValueCompanion, FlowCadenceValueEnumValueCompanion, FlowCadenceValueEnumValue, FlowCadenceValueEventValueCompanion, FlowCadenceValueEventValue, FlowCadenceValueFix64ValueCompanion, FlowCadenceValueInt128ValueCompanion, FlowCadenceValueInt16ValueCompanion, FlowCadenceValueInt256ValueCompanion, FlowCadenceValueInt32ValueCompanion, FlowCadenceValueInt64ValueCompanion, FlowCadenceValueInt8ValueCompanion, FlowCadenceValueIntValueCompanion, FlowCadenceValueOptionalValueCompanion, FlowCadenceValuePathValueCompanion, FlowCadenceValueResourceValueCompanion, FlowCadenceValueResourceValue, FlowCadenceValueStringValueCompanion, FlowCadenceValueStructValueCompanion, FlowCadenceValueTypeValueCompanion, FlowCadenceValueUFix64ValueCompanion, FlowCadenceValueUInt128ValueCompanion, FlowCadenceValueUInt16ValueCompanion, FlowCadenceValueUInt256ValueCompanion, FlowCadenceValueUInt32ValueCompanion, FlowCadenceValueUInt64ValueCompanion, FlowCadenceValueUInt8ValueCompanion, FlowCadenceValueUIntValueCompanion, FlowKotlinUnit, FlowCadenceValueVoidValueCompanion, FlowCadenceValueWord16ValueCompanion, FlowCadenceValueWord32ValueCompanion, FlowCadenceValueWord64ValueCompanion, FlowCadenceValueWord8ValueCompanion, FlowCadenceTypeSerializer, FlowDoubleCadenceSerializer, FlowFixedPointFormatter, FlowIntCadenceSerializer, FlowLongCadenceSerializer, FlowShortCadenceSerializer, FlowUByteCadenceSerializer, FlowUIntCadenceSerializer, FlowULongCadenceSerializer, FlowUShortCadenceSerializer, FlowAccountExpandable, FlowAccountPublicKey, FlowLinks, FlowAccountCompanion, FlowAccountExpandableCompanion, FlowSigningAlgorithm, FlowHashingAlgorithm, FlowAccountPublicKeyCompanion, FlowAggregatedSignatureCompanion, FlowAggregatedSignature, FlowBase64HexSerializer, FlowBase64UFT8Serializer, FlowBlockExpandable, FlowBlockPayload, FlowBlockCompanion, FlowEvent, FlowBlockEventsCompanion, FlowBlockExpandableCompanion, FlowBlockHeaderCompanion, FlowBlockHeightOneOfCompanion, FlowBlockHeightOneOf, FlowCollectionGuarantee, FlowBlockSeal, FlowBlockPayloadCompanion, FlowBlockSealCompanion, FlowCadenceBase64Serializer, FlowChunkCompanion, FlowChunk, FlowCollectionExpandable, FlowCollectionCompanion, FlowCollectionExpandableCompanion, FlowCollectionGuaranteeCompanion, FlowCompareTransactionSignatureCompanion, FlowTransactionSignature, FlowDomainTag, FlowDomainTagAccountProof, FlowDomainTagCustom, FlowDomainTagTransaction, FlowDomainTagUser, FlowErrorCompanion, FlowError, FlowEventCompanion, FlowExecutionResultCompanion, FlowHashingAlgorithmCompanion, FlowLinksCompanion, FlowProposalKeyCompanion, FlowProposalKey, FlowScriptsPostRequestCompanion, FlowScriptsPostRequest, FlowScriptsPostResponseCompanion, FlowScriptsPostResponse, FlowSigningAlgorithmCompanion, FlowStringIntSerializer, FlowTransactionExpandable, FlowTransactionCompanion, FlowTransactionExecutionCompanion, FlowTransactionExecution, FlowTransactionExpandableCompanion, FlowTransactionStatus, FlowTransactionResultCompanion, FlowTransactionSignatureCompanion, FlowTransactionStatusCompanion, FlowFlowApi, FlowKotlinByteIterator, FlowBignumBigIntegerCompanion, FlowBignumBigIntegerQuotientAndRemainder, FlowBignumSign, FlowBignumBigIntegerBigIntegerRange, FlowBignumBigIntegerSqareRootAndRemainder, FlowBignumModularBigInteger, FlowKotlinIllegalStateException, FlowKtor_client_coreHttpClientEngineConfig, FlowKtor_client_coreHttpClientConfig<T>, FlowKtor_eventsEvents, FlowKtor_client_coreHttpReceivePipeline, FlowKtor_client_coreHttpRequestPipeline, FlowKtor_client_coreHttpResponsePipeline, FlowKtor_client_coreHttpSendPipeline, FlowKotlinx_serialization_coreSerializersModule, FlowKotlinx_serialization_coreSerialKind, FlowKotlinNothing, FlowBignumBigDecimalCompanion, FlowBignumDecimalMode, FlowBignumRoundingMode, FlowKotlinx_serialization_jsonJsonElementCompanion, FlowKotlinx_serialization_jsonJsonDefault, FlowKotlinx_serialization_jsonJsonConfiguration, FlowBignumModularBigIntegerCompanion, FlowBignumModularQuotientAndRemainder, FlowKtor_client_coreHttpRequestData, FlowKtor_client_coreHttpResponseData, FlowKotlinx_coroutines_coreCoroutineDispatcher, FlowKtor_client_coreProxyConfig, FlowKtor_utilsAttributeKey<T>, FlowKtor_eventsEventDefinition<T>, FlowKtor_utilsPipelinePhase, FlowKtor_utilsPipeline<TSubject, TContext>, FlowKtor_client_coreHttpReceivePipelinePhases, FlowKtor_client_coreHttpResponse, FlowKtor_client_coreHttpRequestPipelinePhases, FlowKtor_client_coreHttpRequestBuilder, FlowKtor_client_coreHttpResponsePipelinePhases, FlowKtor_client_coreHttpResponseContainer, FlowKtor_client_coreHttpClientCall, FlowKtor_client_coreHttpSendPipelinePhases, FlowBignumDecimalModeCompanion, FlowKtor_httpUrl, FlowKtor_httpHttpMethod, FlowKtor_httpOutgoingContent, FlowKtor_httpHttpStatusCode, FlowKtor_utilsGMTDate, FlowKtor_httpHttpProtocolVersion, FlowKotlinAbstractCoroutineContextElement, FlowKotlinx_coroutines_coreCoroutineDispatcherKey, FlowKtor_httpHeadersBuilder, FlowKtor_client_coreHttpRequestBuilderCompanion, FlowKtor_httpURLBuilder, FlowKtor_utilsTypeInfo, FlowKtor_client_coreHttpClientCallCompanion, FlowKtor_httpUrlCompanion, FlowKtor_httpURLProtocol, FlowKtor_httpHttpMethodCompanion, FlowKtor_httpContentType, FlowKotlinCancellationException, FlowKtor_httpHttpStatusCodeCompanion, FlowKtor_utilsGMTDateCompanion, FlowKtor_utilsWeekDay, FlowKtor_utilsMonth, FlowKtor_httpHttpProtocolVersionCompanion, FlowKotlinAbstractCoroutineContextKey<B, E>, FlowKtor_ioMemory, FlowKtor_ioChunkBuffer, FlowKtor_ioBuffer, FlowKtor_ioByteReadPacket, FlowKtor_utilsStringValuesBuilderImpl, FlowKtor_httpURLBuilderCompanion, FlowKtor_httpURLProtocolCompanion, FlowKtor_httpHeaderValueParam, FlowKtor_httpHeaderValueWithParametersCompanion, FlowKtor_httpHeaderValueWithParameters, FlowKtor_httpContentTypeCompanion, FlowKtor_utilsWeekDayCompanion, FlowKtor_utilsMonthCompanion, FlowKtor_ioMemoryCompanion, FlowKtor_ioBufferCompanion, FlowKtor_ioChunkBufferCompanion, FlowKtor_ioInputCompanion, FlowKtor_ioInput, FlowKtor_ioByteReadPacketCompanion, FlowKotlinKTypeProjection, FlowKotlinx_coroutines_coreAtomicDesc, FlowKotlinx_coroutines_coreLockFreeLinkedListNodePrepareOp, FlowKotlinKVariance, FlowKotlinKTypeProjectionCompanion, FlowKotlinx_coroutines_coreAtomicOp<__contravariant T>, FlowKotlinx_coroutines_coreOpDescriptor, FlowKotlinx_coroutines_coreLockFreeLinkedListNode, FlowKotlinx_coroutines_coreLockFreeLinkedListNodeAbstractAtomicDesc, FlowKotlinx_coroutines_coreLockFreeLinkedListNodeAddLastDesc<T>, FlowKotlinx_coroutines_coreLockFreeLinkedListNodeRemoveFirstDesc<T>;
 
-@protocol FlowChainIdProvider, FlowKotlinx_serialization_coreEncoder, FlowKotlinx_serialization_coreSerialDescriptor, FlowKotlinx_serialization_coreSerializationStrategy, FlowKotlinx_serialization_coreDecoder, FlowKotlinx_serialization_coreDeserializationStrategy, FlowKotlinx_serialization_coreKSerializer, FlowKotlinComparable, FlowBignumBigNumber, FlowBignumBigNumberCreator, FlowBignumBitwiseCapable, FlowBignumByteArraySerializable, FlowKotlinIterator, FlowKotlinCoroutineContext, FlowKotlinx_coroutines_coreCoroutineScope, FlowKtor_ioCloseable, FlowKtor_client_coreHttpClientEngine, FlowKtor_client_coreHttpClientEngineCapability, FlowKtor_utilsAttributes, FlowKotlinx_serialization_coreCompositeEncoder, FlowKotlinAnnotation, FlowKotlinx_serialization_coreCompositeDecoder, FlowKotlinx_serialization_coreSerialFormat, FlowKotlinx_serialization_coreStringFormat, FlowBignumBigNumberUtil, FlowBignumByteArrayDeserializable, FlowKotlinClosedRange, FlowKotlinIterable, FlowKotlinCoroutineContextElement, FlowKotlinCoroutineContextKey, FlowKtor_client_coreHttpClientPlugin, FlowKotlinx_coroutines_coreDisposableHandle, FlowKotlinSuspendFunction2, FlowKotlinx_serialization_coreSerializersModuleCollector, FlowKotlinKClass, FlowKtor_httpHeaders, FlowKotlinx_coroutines_coreJob, FlowKotlinContinuation, FlowKotlinContinuationInterceptor, FlowKotlinx_coroutines_coreRunnable, FlowKotlinFunction, FlowKtor_httpHttpMessage, FlowKtor_ioByteReadChannel, FlowKtor_httpHttpMessageBuilder, FlowKtor_client_coreHttpRequest, FlowKotlinKDeclarationContainer, FlowKotlinKAnnotatedElement, FlowKotlinKClassifier, FlowKtor_httpParameters, FlowKotlinMapEntry, FlowKtor_utilsStringValues, FlowKotlinx_coroutines_coreChildHandle, FlowKotlinx_coroutines_coreChildJob, FlowKotlinSequence, FlowKotlinx_coroutines_coreSelectClause0, FlowKtor_ioReadSession, FlowKotlinSuspendFunction1, FlowKotlinAppendable, FlowKtor_utilsStringValuesBuilder, FlowKtor_httpParametersBuilder, FlowKotlinKType, FlowKotlinx_coroutines_coreParentJob, FlowKotlinx_coroutines_coreSelectInstance, FlowKotlinSuspendFunction0, FlowKtor_ioObjectPool;
+@protocol FlowChainIdProvider, FlowKotlinx_serialization_coreEncoder, FlowKotlinx_serialization_coreSerialDescriptor, FlowKotlinx_serialization_coreSerializationStrategy, FlowKotlinx_serialization_coreDecoder, FlowKotlinx_serialization_coreDeserializationStrategy, FlowKotlinx_serialization_coreKSerializer, FlowKotlinComparable, FlowKotlinComparator, FlowSigner, FlowBignumBigNumber, FlowBignumBigNumberCreator, FlowBignumBitwiseCapable, FlowBignumByteArraySerializable, FlowKotlinIterator, FlowKotlinCoroutineContext, FlowKotlinx_coroutines_coreCoroutineScope, FlowKtor_ioCloseable, FlowKtor_client_coreHttpClientEngine, FlowKtor_client_coreHttpClientEngineCapability, FlowKtor_utilsAttributes, FlowKotlinx_serialization_coreCompositeEncoder, FlowKotlinAnnotation, FlowKotlinx_serialization_coreCompositeDecoder, FlowKotlinx_serialization_coreSerialFormat, FlowKotlinx_serialization_coreStringFormat, FlowBignumBigNumberUtil, FlowBignumByteArrayDeserializable, FlowKotlinClosedRange, FlowKotlinIterable, FlowKotlinCoroutineContextElement, FlowKotlinCoroutineContextKey, FlowKtor_client_coreHttpClientPlugin, FlowKotlinx_coroutines_coreDisposableHandle, FlowKotlinSuspendFunction2, FlowKotlinx_serialization_coreSerializersModuleCollector, FlowKotlinKClass, FlowKtor_httpHeaders, FlowKotlinx_coroutines_coreJob, FlowKotlinContinuation, FlowKotlinContinuationInterceptor, FlowKotlinx_coroutines_coreRunnable, FlowKotlinFunction, FlowKtor_httpHttpMessage, FlowKtor_ioByteReadChannel, FlowKtor_httpHttpMessageBuilder, FlowKtor_client_coreHttpRequest, FlowKotlinKDeclarationContainer, FlowKotlinKAnnotatedElement, FlowKotlinKClassifier, FlowKtor_httpParameters, FlowKotlinMapEntry, FlowKtor_utilsStringValues, FlowKotlinx_coroutines_coreChildHandle, FlowKotlinx_coroutines_coreChildJob, FlowKotlinSequence, FlowKotlinx_coroutines_coreSelectClause0, FlowKtor_ioReadSession, FlowKotlinSuspendFunction1, FlowKotlinAppendable, FlowKtor_utilsStringValuesBuilder, FlowKtor_httpParametersBuilder, FlowKotlinKType, FlowKotlinx_coroutines_coreParentJob, FlowKotlinx_coroutines_coreSelectInstance, FlowKotlinSuspendFunction0, FlowKtor_ioObjectPool;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -2207,6 +2207,30 @@ __attribute__((swift_name("CollectionGuarantee.Companion")))
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 @end;
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CompareTransactionSignature")))
+@interface FlowCompareTransactionSignature : FlowBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+@property (class, readonly, getter=companion) FlowCompareTransactionSignatureCompanion *companion __attribute__((swift_name("companion")));
+@end;
+
+__attribute__((swift_name("KotlinComparator")))
+@protocol FlowKotlinComparator
+@required
+- (int32_t)compareA:(id _Nullable)a b:(id _Nullable)b __attribute__((swift_name("compare(a:b:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CompareTransactionSignature.Companion")))
+@interface FlowCompareTransactionSignatureCompanion : FlowBase <FlowKotlinComparator>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowCompareTransactionSignatureCompanion *shared __attribute__((swift_name("shared")));
+- (int32_t)compareA:(FlowTransactionSignature *)a b:(FlowTransactionSignature *)b __attribute__((swift_name("compare(a:b:)")));
+@end;
+
 __attribute__((swift_name("DomainTag")))
 @interface FlowDomainTag : FlowBase
 @property (readonly) FlowKotlinByteArray *bytes __attribute__((swift_name("bytes")));
@@ -2216,12 +2240,10 @@ __attribute__((swift_name("DomainTag")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("DomainTag.AccountProof")))
 @interface FlowDomainTagAccountProof : FlowDomainTag
-- (instancetype)initWithTag:(NSString *)tag __attribute__((swift_name("init(tag:)"))) __attribute__((objc_designated_initializer));
-- (NSString *)component1 __attribute__((swift_name("component1()"))) __attribute__((deprecated("use corresponding property instead")));
-- (FlowDomainTagAccountProof *)doCopyTag:(NSString *)tag __attribute__((swift_name("doCopy(tag:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)accountProof __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowDomainTagAccountProof *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *tag __attribute__((swift_name("tag")));
 @end;
 
@@ -2240,24 +2262,20 @@ __attribute__((swift_name("DomainTag.Custom")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("DomainTag.Transaction")))
 @interface FlowDomainTagTransaction : FlowDomainTag
-- (instancetype)initWithTag:(NSString *)tag __attribute__((swift_name("init(tag:)"))) __attribute__((objc_designated_initializer));
-- (NSString *)component1 __attribute__((swift_name("component1()"))) __attribute__((deprecated("use corresponding property instead")));
-- (FlowDomainTagTransaction *)doCopyTag:(NSString *)tag __attribute__((swift_name("doCopy(tag:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)transaction __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowDomainTagTransaction *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *tag __attribute__((swift_name("tag")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("DomainTag.User")))
 @interface FlowDomainTagUser : FlowDomainTag
-- (instancetype)initWithTag:(NSString *)tag __attribute__((swift_name("init(tag:)"))) __attribute__((objc_designated_initializer));
-- (NSString *)component1 __attribute__((swift_name("component1()"))) __attribute__((deprecated("use corresponding property instead")));
-- (FlowDomainTagUser *)doCopyTag:(NSString *)tag __attribute__((swift_name("doCopy(tag:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)user __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowDomainTagUser *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *tag __attribute__((swift_name("tag")));
 @end;
 
@@ -2348,6 +2366,13 @@ __attribute__((swift_name("ExecutionResult.Companion")))
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowExecutionResultCompanion *shared __attribute__((swift_name("shared")));
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end;
+
+__attribute__((swift_name("Hasher")))
+@protocol FlowHasher
+@required
+- (FlowKotlinByteArray *)hashBytes:(FlowKotlinByteArray *)bytes __attribute__((swift_name("hash(bytes:)")));
+- (NSString *)hashAsHexStringBytes:(FlowKotlinByteArray *)bytes __attribute__((swift_name("hashAsHexString(bytes:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -2477,6 +2502,37 @@ __attribute__((swift_name("ScriptsPostResponse.Companion")))
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 @end;
 
+__attribute__((swift_name("Signer")))
+@protocol FlowSigner
+@required
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signBytes:(FlowKotlinByteArray *)bytes completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("sign(bytes:completionHandler:)")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signAsTransactionBytes:(FlowKotlinByteArray *)bytes completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signAsTransaction(bytes:completionHandler:)")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signAsUserBytes:(FlowKotlinByteArray *)bytes completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signAsUser(bytes:completionHandler:)")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signWithDomainBytes:(FlowKotlinByteArray *)bytes domain:(FlowKotlinByteArray *)domain completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signWithDomain(bytes:domain:completionHandler:)")));
+@property NSString *address __attribute__((swift_name("address")));
+@property int32_t keyIndex __attribute__((swift_name("keyIndex")));
+@end;
+
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("SigningAlgorithm")))
 @interface FlowSigningAlgorithm : FlowKotlinEnum<FlowSigningAlgorithm *>
@@ -2505,6 +2561,18 @@ __attribute__((swift_name("SigningAlgorithm.Companion")))
 @end;
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("StringIntSerializer")))
+@interface FlowStringIntSerializer : FlowBase <FlowKotlinx_serialization_coreKSerializer>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)stringIntSerializer __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowStringIntSerializer *shared __attribute__((swift_name("shared")));
+- (FlowInt *)deserializeDecoder:(id<FlowKotlinx_serialization_coreDecoder>)decoder __attribute__((swift_name("deserialize(decoder:)")));
+- (void)serializeEncoder:(id<FlowKotlinx_serialization_coreEncoder>)encoder value:(FlowInt *)value __attribute__((swift_name("serialize(encoder:value:)")));
+@property (readonly) id<FlowKotlinx_serialization_coreSerialDescriptor> descriptor __attribute__((swift_name("descriptor")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Transaction")))
 @interface FlowTransaction : FlowBase
 - (instancetype)initWithId:(NSString * _Nullable)id script:(NSString *)script arguments:(NSArray<FlowCadenceValue *> *)arguments referenceBlockId:(NSString *)referenceBlockId gasLimit:(FlowBignumBigInteger *)gasLimit payer:(NSString *)payer proposalKey:(FlowProposalKey *)proposalKey authorizers:(NSArray<NSString *> *)authorizers payloadSignatures:(NSArray<FlowTransactionSignature *> *)payloadSignatures envelopeSignatures:(NSArray<FlowTransactionSignature *> *)envelopeSignatures expandable:(FlowTransactionExpandable * _Nullable)expandable result:(FlowTransactionResult * _Nullable)result links:(FlowLinks * _Nullable)links __attribute__((swift_name("init(id:script:arguments:referenceBlockId:gasLimit:payer:proposalKey:authorizers:payloadSignatures:envelopeSignatures:expandable:result:links:)"))) __attribute__((objc_designated_initializer));
@@ -2525,6 +2593,24 @@ __attribute__((swift_name("Transaction")))
 - (FlowTransaction *)doCopyId:(NSString * _Nullable)id script:(NSString *)script arguments:(NSArray<FlowCadenceValue *> *)arguments referenceBlockId:(NSString *)referenceBlockId gasLimit:(FlowBignumBigInteger *)gasLimit payer:(NSString *)payer proposalKey:(FlowProposalKey *)proposalKey authorizers:(NSArray<NSString *> *)authorizers payloadSignatures:(NSArray<FlowTransactionSignature *> *)payloadSignatures envelopeSignatures:(NSArray<FlowTransactionSignature *> *)envelopeSignatures expandable:(FlowTransactionExpandable * _Nullable)expandable result:(FlowTransactionResult * _Nullable)result links:(FlowLinks * _Nullable)links __attribute__((swift_name("doCopy(id:script:arguments:referenceBlockId:gasLimit:payer:proposalKey:authorizers:payloadSignatures:envelopeSignatures:expandable:result:links:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signSigners:(NSArray<id<FlowSigner>> *)signers completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("sign(signers:completionHandler:)")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signEnvelopeSigners:(NSArray<id<FlowSigner>> *)signers completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signEnvelope(signers:completionHandler:)")));
+
+/**
+ @note This method converts instances of CancellationException to errors.
+ Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signPayloadSigners:(NSArray<id<FlowSigner>> *)signers completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signPayload(signers:completionHandler:)")));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) NSArray<FlowCadenceValue *> *arguments __attribute__((swift_name("arguments")));
 @property (readonly) NSArray<NSString *> *authorizers __attribute__((swift_name("authorizers")));
@@ -2642,18 +2728,20 @@ __attribute__((swift_name("TransactionResult.Companion")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("TransactionSignature")))
 @interface FlowTransactionSignature : FlowBase
-- (instancetype)initWithAddress:(NSString *)address keyIndex:(NSString *)keyIndex signature:(NSString *)signature __attribute__((swift_name("init(address:keyIndex:signature:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithAddress:(NSString *)address keyIndex:(int32_t)keyIndex signature:(NSString *)signature signerIndex:(int32_t)signerIndex __attribute__((swift_name("init(address:keyIndex:signature:signerIndex:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) FlowTransactionSignatureCompanion *companion __attribute__((swift_name("companion")));
 - (NSString *)component1 __attribute__((swift_name("component1()"))) __attribute__((deprecated("use corresponding property instead")));
-- (NSString *)component2 __attribute__((swift_name("component2()"))) __attribute__((deprecated("use corresponding property instead")));
+- (int32_t)component2 __attribute__((swift_name("component2()"))) __attribute__((deprecated("use corresponding property instead")));
 - (NSString *)component3 __attribute__((swift_name("component3()"))) __attribute__((deprecated("use corresponding property instead")));
-- (FlowTransactionSignature *)doCopyAddress:(NSString *)address keyIndex:(NSString *)keyIndex signature:(NSString *)signature __attribute__((swift_name("doCopy(address:keyIndex:signature:)")));
+- (int32_t)component4 __attribute__((swift_name("component4()"))) __attribute__((deprecated("use corresponding property instead")));
+- (FlowTransactionSignature *)doCopyAddress:(NSString *)address keyIndex:(int32_t)keyIndex signature:(NSString *)signature signerIndex:(int32_t)signerIndex __attribute__((swift_name("doCopy(address:keyIndex:signature:signerIndex:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) NSString *address __attribute__((swift_name("address")));
-@property (readonly) NSString *keyIndex __attribute__((swift_name("keyIndex")));
+@property (readonly) int32_t keyIndex __attribute__((swift_name("keyIndex")));
 @property (readonly) NSString *signature __attribute__((swift_name("signature")));
+@property int32_t signerIndex __attribute__((swift_name("signerIndex")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -2723,6 +2811,8 @@ __attribute__((swift_name("KotlinByteArray")))
 - (FlowKotlinByteArray *)paddingZeroRightBlockSize:(int32_t)blockSize __attribute__((swift_name("paddingZeroRight(blockSize:)")));
 - (FlowKotlinByteArray *)removeLeadingZero __attribute__((swift_name("removeLeadingZero()")));
 - (FlowRLPElement *)toRLP __attribute__((swift_name("toRLP()")));
+- (NSString *)toBase64 __attribute__((swift_name("toBase64()")));
+- (NSString *)toHexString __attribute__((swift_name("toHexString()")));
 @end;
 
 @interface FlowRLPType (Extensions)
@@ -2864,6 +2954,7 @@ __attribute__((swift_name("BignumBigInteger")))
 @end;
 
 @interface FlowTransaction (Extensions)
+- (FlowKotlinByteArray *)envelopeMessage __attribute__((swift_name("envelopeMessage()")));
 - (NSArray<FlowRLPType *> *)payload __attribute__((swift_name("payload()")));
 - (FlowKotlinByteArray *)payloadMessage __attribute__((swift_name("payloadMessage()")));
 - (FlowRLPElement *)toRLP __attribute__((swift_name("toRLP()")));

@@ -14,7 +14,6 @@ class FlowMainnetApiTests {
     val api = FlowApi(ChainId.Mainnet)
 
     @Test
-    @Ignore
     fun testGetTransactionID() {
         runBlocking {
             val tx = api.getTransaction("663869d910278d7b6caf793396f6f2c5b91aace7180c2c70cfb3b0b6efd7a049")
