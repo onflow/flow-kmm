@@ -117,8 +117,8 @@ let block = try await api.getBlock(id: "e285bafe8372ae0ad9e0070218c35588b83a09a2
 
 ## Contributing
 
-We welcome contributions to the Flow KMM SDK! Please read our [CONTRIBUTING.md](https://chat.openai.com/CONTRIBUTING.md) file for guidelines on submitting issues, feature requests, and pull requests.
+We welcome contributions to the Flow KMM SDK! Please read our [CONTRIBUTING.md](./CONTRIBUTING.md) file for guidelines on submitting issues, feature requests, and pull requests.
 
 ## License
 
-The Flow KMM SDK is released under the [MIT License](https://chat.openai.com/LICENSE).
+The Flow KMM SDK is released under the [Apache License 2.0](./LICENSE).
