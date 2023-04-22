@@ -9,11 +9,17 @@ sealed class DomainTag {
     open val bytes: ByteArray
         get() = tag.toByteArray().paddingZeroRight(32)
 
-    data class Transaction(override val tag: String = "FLOW-V0.0-transaction") : DomainTag()
+    object Transaction : DomainTag() {
+        override val tag: String = "FLOW-V0.0-transaction"
+    }
 
-    data class User(override val tag: String = "FLOW-V0.0-user") : DomainTag()
+    object User: DomainTag() {
+        override val tag: String = "FLOW-V0.0-user"
+    }
 
-    data class AccountProof(override val tag: String = "FCL-ACCOUNT-PROOF-V0.0") : DomainTag()
+    object AccountProof: DomainTag() {
+        override val tag: String = "FLOW-V0.0-account-proof"
+    }
 
     data class Custom(override val tag: String): DomainTag()
 }
