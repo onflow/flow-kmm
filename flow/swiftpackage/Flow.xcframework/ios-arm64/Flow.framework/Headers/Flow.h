@@ -2368,13 +2368,6 @@ __attribute__((swift_name("ExecutionResult.Companion")))
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 @end;
 
-__attribute__((swift_name("Hasher")))
-@protocol FlowHasher
-@required
-- (FlowKotlinByteArray *)hashBytes:(FlowKotlinByteArray *)bytes __attribute__((swift_name("hash(bytes:)")));
-- (NSString *)hashAsHexStringBytes:(FlowKotlinByteArray *)bytes __attribute__((swift_name("hashAsHexString(bytes:)")));
-@end;
-
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("HashingAlgorithm")))
 @interface FlowHashingAlgorithm : FlowKotlinEnum<FlowHashingAlgorithm *>
@@ -2511,24 +2504,6 @@ __attribute__((swift_name("Signer")))
  Other uncaught Kotlin exceptions are fatal.
 */
 - (void)signBytes:(FlowKotlinByteArray *)bytes completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("sign(bytes:completionHandler:)")));
-
-/**
- @note This method converts instances of CancellationException to errors.
- Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)signAsTransactionBytes:(FlowKotlinByteArray *)bytes completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signAsTransaction(bytes:completionHandler:)")));
-
-/**
- @note This method converts instances of CancellationException to errors.
- Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)signAsUserBytes:(FlowKotlinByteArray *)bytes completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signAsUser(bytes:completionHandler:)")));
-
-/**
- @note This method converts instances of CancellationException to errors.
- Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)signWithDomainBytes:(FlowKotlinByteArray *)bytes domain:(FlowKotlinByteArray *)domain completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signWithDomain(bytes:domain:completionHandler:)")));
 @property NSString *address __attribute__((swift_name("address")));
 @property int32_t keyIndex __attribute__((swift_name("keyIndex")));
 @end;
