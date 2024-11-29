@@ -3,6 +3,7 @@ package org.onflow.flow.models
 
 import kotlinx.serialization.*
 import org.onflow.flow.infrastructure.Base64ByteArray
+import org.onflow.flow.infrastructure.Base64ByteArraySerializer
 
 /**
  * 
@@ -20,7 +21,10 @@ data class CollectionGuarantee (
     @SerialName(value = "signer_ids") val signerIds: List<String>? = null,
 
     /* A variable length signature. */
-    @SerialName(value = "signature") @Required val signature: Base64ByteArray
+    @Required
+    @SerialName(value = "signature")
+    @Serializable(with = Base64ByteArraySerializer::class)
+    val signature: Base64ByteArray
 
 )
 

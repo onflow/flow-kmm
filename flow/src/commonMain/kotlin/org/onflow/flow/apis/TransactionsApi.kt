@@ -5,6 +5,9 @@ import io.ktor.client.request.headers
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import org.onflow.flow.infrastructure.ApiBase
 import org.onflow.flow.infrastructure.toMultiValue
 import org.onflow.flow.models.Transaction
@@ -41,13 +44,15 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         expand?.apply { queryParams["expand"] = toMultiValue(this, "csv") }
         select?.apply { queryParams["select"] = toMultiValue(this, "csv") }
 
-        return client.get("$baseUrl/transactions/$id") {
+        val result = client.get("$baseUrl/transactions/$id") {
             queryParams.forEach { queryParam ->
                 queryParam.value.forEach { value ->
                     parameter(queryParam.key, value)
                 }
             }
-        }.body()
+        }
+
+        return result.body()
     }
 
     private suspend fun requestSendTransaction(transaction: Transaction): Transaction {
@@ -74,5 +79,4 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
     internal suspend fun sendTransaction(request: Transaction): Transaction {
         return requestSendTransaction(request)
     }
-
 }

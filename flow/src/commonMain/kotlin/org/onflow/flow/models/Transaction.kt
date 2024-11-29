@@ -29,31 +29,49 @@ import kotlinx.serialization.*
 data class Transaction (
 
     /* A 32-byte unique identifier for an entity. */
-    @SerialName(value = "id") @Required val id: String? = null,
+    @SerialName(value = "id")
+    @Required
+    val id: String? = null,
 
     /* Base64 encoded Cadence script. */
+    @SerialName(value = "script")
     @Serializable(Base64UFT8Serializer::class)
-    @SerialName(value = "script") @Required val script: String,
+    @Required
+    val script: String,
 
     /* Array of Base64 encoded arguments with in [JSON-Cadence interchange format](https://docs.onflow.org/cadence/json-cadence-spec/). */
+    @SerialName(value = "arguments")
     @Serializable(CadenceBase64ListSerializer::class)
-    @SerialName(value = "arguments") @Required val arguments: List<Cadence.Value>,
+    @Required
+    val arguments: List<Cadence.Value>,
 
     /* A 32-byte unique identifier for an entity. */
-    @SerialName(value = "reference_block_id") @Required val referenceBlockId: String,
+    @SerialName(value = "reference_block_id")
+    @Required
+    val referenceBlockId: String,
 
     /* The limit on the amount of computation a transaction is allowed to preform. */
     @Serializable(BigIntegerCadenceSerializer::class)
-    @SerialName(value = "gas_limit") @Required val gasLimit: BigInteger,
+    @SerialName(value = "gas_limit")
+    @Required
+    val gasLimit: BigInteger,
 
     /* The 8-byte address of an account. */
-    @SerialName(value = "payer") @Required val payer: String,
+    @SerialName(value = "payer")
+    @Required
+    val payer: String,
 
-    @SerialName(value = "proposal_key") @Required val proposalKey: ProposalKey,
+    @SerialName(value = "proposal_key")
+    @Required
+    val proposalKey: ProposalKey,
 
-    @SerialName(value = "authorizers") @Required val authorizers: List<String>,
+    @SerialName(value = "authorizers")
+    @Required
+    val authorizers: List<String>,
 
-    @SerialName(value = "payload_signatures") @Required val payloadSignatures: List<TransactionSignature> = emptyList(),
+    @SerialName(value = "payload_signatures")
+    @Required
+    val payloadSignatures: List<TransactionSignature> = emptyList(),
 
     @SerialName(value = "envelope_signatures") @Required val envelopeSignatures: List<TransactionSignature> = emptyList(),
 

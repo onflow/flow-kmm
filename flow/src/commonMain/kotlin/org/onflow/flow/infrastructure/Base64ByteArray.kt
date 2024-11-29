@@ -8,17 +8,6 @@ import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 class Base64ByteArray(val bytes: ByteArray) {
-    @OptIn(ExperimentalSerializationApi::class)
-    @Serializer(Base64ByteArray::class)
-    companion object : KSerializer<Base64ByteArray> {
-        override val descriptor = PrimitiveSerialDescriptor("Base64ByteArray", PrimitiveKind.STRING)
-        override fun serialize(encoder: Encoder, value: Base64ByteArray) {
-            encoder.encodeString(value.bytes.encodeBase64())
-        }
-        override fun deserialize(decoder: Decoder): Base64ByteArray {
-            return Base64ByteArray(decoder.decodeString().decodeBase64Bytes())
-        }
-    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -33,5 +22,16 @@ class Base64ByteArray(val bytes: ByteArray) {
 
     override fun toString(): String {
         return "Base64ByteArray(${hex(bytes)})"
+    }
+}
+
+object Base64ByteArraySerializer : KSerializer<Base64ByteArray> {
+    override val descriptor = PrimitiveSerialDescriptor("Base64ByteArray", PrimitiveKind.STRING)
+
+    override fun serialize(encoder: Encoder, value: Base64ByteArray) {
+        encoder.encodeString(value.bytes.encodeBase64())
+    }
+    override fun deserialize(decoder: Decoder): Base64ByteArray {
+        return Base64ByteArray(decoder.decodeString().decodeBase64Bytes())
     }
 }

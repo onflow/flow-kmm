@@ -18,7 +18,6 @@ class FlowApiTests {
     private val format = Json { prettyPrint = true }
 
     @Test
-    @Ignore
     fun testGetAccount() {
         runBlocking {
             val account = api.getAccount("0x328649a25184b171")
@@ -29,7 +28,6 @@ class FlowApiTests {
     }
 
     @Test
-    @Ignore
     fun testGetBlock() {
         runBlocking {
             val block = api.getBlock()
@@ -39,11 +37,10 @@ class FlowApiTests {
     }
 
     @Test
-    @Ignore
     fun testRunScript() {
         runBlocking {
             val response = api.executeScript("""
-                pub fun main(name: String): String {
+                access(all) main(name: String): String {
                     let greeting = "Hello, "
                     return greeting.concat(name)
                 }

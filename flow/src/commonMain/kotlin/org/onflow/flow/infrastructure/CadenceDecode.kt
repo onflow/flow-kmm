@@ -1,7 +1,7 @@
 package org.onflow.flow.infrastructure
 
 import com.ionspin.kotlin.bignum.integer.BigInteger
-import com.ionspin.kotlin.bignum.serialization.kotlinx.biginteger.BigIntegerHumanReadableSerializer
+//import com.ionspin.kotlin.bignum.serialization.kotlinx.biginteger.BigIntegerHumanReadableSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.*
 import kotlin.time.Duration
@@ -46,7 +46,7 @@ fun Any?.toJsonElement(): JsonElement = when (this) {
     is UByte -> Json.encodeToJsonElement(UByte.serializer(), this)
     is ULong -> Json.encodeToJsonElement(ULong.serializer(), this)
     is UShort -> Json.encodeToJsonElement(UShort.serializer(), this)
-    is BigInteger -> Json.encodeToJsonElement(BigIntegerHumanReadableSerializer, this)
+//    is BigInteger -> Json.encodeToJsonElement(BigIntegerHumanReadableSerializer, this)
 
     is Cadence.Path -> Json.encodeToJsonElement(Cadence.Path.serializer(), this)
     is Cadence.Capability -> Json.encodeToJsonElement(Cadence.Capability.serializer(), this)

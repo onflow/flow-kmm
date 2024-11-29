@@ -28,6 +28,7 @@ open class ApiBase {
                     prettyPrint = true
                     isLenient = true
                     ignoreUnknownKeys = true
+                    explicitNulls = false
                 })
             }
         }
