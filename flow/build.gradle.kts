@@ -3,7 +3,7 @@ import java.lang.System.getenv
 
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization") version "2.0.21"
+    kotlin("plugin.serialization") version "2.1.0"
     id("com.android.library")
     id("io.github.luca992.multiplatform-swiftpackage") version "2.0.5-arm64"
     id("maven-publish")

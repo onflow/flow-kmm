@@ -1,6 +1,6 @@
 package org.onflow.flow
 
-import kotlinx.coroutines.flow.Flow
+import kotlinx.serialization.json.Json
 import org.onflow.flow.models.FlowAddress
 
 class AddressRegistry {
@@ -17,7 +17,7 @@ class AddressRegistry {
         const val TOKEN_FORWARDING = "0xTOKENFORWARDING"
     }
 
-    private val SCRIPT_TOKEN_MAP: MutableMap<ChainId, MutableMap<String, String>> = mutableMapOf()
+    private val SCRIPT_TOKEN_MAP: MutableMap<ChainId, MutableMap<String, FlowAddress>> = mutableMapOf()
 
     var defaultChainId = ChainId.Mainnet
 
@@ -25,33 +25,39 @@ class AddressRegistry {
         registerDefaults()
     }
 
-//    fun processScript(script: String, chainId: ChainId = defaultChainId, addresses: Map<String, String> = mapOf()): String {
-//        var ret = script
-//        SCRIPT_TOKEN_MAP[chainId]?.forEach {
-//            ret = ret.replace(it.key, it.value.formatted)
-//        }
-//        addresses.forEach {
-//            ret = ret.replace(it.key, it.value.formatted)
-//        }
-//        return ret
-//    }
-//
-//    fun addressOf(contract: String, chainId: ChainId = defaultChainId): FlowAddress? = SCRIPT_TOKEN_MAP[chainId]?.get(contract)
-//
+    fun processScript(script: String, chainId: ChainId = defaultChainId, addresses: Map<String, FlowAddress> = mapOf()): String {
+        var ret = script
+        SCRIPT_TOKEN_MAP[chainId]?.forEach {
+            ret = ret.replace(it.key, it.value.formatted)
+        }
+        addresses.forEach {
+            ret = ret.replace(it.key, it.value.formatted)
+        }
+        return ret
+    }
+
+    fun addressOf(contract: String, chainId: ChainId = defaultChainId): FlowAddress? = SCRIPT_TOKEN_MAP[chainId]?.get(contract)
+
     fun register(contract: String, address: FlowAddress, chainId: ChainId = defaultChainId): AddressRegistry {
-        SCRIPT_TOKEN_MAP[chainId]?.set(contract, address.formatted)
+        SCRIPT_TOKEN_MAP[chainId]?.set(contract, address)
         return this
     }
-//
-//    fun deregister(contract: String, chainId: ChainId? = null): AddressRegistry {
-//        val chains = if (chainId != null) {
-//            arrayOf(chainId)
-//        } else {
-//            ChainId.values()
-//        }
-//        chains.forEach { SCRIPT_TOKEN_MAP[it]?.remove(contract) }
-//        return this
-//    }
+
+    fun register(jsonString: String): AddressRegistry {
+        val model = Json.decodeFromString<MutableMap<String, MutableMap<String, String>>>(jsonString)
+        model.forEach { chain ->
+            ChainId.fromString(chain.key)?.let { chainId ->
+                chain.value.forEach {
+                    register(it.key, FlowAddress(it.value), chainId)
+                }
+            }
+        }
+        return this
+    }
+    fun deregister(contract: String, chainId: ChainId): AddressRegistry {
+        SCRIPT_TOKEN_MAP[chainId]?.remove(contract)
+        return this
+    }
 
     fun clear(): AddressRegistry {
         SCRIPT_TOKEN_MAP.clear()

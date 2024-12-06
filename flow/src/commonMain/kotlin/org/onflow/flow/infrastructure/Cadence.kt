@@ -10,6 +10,42 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.plus
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
+import org.onflow.flow.infrastructure.Cadence.Type.Companion.jsonSerializer
+import org.onflow.flow.infrastructure.Cadence.Value.AddressValue
+import org.onflow.flow.infrastructure.Cadence.Value.ArrayValue
+import org.onflow.flow.infrastructure.Cadence.Value.BooleanValue
+import org.onflow.flow.infrastructure.Cadence.Value.CapabilityValue
+import org.onflow.flow.infrastructure.Cadence.Value.ContractValue
+import org.onflow.flow.infrastructure.Cadence.Value.DictionaryValue
+import org.onflow.flow.infrastructure.Cadence.Value.EnumValue
+import org.onflow.flow.infrastructure.Cadence.Value.EventValue
+import org.onflow.flow.infrastructure.Cadence.Value.Fix64Value
+import org.onflow.flow.infrastructure.Cadence.Value.Int128Value
+import org.onflow.flow.infrastructure.Cadence.Value.Int16Value
+import org.onflow.flow.infrastructure.Cadence.Value.Int256Value
+import org.onflow.flow.infrastructure.Cadence.Value.Int32Value
+import org.onflow.flow.infrastructure.Cadence.Value.Int64Value
+import org.onflow.flow.infrastructure.Cadence.Value.Int8Value
+import org.onflow.flow.infrastructure.Cadence.Value.IntValue
+import org.onflow.flow.infrastructure.Cadence.Value.OptionalValue
+import org.onflow.flow.infrastructure.Cadence.Value.PathValue
+import org.onflow.flow.infrastructure.Cadence.Value.ResourceValue
+import org.onflow.flow.infrastructure.Cadence.Value.StringValue
+import org.onflow.flow.infrastructure.Cadence.Value.StructValue
+import org.onflow.flow.infrastructure.Cadence.Value.TypeValue
+import org.onflow.flow.infrastructure.Cadence.Value.UFix64Value
+import org.onflow.flow.infrastructure.Cadence.Value.UInt128Value
+import org.onflow.flow.infrastructure.Cadence.Value.UInt16Value
+import org.onflow.flow.infrastructure.Cadence.Value.UInt256Value
+import org.onflow.flow.infrastructure.Cadence.Value.UInt32Value
+import org.onflow.flow.infrastructure.Cadence.Value.UInt64Value
+import org.onflow.flow.infrastructure.Cadence.Value.UInt8Value
+import org.onflow.flow.infrastructure.Cadence.Value.UIntValue
+import org.onflow.flow.infrastructure.Cadence.Value.VoidValue
+import org.onflow.flow.infrastructure.Cadence.Value.Word16Value
+import org.onflow.flow.infrastructure.Cadence.Value.Word32Value
+import org.onflow.flow.infrastructure.Cadence.Value.Word64Value
+import org.onflow.flow.infrastructure.Cadence.Value.Word8Value
 
 class Cadence {
 
@@ -57,26 +93,8 @@ class Cadence {
             fun findByKey(value: String, default: Type = Type.VOID): Type {
                 return Type.values().find { it.value == value } ?: default
             }
-        }
-    }
 
-    @Polymorphic
-    @Serializable
-    sealed class Value {
-        abstract val value: Any?
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (other !is Value) return false
-            return this.encodeBase64() == other.encodeBase64()
-        }
-
-        override fun hashCode(): Int {
-            return encodeBase64().hashCode()
-        }
-
-        companion object {
-            private val serializersModule = SerializersModule {
+            private val valueSerializersModule = SerializersModule {
                 polymorphic(Value::class) {
                     subclass(VoidValue::class)
                     subclass(BooleanValue::class)
@@ -117,11 +135,29 @@ class Cadence {
             }
 
             val jsonSerializer = Json {
-                serializersModule = Value.serializersModule + humanReadableSerializerModule
+                serializersModule = valueSerializersModule + humanReadableSerializerModule
                 ignoreUnknownKeys = true
                 isLenient = true
                 classDiscriminator = "type"
             }
+        }
+    }
+
+    @Serializable
+    sealed class Value {
+        abstract val value: Any?
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is Value) return false
+            return this.encodeBase64() == other.encodeBase64()
+        }
+
+        override fun hashCode(): Int {
+            return encodeBase64().hashCode()
+        }
+
+        companion object {
 
             fun decodeFromJsonElement(jsonElement: JsonElement): Value {
                 return jsonSerializer.decodeFromJsonElement(jsonElement)
@@ -141,7 +177,7 @@ class Cadence {
         }
 
         fun encode(): String {
-            return Value.jsonSerializer.encodeToString(this)
+            return jsonSerializer.encodeToString(this)
         }
 
         fun encodeBase64(): String {
@@ -169,7 +205,6 @@ class Cadence {
 
 //                is CapabilityValue -> { value.let { toMap(it) } }
 //                is PathValue -> { value.let { toMap(it) } }
-//
 //                // TODO: Handle type decode
 //                is TypeValue -> { value.let { toMap(it) } }
 

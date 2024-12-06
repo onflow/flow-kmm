@@ -5,6 +5,7 @@ import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpStatusCode
 import io.ktor.util.decodeBase64String
 import io.ktor.util.encodeBase64
 import io.ktor.utils.io.core.toByteArray
@@ -40,9 +41,13 @@ internal class ScriptsApi(val baseUrl: String) : ApiBase() {
                 }
             }
             setBody(scriptsPostRequest)
-        }.bodyAsText()
+        }
 
-        return response.replace("\"", "").decodeBase64String()
+        if (response.status == HttpStatusCode.OK) {
+            return response.bodyAsText().replace("\"", "").decodeBase64String()
+        }
+
+        return response.bodyAsText()
     }
 
     internal suspend fun executeScript(

@@ -30,4 +30,16 @@ sealed class ChainId: ChainIdProvider {
         override val baseUrl: String,
         override val description: String
         ): ChainId()
+
+    companion object {
+        fun fromString(chainId: String): ChainId? {
+            return when (chainId) {
+                "mainnet" -> Mainnet
+                "testnet" -> Testnet
+                "canary" -> Canary
+                "emulator" -> Emulator
+                else -> null
+            }
+        }
+    }
 }

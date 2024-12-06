@@ -19,7 +19,7 @@ import org.onflow.flow.models.TransactionResult
 
 class FlowApi(val chainId: ChainIdProvider) {
 
-    private val baseUrl = chainId.baseUrl.toString()
+    private val baseUrl = chainId.baseUrl
     private val accountsApi = AccountsApi(baseUrl)
     private val blocksApi = BlocksApi(baseUrl)
     private val collectionsApi = CollectionsApi(baseUrl)
