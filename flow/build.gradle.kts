@@ -3,7 +3,7 @@ import java.lang.System.getenv
 
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization") version "1.8.0"
+    kotlin("plugin.serialization") version "2.1.0"
     id("com.android.library")
     id("io.github.luca992.multiplatform-swiftpackage") version "2.0.5-arm64"
     id("maven-publish")
@@ -17,6 +17,9 @@ multiplatformSwiftPackage {
 }
 
 kotlin {
+
+    jvmToolchain(17)
+
     android {
         publishLibraryVariants("release", "debug")
     }
@@ -31,8 +34,9 @@ kotlin {
         }
     }
 
-    val coroutineVersion = "1.6.4"
-    val ktorVersion = "2.1.3"
+    val coroutineVersion = "1.9.0"
+    val ktorVersion = "3.0.1"
+    val kotlincrypto = "0.5.3"
     
     sourceSets {kotlin
         val commonMain by getting {
@@ -49,9 +53,13 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
-                implementation("com.ionspin.kotlin:bignum:0.3.7")
-                implementation("com.ionspin.kotlin:bignum-serialization-kotlinx:0.3.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+                implementation("com.ionspin.kotlin:bignum:0.3.10")
+                implementation("com.ionspin.kotlin:bignum-serialization-kotlinx:0.3.10")
+                implementation("com.ionspin.kotlin:bignum:0.3.10-SNAPSHOT")
+
+                implementation("org.kotlincrypto.hash:sha2:$kotlincrypto")
+                implementation("org.kotlincrypto.hash:sha3:$kotlincrypto")
             }
         }
         val commonTest by getting {
@@ -76,11 +84,12 @@ kotlin {
 }
 
 android {
+    namespace = "com.flow.flowKMM"
     compileSdk = 32
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
     }
 }
 

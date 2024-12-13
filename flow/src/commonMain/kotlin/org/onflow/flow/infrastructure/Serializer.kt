@@ -79,8 +79,6 @@ object DoubleCadenceSerializer : KSerializer<Double> {
     override fun deserialize(decoder: Decoder): Double = decoder.decodeString().toDouble()
 }
 
-@kotlinx.serialization.ExperimentalSerializationApi
-@Serializer(forClass = Cadence.Type::class)
 object CadenceTypeSerializer : KSerializer<Cadence.Type> {
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("Cadence.Type", PrimitiveKind.STRING)

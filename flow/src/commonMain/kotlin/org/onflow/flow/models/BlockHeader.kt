@@ -2,6 +2,7 @@ package org.onflow.flow.models
 
 import kotlinx.serialization.*
 import org.onflow.flow.infrastructure.Base64ByteArray
+import org.onflow.flow.infrastructure.Base64ByteArraySerializer
 
 /**
  * 
@@ -26,7 +27,10 @@ data class BlockHeader (
     @SerialName(value = "timestamp") @Required val timestamp: kotlin.String,
 
     /* A variable length signature. */
-    @SerialName(value = "parent_voter_signature") @Required val parentVoterSignature: Base64ByteArray
+    @SerialName(value = "parent_voter_signature")
+    @Serializable(with = Base64ByteArraySerializer::class)
+    @Required
+    val parentVoterSignature: Base64ByteArray
 
 )
 

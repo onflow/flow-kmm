@@ -14,18 +14,15 @@ class FlowMainnetApiTests {
     val api = FlowApi(ChainId.Mainnet)
 
     @Test
-    @Ignore
     fun testGetTransactionID() {
         runBlocking {
-            val tx = api.getTransaction("663869d910278d7b6caf793396f6f2c5b91aace7180c2c70cfb3b0b6efd7a049")
-            assertEquals(1, tx.arguments.count())
-            assertEquals(291975851UL, tx.arguments.first().decode<ULong>())
-            assertTrue( tx.payloadSignatures.first().signature.startsWith("0xfe25c43444") )
+            val tx = api.getTransaction("e5b5fe5457e7d3594d9cf581cee74af1a589fbc37b70952b2223d714894d2849")
+            assertEquals(4, tx.arguments.count())
+            assertEquals("0x779ffd206566b382", tx.arguments.last().decode<String>())
         }
     }
 
     @Test
-    @Ignore
     fun testGetEvents() {
         runBlocking {
             val result = api.getTransactionResult("663869d910278d7b6caf793396f6f2c5b91aace7180c2c70cfb3b0b6efd7a049")
@@ -36,15 +33,14 @@ class FlowMainnetApiTests {
     }
 
     @Test
-    @Ignore
     fun decodeStruct() {
         runBlocking {
             val result = api.executeScript(
                 """
-                  pub struct StorageInfo {
-                      pub let capacity: Int
-                      pub let used: Int
-                      pub let available: Int
+                  access(all) struct StorageInfo {
+                      access(all) let capacity: Int
+                      access(all) let used: Int
+                      access(all) let available: Int
 
                       init(capacity: Int, used: Int, available: Int) {
                           self.capacity = capacity
@@ -53,7 +49,7 @@ class FlowMainnetApiTests {
                       }
                   }
 
-                  pub fun main(addr: Address): [StorageInfo] {
+                  access(all) fun main(addr: Address): [StorageInfo] {
                     let acct = getAccount(addr)
                     return [StorageInfo(capacity: 1,
                                        used: 2,

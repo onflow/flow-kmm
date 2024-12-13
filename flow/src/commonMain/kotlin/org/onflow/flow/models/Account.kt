@@ -2,6 +2,7 @@ package org.onflow.flow.models
 
 import kotlinx.serialization.*
 import org.onflow.flow.infrastructure.Base64ByteArray
+import org.onflow.flow.infrastructure.Base64ByteArraySerializer
 
 /**
  *
@@ -26,7 +27,8 @@ data class Account(
 
     @SerialName(value = "keys") val keys: Set<AccountPublicKey>? = null,
 
-    @SerialName(value = "contracts") val contracts: Map<String, Base64ByteArray>? = null,
+    @SerialName(value = "contracts")
+    val contracts: Map<String, @Serializable(with = Base64ByteArraySerializer::class) Base64ByteArray>? = null,
 
     @SerialName(value = "_links") val links: Links? = null
 

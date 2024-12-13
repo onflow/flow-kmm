@@ -2,6 +2,7 @@ package org.onflow.flow.models
 
 import kotlinx.serialization.*
 import org.onflow.flow.infrastructure.Base64ByteArray
+import org.onflow.flow.infrastructure.Base64ByteArraySerializer
 
 /**
  * 
@@ -12,7 +13,9 @@ import org.onflow.flow.infrastructure.Base64ByteArray
 @Serializable
 data class AggregatedSignature (
 
-    @SerialName(value = "verifier_signatures") @Required val verifierSignatures: List<Base64ByteArray>,
+    @Required
+    @SerialName(value = "verifier_signatures")
+    val verifierSignatures: List< @Serializable(with = Base64ByteArraySerializer::class) Base64ByteArray>,
 
     @SerialName(value = "signer_ids") @Required val signerIds: List<String>
 

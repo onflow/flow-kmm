@@ -2,6 +2,7 @@ package org.onflow.flow.models
 
 import org.onflow.flow.infrastructure.Base64ByteArray
 import kotlinx.serialization.*
+import org.onflow.flow.infrastructure.Base64ByteArraySerializer
 
 /**
  * 
@@ -23,11 +24,20 @@ data class Chunk (
 
     @SerialName(value = "collection_index") @Required val collectionIndex: kotlin.String,
 
-    @SerialName(value = "start_state") @Required val startState: Base64ByteArray,
+    @Required
+    @SerialName(value = "start_state")
+    @Serializable(with = Base64ByteArraySerializer::class)
+    val startState: Base64ByteArray,
 
-    @SerialName(value = "end_state") @Required val endState: Base64ByteArray,
+    @Required
+    @SerialName(value = "end_state")
+    @Serializable(with = Base64ByteArraySerializer::class)
+    val endState: Base64ByteArray,
 
-    @SerialName(value = "event_collection") @Required val eventCollection: Base64ByteArray,
+    @Required
+    @SerialName(value = "event_collection")
+    @Serializable(with = Base64ByteArraySerializer::class)
+    val eventCollection: Base64ByteArray,
 
     @SerialName(value = "index") @Required val index: kotlin.String,
 
