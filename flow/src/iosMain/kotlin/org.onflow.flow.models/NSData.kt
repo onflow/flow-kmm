@@ -7,6 +7,7 @@ import platform.Foundation.NSData
 import platform.Foundation.create
 import platform.posix.memcpy
 
+@kotlinx.cinterop.ExperimentalForeignApi
 internal inline fun ByteArray.toData(): NSData {
     if (isEmpty()) return NSData()
     val pinned = pin()
@@ -17,6 +18,7 @@ internal inline fun ByteArray.toData(): NSData {
     )
 }
 
+@kotlinx.cinterop.ExperimentalForeignApi
 internal fun NSData.toByteArray(): ByteArray {
     val size = length.toInt()
     val bytes = ByteArray(size)
