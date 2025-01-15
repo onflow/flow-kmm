@@ -20,7 +20,7 @@ kotlin {
 
     jvmToolchain(17)
 
-    android {
+    androidTarget {
         publishLibraryVariants("release", "debug")
     }
 
