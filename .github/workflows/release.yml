@@ -1,21 +1,45 @@
 on:
- release:
-   types: [created]
+  release:
+    types: [created]
 
 jobs:
   build:
     runs-on: macos-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
+      # Step 2: Setup Java environment
       - name: Setup Java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 17
+          distribution: 'temurin'
+          cache: 'gradle' # Enables caching for Gradle dependencies
 
-      - name: Publish
-        run: ./gradlew check publish --no-configure-on-demand --no-daemon
+      # Step 3: Run Gradle build and publish
+      - name: Build and Publish
+        run: |
+          ./gradlew check publish --no-configure-on-demand --no-daemon --info
         env:
           ORG_GRADLE_PROJECT_githubUsername: ${{ github.actor }}
-          ORG_GRADLE_PROJECT_githubPassword: ${{ github.token }}
+          ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 4: Collect all reports and logs
+      - name: Collect Reports and Logs
+        if: failure() # Only run if the previous step fails
+        run: |
+          mkdir -p reports
+          # Copy test reports
+          cp -r flow/build/reports/tests reports/tests || echo "No test reports found"
+          # Copy Gradle build logs
+          cp -r flow/build/reports reports/gradle-reports || echo "No Gradle reports found"
+
+      # Step 5: Upload all reports and logs
+      - name: Upload All Reports
+        if: failure() # Only run if the previous step fails
+        uses: actions/upload-artifact@v3
+        with:
+          name: all-reports
+          path: reports
