@@ -22,14 +22,13 @@ class FlowMainnetApiTests {
         }
     }
 
-    @Ignore
     @Test
     fun testGetEvents() {
         runBlocking {
-            val result = api.getTransactionResult("663869d910278d7b6caf793396f6f2c5b91aace7180c2c70cfb3b0b6efd7a049")
+            val result = api.getTransactionResult("e5b5fe5457e7d3594d9cf581cee74af1a589fbc37b70952b2223d714894d2849")
             val event = result.events.first().payload.value as Cadence.CompositeValue
-            assertEquals("A.b8ea91944fd51c43.Offers.OfferCompleted", event.id)
-            assertEquals(291975851UL, event.getField<ULong>("offerId"))
+            assertEquals("A.a08e88e23f332538.DapperStorageRent.RefilledFailed", event.id)
+            assertEquals("Address is not below StorageRentRefillThreshold", event.getField<String>("reason"))
         }
     }
 
