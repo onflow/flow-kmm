@@ -35,13 +35,14 @@ class FlowApiTests {
     @Test
     fun testRunScript() {
         runBlocking {
-            val a = Cadence.string("Ryan")
             val response = api.executeScript("""
                 access(all) fun main(name: String): String {
                     let greeting = "Hello, "
                     return greeting.concat(name)
                 }
-            """.trimIndent(), listOf(a))
+            """.trimIndent(),
+                listOf(Cadence.string("Ryan"))
+            )
             println(format.encodeToString(response))
             val result = response.decode<String>()
             assertTrue(result == "Hello, Ryan")

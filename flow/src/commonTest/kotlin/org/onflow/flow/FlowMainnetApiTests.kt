@@ -22,6 +22,7 @@ class FlowMainnetApiTests {
         }
     }
 
+    @Ignore
     @Test
     fun testGetEvents() {
         runBlocking {

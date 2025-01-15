@@ -25,7 +25,16 @@ kotlin {
     }
 
     val xcf = XCFramework()
-    ios {
+    iosX64 {
+        binaries {
+            framework {
+                baseName = "Flow"
+                xcf.add(this)
+            }
+        }
+    }
+
+    iosArm64 {
         binaries {
             framework {
                 baseName = "Flow"
@@ -39,7 +48,7 @@ kotlin {
     val kotlincrypto = "0.5.3"
     
     sourceSets {kotlin
-        val commonMain by getting {
+        commonMain {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion") {
                     version {
@@ -62,24 +71,24 @@ kotlin {
                 implementation("org.kotlincrypto.hash:sha3:$kotlincrypto")
             }
         }
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting {
+        androidMain {
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
             }
         }
-        val iosMain by getting {
+        iosMain {
             dependencies {
                 implementation("io.ktor:ktor-client-darwin:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.8")
             }
         }
-        val iosTest by getting
+        iosTest
     }
 }
 
