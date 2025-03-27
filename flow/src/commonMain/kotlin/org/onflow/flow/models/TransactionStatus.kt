@@ -10,6 +10,9 @@ import kotlinx.serialization.*
 @Serializable
 enum class TransactionStatus(val value: String) {
 
+    @SerialName(value = "Unknown")
+    UNKNOWN("Unknown"),
+
     @SerialName(value = "Pending")
     PENDING("Pending"),
 
