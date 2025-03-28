@@ -39,7 +39,7 @@ jobs:
       # Step 5: Upload all reports and logs
       - name: Upload All Reports
         if: failure() # Only run if the previous step fails
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: all-reports
           path: reports
