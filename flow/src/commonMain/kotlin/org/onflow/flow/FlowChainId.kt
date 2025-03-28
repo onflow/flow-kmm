@@ -32,6 +32,7 @@ sealed class ChainId: ChainIdProvider {
     }
 
     data class Custom(
+        override val id: String = "custom"
         override val baseUrl: String,
         override val description: String
         ): ChainId()
