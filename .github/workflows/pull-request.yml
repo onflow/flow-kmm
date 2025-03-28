@@ -37,7 +37,7 @@ jobs:
 
       - name: Build
         id: build
-        run: ./gradlew --warning-mode all check build -x test -x integrationTest
+        run: ./gradlew --warning-mode all check build -x test
 
       - name: Run Unit Tests
         id: unit_test
