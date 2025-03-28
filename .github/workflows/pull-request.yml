@@ -1,0 +1,56 @@
+name: Build Pull Request
+on: pull_request
+
+jobs:
+  build:
+    name: Build pull request
+    runs-on: ubuntu-latest
+    env:
+      JAVA_OPTS: -Xmx2g -Dorg.gradle.daemon=false
+    #services:
+    #  flow-emulator:
+    #    image: gcr.io/flow-container-registry/emulator
+    #    env:
+    #      FLOW_VERBOSE: true
+    #      FLOW_PORT: 3569
+    #      FLOW_INTERVAL: 5s
+    #      FLOW_PERSIST: false
+    #    ports:
+    #      - 3569:3569
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21.0.1'
+          java-package: jdk
+          distribution: 'temurin'
+          architecture: 'x64'
+
+      - name: Install flow emulator
+        run: sh -ci "$(curl -fsSL https://raw.githubusercontent.com/onflow/flow-cli/master/install.sh)"
+
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Build
+        id: build
+        run: ./gradlew --warning-mode all check build -x test -x integrationTest
+
+      - name: Run Unit Tests
+        id: unit_test
+        if: ${{ steps.build.outcome == 'success' }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          ./gradlew --no-daemon --max-workers=2 --warning-mode=all test --continue --stacktrace
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1.18
+        if: always()
+        with:
+          check_name: "Unit Test Results"
+          files: "**/test-results/test/**/*.xml"
+          seconds_between_github_writes: 5
+          secondary_rate_limit_wait_seconds: 120
