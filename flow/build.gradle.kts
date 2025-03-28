@@ -69,7 +69,6 @@ kotlin {
 
                 implementation("org.kotlincrypto.hash:sha2:$kotlincrypto")
                 implementation("org.kotlincrypto.hash:sha3:$kotlincrypto")
-                implementation "com.google.guava:guava:31.0.1-android"
             }
         }
         commonTest {
