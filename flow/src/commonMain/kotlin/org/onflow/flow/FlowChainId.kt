@@ -6,7 +6,7 @@ interface ChainIdProvider {
     val description: String
 }
 
-sealed class ChainId: ChainIdProvider {
+abstract class ChainId: ChainIdProvider {
     object Mainnet: ChainId() {
         override val id: String = "flow-mainnet"
         override val baseUrl: String = "https://rest-mainnet.onflow.org/v1"

@@ -6,6 +6,9 @@ import kotlinx.serialization.*
 @Serializable
 enum class HashingAlgorithm(val value: String, val cadenceIndex: Int) {
 
+    @SerialName(value = "UNKNOWN")
+    UNKNOWN("UNKNOWN", 0),
+
     @SerialName(value = "SHA2_256")
     SHA2_256("SHA2_256", 1),
 
@@ -46,7 +49,7 @@ enum class HashingAlgorithm(val value: String, val cadenceIndex: Int) {
           }
         }
 
-        fun fromCadenceIndex(index: Int): HashingAlgorithm = entries.find { it.cadenceIndex == index }
+        fun fromCadenceIndex(index: Int): HashingAlgorithm = entries.find { it.cadenceIndex == index }?: HashingAlgorithm.UNKNOWN
     }
 }
 

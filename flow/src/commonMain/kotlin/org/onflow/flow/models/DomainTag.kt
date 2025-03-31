@@ -3,7 +3,7 @@ package org.onflow.flow.models
 import io.ktor.utils.io.core.*
 import org.onflow.flow.rlp.paddingZeroRight
 
-sealed class DomainTag {
+abstract class DomainTag {
     abstract val tag: String
 
     open val bytes: ByteArray
