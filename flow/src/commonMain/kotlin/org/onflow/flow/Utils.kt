@@ -6,7 +6,7 @@ fun ByteArray.bytesToHex(): String {
         result[i * 2] = hexChars[v ushr 4]
         result[i * 2 + 1] = hexChars[v and 0x0F]
     }
-    return String(result)
+    return result.concatToString()
 }
 
 fun String.hexToBytes(): ByteArray {
@@ -14,7 +14,7 @@ fun String.hexToBytes(): ByteArray {
     val cleanInput = if (lowercase().startsWith("0x")) substring(2) else this
     require(cleanInput.length % 2 == 0) { "Hex string must have an even length" }
     val result = ByteArray(cleanInput.length / 2)
-    for (i in 0 until cleanInput.length step 2) {
+    for (i in cleanInput.indices step 2) {
         val firstDigit = hexCharToInt(cleanInput[i])
         val secondDigit = hexCharToInt(cleanInput[i + 1])
         result[i / 2] = ((firstDigit shl 4) or secondDigit).toByte()
