@@ -1,10 +1,9 @@
 package org.onflow.flow.models
 
 import kotlinx.serialization.*
-import org.onflow.flow.infrastructure.Base64ByteArray
 
 @Serializable
-data class FlowAddress constructor(val bytes: ByteArray) {
+data class FlowAddress(val bytes: ByteArray) {
     companion object {
         val FLOW_ADDRESS_SIZE_BYTES = 8
         fun of(bytes: ByteArray): FlowAddress = FlowAddress(fixedSize(bytes, FLOW_ADDRESS_SIZE_BYTES))
