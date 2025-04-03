@@ -14,7 +14,7 @@ actual class KeyPair(
 )
 
 actual class PrivateKey(
-    private val privateKey: java.security.PrivateKey,
+    internal val privateKey: java.security.PrivateKey,
     actual val algo: SigningAlgorithm,
     actual val hex: String,
     actual val publicKey: org.onflow.flow.crypto.PublicKey

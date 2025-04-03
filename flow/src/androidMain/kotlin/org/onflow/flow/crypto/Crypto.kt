@@ -43,12 +43,12 @@ actual object Crypto {
         val curveFieldSize = getCurveFieldSize(ecDomainFromECSpec(curveSpec))
 
         val publicKey = PublicKey(
-            key = pk,
+            publicKey = pk,
             algo = algo,
             hex = jsecPublicKeyToHexString(pk, curveFieldSize)
         )
         val privateKey = PrivateKey(
-            key = sk,
+            privateKey = sk,
             algo = algo,
             publicKey = publicKey,
             hex = jsecPrivateKeyToHexString(sk, curveOrderSize)
@@ -61,7 +61,7 @@ actual object Crypto {
 
     actual fun decodePrivateKey(
         key: String,
-        algo: SigningAlgorithm = SigningAlgorithm.ECDSA_P256
+        algo: SigningAlgorithm
     ): PrivateKey {
         checkSupportedSignAlgo(algo)
 
@@ -85,13 +85,13 @@ actual object Crypto {
         val pk = derivePublicKey(sk)
 
         var publicKey = PublicKey(
-            key = pk,
+            publicKey = pk,
             algo = algo,
             hex = jsecPrivateKeyToHexString(pk, curveFieldSize)
         )
 
         return PrivateKey(
-            key = sk,
+            privateKey = sk,
             algo = algo,
             publicKey = publicKey,
             hex = key
@@ -101,7 +101,7 @@ actual object Crypto {
     @JvmStatic
     actual fun getSigner(
         privateKey: PrivateKey,
-        hashAlgo: HashingAlgorithm = HashingAlgorithm.SHA3_256
+        hashAlgo: HashingAlgorithm
     ): Signer = SignerImpl(privateKey, hashAlgo)
 
     @JvmStatic
@@ -232,8 +232,8 @@ internal class SignerImpl(
 
     override suspend fun sign(bytes: ByteArray): ByteArray {
         // check the private key is of the correct type
-        val ecSK = if (privateKey.key is ECPrivateKey) {
-            privateKey.key
+        val ecSK = if (privateKey.privateKey is ECPrivateKey) {
+            privateKey.privateKey
         } else {
             throw IllegalArgumentException("Private key must be an ECPrivateKey")
         }
