@@ -6,34 +6,43 @@ import org.bouncycastle.jce.interfaces.ECPublicKey
 import org.onflow.flow.models.HashingAlgorithm
 import org.onflow.flow.models.SigningAlgorithm
 import java.math.BigInteger
-import java.security.PrivateKey
 import java.security.PublicKey
 
 actual class KeyPair(
-    actual val private: PrivateKey,
-    actual val public: PublicKey
+    actual  val private: PrivateKey,
+    actual  val public: org.onflow.flow.crypto.PublicKey
 )
 
 actual class PrivateKey(
-    actual val key: PrivateKey,
+    private val privateKey: java.security.PrivateKey,
     actual val algo: SigningAlgorithm,
     actual val hex: String,
-    actual val publicKey: PublicKey
-)
+    actual val publicKey: org.onflow.flow.crypto.PublicKey
+) {
+    actual val key: Any
+        get() = privateKey
+}
 
 actual class PublicKey(
-    actual val key: PublicKey,
+    private val publicKey: PublicKey,
     actual val algo: SigningAlgorithm,
     actual val hex: String
 ) {
-    actual fun verify(signature: ByteArray, message: ByteArray, hashAlgo: HashingAlgorithm): Boolean {
+    actual val key: Any
+        get() = publicKey
+
+    actual fun verify(
+        signature: ByteArray,
+        message: ByteArray,
+        hashAlgo: HashingAlgorithm
+    ): Boolean {
         // check for supported algos
         Crypto.checkSupportedSignAlgo(algo)
         Crypto.checkHashAlgoForSigning(hashAlgo)
 
         // check the input key is of the correct type
-        val ecPK = if (key is ECPublicKey) {
-            key
+        val ecPK = if (publicKey is ECPublicKey) {
+            publicKey
         } else {
             throw IllegalArgumentException("key in PublicKey must be an ECPublicKey")
         }

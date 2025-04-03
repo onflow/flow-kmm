@@ -15,10 +15,10 @@ expect class PrivateKey {
     val publicKey: PublicKey
 }
 
-expect class PublicKey (
-    val key: Any,
-    val algo: SigningAlgorithm,
+expect class PublicKey {
+    val key: Any
+    val algo: SigningAlgorithm
     val hex: String
-) {
-    fun verify(signature: ByteArray, message: ByteArray, hashAlgo: HashingAlgorithm) : Boolean
+    
+    fun verify(signature: ByteArray, message: ByteArray, hashAlgo: HashingAlgorithm): Boolean
 }
