@@ -11,7 +11,6 @@ expect class KeyPair {
 expect class PrivateKey {
     val key: Any
     val algo: SigningAlgorithm
-    val ecCoupleComponentSize: Int
     val hex: String
     val publicKey: PublicKey
 }

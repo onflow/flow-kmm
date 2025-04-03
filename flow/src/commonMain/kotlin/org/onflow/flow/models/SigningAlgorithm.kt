@@ -5,16 +5,13 @@ import kotlinx.serialization.*
 
 
 @Serializable
-enum class SigningAlgorithm(val value: String, val cadenceIndex: Int) {
-
-    @SerialName(value = "BLS_BLS12_381")
-    BLS_BLS12_381("BLS_BLS12_381", 3),
+enum class SigningAlgorithm(val value: String, val cadenceIndex: Int, val curve: String) {
 
     @SerialName(value = "ECDSA_P256")
-    ECDSA_P256("ECDSA_P256", 1),
+    ECDSA_P256("ECDSA_P256", 1, "P-256"),
 
     @SerialName(value = "ECDSA_secp256k1")
-    ECDSA_secp256k1("ECDSA_secp256k1", 2);
+    ECDSA_secp256k1("ECDSA_secp256k1", 2, "secp256k1");
 
     /**
      * Override toString() to avoid using the enum variable name as the value, and instead use

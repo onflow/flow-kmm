@@ -4,11 +4,9 @@ import org.bouncycastle.crypto.params.ECDomainParameters
 import org.bouncycastle.crypto.params.ECPrivateKeyParameters
 import org.bouncycastle.crypto.signers.ECDSASigner
 import org.bouncycastle.jce.ECNamedCurveTable
-import org.bouncycastle.jce.ECPointUtil
 import org.bouncycastle.jce.interfaces.ECPrivateKey
 import org.bouncycastle.jce.interfaces.ECPublicKey
 import org.bouncycastle.jce.provider.BouncyCastleProvider
-import org.bouncycastle.jce.spec.ECNamedCurveSpec
 import org.bouncycastle.jce.spec.ECParameterSpec
 import org.bouncycastle.jce.spec.ECPrivateKeySpec
 import org.onflow.flow.models.*
@@ -16,8 +14,6 @@ import org.onflow.flow.models.Signer
 import java.math.BigInteger
 import java.security.*
 import java.security.spec.ECGenParameterSpec
-import java.security.spec.ECPublicKeySpec
-import kotlin.experimental.and
 import kotlin.math.max
 import kotlin.random.Random
 
@@ -102,6 +98,7 @@ actual object Crypto {
         )
     }
 
+    @JvmStatic
     actual fun getSigner(
         privateKey: PrivateKey,
         hashAlgo: HashingAlgorithm = HashingAlgorithm.SHA3_256
