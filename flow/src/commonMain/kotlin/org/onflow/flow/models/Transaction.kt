@@ -179,6 +179,37 @@ fun Transaction.payload(): List<RLPType> = listOf(
 
 fun Transaction.toRLP(): RLPElement = payload().toRLP()
 
+val Transaction.canonicalPayload: ByteArray
+    get() = payload().toRLP().encode()
+
+val Transaction.canonicalAuthorizationEnvelope: ByteArray
+    get() = RLPList(
+        listOf(
+            // The payload as an RLP list.
+            RLPList(payload()),
+            // The payload signatures as an RLP list.
+            RLPList(payloadSignatures.map { signature ->
+                RLPList(
+                    listOf(
+                        (signers[signature.address] ?: -1).toRLP(),
+                        signature.keyIndex.toRLP(),
+                        hex(signature.signature).toRLP()
+                    )
+                )
+            }),
+            // The envelope signatures as an RLP list.
+            RLPList(envelopeSignatures.map { signature ->
+                RLPList(
+                    listOf(
+                        (signers[signature.address] ?: -1).toRLP(),
+                        signature.keyIndex.toRLP(),
+                        hex(signature.signature).toRLP()
+                    )
+                )
+            })
+        )
+    ).encode()
+
 fun Transaction.payloadMessage(): ByteArray =
     DomainTag.Transaction.bytes +
         (RLPList(
@@ -209,3 +240,13 @@ fun Transaction.envelopeMessage(): ByteArray =
                 )
             )
         )).encode()
+
+fun Transaction.addEnvelopeSignature(signature: TransactionSignature): Transaction {
+    return this.copy(envelopeSignatures = this.envelopeSignatures + signature)
+}
+
+fun Transaction.addPayloadSignature(signature: TransactionSignature): Transaction {
+    return this.copy(payloadSignatures = this.payloadSignatures + signature)
+}
+
+

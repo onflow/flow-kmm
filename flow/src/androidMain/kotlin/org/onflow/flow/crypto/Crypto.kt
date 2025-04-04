@@ -87,7 +87,7 @@ actual object Crypto {
         var publicKey = PublicKey(
             publicKey = pk,
             algo = algo,
-            hex = jsecPrivateKeyToHexString(pk, curveFieldSize)
+            hex = jsecPrivateKeyToHexString(sk, curveFieldSize)
         )
 
         return PrivateKey(
