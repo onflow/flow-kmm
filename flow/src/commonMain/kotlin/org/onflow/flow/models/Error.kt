@@ -1,8 +1,6 @@
 package org.onflow.flow.models
 
 import kotlinx.serialization.*
-import kotlinx.serialization.descriptors.*
-import kotlinx.serialization.encoding.*
 
 /**
  * 
@@ -11,11 +9,9 @@ import kotlinx.serialization.encoding.*
  * @param message 
  */
 @Serializable
-data class Error (
+class Error(
+    @SerialName("code") val code: Int? = null,
+    @SerialName("message") override val message: String? = null
+) : Exception(message)
 
-    @SerialName(value = "code") val code: Int? = null,
-
-    @SerialName(value = "message") val message: String? = null
-
-)
 

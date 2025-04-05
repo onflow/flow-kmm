@@ -80,6 +80,8 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+                implementation("org.bouncycastle:bcprov-jdk15on:1.70")
+                implementation("org.bouncycastle:bcpkix-jdk15on:1.70")
             }
         }
         iosMain {

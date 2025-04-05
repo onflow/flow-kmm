@@ -8,7 +8,7 @@ package org.onflow.flow.rlp
 internal const val ELEMENT_OFFSET = 128
 internal const val LIST_OFFSET = 192
 
-sealed class RLPType
+abstract class RLPType
 
 data class RLPElement(val bytes: ByteArray) : RLPType() {
 

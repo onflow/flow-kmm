@@ -10,7 +10,7 @@ import org.onflow.flow.infrastructure.Base64ByteArraySerializer
  * @param address The 8-byte address of an account.
  * @param balance Flow balance of the account.
  * @param expandable
- * @param propertyKeys
+ * @param keys
  * @param contracts
  * @param links
  */

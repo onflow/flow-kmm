@@ -17,7 +17,7 @@ import kotlinx.serialization.*
 data class AccountPublicKey (
 
     /* Index of the public key. */
-    @SerialName(value = "index") @Required val index: String,
+    @SerialName(value = "index") @Required val index: String, // previously used .id in Flow JVM SDK, which was always set to -1
 
     /* Hex encoded public key. */
     @SerialName(value = "public_key") @Required val publicKey: String,
