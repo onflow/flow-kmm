@@ -101,7 +101,7 @@ actual object Crypto {
     @JvmStatic
     actual fun getSigner(
         privateKey: PrivateKey,
-        hashAlgo: HashingAlgorithm
+        hashAlgo: HashingAlgorithm,
     ): Signer = SignerImpl(privateKey, hashAlgo)
 
     @JvmStatic
@@ -219,7 +219,9 @@ internal class HasherImpl(
 
 internal class SignerImpl(
     private val privateKey: PrivateKey,
-    private val hashAlgo: HashingAlgorithm, override var address: String, override var keyIndex: Int
+    private val hashAlgo: HashingAlgorithm,
+    override var address: String = "",
+    override var keyIndex: Int = 0
 ) : Signer {
     init {
         Crypto.checkSupportedSignAlgo(privateKey.algo)
