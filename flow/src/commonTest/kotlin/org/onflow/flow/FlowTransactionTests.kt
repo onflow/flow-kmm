@@ -8,8 +8,6 @@ import org.onflow.flow.crypto.Crypto
 import org.onflow.flow.models.SigningAlgorithm
 import org.onflow.flow.models.HashingAlgorithm
 import org.onflow.flow.models.ProposalKey
-import org.onflow.flow.models.TransactionSignature
-import org.onflow.flow.infrastructure.IntCadenceSerializer
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
@@ -28,8 +26,7 @@ class FlowTransactionTests {
             // Get the account to verify it exists and get the key index
             val account = api.getAccount(cleanAccountAddress)
             val key = account.keys!!.first()
-            println("Account key index: ${key.index}")
-            
+
             // Get the latest block for reference block ID
             val latestBlock = api.getBlock()
             
@@ -56,7 +53,7 @@ class FlowTransactionTests {
                 payer = cleanAccountAddress,
                 proposalKey = ProposalKey(
                     address = cleanAccountAddress,
-                    keyIndex = account.keys!!.first().index,
+                    keyIndex = account.keys!!.first().index.toInt(),
                     sequenceNumber = key.sequenceNumber.toBigInteger()
                 ),
                 authorizers = listOf(cleanAccountAddress),

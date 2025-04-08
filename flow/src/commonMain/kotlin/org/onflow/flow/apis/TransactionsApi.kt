@@ -68,17 +68,12 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
             setBody(transaction)
         }
 
-        val raw = response.bodyAsText() // 👈 this is the raw response string
-        println("Raw response body: $raw")
-
-        return client.post("$baseUrl/transactions") {
-            headers {
-                headers.forEach { header ->
-                    append(header.key, header.value)
-                }
-            }
-            setBody(transaction)
-        }.body()
+        return try {
+            response.body()
+        } catch (e: Exception) {
+            val errorText = response.bodyAsText()
+            throw RuntimeException("Failed to send transaction: $errorText", e)
+        }
     }
 
     internal suspend fun getTransactionResult(transactionId: String): TransactionResult {
