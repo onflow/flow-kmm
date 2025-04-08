@@ -21,8 +21,8 @@ data class ProposalKey (
     /* The 8-byte address of an account. */
     @SerialName(value = "address") @Required val address: String,
 
-    @Serializable(IntCadenceSerializer::class)
-    @SerialName(value = "key_index") @Required val keyIndex: Int,
+    //@Serializable(IntCadenceSerializer::class)
+    @SerialName(value = "key_index") @Required val keyIndex: String,
 
     @Serializable(BigIntegerCadenceSerializer::class)
     @SerialName(value = "sequence_number") @Required val sequenceNumber: BigInteger

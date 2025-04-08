@@ -2,12 +2,14 @@ package org.onflow.flow
 
 import com.ionspin.kotlin.bignum.integer.toBigInteger
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
 import org.onflow.flow.models.Transaction
 import org.onflow.flow.crypto.Crypto
 import org.onflow.flow.models.SigningAlgorithm
 import org.onflow.flow.models.HashingAlgorithm
 import org.onflow.flow.models.ProposalKey
 import org.onflow.flow.models.TransactionSignature
+import org.onflow.flow.infrastructure.IntCadenceSerializer
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
@@ -35,10 +37,12 @@ class FlowTransactionTests {
             val privateKey = Crypto.decodePrivateKey(privateKeyHex, SigningAlgorithm.ECDSA_P256)
             val signer = Crypto.getSigner(privateKey, HashingAlgorithm.SHA3_256).apply {
                 address = cleanAccountAddress
-                keyIndex = key.index.toInt()
+                keyIndex = 0 // Use 0 as the key index since we know it's the first key
             }
-
+            
+            // Create the transaction with all required fields
             val tx = Transaction(
+                id = null, // This is optional
                 script = """
                     access(all) transaction {
                         prepare(signer: AuthAccount) {
@@ -52,18 +56,20 @@ class FlowTransactionTests {
                 payer = cleanAccountAddress,
                 proposalKey = ProposalKey(
                     address = cleanAccountAddress,
-                    keyIndex = key.index.toInt(),
+                    keyIndex = account.keys!!.first().index,
                     sequenceNumber = key.sequenceNumber.toBigInteger()
                 ),
                 authorizers = listOf(cleanAccountAddress),
                 payloadSignatures = emptyList(),
-                envelopeSignatures = emptyList()
+                envelopeSignatures = emptyList(),
+                expandable = null, // This is optional
+                result = null, // This is optional
+                links = null // This is optional
             )
             
             // Sign and send the transaction
             val signedTx = tx.sign(listOf(signer))
-            println("Payload signatures: ${signedTx.payloadSignatures}")
-            println("Envelope signatures: ${signedTx.envelopeSignatures}")
+            
             val result = api.sendTransaction(signedTx)
             
             // Verify the transaction was sent successfully
