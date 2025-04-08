@@ -118,9 +118,9 @@ data class Transaction (
 
         // Sign the transaction with each authorizer
         for (authorizer in authorizers) {
-            if (proposalKey.address == authorizer || payer == authorizer) {
-                continue
-            }
+//            if (proposalKey.address == authorizer || payer == authorizer) {
+//                continue
+//            }
 
             val signerList = findSigners(authorizer, signers)
             for (signUser in signerList) {

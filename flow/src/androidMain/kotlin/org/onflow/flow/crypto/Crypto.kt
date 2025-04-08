@@ -30,15 +30,15 @@ actual object Crypto {
         }
     }
 
-    fun generateKeyPair(algo: SigningAlgorithm = SigningAlgorithm.ECDSA_P256): KeyPair {
+    actual fun generateKeyPair(algo: SigningAlgorithm): KeyPair {
         checkSupportedSignAlgo(algo)
         val generator = KeyPairGenerator.getInstance("EC", "BC")
-        generator.initialize(ECGenParameterSpec("ECDSA"), SecureRandom())
+        generator.initialize(ECGenParameterSpec(algo.curve), SecureRandom())
         val keyPair = generator.generateKeyPair()
         val sk = keyPair.private
         val pk = keyPair.public
 
-        val curveSpec = ECNamedCurveTable.getParameterSpec("ECDSA")
+        val curveSpec = ECNamedCurveTable.getParameterSpec(algo.curve)
         val curveOrderSize = getCurveOrderSize(ecDomainFromECSpec(curveSpec))
         val curveFieldSize = getCurveFieldSize(ecDomainFromECSpec(curveSpec))
 
@@ -212,7 +212,7 @@ internal class HasherImpl(
 ) : Hasher {
 
     override fun hash(bytes: ByteArray): ByteArray {
-        val digest = MessageDigest.getInstance(hashAlgo.value)
+        val digest = MessageDigest.getInstance(hashAlgo.algorithm)
         return digest.digest(bytes)
     }
 }

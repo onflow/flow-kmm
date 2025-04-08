@@ -58,6 +58,19 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
     private suspend fun requestSendTransaction(transaction: Transaction): Transaction {
         val headers = mutableMapOf<String, String>()
         headers["Content-Type"] = "application/json"
+
+        val response = client.post("$baseUrl/transactions") {
+            headers {
+                headers.forEach { header ->
+                    append(header.key, header.value)
+                }
+            }
+            setBody(transaction)
+        }
+
+        val raw = response.bodyAsText() // 👈 this is the raw response string
+        println("Raw response body: $raw")
+
         return client.post("$baseUrl/transactions") {
             headers {
                 headers.forEach { header ->
