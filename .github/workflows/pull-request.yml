@@ -4,19 +4,10 @@ on: pull_request
 jobs:
   build:
     name: Build pull request
-    runs-on: ubuntu-latest
+    runs-on: macos-13
     env:
-      JAVA_OPTS: -Xmx2g -Dorg.gradle.daemon=false
-    #services:
-    #  flow-emulator:
-    #    image: gcr.io/flow-container-registry/emulator
-    #    env:
-    #      FLOW_VERBOSE: true
-    #      FLOW_PORT: 3569
-    #      FLOW_INTERVAL: 5s
-    #      FLOW_PERSIST: false
-    #    ports:
-    #      - 3569:3569
+        JAVA_OPTS: -Xmx2g -Dorg.gradle.daemon=false
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,9 +16,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '21.0.1'
-          java-package: jdk
           distribution: 'temurin'
-          architecture: 'x64'
 
       - name: Install flow emulator
         run: sh -ci "$(curl -fsSL https://raw.githubusercontent.com/onflow/flow-cli/master/install.sh)"
