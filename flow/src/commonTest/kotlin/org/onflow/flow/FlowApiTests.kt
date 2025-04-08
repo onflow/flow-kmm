@@ -11,7 +11,7 @@ import kotlin.test.assertTrue
 class FlowApiTests {
 
     private val api = FlowApi(ChainId.Testnet)
-    private val format = Json { prettyPrint = true }
+    private val format = Cadence.Type.jsonSerializer
 
     @Test
     fun testGetAccount() {
