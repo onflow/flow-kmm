@@ -9,6 +9,7 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.delay
+import org.onflow.flow.ChainId
 import org.onflow.flow.infrastructure.ApiBase
 import org.onflow.flow.infrastructure.Cadence
 import org.onflow.flow.infrastructure.toMultiValue
@@ -106,6 +107,7 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
     }
 
     internal suspend fun createCOAAccount(
+        chainId: ChainId,
         proposer: FlowAddress,
         payer: FlowAddress,
         amount: Double = 0.0,
@@ -114,10 +116,12 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         val script = CadenceLoader.load("create_coa", "common/evm")
         val amountArg = Cadence.ufix64(amount)
         
+        val latestBlock = BlocksApi(chainId.baseUrl).getBlock()
+        
         val transaction = Transaction(
             script = script,
             arguments = listOf(amountArg),
-            referenceBlockId = "",
+            referenceBlockId = latestBlock.header.id,
             gasLimit = 1000.toBigInteger(),
             payer = payer.bytes.toString(),
             proposalKey = ProposalKey(
