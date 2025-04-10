@@ -47,8 +47,9 @@ kotlin {
     val ktorVersion = "3.0.1"
     val kotlincrypto = "0.5.3"
     
-    sourceSets {kotlin
+    sourceSets {
         commonMain {
+            resources.srcDirs("src/commonMain/resources")
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion") {
                     version {
@@ -80,6 +81,8 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+                implementation("org.bouncycastle:bcprov-jdk15on:1.70")
+                implementation("org.bouncycastle:bcpkix-jdk15on:1.70")
             }
         }
         iosMain {

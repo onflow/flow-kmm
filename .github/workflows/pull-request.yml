@@ -1,0 +1,45 @@
+name: Build Pull Request
+on: pull_request
+
+jobs:
+  build:
+    name: Build pull request
+    runs-on: macos-13
+    env:
+        JAVA_OPTS: -Xmx2g -Dorg.gradle.daemon=false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21.0.1'
+          distribution: 'temurin'
+
+      - name: Install flow emulator
+        run: sh -ci "$(curl -fsSL https://raw.githubusercontent.com/onflow/flow-cli/master/install.sh)"
+
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Build
+        id: build
+        run: ./gradlew --warning-mode all check build -x test
+
+      - name: Run Unit Tests
+        id: unit_test
+        if: ${{ steps.build.outcome == 'success' }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          ./gradlew --no-daemon --max-workers=2 --warning-mode=all test --continue --stacktrace
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1.18
+        if: always()
+        with:
+          check_name: "Unit Test Results"
+          files: "**/test-results/test/**/*.xml"
+          seconds_between_github_writes: 5
+          secondary_rate_limit_wait_seconds: 120

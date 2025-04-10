@@ -21,15 +21,13 @@ data class TransactionSignature (
 
     /* A variable length signature. */
     @Serializable(Base64HexSerializer::class)
-    @SerialName(value = "signature") @Required val signature: String,
-
-    var signerIndex: Int = -1
+    @SerialName(value = "signature") @Required val signature: String
 )
 
 class CompareTransactionSignature {
     companion object : Comparator<TransactionSignature> {
         override fun compare(a: TransactionSignature, b: TransactionSignature): Int = when {
-            a.keyIndex == b.keyIndex -> a.signerIndex - b.signerIndex
+            a.keyIndex == b.keyIndex -> 0
             else -> a.keyIndex - b.keyIndex
         }
     }

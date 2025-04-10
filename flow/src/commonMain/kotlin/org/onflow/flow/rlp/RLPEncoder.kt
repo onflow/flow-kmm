@@ -9,6 +9,7 @@ fun RLPType.encode(): ByteArray = when (this) {
     is RLPList -> element.asSequence().map { it.encode() }
         .fold(ByteArray(0)) { acc, bytes -> acc + bytes } // this can be speed optimized when needed
         .encodeLegacyTxRLP(LIST_OFFSET)
+    else -> throw IllegalArgumentException("Unsupported RLPType: $this")
 }
 
 internal fun ByteArray.encodeLegacyTxRLP(offset: Int) = when {

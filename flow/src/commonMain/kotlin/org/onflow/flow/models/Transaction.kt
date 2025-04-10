@@ -109,8 +109,7 @@ data class Transaction (
                 val txSignature = TransactionSignature(
                     address = signUser.address,
                     keyIndex = signUser.keyIndex,
-                    signature = signature.toHexString(),
-                    signerIndex = this.signers[signUser.address] ?: -1
+                    signature = signature.toHexString()
                 )
                 payloadSignatures.add(txSignature)
             }
@@ -118,6 +117,7 @@ data class Transaction (
 
         // Sign the transaction with each authorizer
         for (authorizer in authorizers) {
+            // Skip if this authorizer is the same as the proposal key
             if (proposalKey.address == authorizer || payer == authorizer) {
                 continue
             }
@@ -128,8 +128,7 @@ data class Transaction (
                 val txSignature = TransactionSignature(
                     address = signUser.address,
                     keyIndex = signUser.keyIndex,
-                    signature = signature.toHexString(),
-                    signerIndex = this.signers[signUser.address] ?: -1
+                    signature = signature.toHexString()
                 )
                 payloadSignatures.add(txSignature)
             }
@@ -150,8 +149,7 @@ data class Transaction (
             val txSignature = TransactionSignature(
                 address = signUser.address,
                 keyIndex = signUser.keyIndex,
-                signature = signature.toHexString(),
-                signerIndex = this.signers[signUser.address] ?: -1
+                signature = signature.toHexString()
             )
             envelopeSignatures.add(txSignature)
         }
@@ -179,6 +177,35 @@ fun Transaction.payload(): List<RLPType> = listOf(
 
 fun Transaction.toRLP(): RLPElement = payload().toRLP()
 
+val Transaction.canonicalPayload: ByteArray
+    get() = payload().toRLP().encode()
+
+val Transaction.canonicalAuthorizationEnvelope: ByteArray
+    get() = RLPList(
+        listOf(
+            // The payload as an RLP list.
+            RLPList(payload()),
+            // The payload signatures as an RLP list.
+            RLPList(payloadSignatures.map { signature ->
+                RLPList(
+                    listOf(
+                        signature.keyIndex.toRLP(),
+                        hex(signature.signature).toRLP()
+                    )
+                )
+            }),
+            // The envelope signatures as an RLP list.
+            RLPList(envelopeSignatures.map { signature ->
+                RLPList(
+                    listOf(
+                        signature.keyIndex.toRLP(),
+                        hex(signature.signature).toRLP()
+                    )
+                )
+            })
+        )
+    ).encode()
+
 fun Transaction.payloadMessage(): ByteArray =
     DomainTag.Transaction.bytes +
         (RLPList(
@@ -186,7 +213,7 @@ fun Transaction.payloadMessage(): ByteArray =
                 RLPList(payload()),
                     RLPList(
                         payloadSignatures.map {
-                            listOf((signers[it.address] ?: -1).toRLP(), it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
+                            listOf(it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
                         }
                     )
             )
@@ -199,13 +226,23 @@ fun Transaction.envelopeMessage(): ByteArray =
                 RLPList(payload()),
                 RLPList(
                     payloadSignatures.map {
-                        listOf((signers[it.address] ?: -1).toRLP(), it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
+                        listOf(it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
                     }
                 ),
                 RLPList(
                     envelopeSignatures.map {
-                        listOf((signers[it.address] ?: -1).toRLP(), it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
+                        listOf(it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
                     }
                 )
             )
         )).encode()
+
+fun Transaction.addEnvelopeSignature(signature: TransactionSignature): Transaction {
+    return this.copy(envelopeSignatures = this.envelopeSignatures + signature)
+}
+
+fun Transaction.addPayloadSignature(signature: TransactionSignature): Transaction {
+    return this.copy(payloadSignatures = this.payloadSignatures + signature)
+}
+
+
