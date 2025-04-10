@@ -116,7 +116,7 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         val script = CadenceLoader.load("create_coa", "common/evm")
         val amountArg = Cadence.ufix64(amount)
         
-        val latestBlock = BlocksApi(chainId.baseUrl).getBlock()
+        val latestBlock = BlocksApi(baseUrl).getBlock()
         
         val transaction = Transaction(
             script = script,

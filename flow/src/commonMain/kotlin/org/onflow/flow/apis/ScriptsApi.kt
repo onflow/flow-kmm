@@ -76,6 +76,6 @@ internal class ScriptsApi(val baseUrl: String) : ApiBase() {
             script = script,
             arguments = listOf(Cadence.address(flowAddress.bytes.toString()))
         )
-        return result.decode<Cadence.Value.StringValue>()?.value
+        return result.decode<Cadence.Value.StringValue>().value
     }
 }
