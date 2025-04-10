@@ -4,7 +4,7 @@ import java.io.InputStreamReader
 
 internal actual fun loadResource(path: String): String {
     val resourcePath = "scripts/$path.cdc"
-    val inputStream = javaClass.classLoader?.getResourceAsStream(resourcePath)
+    val inputStream = CadenceLoader::class.java.classLoader?.getResourceAsStream(resourcePath)
         ?: throw RuntimeException("Resource not found: $resourcePath")
     
     return InputStreamReader(inputStream).use { reader ->
@@ -12,19 +12,3 @@ internal actual fun loadResource(path: String): String {
     }
 }
 
-interface ContextProvider {
-    fun getContext(): Context
-}
-
-object FlowContextProvider {
-    private var contextProvider: ContextProvider? = null
-
-    fun initialize(provider: ContextProvider) {
-        contextProvider = provider
-    }
-
-    fun getContext(): Context {
-        return contextProvider?.getContext() 
-            ?: throw IllegalStateException("ContextProvider not initialized. Call FlowContextProvider.initialize() first.")
-    }
-} 
