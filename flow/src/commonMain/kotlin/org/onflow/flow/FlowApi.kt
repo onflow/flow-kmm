@@ -85,4 +85,8 @@ class FlowApi(val chainId: ChainIdProvider) {
     suspend fun sendTransaction(request: Transaction): Transaction {
         return transactionsApi.sendTransaction(request)
     }
+
+    suspend fun waitForSeal(transactionId: String): TransactionResult {
+        return transactionsApi.waitForSeal(transactionId)
+    }
 }

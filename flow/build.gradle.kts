@@ -47,8 +47,9 @@ kotlin {
     val ktorVersion = "3.0.1"
     val kotlincrypto = "0.5.3"
     
-    sourceSets {kotlin
+    sourceSets {
         commonMain {
+            resources.srcDirs("src/commonMain/resources")
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion") {
                     version {
