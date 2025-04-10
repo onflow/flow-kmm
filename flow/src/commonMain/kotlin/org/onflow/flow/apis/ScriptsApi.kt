@@ -9,6 +9,8 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.util.decodeBase64String
 import io.ktor.util.encodeBase64
 import org.onflow.flow.models.ScriptsPostRequest
+import org.onflow.flow.infrastructure.scripts.CadenceLoader
+import org.onflow.flow.models.FlowAddress
 
 internal class ScriptsApi(val baseUrl: String) : ApiBase() {
 
@@ -64,5 +66,16 @@ internal class ScriptsApi(val baseUrl: String) : ApiBase() {
         }
 
         return Cadence.Value.decodeFromJson(response)
+    }
+
+    internal suspend fun getEVMAddress(
+        flowAddress: FlowAddress
+    ): String? {
+        val script = CadenceLoader.load("get_evm_address", "common/evm")
+        val result = executeScript(
+            script = script,
+            arguments = listOf(Cadence.address(flowAddress.bytes.toString()))
+        )
+        return result.decode<Cadence.Value.StringValue>()?.value
     }
 }
