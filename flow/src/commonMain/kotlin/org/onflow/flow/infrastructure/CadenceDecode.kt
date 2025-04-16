@@ -4,6 +4,7 @@ import com.ionspin.kotlin.bignum.integer.BigInteger
 import com.ionspin.kotlin.bignum.serialization.kotlinx.biginteger.BigIntegerHumanReadableSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.*
+import org.onflow.flow.infrastructure.Cadence.Type.Companion.jsonSerializer
 import kotlin.time.Duration
 
 fun List<Cadence.Value>.decodeToAny(): List<Any?> {
@@ -24,6 +25,17 @@ fun String.addHexPrefix(): String {
 
 fun String.removeHexPrefix(): String {
     return if (startsWith("0x")) this.removePrefix("0x") else this
+}
+
+inline fun <reified T> decodeCadenceStruct(struct: Cadence.Value.StructValue): T {
+    return jsonSerializer.decodeFromJsonElement(struct.toJsonObject())
+}
+
+fun Cadence.Value.StructValue.toJsonObject(): JsonObject {
+    val jsonFields = this.value.fields
+        .associate { it.name to it.value.decodeToAny().toJsonElement() }
+
+    return JsonObject(jsonFields)
 }
 
 fun Any?.toJsonElement(): JsonElement = when (this) {
