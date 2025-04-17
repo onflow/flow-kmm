@@ -9,7 +9,6 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.util.decodeBase64String
 import io.ktor.util.encodeBase64
 import kotlinx.serialization.Serializable
-import org.onflow.flow.infrastructure.Cadence.Type.Companion.jsonSerializer
 import org.onflow.flow.models.ScriptsPostRequest
 import org.onflow.flow.infrastructure.scripts.CadenceLoader
 import org.onflow.flow.models.FlowAddress
