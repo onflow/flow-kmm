@@ -10,6 +10,9 @@ import kotlinx.serialization.*
 @Serializable
 enum class TransactionStatus(val value: String) {
 
+    @SerialName(value = "")
+    EMPTY(""),
+
     @SerialName(value = "Unknown")
     UNKNOWN("Unknown"),
 
@@ -47,11 +50,18 @@ enum class TransactionStatus(val value: String) {
          * Returns a valid [TransactionStatus] for [data], null otherwise.
          */
         fun decode(data: Any?): TransactionStatus? = data?.let {
-          val normalizedData = "$it".lowercase()
-          values().firstOrNull { value ->
-            it == value || normalizedData == "$value".lowercase()
-          }
+            println("Hello!")
+            val normalizedData = "$it".lowercase()
+            if (normalizedData.isBlank()) {
+                UNKNOWN
+            } else {
+                values().firstOrNull { value ->
+                    it == value || normalizedData == "$value".lowercase()
+                }
+            }
         }
     }
 }
+
+
 

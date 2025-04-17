@@ -7,7 +7,7 @@ import org.onflow.flow.infrastructure.Base64ByteArray
  * Base64 encoded signature.
  *
  * @param address The 8-byte address of an account.
- * @param keyIndex 
+ * @param keyIndex
  * @param signature A variable length signature.
  */
 @Serializable
@@ -21,13 +21,15 @@ data class TransactionSignature (
 
     /* A variable length signature. */
     @Serializable(Base64HexSerializer::class)
-    @SerialName(value = "signature") @Required val signature: String
+    @SerialName(value = "signature") @Required val signature: String,
+
+    var signerIndex: Int = -1
 )
 
 class CompareTransactionSignature {
     companion object : Comparator<TransactionSignature> {
         override fun compare(a: TransactionSignature, b: TransactionSignature): Int = when {
-            a.keyIndex == b.keyIndex -> 0
+            a.keyIndex == b.keyIndex -> a.signerIndex - b.signerIndex
             else -> a.keyIndex - b.keyIndex
         }
     }

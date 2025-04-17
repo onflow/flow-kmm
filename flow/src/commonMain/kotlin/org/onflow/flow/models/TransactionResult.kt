@@ -19,7 +19,7 @@ data class TransactionResult (
     /* A 32-byte unique identifier for an entity. */
     @SerialName(value = "block_id") @Required val blockId: String,
 
-    @SerialName(value = "status") @Required val status: TransactionStatus,
+    @SerialName(value = "status") val status: TransactionStatus? = TransactionStatus.UNKNOWN,
 
     @SerialName(value = "status_code") @Required val statusCode: Int,
 

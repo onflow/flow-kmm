@@ -15,6 +15,7 @@ import org.onflow.flow.models.BlockHeader
 import org.onflow.flow.models.Collection
 import org.onflow.flow.models.ExecutionResult
 import org.onflow.flow.models.FlowAddress
+import org.onflow.flow.models.Signer
 import org.onflow.flow.models.Transaction
 import org.onflow.flow.models.TransactionResult
 
@@ -97,5 +98,19 @@ class FlowApi(val chainId: ChainIdProvider) {
 
     suspend fun getChildAccountMetadata(flowAddress: FlowAddress): Map<String, ScriptsApi.ChildAccountMetadata> {
         return scriptsApi.getChildAccountMetadata(flowAddress)
+    }
+
+    suspend fun createCOAAccount(
+        proposer: FlowAddress,
+        payer: FlowAddress,
+        amount: Double = 0.0,
+        signers: List<Signer>
+    ): String {
+        return transactionsApi.createCOAAccount(
+            proposer = proposer,
+            payer = payer,
+            amount = amount,
+            signers = signers
+        )
     }
 }
