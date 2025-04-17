@@ -10,10 +10,10 @@ import io.ktor.util.decodeBase64String
 import io.ktor.util.encodeBase64
 import kotlinx.serialization.Serializable
 import org.onflow.flow.models.ScriptsPostRequest
-import org.onflow.flow.infrastructure.scripts.CadenceLoader
+import org.onflow.flow.infrastructure.scripts.CadenceScriptLoader
 import org.onflow.flow.models.FlowAddress
 
-internal class ScriptsApi(val baseUrl: String) : ApiBase() {
+class ScriptsApi(val baseUrl: String) : ApiBase() {
 
     private suspend fun request(
         scriptsPostRequest: ScriptsPostRequest,
@@ -66,13 +66,15 @@ internal class ScriptsApi(val baseUrl: String) : ApiBase() {
             request(request, blockHeight = "sealed")
         }
 
+        println(response)
+
         return Cadence.Value.decodeFromJson(response)
     }
 
     internal suspend fun getEVMAddress(
         flowAddress: FlowAddress
     ): String {
-        val script = CadenceLoader.load("get_evm_address", "common/evm")
+        val script = CadenceScriptLoader.load("get_addr", "common/evm")
         val result = executeScript(
             script = script,
             arguments = listOf(Cadence.address(flowAddress.base16Value))
@@ -93,7 +95,7 @@ internal class ScriptsApi(val baseUrl: String) : ApiBase() {
     )
 
     internal suspend fun getChildAccountMetadata(flowAddress: FlowAddress): Map<String, ChildAccountMetadata> {
-        val script = CadenceLoader.load("get_child_account_meta", "common/evm")
+        val script = CadenceScriptLoader.load("get_child_account_meta", "common/evm")
         val result = executeScript(
             script = script,
             arguments = listOf(Cadence.address(flowAddress.base16Value))

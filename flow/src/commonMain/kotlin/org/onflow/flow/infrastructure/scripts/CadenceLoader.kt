@@ -1,11 +1,25 @@
 package org.onflow.flow.infrastructure.scripts
 
+import org.onflow.flow.ChainId
+
 /**
  * Interface for defining Cadence script paths
  */
 interface CadenceLoaderProtocol {
     val directory: String
     val filename: String
+}
+
+/**
+ * Base class for loading Cadence scripts from resources
+ */
+expect class CadenceLoader(chainId: ChainId) {
+    /**
+     * Load a Cadence script from resources and resolve contract addresses
+     * @param path Path to the script in resources
+     * @return The script content with resolved addresses
+     */
+    open fun loadScript(path: String): String
 }
 
 /**
@@ -16,10 +30,9 @@ internal expect fun loadResource(path: String): String
 /**
  * Utility class for loading Cadence scripts from files
  */
-class CadenceLoader {
+class CadenceScriptLoader {
     companion object {
-        private const val SUBDIRECTORY = "scripts"
-        private const val FILE_EXTENSION = "cdc"
+        private val loader = CadenceLoader(ChainId.Testnet)
 
         /**
          * Load a Cadence script from the resources
@@ -30,7 +43,13 @@ class CadenceLoader {
          */
         fun load(name: String, directory: String = ""): String {
             val resourcePath = buildResourcePath(name, directory)
-            return loadResource(resourcePath)
+            try {
+                val script = loader.loadScript(resourcePath)
+                return script
+            } catch (e: Exception) {
+                println("Error loading script from path: $resourcePath")
+                throw e
+            }
         }
 
         /**
@@ -44,12 +63,17 @@ class CadenceLoader {
         }
 
         private fun buildResourcePath(name: String, directory: String): String {
-            val path = StringBuilder("/$SUBDIRECTORY")
+            val path = StringBuilder()
+            // Start with the base scripts directory
+            path.append("scripts/")
+            // Add the directory if provided
             if (directory.isNotEmpty()) {
-                path.append("/$directory")
+                path.append("$directory/")
             }
-            path.append("/$name.$FILE_EXTENSION")
-            return path.toString()
+            // Add the filename
+            path.append(name)
+            val fullPath = path.toString()
+            return fullPath
         }
     }
 }

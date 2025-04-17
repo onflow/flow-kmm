@@ -49,7 +49,7 @@ kotlin {
     
     sourceSets {
         commonMain {
-            resources.srcDirs("src/commonMain/resources")
+            resources.srcDirs("src/commonMain/resources", "src/commonMain/kotlin/org/onflow/flow/infrastructure/scripts/common")
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion") {
                     version {
@@ -73,9 +73,13 @@ kotlin {
             }
         }
         commonTest {
+            resources.srcDirs("src/commonTest/resources")
             dependencies {
                 implementation(kotlin("test"))
             }
+        }
+        androidUnitTest {
+            resources.srcDirs("src/commonTest/resources", "src/commonMain/resources" )
         }
         androidMain {
             dependencies {
@@ -117,5 +121,15 @@ getenv("GITHUB_REPOSITORY")?.let {
     }
 }
 
+tasks.withType<Copy>().configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 tasks.named("build") { finalizedBy("createXCFramework") }
 tasks.named("clean") { doFirst { delete("swiftpackage") } }
+
+
+tasks.withType<Test> {
+    testLogging.showStandardStreams = true
+    outputs.upToDateWhen { false } // helps debugging
+}

@@ -14,6 +14,7 @@ import org.onflow.flow.models.BlockEvents
 import org.onflow.flow.models.BlockHeader
 import org.onflow.flow.models.Collection
 import org.onflow.flow.models.ExecutionResult
+import org.onflow.flow.models.FlowAddress
 import org.onflow.flow.models.Transaction
 import org.onflow.flow.models.TransactionResult
 
@@ -88,5 +89,13 @@ class FlowApi(val chainId: ChainIdProvider) {
 
     suspend fun waitForSeal(transactionId: String): TransactionResult {
         return transactionsApi.waitForSeal(transactionId)
+    }
+
+    suspend fun getEVMAddress(flowAddress: FlowAddress): String {
+        return scriptsApi.getEVMAddress(flowAddress)
+    }
+
+    suspend fun getChildAccountMetadata(flowAddress: FlowAddress): Map<String, ScriptsApi.ChildAccountMetadata> {
+        return scriptsApi.getChildAccountMetadata(flowAddress)
     }
 }

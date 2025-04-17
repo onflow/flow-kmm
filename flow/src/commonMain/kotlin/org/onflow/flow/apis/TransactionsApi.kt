@@ -18,7 +18,7 @@ import org.onflow.flow.models.ProposalKey
 import org.onflow.flow.models.Transaction
 import org.onflow.flow.models.TransactionResult
 import org.onflow.flow.models.TransactionStatus
-import org.onflow.flow.infrastructure.scripts.CadenceLoader
+import org.onflow.flow.infrastructure.scripts.CadenceScriptLoader
 import org.onflow.flow.models.Signer
 
 internal class TransactionsApi(val baseUrl: String) : ApiBase() {
@@ -113,7 +113,7 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         amount: Double = 0.0,
         signers: List<Signer>
     ): String {
-        val script = CadenceLoader.load("create_coa", "common/evm")
+        val script = CadenceScriptLoader.load("create_coa", "common/evm")
         val amountArg = Cadence.ufix64(amount)
         
         val latestBlock = BlocksApi(baseUrl).getBlock()
