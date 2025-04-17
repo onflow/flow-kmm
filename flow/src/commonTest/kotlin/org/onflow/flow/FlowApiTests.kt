@@ -5,6 +5,8 @@ import kotlinx.serialization.encodeToString
 import org.onflow.flow.apis.ScriptsApi
 import org.onflow.flow.infrastructure.Cadence
 import org.onflow.flow.infrastructure.scripts.CadenceScriptLoader
+import org.onflow.flow.models.FlowAddress
+import org.onflow.flow.models.hexToBytes
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -53,20 +55,16 @@ class FlowApiTests {
     @Test
     fun testGetEVMAddress() {
         runBlocking {
-            val script = CadenceScriptLoader.load("get_addr", "common/evm")
-            val response = api.executeScript(script, listOf(Cadence.address("0xcfa16944c93058bf")))
-            val evmAddress = response.decode<String>()
-            println("EVM Address: $evmAddress")
-            assertEquals("0000000000000000000000029e7fe89acde8be4a", evmAddress)
+            val response = api.getEVMAddress(FlowAddress.of("0xcfa16944c93058bf".hexToBytes()))
+            println("EVM Address: $response")
+            assertEquals("0000000000000000000000029e7fe89acde8be4a", response)
         }
     }
 
     @Test
     fun testGetChildAccountMetadata() {
         runBlocking {
-            val script = CadenceScriptLoader.load("get_child_account_meta", "common/evm")
-            val response = api.executeScript(script, listOf(Cadence.address("0xcfa16944c93058bf")))
-            val metadata = response.decode<Map<String, ScriptsApi.ChildAccountMetadata>>()
+            val metadata = api.getChildAccountMetadata(FlowAddress.of("0xcfa16944c93058bf".hexToBytes()))
             // Verify the metadata structure
             metadata.forEach { (key, value) ->
                 assertTrue(key.isNotEmpty())

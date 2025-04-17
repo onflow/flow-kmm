@@ -79,7 +79,8 @@ class ScriptsApi(val baseUrl: String) : ApiBase() {
             script = script,
             arguments = listOf(Cadence.address(flowAddress.base16Value))
         )
-        return result.decode<Cadence.Value.StringValue>().value
+        val evmAddress = result.decode<String>()
+        return evmAddress
     }
 
     @Serializable
@@ -100,13 +101,7 @@ class ScriptsApi(val baseUrl: String) : ApiBase() {
             script = script,
             arguments = listOf(Cadence.address(flowAddress.base16Value))
         )
-
-        val objectMap = result.decode<Cadence.Value.DictionaryValue>()
-        return objectMap.value.associate { entry ->
-            val key = entry.key.decode<Cadence.Value.StringValue>().value
-            val struct = entry.value.decode<Cadence.Value.StructValue>()
-            val metadata = decodeCadenceStruct<ChildAccountMetadata>(struct)
-            key to metadata
-        }
+        val objectMap = result.decode<Map<String, ChildAccountMetadata>>()
+        return objectMap
     }
 }
