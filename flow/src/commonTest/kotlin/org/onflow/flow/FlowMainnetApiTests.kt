@@ -7,7 +7,6 @@ import kotlinx.coroutines.runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class FlowMainnetApiTests {
 

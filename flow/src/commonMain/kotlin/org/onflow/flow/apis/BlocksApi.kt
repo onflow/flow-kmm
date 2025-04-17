@@ -3,7 +3,6 @@ package org.onflow.flow.apis
 import org.onflow.flow.infrastructure.ApiBase
 import org.onflow.flow.infrastructure.toMultiValue
 import org.onflow.flow.models.Block
-
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
