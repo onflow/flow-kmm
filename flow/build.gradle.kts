@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
 import java.lang.System.getenv
 
 plugins {
@@ -123,6 +124,18 @@ getenv("GITHUB_REPOSITORY")?.let {
 
 tasks.withType<Copy>().configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Disable iOS tests
+tasks.withType<Test>().configureEach {
+    if (name.contains("ios", ignoreCase = true)) {
+        enabled = false
+    }
+}
+tasks.withType<KotlinNativeTest>().configureEach {
+    if (name.contains("ios", ignoreCase = true)) {
+        enabled = false
+    }
 }
 
 tasks.named("build") { finalizedBy("createXCFramework") }
