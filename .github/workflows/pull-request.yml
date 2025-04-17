@@ -18,9 +18,6 @@ jobs:
           java-version: '21.0.1'
           distribution: 'temurin'
 
-      - name: Install flow emulator
-        run: sh -ci "$(curl -fsSL https://raw.githubusercontent.com/onflow/flow-cli/master/install.sh)"
-
       - name: Make gradle executable
         run: chmod +x ./gradlew
 
