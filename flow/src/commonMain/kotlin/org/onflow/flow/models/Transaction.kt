@@ -181,8 +181,16 @@ fun Transaction.toRLP(): RLPElement = payload().toRLP()
 
 fun Transaction.payloadMessage(): ByteArray =
     DomainTag.Transaction.bytes +
-            RLPList(payload())
-                .encode()
+            (RLPList(
+                listOf(
+                    RLPList(payload()),
+                    RLPList(
+                        payloadSignatures.map {
+                            listOf((signers[it.address] ?: -1).toRLP(), it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
+                        }
+                    )
+                )
+            )).encode()
 
 fun Transaction.envelopeMessage(): ByteArray =
     DomainTag.Transaction.bytes +
