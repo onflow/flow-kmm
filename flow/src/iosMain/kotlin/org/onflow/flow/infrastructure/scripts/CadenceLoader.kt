@@ -4,12 +4,10 @@ import org.onflow.flow.ChainId
 
 actual class CadenceLoader actual constructor(chainId: ChainId) {
     actual fun loadScript(path: String): String {
-        // Dummy implementation that returns an empty string
-        return ""
+        return "Not yet implemented"
     }
 }
 
 internal actual fun loadResource(path: String): String {
-    // Dummy implementation that returns an empty string
-    return ""
+    return "Not yet implemented"
 } 
