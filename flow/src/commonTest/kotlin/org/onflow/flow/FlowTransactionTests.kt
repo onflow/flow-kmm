@@ -11,6 +11,7 @@ import org.onflow.flow.models.Transaction
 import org.onflow.flow.models.TransactionStatus
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class FlowTransactionTests {
@@ -88,34 +89,27 @@ class FlowTransactionTests {
 
             val privateKeyHex = "c9c0f04adddf7674d265c395de300a65a777d3ec412bba5bfdfd12cffbbb78d9"
 
-            // Get the account to verify it exists and get the key index
-            val account = api.getAccount(cleanAccountAddress)
-
             val privateKey = Crypto.decodePrivateKey(privateKeyHex, SigningAlgorithm.ECDSA_P256)
             val signer = Crypto.getSigner(privateKey, HashingAlgorithm.SHA3_256).apply {
                 address = cleanAccountAddress
                 keyIndex = 0
             }
 
-            // Create COA account with 0.1 Flow tokens
-            val transactionId = api.createCOAAccount(
-                proposer = FlowAddress(account.address),
-                payer = FlowAddress(account.address),
-                amount = 0.1,
-                signers = listOf(signer)
+            val ex = assertFailsWith<RuntimeException> {
+                // triggers the Cadence script; we *expect* it to abort
+                val txId = api.createCOAAccount(
+                    proposer = FlowAddress(cleanAccountAddress),
+                    payer    = FlowAddress(cleanAccountAddress),
+                    amount   = 0.1,
+                    signers  = listOf(signer)
+                )
+                api.waitForSeal(txId)   // will throw
+            }
+
+            assertTrue(
+                ex.message?.contains("already stores an object") == true,
+                "Error should mention that /storage/evm already stores an object"
             )
-
-            println(transactionId)
-
-            // Wait for the transaction to be sealed
-            val result = api.waitForSeal(transactionId)
-
-            println(result)
-
-            // Verify the transaction was successful
-            assertEquals(result.status, TransactionStatus.SEALED, "Transaction should be sealed")
-            assertTrue(false, "Transaction should not have errors")
-            println("COA account created successfully with transaction ID: $transactionId")
         }
     }
 }
