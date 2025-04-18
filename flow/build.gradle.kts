@@ -50,7 +50,7 @@ kotlin {
     
     sourceSets {
         commonMain {
-            resources.srcDirs("src/commonMain/resources", "src/commonMain/kotlin/org/onflow/flow/infrastructure/scripts/common")
+            resources.srcDirs("src/commonMain/resources")
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion") {
                     version {
@@ -87,7 +87,6 @@ kotlin {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
                 implementation("org.bouncycastle:bcprov-jdk15on:1.70")
-                implementation("org.bouncycastle:bcpkix-jdk15on:1.70")
             }
         }
         iosMain {
@@ -142,7 +141,3 @@ tasks.named("build") { finalizedBy("createXCFramework") }
 tasks.named("clean") { doFirst { delete("swiftpackage") } }
 
 
-tasks.withType<Test> {
-    testLogging.showStandardStreams = true
-    outputs.upToDateWhen { false } // helps debugging
-}
