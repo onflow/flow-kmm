@@ -143,17 +143,6 @@ actual object Crypto {
         return hexString
     }
 
-    actual fun derivePublicKey(sk: PrivateKey): PublicKey {
-        val jcePubKey = derivePublicKey(sk.privateKey) // this is your internal method
-        val curveSpec = ECNamedCurveTable.getParameterSpec(sk.algo.curve)
-        val curveFieldSize = getCurveFieldSize(ecDomainFromECSpec(curveSpec))
-        return PublicKey(
-            publicKey = jcePubKey,
-            algo = sk.algo,
-            hex = jsecPublicKeyToHexString(jcePubKey, curveFieldSize)
-        )
-    }
-
     @JvmStatic
     internal fun derivePublicKey(sk: java.security.PrivateKey): java.security.PublicKey {
         val ecSK = if (sk is ECPrivateKey) {

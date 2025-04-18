@@ -87,32 +87,14 @@ class FlowTransactionTests {
             val cleanAccountAddress = testAccountAddress.removePrefix("0x")
 
             val privateKeyHex = "c9c0f04adddf7674d265c395de300a65a777d3ec412bba5bfdfd12cffbbb78d9"
-            val expectedPubKey = "d487802b66e5c0498ead1c3f576b718949a3500218e97a6a4a62bf69a8b0019789639bc7acaca63f5889c1e7251c19066abb09fcd6b273e394a8ac4ee1a3372f"
-
 
             // Get the account to verify it exists and get the key index
             val account = api.getAccount(cleanAccountAddress)
-            val key = account.keys!!.first()
 
-            println(account)
-            println(account.keys!!.first().signingAlgorithm)
-            println(account.keys!!.first().hashingAlgorithm)
-
-            // Get the latest block for reference block ID
-            val latestBlock = api.getBlock()
-
-            // Create a signer using the provided private key
             val privateKey = Crypto.decodePrivateKey(privateKeyHex, SigningAlgorithm.ECDSA_P256)
-
-            val derivedPubKey = Crypto.derivePublicKey(privateKey).hex
-
-            println("Derived:  $derivedPubKey")
-            println("Expected: $expectedPubKey")
-
-
-            val signer = Crypto.getSigner(privateKey, HashingAlgorithm.SHA2_256).apply {
+            val signer = Crypto.getSigner(privateKey, HashingAlgorithm.SHA3_256).apply {
                 address = cleanAccountAddress
-                keyIndex = 0 // Use 0 as the key index since we know it's the first key
+                keyIndex = 0
             }
 
             // Create COA account with 0.1 Flow tokens
@@ -125,17 +107,14 @@ class FlowTransactionTests {
 
             println(transactionId)
 
-            println("Key index: ${signer.keyIndex}")
-            println("Address: ${signer.address}")
-
             // Wait for the transaction to be sealed
             val result = api.waitForSeal(transactionId)
 
             println(result)
 
             // Verify the transaction was successful
-            assertTrue(result.status == TransactionStatus.SEALED, "Transaction should be sealed")
-            assertTrue(result.errorMessage == null, "Transaction should not have errors")
+            assertEquals(result.status, TransactionStatus.SEALED, "Transaction should be sealed")
+            assertTrue(false, "Transaction should not have errors")
             println("COA account created successfully with transaction ID: $transactionId")
         }
     }

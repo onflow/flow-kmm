@@ -8,7 +8,6 @@ internal actual object ResourceLoader {
         )
 
         for (tryPath in pathsToTry) {
-            println("Trying to load from path: $tryPath")
             val inputStream = javaClass.classLoader.getResourceAsStream(tryPath)
             if (inputStream != null) {
                 return inputStream.bufferedReader().use { it.readText() }

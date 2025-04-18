@@ -26,7 +26,7 @@ import kotlinx.serialization.*
  * @param links
  */
 @Serializable
-data class Transaction (
+data class Transaction(
 
     /* A 32-byte unique identifier for an entity. */
     @SerialName(value = "id")
@@ -85,7 +85,7 @@ data class Transaction (
         get() = listOf(listOf(proposalKey.address, payer), authorizers)
             .flatten()
             .toSet()
-            .mapIndexed{ index, item ->
+            .mapIndexed { index, item ->
                 item to index
             }
             .toMap()
@@ -167,29 +167,29 @@ data class Transaction (
 
 fun Transaction.payload(): List<RLPType> = listOf(
     script.toRLP(),
-    RLPList(arguments.map{ it.encode().toByteArray().toRLP() }),
+    RLPList(arguments.map { it.encode().toByteArray().toRLP() }),
     hex(referenceBlockId).toRLP(),
     gasLimit.toRLP(),
     hex(proposalKey.address).paddingZeroLeft().toRLP(),
     proposalKey.keyIndex.toRLP(),
     proposalKey.sequenceNumber.toRLP(),
     hex(payer).paddingZeroLeft().toRLP(),
-    RLPList(authorizers.map{hex(it).paddingZeroLeft().toRLP()})
+    RLPList(authorizers.map { hex(it).paddingZeroLeft().toRLP() })
 )
 
 fun Transaction.toRLP(): RLPElement = payload().toRLP()
 
 fun Transaction.payloadMessage(): ByteArray =
-    DomainTag.Transaction.bytes +           // 32‑byte tag
-            RLPList(payload())                      // only the payload!
+    DomainTag.Transaction.bytes +
+            RLPList(payload())
                 .encode()
 
 fun Transaction.envelopeMessage(): ByteArray =
     DomainTag.Transaction.bytes +
             RLPList(
                 listOf(
-                    RLPList(payload()),             // payload
-                    RLPList(                        // list of *payload* sigs
+                    RLPList(payload()),
+                    RLPList(
                         payloadSignatures.map {
                             listOf(
                                 (signers[it.address] ?: -1).toRLP(),

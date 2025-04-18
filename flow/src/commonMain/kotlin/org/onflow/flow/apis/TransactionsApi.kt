@@ -142,10 +142,6 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         val accountsApi = AccountsApi(baseUrl)
         val blocksApi = BlocksApi(baseUrl)
 
-        val acct = accountsApi.getAccount("c6de0d94160377cd")
-        val key = acct.keys!!.first()
-        println("on‑chain signAlgo=${key.signingAlgorithm} hashAlgo=${key.hashingAlgorithm}")
-
         val script = CadenceScriptLoader.load("create_coa", "common/evm")
         val latestBlock = blocksApi.getBlock()
 
@@ -155,7 +151,7 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         val proposerKey = proposerAccount.keys?.firstOrNull()
             ?: throw IllegalArgumentException("Proposer has no keys")
 
-        val payerKey = payerAccount.keys?.firstOrNull()
+        payerAccount.keys?.firstOrNull()
             ?: throw IllegalArgumentException("Payer has no keys")
 
         // Fill in keyIndex dynamically if not set
@@ -182,21 +178,9 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
             authorizers = listOf(proposer.base16Value)
         )
 
-        println("Signer map: ${signers}")
-
-
-        // ✅ Use combined sign method (payload + envelope)
         val signedTransaction = transaction.sign(signers)
-
-        println("Payload sigs: ${signedTransaction.payloadSignatures.map { it.address to it.keyIndex }}")
-        println("Envelope sigs: ${signedTransaction.envelopeSignatures.map { it.address to it.keyIndex }}")
-
         val result = sendTransaction(signedTransaction)
-
-
 
         return result.id ?: throw IllegalStateException("Transaction did not return an ID")
     }
-
-
 }
