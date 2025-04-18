@@ -8,4 +8,5 @@ expect object Crypto {
     fun decodePrivateKey(key: String, algo: SigningAlgorithm = SigningAlgorithm.ECDSA_P256): PrivateKey
     fun getSigner(privateKey: PrivateKey, hashAlgo: HashingAlgorithm = HashingAlgorithm.SHA3_256): Signer
     fun generateKeyPair(algo: SigningAlgorithm = SigningAlgorithm.ECDSA_P256): KeyPair
+    fun derivePublicKey(sk: PrivateKey): PublicKey
 }

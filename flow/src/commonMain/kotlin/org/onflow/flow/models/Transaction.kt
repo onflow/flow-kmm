@@ -110,7 +110,7 @@ data class Transaction (
                     address = signUser.address,
                     keyIndex = signUser.keyIndex,
                     signature = signature.toHexString(),
-                    // signerIndex = this.signers[signUser.address] ?: -1
+                    //signerIndex = this.signers[signUser.address] ?: -1
                 )
                 payloadSignatures.add(txSignature)
             }
@@ -129,7 +129,7 @@ data class Transaction (
                     address = signUser.address,
                     keyIndex = signUser.keyIndex,
                     signature = signature.toHexString(),
-                    // signerIndex = this.signers[signUser.address] ?: -1
+                    //signerIndex = this.signers[signUser.address] ?: -1
                 )
                 payloadSignatures.add(txSignature)
             }
@@ -151,7 +151,7 @@ data class Transaction (
                 address = signUser.address,
                 keyIndex = signUser.keyIndex,
                 signature = signature.toHexString(),
-                // signerIndex = this.signers[signUser.address] ?: -1
+                //signerIndex = this.signers[signUser.address] ?: -1
             )
             envelopeSignatures.add(txSignature)
         }
@@ -180,32 +180,23 @@ fun Transaction.payload(): List<RLPType> = listOf(
 fun Transaction.toRLP(): RLPElement = payload().toRLP()
 
 fun Transaction.payloadMessage(): ByteArray =
-    DomainTag.Transaction.bytes +
-            (RLPList(
-                listOf(
-                    RLPList(payload()),
-                    RLPList(
-                        payloadSignatures.map {
-                            listOf((signers[it.address] ?: -1).toRLP(), it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
-                        }
-                    )
-                )
-            )).encode()
+    DomainTag.Transaction.bytes +           // 32‑byte tag
+            RLPList(payload())                      // only the payload!
+                .encode()
 
 fun Transaction.envelopeMessage(): ByteArray =
     DomainTag.Transaction.bytes +
-            (RLPList(
+            RLPList(
                 listOf(
-                    RLPList(payload()),
-                    RLPList(
+                    RLPList(payload()),             // payload
+                    RLPList(                        // list of *payload* sigs
                         payloadSignatures.map {
-                            listOf((signers[it.address] ?: -1).toRLP(), it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
-                        }
-                    ),
-                    RLPList(
-                        envelopeSignatures.map {
-                            listOf((signers[it.address] ?: -1).toRLP(), it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
+                            listOf(
+                                (signers[it.address] ?: -1).toRLP(),
+                                it.keyIndex.toRLP(),
+                                hex(it.signature).toRLP()
+                            ).toRLP()
                         }
                     )
                 )
-            )).encode()
+            ).encode()

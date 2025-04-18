@@ -1,4 +1,5 @@
 package org.onflow.flow.apis
+
 import com.ionspin.kotlin.bignum.integer.toBigInteger
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -98,7 +99,7 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
     internal suspend fun waitForSeal(transactionId: String): TransactionResult {
         var attempts = 0
         val maxAttempts = 30 // 30 seconds timeout
-        
+
         while (attempts < maxAttempts) {
             val result = getTransactionResult(transactionId)
             when (result.status ?: TransactionStatus.EMPTY) {
@@ -108,20 +109,28 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
                     }
                     return result
                 }
+
                 TransactionStatus.EXPIRED -> throw RuntimeException("Transaction expired")
                 TransactionStatus.EMPTY, TransactionStatus.UNKNOWN -> {
                     // Treat empty/unknown status as pending
                     attempts++
                     delay(1000)
                 }
+
                 else -> {
                     attempts++
                     delay(1000)
                 }
             }
         }
-        
+
         throw RuntimeException("Transaction not sealed after $maxAttempts seconds")
+    }
+
+    private suspend fun resolveKeyIndex(address: FlowAddress, accountsApi: AccountsApi): Int {
+        val account = accountsApi.getAccount(address.base16Value)
+        return account.keys?.firstOrNull()?.index?.toInt()
+            ?: throw IllegalStateException("No keys found for address $address")
     }
 
     internal suspend fun createCOAAccount(
@@ -130,76 +139,64 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         amount: Double = 0.0,
         signers: List<Signer>
     ): String {
-        val script = CadenceScriptLoader.load("create_coa", "common/evm")
-        val amountArg = Cadence.ufix64(amount)
-
-        val blocksApi = BlocksApi(baseUrl)
         val accountsApi = AccountsApi(baseUrl)
+        val blocksApi = BlocksApi(baseUrl)
 
+        val acct = accountsApi.getAccount("c6de0d94160377cd")
+        val key = acct.keys!!.first()
+        println("on‑chain signAlgo=${key.signingAlgorithm} hashAlgo=${key.hashingAlgorithm}")
+
+        val script = CadenceScriptLoader.load("create_coa", "common/evm")
         val latestBlock = blocksApi.getBlock()
 
         val proposerAccount = accountsApi.getAccount(proposer.base16Value)
         val payerAccount = accountsApi.getAccount(payer.base16Value)
 
-        // Get first key for each address (assumes it's index 0, or single key setup)
-        val proposerKey = proposerAccount.keys!!.firstOrNull { it.index == "0" }
-            ?: throw IllegalArgumentException("Proposer has no key at index 0")
-        val payerKey = payerAccount.keys!!.firstOrNull { it.index == "0" }
-            ?: throw IllegalArgumentException("Payer has no key at index 0")
+        val proposerKey = proposerAccount.keys?.firstOrNull()
+            ?: throw IllegalArgumentException("Proposer has no keys")
 
-        // Set keyIndex based on address match (we assume keyIndex=0 here — may change if multi-key)
+        val payerKey = payerAccount.keys?.firstOrNull()
+            ?: throw IllegalArgumentException("Payer has no keys")
+
+        // Fill in keyIndex dynamically if not set
         signers.forEach { signer ->
-
-            val account = accountsApi.getAccount(signer.address)
-            println("On-chain public keys: ${account.keys?.map { it.index to it.publicKey }}")
-            println("Signer: ${signer.address} keyIndex=${signer.keyIndex}")
-
-            when (signer.address.lowercase()) {
-                proposer.base16Value.lowercase() -> signer.keyIndex = 0
-                payer.base16Value.lowercase() -> signer.keyIndex = 0
-                else -> throw IllegalArgumentException("Unexpected signer: ${signer.address}")
+            if (signer.keyIndex == -1) {
+                val account = accountsApi.getAccount(signer.address)
+                signer.keyIndex = account.keys?.firstOrNull()?.index?.toInt()
+                    ?: throw IllegalStateException("No key found for ${signer.address}")
             }
         }
 
+        // Create transaction
         val transaction = Transaction(
             script = script,
-            arguments = listOf(amountArg),
+            arguments = listOf(Cadence.ufix64(amount)),
             referenceBlockId = latestBlock.header.id,
-            gasLimit = 9999.toBigInteger(),
+            gasLimit = 1000.toBigInteger(),
             payer = payer.base16Value,
             proposalKey = ProposalKey(
                 address = proposer.base16Value,
-                keyIndex = 0,
+                keyIndex = proposerKey.index.toInt(),
                 sequenceNumber = proposerKey.sequenceNumber.toBigInteger()
             ),
-            authorizers = listOf(proposer.base16Value),
-            payloadSignatures = emptyList(),
-            envelopeSignatures = emptyList()
+            authorizers = listOf(proposer.base16Value)
         )
 
-        // Sign payload with proposer only
-        val proposerSigner = signers.first { it.address.equals(proposer.base16Value, ignoreCase = true) }
-        val payloadSigned = transaction.signPayload(listOf(proposerSigner))
+        println("Signer map: ${signers}")
 
-        // Sign envelope with both proposer and payer
-        val envelopeSigners = signers.filter {
-            it.address.equals(proposer.base16Value, ignoreCase = true) ||
-                    it.address.equals(payer.base16Value, ignoreCase = true)
-        }
-        val envelopeSigned = payloadSigned.signEnvelope(envelopeSigners)
 
-        val payloadSigs = envelopeSigned.payloadSignatures.map { it.address to it.keyIndex }
-        val envelopeSigs = envelopeSigned.envelopeSignatures.map { it.address to it.keyIndex }
-        println("Payload sigs: $payloadSigs")
-        println("Envelope sigs: $envelopeSigs")
+        // ✅ Use combined sign method (payload + envelope)
+        val signedTransaction = transaction.sign(signers)
 
-        val allSigs = payloadSigs + envelopeSigs
-        val duplicates = allSigs.groupBy { it }.filter { it.value.size > 1 }
-        println("Duplicates: $duplicates")
+        println("Payload sigs: ${signedTransaction.payloadSignatures.map { it.address to it.keyIndex }}")
+        println("Envelope sigs: ${signedTransaction.envelopeSignatures.map { it.address to it.keyIndex }}")
 
-        val result = sendTransaction(envelopeSigned)
+        val result = sendTransaction(signedTransaction)
 
-        return result.id ?: throw RuntimeException("Transaction ID is null")
+
+
+        return result.id ?: throw IllegalStateException("Transaction did not return an ID")
     }
+
 
 }
