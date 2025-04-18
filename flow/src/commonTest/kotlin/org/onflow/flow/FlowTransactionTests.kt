@@ -2,14 +2,15 @@ package org.onflow.flow
 
 import com.ionspin.kotlin.bignum.integer.toBigInteger
 import kotlinx.coroutines.runBlocking
-import org.onflow.flow.models.Transaction
 import org.onflow.flow.crypto.Crypto
 import org.onflow.flow.models.FlowAddress
-import org.onflow.flow.models.SigningAlgorithm
 import org.onflow.flow.models.HashingAlgorithm
 import org.onflow.flow.models.ProposalKey
+import org.onflow.flow.models.SigningAlgorithm
+import org.onflow.flow.models.Transaction
 import org.onflow.flow.models.TransactionStatus
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class FlowTransactionTests {
@@ -67,14 +68,12 @@ class FlowTransactionTests {
 
             // Sign and send the transaction
             val signedTx = tx.sign(listOf(signer))
-
             val result = api.sendTransaction(signedTx)
 
             val seal = result.id?.let { api.waitForSeal(it) }
 
-            print(seal)
-
             // Verify the transaction was sent successfully
+            assertEquals(TransactionStatus.SEALED, seal?.status, "Transaction should be sealed")
             result.id?.isNotEmpty()?.let { assertTrue(it, "Transaction ID should not be empty") }
             println("Transaction sent successfully with ID: ${result.id}")
         }
