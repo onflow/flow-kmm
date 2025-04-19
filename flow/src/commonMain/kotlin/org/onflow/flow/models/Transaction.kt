@@ -4,6 +4,7 @@ import org.onflow.flow.infrastructure.BigIntegerCadenceSerializer
 import org.onflow.flow.infrastructure.Cadence
 import org.onflow.flow.rlp.*
 import com.ionspin.kotlin.bignum.integer.BigInteger
+import com.ionspin.kotlin.bignum.integer.toBigInteger
 import io.ktor.util.*
 import io.ktor.utils.io.core.*
 import kotlinx.serialization.*
@@ -208,3 +209,67 @@ fun Transaction.envelopeMessage(): ByteArray =
                     )
                 )
             ).encode()
+
+/**
+ * Builder class to simplify transaction creation and signing
+ */
+class TransactionBuilder(
+    private val script: String,
+    private val arguments: List<Cadence.Value> = emptyList(),
+    private val gasLimit: BigInteger = 1000.toBigInteger()
+) {
+    private var referenceBlockId: String? = null
+    private var payer: String? = null
+    private var proposalKey: ProposalKey? = null
+    private var authorizers: List<String> = emptyList()
+    private var signers: List<Signer> = emptyList()
+
+    fun withReferenceBlockId(blockId: String): TransactionBuilder {
+        this.referenceBlockId = blockId
+        return this
+    }
+
+    fun withPayer(payer: String): TransactionBuilder {
+        this.payer = payer
+        return this
+    }
+
+    fun withProposalKey(address: String, keyIndex: Int, sequenceNumber: BigInteger): TransactionBuilder {
+        this.proposalKey = ProposalKey(address, keyIndex, sequenceNumber)
+        return this
+    }
+
+    fun withAuthorizers(authorizers: List<String>): TransactionBuilder {
+        this.authorizers = authorizers
+        return this
+    }
+
+    fun withSigners(signers: List<Signer>): TransactionBuilder {
+        this.signers = signers
+        return this
+    }
+
+    fun build(): Transaction {
+        require(referenceBlockId != null) { "Reference block ID must be set" }
+        require(payer != null) { "Payer must be set" }
+        require(proposalKey != null) { "Proposal key must be set" }
+
+        return Transaction(
+            script = script,
+            arguments = arguments,
+            referenceBlockId = referenceBlockId!!,
+            gasLimit = gasLimit,
+            payer = payer!!,
+            proposalKey = proposalKey!!,
+            authorizers = authorizers
+        )
+    }
+
+    /**
+     * Builds and signs the transaction in one step
+     */
+    suspend fun buildAndSign(): Transaction {
+        require(signers.isNotEmpty()) { "Signers must be set before signing" }
+        return build().sign(signers)
+    }
+}

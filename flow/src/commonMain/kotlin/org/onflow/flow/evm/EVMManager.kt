@@ -12,6 +12,7 @@ import org.onflow.flow.models.ProposalKey
 import org.onflow.flow.models.Signer
 import org.onflow.flow.models.Transaction
 import org.onflow.flow.apis.ScriptsApi
+import org.onflow.flow.models.TransactionBuilder
 
 /**
  * Manager class for EVM-specific operations on Flow blockchain
@@ -38,7 +39,6 @@ internal class EVMManager(
     ): String {
         val script = CadenceScriptLoader.load("create_coa", "common/evm")
         val latestBlock = blocksApi.getBlock()
-
         val proposerAccount = accountsApi.getAccount(proposer.base16Value)
         val proposerKey = proposerAccount.keys?.firstOrNull()
             ?: throw IllegalArgumentException("Proposer has no keys")
@@ -52,24 +52,20 @@ internal class EVMManager(
             }
         }
 
-        // Create transaction
-        val transaction = Transaction(
-            script = script,
-            arguments = listOf(Cadence.ufix64(amount)),
-            referenceBlockId = latestBlock.header.id,
-            gasLimit = 1000.toBigInteger(),
-            payer = payer.base16Value,
-            proposalKey = ProposalKey(
+        // Create and sign transaction in one step
+        val signedTransaction = TransactionBuilder(script, listOf(Cadence.ufix64(amount)))
+            .withReferenceBlockId(latestBlock.header.id)
+            .withPayer(payer.base16Value)
+            .withProposalKey(
                 address = proposer.base16Value,
                 keyIndex = proposerKey.index.toInt(),
                 sequenceNumber = proposerKey.sequenceNumber.toBigInteger()
-            ),
-            authorizers = listOf(proposer.base16Value)
-        )
+            )
+            .withAuthorizers(listOf(proposer.base16Value))
+            .withSigners(signers)
+            .buildAndSign()
 
-        val signedTransaction = transaction.sign(signers)
         val result = transactionsApi.sendTransaction(signedTransaction)
-
         return result.id ?: throw IllegalStateException("Transaction did not return an ID")
     }
 
