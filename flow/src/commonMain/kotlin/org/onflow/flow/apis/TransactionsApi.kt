@@ -1,6 +1,5 @@
 package org.onflow.flow.apis
 
-import com.ionspin.kotlin.bignum.integer.toBigInteger
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
@@ -10,15 +9,11 @@ import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.delay
 import org.onflow.flow.infrastructure.ApiBase
-import org.onflow.flow.infrastructure.Cadence
 import org.onflow.flow.infrastructure.toMultiValue
 import org.onflow.flow.models.FlowAddress
-import org.onflow.flow.models.ProposalKey
 import org.onflow.flow.models.Transaction
 import org.onflow.flow.models.TransactionResult
 import org.onflow.flow.models.TransactionStatus
-import org.onflow.flow.infrastructure.scripts.CadenceScriptLoader
-import org.onflow.flow.models.Signer
 import org.onflow.flow.models.TransactionExecution
 
 internal class TransactionsApi(val baseUrl: String) : ApiBase() {
@@ -131,51 +126,5 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         val account = accountsApi.getAccount(address.base16Value)
         return account.keys?.firstOrNull()?.index?.toInt()
             ?: throw IllegalStateException("No keys found for address $address")
-    }
-
-    internal suspend fun createCOAAccount(
-        proposer: FlowAddress,
-        payer: FlowAddress,
-        amount: Double = 0.0,
-        signers: List<Signer>
-    ): String {
-        val accountsApi = AccountsApi(baseUrl)
-        val blocksApi = BlocksApi(baseUrl)
-
-        val script = CadenceScriptLoader.load("create_coa", "common/evm")
-        val latestBlock = blocksApi.getBlock()
-
-        val proposerAccount = accountsApi.getAccount(proposer.base16Value)
-        val proposerKey = proposerAccount.keys?.firstOrNull()
-            ?: throw IllegalArgumentException("Proposer has no keys")
-
-        // Fill in keyIndex dynamically if not set
-        signers.forEach { signer ->
-            if (signer.keyIndex == -1) {
-                val account = accountsApi.getAccount(signer.address)
-                signer.keyIndex = account.keys?.firstOrNull()?.index?.toInt()
-                    ?: throw IllegalStateException("No key found for ${signer.address}")
-            }
-        }
-
-        // Create transaction
-        val transaction = Transaction(
-            script = script,
-            arguments = listOf(Cadence.ufix64(amount)),
-            referenceBlockId = latestBlock.header.id,
-            gasLimit = 1000.toBigInteger(),
-            payer = payer.base16Value,
-            proposalKey = ProposalKey(
-                address = proposer.base16Value,
-                keyIndex = proposerKey.index.toInt(),
-                sequenceNumber = proposerKey.sequenceNumber.toBigInteger()
-            ),
-            authorizers = listOf(proposer.base16Value)
-        )
-
-        val signedTransaction = transaction.sign(signers)
-        val result = sendTransaction(signedTransaction)
-
-        return result.id ?: throw IllegalStateException("Transaction did not return an ID")
     }
 }

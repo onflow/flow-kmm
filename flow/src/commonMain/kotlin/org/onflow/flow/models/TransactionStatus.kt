@@ -55,7 +55,7 @@ enum class TransactionStatus(val value: String) {
             if (normalizedData.isBlank()) {
                 UNKNOWN
             } else {
-                values().firstOrNull { value ->
+                entries.firstOrNull { value ->
                     it == value || normalizedData == "$value".lowercase()
                 }
             }
