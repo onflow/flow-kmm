@@ -146,13 +146,8 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         val latestBlock = blocksApi.getBlock()
 
         val proposerAccount = accountsApi.getAccount(proposer.base16Value)
-        val payerAccount = accountsApi.getAccount(payer.base16Value)
-
         val proposerKey = proposerAccount.keys?.firstOrNull()
             ?: throw IllegalArgumentException("Proposer has no keys")
-
-        payerAccount.keys?.firstOrNull()
-            ?: throw IllegalArgumentException("Payer has no keys")
 
         // Fill in keyIndex dynamically if not set
         signers.forEach { signer ->

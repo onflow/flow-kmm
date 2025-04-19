@@ -227,7 +227,7 @@ internal class SignerImpl(
         Crypto.checkHashAlgoForSigning(hashAlgo)
     }
 
-    override suspend fun sign(transaction: Transaction, bytes: ByteArray): ByteArray {
+    override suspend fun sign(transaction: Transaction?, bytes: ByteArray): ByteArray {
         TODO("Not yet implemented")
     }
 

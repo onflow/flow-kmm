@@ -110,7 +110,7 @@ data class Transaction(
                     address = signUser.address,
                     keyIndex = signUser.keyIndex,
                     signature = signature.toHexString(),
-                    //signerIndex = this.signers[signUser.address] ?: -1
+                    signerIndex = this.signers[signUser.address] ?: -1
                 )
                 payloadSignatures.add(txSignature)
             }
@@ -129,7 +129,7 @@ data class Transaction(
                     address = signUser.address,
                     keyIndex = signUser.keyIndex,
                     signature = signature.toHexString(),
-                    //signerIndex = this.signers[signUser.address] ?: -1
+                    signerIndex = this.signers[signUser.address] ?: -1
                 )
                 payloadSignatures.add(txSignature)
             }
