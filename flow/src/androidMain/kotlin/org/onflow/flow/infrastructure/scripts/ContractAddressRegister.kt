@@ -76,7 +76,8 @@ actual class ContractAddressRegister {
     actual fun resolveImports(code: String, network: ChainId): String {
         var result = code
         getAddresses(network).forEach { (contract, address) ->
-            result = result.replace("0x$contract", address)
+            val pattern = "\\b0x${Regex.escape(contract)}\\b"
+            result = result.replace(Regex(pattern), address)
         }
         return result
     }
