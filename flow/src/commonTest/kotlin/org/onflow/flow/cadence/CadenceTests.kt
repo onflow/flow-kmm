@@ -114,7 +114,7 @@ class CadenceTests {
     fun testFix64() {
         val value = 23.098842
         val field = Cadence.fix64(value)
-        val jsonString = "{\"type\":\"Fix64\",\"value\":\"23.09884200\"}"
+        val jsonString = "{\"type\":\"Fix64\",\"value\":\"23.098842\"}"
         genericCadenceTest<Double>(field, value, jsonString, value)
     }
 

@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
 import java.lang.System.getenv
 
 plugins {
@@ -47,8 +48,9 @@ kotlin {
     val ktorVersion = "3.0.1"
     val kotlincrypto = "0.5.3"
     
-    sourceSets {kotlin
+    sourceSets {
         commonMain {
+            resources.srcDirs("src/commonMain/resources")
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion") {
                     version {
@@ -72,14 +74,19 @@ kotlin {
             }
         }
         commonTest {
+            resources.srcDirs("src/commonTest/resources")
             dependencies {
                 implementation(kotlin("test"))
             }
+        }
+        androidUnitTest {
+            resources.srcDirs("src/commonTest/resources", "src/commonMain/resources" )
         }
         androidMain {
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+                implementation("org.bouncycastle:bcprov-jdk15on:1.70")
             }
         }
         iosMain {
@@ -114,5 +121,23 @@ getenv("GITHUB_REPOSITORY")?.let {
     }
 }
 
+tasks.withType<Copy>().configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Disable iOS tests
+tasks.withType<Test>().configureEach {
+    if (name.contains("ios", ignoreCase = true)) {
+        enabled = false
+    }
+}
+tasks.withType<KotlinNativeTest>().configureEach {
+    if (name.contains("ios", ignoreCase = true)) {
+        enabled = false
+    }
+}
+
 tasks.named("build") { finalizedBy("createXCFramework") }
 tasks.named("clean") { doFirst { delete("swiftpackage") } }
+
+

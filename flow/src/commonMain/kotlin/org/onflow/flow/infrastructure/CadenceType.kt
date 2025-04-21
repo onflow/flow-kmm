@@ -73,3 +73,44 @@ const val TYPE_CONTRACT = "Contract"
 const val TYPE_STRUCT_INTERFACE = "StructInterface"
 const val TYPE_RESOURCE_INTERFACE = "ResourceInterface"
 const val TYPE_CONTRACT_INTERFACE = "ContractInterface"
+
+fun Cadence.Value.getTypeName(): String {
+    return when (this) {
+        is Cadence.Value.VoidValue -> TYPE_VOID
+        is Cadence.Value.OptionalValue -> TYPE_OPTIONAL
+        is Cadence.Value.BooleanValue -> TYPE_BOOLEAN
+        is Cadence.Value.StringValue -> TYPE_STRING
+        is Cadence.Value.AddressValue -> TYPE_ADDRESS
+        is Cadence.Value.IntValue -> TYPE_INT
+        is Cadence.Value.UIntValue -> TYPE_UINT
+        is Cadence.Value.Int8Value -> TYPE_INT8
+        is Cadence.Value.UInt8Value -> TYPE_UINT8
+        is Cadence.Value.Int16Value -> TYPE_INT16
+        is Cadence.Value.UInt16Value -> TYPE_UINT16
+        is Cadence.Value.Int32Value -> TYPE_INT32
+        is Cadence.Value.UInt32Value -> TYPE_UINT32
+        is Cadence.Value.Int64Value -> TYPE_INT64
+        is Cadence.Value.UInt64Value -> TYPE_UINT64
+        is Cadence.Value.Int128Value -> TYPE_INT128
+        is Cadence.Value.UInt128Value -> TYPE_UINT128
+        is Cadence.Value.Int256Value -> TYPE_INT256
+        is Cadence.Value.UInt256Value -> TYPE_UINT256
+        is Cadence.Value.Fix64Value -> TYPE_FIX64
+        is Cadence.Value.UFix64Value -> TYPE_UFIX64
+        is Cadence.Value.Word8Value -> TYPE_WORD8
+        is Cadence.Value.Word16Value -> TYPE_WORD16
+        is Cadence.Value.Word32Value -> TYPE_WORD32
+        is Cadence.Value.Word64Value -> TYPE_WORD64
+        is Cadence.Value.ArrayValue -> TYPE_ARRAY
+        is Cadence.Value.DictionaryValue -> TYPE_DICTIONARY
+        is Cadence.Value.ContractValue -> TYPE_CONTRACT
+        is Cadence.Value.EventValue -> TYPE_EVENT
+        is Cadence.Value.ResourceValue -> TYPE_RESOURCE
+        is Cadence.Value.EnumValue -> TYPE_ENUM
+        is Cadence.Value.StructValue -> TYPE_STRUCT
+        is Cadence.Value.PathValue -> TYPE_PATH
+        is Cadence.Value.TypeValue -> TYPE_TYPE
+        is Cadence.Value.CapabilityValue -> TYPE_CAPABILITY
+        else -> "Unknown"
+    }
+}

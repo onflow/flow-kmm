@@ -144,7 +144,7 @@ class Cadence {
     }
 
     @Serializable
-    sealed class Value {
+    abstract class Value {
         abstract val value: Any?
 
         override fun equals(other: Any?): Boolean {

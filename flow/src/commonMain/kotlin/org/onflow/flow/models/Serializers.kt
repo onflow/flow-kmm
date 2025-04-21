@@ -21,7 +21,7 @@ object Base64UFT8Serializer : KSerializer<String> {
 
 object StringIntSerializer : KSerializer<Int> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("StringInt", PrimitiveKind.STRING)
-    override fun serialize(encoder: Encoder, value: Int) = encoder.encodeInt(value)
+    override fun serialize(encoder: Encoder, value: Int) = encoder.encodeString(value.toString())
     override fun deserialize(decoder: Decoder): Int = decoder.decodeString().toInt()
 }
 

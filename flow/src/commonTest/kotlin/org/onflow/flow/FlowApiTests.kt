@@ -2,7 +2,6 @@ package org.onflow.flow
 
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.onflow.flow.infrastructure.Cadence
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -11,7 +10,7 @@ import kotlin.test.assertTrue
 class FlowApiTests {
 
     private val api = FlowApi(ChainId.Testnet)
-    private val format = Json { prettyPrint = true }
+    private val format = Cadence.Type.jsonSerializer
 
     @Test
     fun testGetAccount() {

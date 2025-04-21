@@ -4,12 +4,13 @@ import org.onflow.flow.infrastructure.BigIntegerCadenceSerializer
 import org.onflow.flow.infrastructure.Cadence
 import org.onflow.flow.rlp.*
 import com.ionspin.kotlin.bignum.integer.BigInteger
+import com.ionspin.kotlin.bignum.integer.toBigInteger
 import io.ktor.util.*
 import io.ktor.utils.io.core.*
 import kotlinx.serialization.*
 
 /**
- * 
+ *
  *
  * @param id A 32-byte unique identifier for an entity.
  * @param script Base64 encoded Cadence script.
@@ -17,16 +18,16 @@ import kotlinx.serialization.*
  * @param referenceBlockId A 32-byte unique identifier for an entity.
  * @param gasLimit The limit on the amount of computation a transaction is allowed to preform.
  * @param payer The 8-byte address of an account.
- * @param proposalKey 
- * @param authorizers 
- * @param payloadSignatures 
- * @param envelopeSignatures 
- * @param expandable 
- * @param result 
- * @param links 
+ * @param proposalKey
+ * @param authorizers
+ * @param payloadSignatures
+ * @param envelopeSignatures
+ * @param expandable
+ * @param result
+ * @param links
  */
 @Serializable
-data class Transaction (
+data class Transaction(
 
     /* A 32-byte unique identifier for an entity. */
     @SerialName(value = "id")
@@ -85,7 +86,7 @@ data class Transaction (
         get() = listOf(listOf(proposalKey.address, payer), authorizers)
             .flatten()
             .toSet()
-            .mapIndexed{ index, item ->
+            .mapIndexed { index, item ->
                 item to index
             }
             .toMap()
@@ -151,7 +152,7 @@ data class Transaction (
                 address = signUser.address,
                 keyIndex = signUser.keyIndex,
                 signature = signature.toHexString(),
-                signerIndex = this.signers[signUser.address] ?: -1
+                //signerIndex = this.signers[signUser.address] ?: -1
             )
             envelopeSignatures.add(txSignature)
         }
@@ -167,45 +168,108 @@ data class Transaction (
 
 fun Transaction.payload(): List<RLPType> = listOf(
     script.toRLP(),
-    RLPList(arguments.map{ it.encode().toByteArray().toRLP() }),
+    RLPList(arguments.map { it.encode().toByteArray().toRLP() }),
     hex(referenceBlockId).toRLP(),
     gasLimit.toRLP(),
     hex(proposalKey.address).paddingZeroLeft().toRLP(),
     proposalKey.keyIndex.toRLP(),
     proposalKey.sequenceNumber.toRLP(),
     hex(payer).paddingZeroLeft().toRLP(),
-    RLPList(authorizers.map{hex(it).paddingZeroLeft().toRLP()})
+    RLPList(authorizers.map { hex(it).paddingZeroLeft().toRLP() })
 )
 
 fun Transaction.toRLP(): RLPElement = payload().toRLP()
 
 fun Transaction.payloadMessage(): ByteArray =
     DomainTag.Transaction.bytes +
-        (RLPList(
-            listOf(
-                RLPList(payload()),
+            (RLPList(
+                listOf(
+                    RLPList(payload()),
                     RLPList(
                         payloadSignatures.map {
                             listOf((signers[it.address] ?: -1).toRLP(), it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
                         }
                     )
-            )
-        )).encode()
+                )
+            )).encode()
 
 fun Transaction.envelopeMessage(): ByteArray =
     DomainTag.Transaction.bytes +
-        (RLPList(
-            listOf(
-                RLPList(payload()),
-                RLPList(
-                    payloadSignatures.map {
-                        listOf((signers[it.address] ?: -1).toRLP(), it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
-                    }
-                ),
-                RLPList(
-                    envelopeSignatures.map {
-                        listOf((signers[it.address] ?: -1).toRLP(), it.keyIndex.toRLP(), hex(it.signature).toRLP()).toRLP()
-                    }
+            RLPList(
+                listOf(
+                    RLPList(payload()),
+                    RLPList(
+                        payloadSignatures.map {
+                            listOf(
+                                (signers[it.address] ?: -1).toRLP(),
+                                it.keyIndex.toRLP(),
+                                hex(it.signature).toRLP()
+                            ).toRLP()
+                        }
+                    )
                 )
-            )
-        )).encode()
+            ).encode()
+
+/**
+ * Builder class to simplify transaction creation and signing
+ */
+class TransactionBuilder(
+    private val script: String,
+    private val arguments: List<Cadence.Value> = emptyList(),
+    private val gasLimit: BigInteger = 1000.toBigInteger()
+) {
+    private var referenceBlockId: String? = null
+    private var payer: String? = null
+    private var proposalKey: ProposalKey? = null
+    private var authorizers: List<String> = emptyList()
+    private var signers: List<Signer> = emptyList()
+
+    fun withReferenceBlockId(blockId: String): TransactionBuilder {
+        this.referenceBlockId = blockId
+        return this
+    }
+
+    fun withPayer(payer: String): TransactionBuilder {
+        this.payer = payer
+        return this
+    }
+
+    fun withProposalKey(address: String, keyIndex: Int, sequenceNumber: BigInteger): TransactionBuilder {
+        this.proposalKey = ProposalKey(address, keyIndex, sequenceNumber)
+        return this
+    }
+
+    fun withAuthorizers(authorizers: List<String>): TransactionBuilder {
+        this.authorizers = authorizers
+        return this
+    }
+
+    fun withSigners(signers: List<Signer>): TransactionBuilder {
+        this.signers = signers
+        return this
+    }
+
+    fun build(): Transaction {
+        require(referenceBlockId != null) { "Reference block ID must be set" }
+        require(payer != null) { "Payer must be set" }
+        require(proposalKey != null) { "Proposal key must be set" }
+
+        return Transaction(
+            script = script,
+            arguments = arguments,
+            referenceBlockId = referenceBlockId!!,
+            gasLimit = gasLimit,
+            payer = payer!!,
+            proposalKey = proposalKey!!,
+            authorizers = authorizers
+        )
+    }
+
+    /**
+     * Builds and signs the transaction in one step
+     */
+    suspend fun buildAndSign(): Transaction {
+        require(signers.isNotEmpty()) { "Signers must be set before signing" }
+        return build().sign(signers)
+    }
+}

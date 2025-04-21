@@ -8,13 +8,9 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import io.ktor.util.decodeBase64String
 import io.ktor.util.encodeBase64
-import io.ktor.utils.io.core.toByteArray
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonElement
 import org.onflow.flow.models.ScriptsPostRequest
 
-internal class ScriptsApi(val baseUrl: String) : ApiBase() {
+class ScriptsApi(val baseUrl: String) : ApiBase() {
 
     private suspend fun request(
         scriptsPostRequest: ScriptsPostRequest,
@@ -66,6 +62,8 @@ internal class ScriptsApi(val baseUrl: String) : ApiBase() {
         } else {
             request(request, blockHeight = "sealed")
         }
+
+        println(response)
 
         return Cadence.Value.decodeFromJson(response)
     }
