@@ -9,20 +9,14 @@ import org.onflow.flow.models.SigningAlgorithm
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
-import org.onflow.flow.apis.AccountsApi
-import org.onflow.flow.apis.BlocksApi
-import org.onflow.flow.apis.ScriptsApi
 import org.onflow.flow.apis.TransactionsApi
 import org.onflow.flow.models.hexToBytes
 import kotlin.test.assertEquals
 
 class EVMManagerTests {
     private val baseUrl = ChainId.Testnet.baseUrl
-    private val accountsApi = AccountsApi(baseUrl)
-    private val blocksApi = BlocksApi(baseUrl)
     private val transactionsApi = TransactionsApi(baseUrl)
-    private val scriptsApi = ScriptsApi(baseUrl)
-    private val evmManager = EVMManager(accountsApi, blocksApi, transactionsApi, scriptsApi)
+    private val evmManager = EVMManager(ChainId.Testnet)
 
     @Test
     fun testCreateCOAAccount() {
@@ -83,4 +77,4 @@ class EVMManagerTests {
             }
         }
     }
-} 
+}
