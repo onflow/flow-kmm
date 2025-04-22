@@ -22,6 +22,14 @@ class EVMManager(chainId: ChainId) {
         scriptsApi = ScriptsApi(baseUrl)
     )
 
+    /**
+     * Creates a Cadence Owned Account (COA) on the Flow blockchain
+     * @param proposer The Flow address that will propose the transaction
+     * @param payer The Flow address that will pay for the transaction
+     * @param amount The amount of FLOW tokens to deposit into the COA
+     * @param signers List of signers required for the transaction
+     * @return The transaction ID of the created COA
+     */
     suspend fun createCOAAccount(
         proposer: FlowAddress,
         payer: FlowAddress,
@@ -29,8 +37,18 @@ class EVMManager(chainId: ChainId) {
         signers: List<Signer>
     ): String = impl.createCOAAccount(proposer, payer, amount, signers)
 
+    /**
+     * Gets the EVM address associated with a Flow address
+     * @param flowAddress The Flow address to look up
+     * @return The EVM address as a hex string
+     */
     suspend fun getEVMAddress(flowAddress: FlowAddress): String = impl.getEVMAddress(flowAddress)
 
+    /**
+     * Gets metadata for child accounts associated with a Flow address
+     * @param flowAddress The Flow address to look up
+     * @return Map of child account addresses to their metadata
+     */
     suspend fun getChildAccountMetadata(flowAddress: FlowAddress): Map<String, ChildAccountMetadata> =
         impl.getChildAccountMetadata(flowAddress)
 
@@ -104,11 +122,6 @@ class EVMManager(chainId: ChainId) {
             return result.decode<String>()
         }
 
-        /**
-         * Gets metadata for child accounts associated with a Flow address
-         * @param flowAddress The Flow address to look up
-         * @return Map of child account addresses to their metadata
-         */
         suspend fun getChildAccountMetadata(flowAddress: FlowAddress): Map<String, ChildAccountMetadata> {
             val script = CadenceScriptLoader.load("get_child_account_meta", "common/evm")
             val result = scriptsApi.executeScript(
