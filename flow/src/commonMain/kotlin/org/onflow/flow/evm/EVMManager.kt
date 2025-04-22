@@ -108,11 +108,6 @@ class EVMManager(chainId: ChainId) {
             return result.id ?: throw IllegalStateException("Transaction did not return an ID")
         }
 
-        /**
-         * Gets the EVM address associated with a Flow address
-         * @param flowAddress The Flow address to look up
-         * @return The EVM address as a hex string
-         */
         suspend fun getEVMAddress(flowAddress: FlowAddress): String {
             val script = CadenceScriptLoader.load("get_addr", "common/evm")
             val result = scriptsApi.executeScript(
