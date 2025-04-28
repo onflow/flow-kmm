@@ -47,7 +47,6 @@ kotlin {
     val coroutineVersion = "1.9.0"
     val ktorVersion = "3.0.1"
     val kotlincrypto = "0.5.3"
-    
     sourceSets {
         commonMain {
             resources.srcDirs("src/commonMain/resources")
