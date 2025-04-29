@@ -63,61 +63,98 @@ class FlowWebSocketClient(
     private suspend fun DefaultWebSocketSession.processIncomingMessages() {
         try {
             for (frame in incoming) {
-                when (frame) {
-                    is Frame.Text -> {
-                        val rawText = frame.readText()
-                        println("Raw incoming message: $rawText")
-                        try {
-                            val response = json.decodeFromString<FlowWebSocketResponse>(rawText)
-                            response.subscriptionId?.let { id ->
-                                subscriptions[id]?.send(response)
+                withContext(NonCancellable) { // <-- 🛡️ Protect parsing per frame
+                    when (frame) {
+                        is Frame.Text -> {
+                            val rawText = frame.readText()
+                            println("Raw incoming message: $rawText")
+                            try {
+                                val baseResponse = json.decodeFromString<FlowWebSocketResponse>(rawText)
+                                println(baseResponse)
+                                val id = baseResponse.subscriptionId
+
+                                if (id != null) {
+                                    if (baseResponse.topic == "blocks" && baseResponse.payload != null) {
+                                        try {
+                                            val blockPayload = json.decodeFromJsonElement(BlockEventPayload.serializer(), baseResponse.payload)
+                                            val wrappedResponse = FlowWebSocketResponse(
+                                                subscriptionId = baseResponse.subscriptionId,
+                                                action = baseResponse.action,
+                                                topic = baseResponse.topic,
+                                                payload = json.encodeToJsonElement(BlockEventPayload.serializer(), blockPayload),
+                                                error = baseResponse.error
+                                            )
+                                            subscriptions[id]?.let { channel ->
+                                                if (!channel.isClosedForSend) {
+                                                    channel.send(wrappedResponse)
+                                                } else {
+                                                    println("Channel for $id is already closed, dropping message")
+                                                }
+                                            }
+                                        } catch (e: Exception) {
+                                            println("Failed to decode BlockEventPayload: $e")
+                                            subscriptions[id]?.send(baseResponse)
+                                        }
+                                    } else {
+                                        subscriptions[id]?.send(baseResponse)
+                                    }
+                                } else {
+                                    println("Received a message without subscription_id, ignoring.")
+                                }
+                            } catch (e: Exception) {
+                                println("Failed to parse incoming WebSocket frame: $e")
                             }
-                        } catch (e: Exception) {
-                            println("Failed to parse frame: $e")
+                        }
+                        else -> {
+                            // ignore other frames
                         }
                     }
-                    else -> {} // ignore
                 }
             }
         } catch (e: Exception) {
-            // Handle connection errors
             throw e
         }
     }
 
+    fun BlockEventResponse.asGeneric(): FlowWebSocketResponse {
+        return FlowWebSocketResponse(
+            subscriptionId = this.subscriptionId,
+            topic = this.topic,
+            action = null,
+            payload = Json.encodeToJsonElement(BlockEventPayload.serializer(), this.payload),
+            error = null
+        )
+    }
+
+    data class SubscriptionResult(
+        val subscriptionId: String,
+        val events: Flow<FlowWebSocketResponse>
+    )
+
     suspend fun subscribe(
         topic: String,
-        subscriptionId: String? = null,
         arguments: Map<String, String>? = null
-    ): Flow<FlowWebSocketResponse> {
-        val request = FlowWebSocketRequest(
-            subscriptionId = subscriptionId,
-            action = "subscribe",
-            topic = topic,
-            arguments = arguments
-        )
+    ): SubscriptionResult {
+        val actualSubscriptionId = generateSubscriptionId()
 
         val channel = Channel<FlowWebSocketResponse>(Channel.BUFFERED)
-        val actualSubscriptionId = subscriptionId ?: generateSubscriptionId()
         subscriptions[actualSubscriptionId] = channel
 
+        sendMessage(
+            FlowWebSocketRequest(
+                subscriptionId = actualSubscriptionId,
+                action = "subscribe",
+                topic = topic,
+                arguments = arguments // ✅ Accept and pass the arguments here
+            )
+        )
 
-        sendMessage(request)
+        println("Sent subscription request: $actualSubscriptionId")
 
-        println("Sent message")
-
-        return flow {
-            try {
-                for (message in channel) {
-                    emit(message)
-                }
-            } catch (e: CancellationException) {
-                // Flow cancelled normally, no problem
-                println("Flow for subscription $actualSubscriptionId cancelled.")
-            } finally {
-                unsubscribe(actualSubscriptionId)
-            }
-        }
+        return SubscriptionResult(
+            subscriptionId = actualSubscriptionId,
+            events = channel.consumeAsFlow()
+        )
     }
 
     suspend fun unsubscribe(subscriptionId: String) {
