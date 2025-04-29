@@ -12,6 +12,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonPrimitive
 
 class FlowWebSocketClient(
     private val client: HttpClient,
@@ -60,6 +62,19 @@ class FlowWebSocketClient(
         }
     }
 
+    private fun deserializeTopicPayload(topic: String, payload: JsonElement): JsonElement {
+        return when (topic) {
+            "blocks" -> json.encodeToJsonElement(BlockEventPayload.serializer(), json.decodeFromJsonElement(BlockEventPayload.serializer(), payload))
+            "block_digests" -> json.encodeToJsonElement(BlockDigestPayload.serializer(), json.decodeFromJsonElement(BlockDigestPayload.serializer(), payload))
+            "block_headers" -> json.encodeToJsonElement(BlockHeaderPayload.serializer(), json.decodeFromJsonElement(BlockHeaderPayload.serializer(), payload))
+            "events" -> json.encodeToJsonElement(EventsPayload.serializer(), json.decodeFromJsonElement(EventsPayload.serializer(), payload))
+            "account_statuses" -> json.encodeToJsonElement(AccountStatusPayload.serializer(), json.decodeFromJsonElement(AccountStatusPayload.serializer(), payload))
+            "transaction_statuses" -> json.encodeToJsonElement(TransactionStatusPayload.serializer(), json.decodeFromJsonElement(TransactionStatusPayload.serializer(), payload))
+            "send_transaction_statuses" -> json.encodeToJsonElement(SendTransactionStatusPayload.serializer(), json.decodeFromJsonElement(SendTransactionStatusPayload.serializer(), payload))
+            else -> payload // 🔥 fallback: if unknown topic, keep raw
+        }
+    }
+
     private suspend fun DefaultWebSocketSession.processIncomingMessages() {
         try {
             for (frame in incoming) {
@@ -74,29 +89,24 @@ class FlowWebSocketClient(
                                 val id = baseResponse.subscriptionId
 
                                 if (id != null) {
-                                    if (baseResponse.topic == "blocks" && baseResponse.payload != null) {
+                                    val wrappedResponse = if (baseResponse.topic != null && baseResponse.payload != null) {
                                         try {
-                                            val blockPayload = json.decodeFromJsonElement(BlockEventPayload.serializer(), baseResponse.payload)
-                                            val wrappedResponse = FlowWebSocketResponse(
-                                                subscriptionId = baseResponse.subscriptionId,
-                                                action = baseResponse.action,
-                                                topic = baseResponse.topic,
-                                                payload = json.encodeToJsonElement(BlockEventPayload.serializer(), blockPayload),
-                                                error = baseResponse.error
-                                            )
-                                            subscriptions[id]?.let { channel ->
-                                                if (!channel.isClosedForSend) {
-                                                    channel.send(wrappedResponse)
-                                                } else {
-                                                    println("Channel for $id is already closed, dropping message")
-                                                }
-                                            }
+                                            val decodedPayload = deserializeTopicPayload(baseResponse.topic, baseResponse.payload)
+                                            baseResponse.copy(payload = decodedPayload)
                                         } catch (e: Exception) {
-                                            println("Failed to decode BlockEventPayload: $e")
-                                            subscriptions[id]?.send(baseResponse)
+                                            println("Failed to decode payload for topic ${baseResponse.topic}: $e")
+                                            baseResponse
                                         }
                                     } else {
-                                        subscriptions[id]?.send(baseResponse)
+                                        baseResponse
+                                    }
+
+                                    subscriptions[id]?.let { channel ->
+                                        if (!channel.isClosedForSend) {
+                                            channel.send(wrappedResponse)
+                                        } else {
+                                            println("Channel for $id is already closed, dropping message")
+                                        }
                                     }
                                 } else {
                                     println("Received a message without subscription_id, ignoring.")
@@ -131,9 +141,10 @@ class FlowWebSocketClient(
         val events: Flow<FlowWebSocketResponse>
     )
 
+    // Primary overload for callers who want to use raw JsonElement-based arguments
     suspend fun subscribe(
         topic: String,
-        arguments: Map<String, String>? = null
+        arguments: Map<String, JsonElement>? = null
     ): SubscriptionResult {
         val actualSubscriptionId = generateSubscriptionId()
 
@@ -145,7 +156,7 @@ class FlowWebSocketClient(
                 subscriptionId = actualSubscriptionId,
                 action = "subscribe",
                 topic = topic,
-                arguments = arguments // ✅ Accept and pass the arguments here
+                arguments = arguments
             )
         )
 
@@ -157,6 +168,16 @@ class FlowWebSocketClient(
         )
     }
 
+    // Convenience overload for simple String-to-String maps
+    // Convenience wrapper for Map<String, String>
+    suspend fun subscribeWithStrings(
+        topic: String,
+        arguments: Map<String, String>? = null
+    ): SubscriptionResult = subscribe(
+        topic = topic,
+        arguments = arguments?.mapValues { JsonPrimitive(it.value) }
+    )
+
     suspend fun unsubscribe(subscriptionId: String) {
         val request = FlowWebSocketRequest(
             subscriptionId = subscriptionId,
@@ -167,10 +188,29 @@ class FlowWebSocketClient(
     }
 
     suspend fun listSubscriptions(): List<FlowWebSocketSubscription> {
-        val request = FlowWebSocketRequest(action = "list_subscriptions")
-        sendMessage(request)
-        // The response will come through the normal message processing
-        return emptyList() // In reality, you'd want to wait for the response
+        val responseChannel = Channel<FlowWebSocketResponse>(Channel.UNLIMITED)
+        val tempId = generateSubscriptionId()
+        subscriptions[tempId] = responseChannel
+
+        sendMessage(
+            FlowWebSocketRequest(
+                subscriptionId = tempId,
+                action = "list_subscriptions"
+            )
+        )
+
+        // Wait for the list response (or timeout)
+        val response = withTimeout(5_000) {
+            responseChannel.receive()
+        }
+
+        subscriptions.remove(tempId)?.close()
+
+        if (response.payload != null) {
+            return json.decodeFromJsonElement(FlowWebSocketSubscriptionList.serializer(), response.payload).subscriptions
+        }
+
+        return emptyList()
     }
 
     private suspend fun sendMessage(message: FlowWebSocketMessage) {
