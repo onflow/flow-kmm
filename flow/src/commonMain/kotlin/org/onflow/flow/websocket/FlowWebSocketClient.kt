@@ -22,6 +22,7 @@ class FlowWebSocketClient(
     private var webSocketSession: DefaultWebSocketSession? = null
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val subscriptions = mutableMapOf<String, Channel<FlowWebSocketResponse>>()
+    private val listSubscriptionsChannel = Channel<FlowWebSocketResponse>(Channel.UNLIMITED)
 
     private var connectionJob: Job? = null
 
@@ -78,13 +79,22 @@ class FlowWebSocketClient(
     private suspend fun DefaultWebSocketSession.processIncomingMessages() {
         try {
             for (frame in incoming) {
-                withContext(NonCancellable) { // <-- 🛡️ Protect parsing per frame
+                withContext(NonCancellable) {
                     when (frame) {
                         is Frame.Text -> {
                             val rawText = frame.readText()
                             println("Raw incoming message: $rawText")
                             try {
                                 val baseResponse = json.decodeFromString<FlowWebSocketResponse>(rawText)
+
+                                // Handle list_subscriptions response
+                                if (baseResponse.action == "list_subscriptions") {
+                                    if (!listSubscriptionsChannel.isClosedForSend) {
+                                        listSubscriptionsChannel.trySend(baseResponse)
+                                    }
+                                    return@withContext
+                                }
+
                                 println(baseResponse)
                                 val id = baseResponse.subscriptionId
 
@@ -92,6 +102,7 @@ class FlowWebSocketClient(
                                     val wrappedResponse = if (baseResponse.topic != null && baseResponse.payload != null) {
                                         try {
                                             val decodedPayload = deserializeTopicPayload(baseResponse.topic, baseResponse.payload)
+                                            println(decodedPayload)
                                             baseResponse.copy(payload = decodedPayload)
                                         } catch (e: Exception) {
                                             println("Failed to decode payload for topic ${baseResponse.topic}: $e")
@@ -124,16 +135,6 @@ class FlowWebSocketClient(
         } catch (e: Exception) {
             throw e
         }
-    }
-
-    fun BlockEventResponse.asGeneric(): FlowWebSocketResponse {
-        return FlowWebSocketResponse(
-            subscriptionId = this.subscriptionId,
-            topic = this.topic,
-            action = null,
-            payload = Json.encodeToJsonElement(BlockEventPayload.serializer(), this.payload),
-            error = null
-        )
     }
 
     data class SubscriptionResult(
@@ -188,29 +189,26 @@ class FlowWebSocketClient(
     }
 
     suspend fun listSubscriptions(): List<FlowWebSocketSubscription> {
-        val responseChannel = Channel<FlowWebSocketResponse>(Channel.UNLIMITED)
-        val tempId = generateSubscriptionId()
-        subscriptions[tempId] = responseChannel
-
         sendMessage(
             FlowWebSocketRequest(
-                subscriptionId = tempId,
                 action = "list_subscriptions"
             )
         )
 
         // Wait for the list response (or timeout)
         val response = withTimeout(5_000) {
-            responseChannel.receive()
+            listSubscriptionsChannel.receive()
         }
 
-        subscriptions.remove(tempId)?.close()
-
-        if (response.payload != null) {
-            return json.decodeFromJsonElement(FlowWebSocketSubscriptionList.serializer(), response.payload).subscriptions
+        if (response.error != null) {
+            throw IllegalStateException("Failed to list subscriptions: ${response.error.message}")
         }
 
-        return emptyList()
+        if (response.payload == null) {
+            throw IllegalStateException("Received empty response when listing subscriptions")
+        }
+
+        return json.decodeFromJsonElement(FlowWebSocketSubscriptionList.serializer(), response.payload).subscriptions
     }
 
     private suspend fun sendMessage(message: FlowWebSocketMessage) {
@@ -229,6 +227,7 @@ class FlowWebSocketClient(
         webSocketSession?.close()
         subscriptions.values.forEach { it.close() }
         subscriptions.clear()
+        listSubscriptionsChannel.close()
     }
 
     companion object {
