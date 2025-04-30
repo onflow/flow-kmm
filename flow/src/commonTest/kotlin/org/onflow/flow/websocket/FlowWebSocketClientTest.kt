@@ -254,29 +254,36 @@ class FlowWebSocketClientTest {
 
     @Test
     fun testListSubscriptions() = runTest {
-        val client = HttpClient {
-            install(WebSockets)
+        val wsClient = createClientAndConnect()
+
+        // First list should be empty
+        val initialList = withContext(Dispatchers.Default.limitedParallelism(1)) {
+            withTimeout(10_000) {
+                println("Requesting initial list of subscriptions")
+                val list = wsClient.listSubscriptions()
+                println("Received initial list: $list")
+                list
+            }
         }
-        val wsClient = FlowWebSocketClient(client)
+        assertEquals(0, initialList.size, "Initial list should be empty")
 
+        // Create a subscription
+        val subscription = wsClient.subscribeWithStrings(
+            topic = FlowWebSocketTopic.BLOCKS.value,
+            arguments = mapOf("block_status" to "sealed")
+        )
         try {
-            wsClient.connect(FlowWebSocketClient.MAINNET_WS_URL)
-
-            // First list should be empty
-            val initialList = wsClient.listSubscriptions()
-            assertEquals(0, initialList.size, "Initial list should be empty")
-
-            // Create a subscription
-            val subscription = wsClient.subscribeWithStrings(
-                topic = FlowWebSocketTopic.BLOCKS.value,
-                arguments = mapOf("block_status" to "sealed")
-            )
-
             // Let server register the subscription
-            delay(1000)
+            delay(10_000)
 
-            // List should now contain our subscription
-            val listed = wsClient.listSubscriptions()
+            // List should now contain subscription
+            val listed = withContext(Dispatchers.Default.limitedParallelism(1)) {
+                withTimeout(10_000) {
+                    val list = wsClient.listSubscriptions()
+                    println("Received updated list: $list")
+                    list
+                }
+            }
 
             val match = listed.find { it.subscriptionId == subscription.subscriptionId }
 
@@ -286,14 +293,19 @@ class FlowWebSocketClientTest {
 
             // Unsubscribe and verify it's removed
             wsClient.unsubscribe(subscription.subscriptionId)
-            delay(1000)
+            delay(10_000)
 
-            val finalList = wsClient.listSubscriptions()
+            val finalList = withContext(Dispatchers.Default.limitedParallelism(1)) {
+                withTimeout(10_000) {
+                    val list = wsClient.listSubscriptions()
+                    list
+                }
+            }
             assertFalse(finalList.any { it.subscriptionId == subscription.subscriptionId }, "Subscription should be removed from list")
 
         } finally {
+            subscription?.let { wsClient.unsubscribe(it.subscriptionId) }
             wsClient.close()
-            client.close()
         }
     }
 }

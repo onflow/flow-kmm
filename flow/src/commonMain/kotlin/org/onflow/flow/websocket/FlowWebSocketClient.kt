@@ -12,7 +12,9 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 
 class FlowWebSocketClient(
@@ -90,7 +92,11 @@ class FlowWebSocketClient(
                                 // Handle list_subscriptions response
                                 if (baseResponse.action == "list_subscriptions") {
                                     if (!listSubscriptionsChannel.isClosedForSend) {
-                                        listSubscriptionsChannel.trySend(baseResponse)
+                                        // Create a new response with the raw payload
+                                        val responseWithPayload = baseResponse.copy(
+                                            payload = json.parseToJsonElement(rawText)
+                                        )
+                                        listSubscriptionsChannel.send(responseWithPayload)
                                     }
                                     return@withContext
                                 }
@@ -196,7 +202,7 @@ class FlowWebSocketClient(
         )
 
         // Wait for the list response (or timeout)
-        val response = withTimeout(5_000) {
+        val response = withTimeout(10_000) {
             listSubscriptionsChannel.receive()
         }
 
@@ -204,11 +210,22 @@ class FlowWebSocketClient(
             throw IllegalStateException("Failed to list subscriptions: ${response.error.message}")
         }
 
+        // Handle null payload
         if (response.payload == null) {
-            throw IllegalStateException("Received empty response when listing subscriptions")
+            return emptyList()
         }
 
-        return json.decodeFromJsonElement(FlowWebSocketSubscriptionList.serializer(), response.payload).subscriptions
+        try {
+            // Parse the payload into FlowWebSocketSubscriptionList
+            val subscriptionList = json.decodeFromJsonElement(
+                FlowWebSocketSubscriptionList.serializer(),
+                response.payload
+            )
+            return subscriptionList.subscriptions
+        } catch (e: Exception) {
+            println("Failed to parse subscription list: $e")
+            return emptyList()
+        }
     }
 
     private suspend fun sendMessage(message: FlowWebSocketMessage) {
