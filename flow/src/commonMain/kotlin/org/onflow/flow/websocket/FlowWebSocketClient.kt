@@ -236,7 +236,8 @@ class FlowWebSocketClient(
 
     private fun generateSubscriptionId(): String {
         val randomPart = (0..9999).random().toString().padStart(4, '0')
-        return "sub${System.currentTimeMillis()}$randomPart".take(20)
+        val timestamp = kotlin.time.TimeSource.Monotonic.markNow().elapsedNow().inWholeMilliseconds
+        return "sub${timestamp}$randomPart".take(20)
     }
 
     suspend fun close() {
