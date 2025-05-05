@@ -60,7 +60,7 @@ class ScriptsApi(val baseUrl: String) : ApiBase() {
         } else if (blockHeight != null) {
             request(request, blockHeight = blockHeight)
         } else {
-            request(request, blockHeight = "sealed")
+            request(request, blockHeight = "final")
         }
 
         println(response)
