@@ -38,7 +38,7 @@ class FlowWebSocketClientTest {
 
             subscription = wsClient.subscribeWithStrings(
                 topic = FlowWebSocketTopic.BLOCKS.value,
-                arguments = mapOf("block_status" to "sealed")
+                arguments = mapOf("block_status" to "finalized")
             )
 
             val responses = withContext(Dispatchers.Default.limitedParallelism(1)) {
