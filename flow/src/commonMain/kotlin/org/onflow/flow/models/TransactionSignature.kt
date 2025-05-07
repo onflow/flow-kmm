@@ -1,7 +1,6 @@
 package org.onflow.flow.models
 
 import kotlinx.serialization.*
-import org.onflow.flow.infrastructure.Base64ByteArray
 
 /**
  * Base64 encoded signature.

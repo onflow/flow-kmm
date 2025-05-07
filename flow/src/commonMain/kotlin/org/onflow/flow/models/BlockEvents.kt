@@ -1,7 +1,5 @@
 package org.onflow.flow.models
 
-import org.onflow.flow.models.Event
-import org.onflow.flow.models.Links
 import kotlinx.serialization.*
 
 /**
