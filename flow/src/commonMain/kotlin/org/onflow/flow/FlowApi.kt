@@ -12,6 +12,7 @@ import org.onflow.flow.models.Account
 import org.onflow.flow.models.Block
 import org.onflow.flow.models.BlockEvents
 import org.onflow.flow.models.BlockHeader
+import org.onflow.flow.models.BlockStatus
 import org.onflow.flow.models.Collection
 import org.onflow.flow.models.ExecutionResult
 import org.onflow.flow.models.Transaction
@@ -28,20 +29,20 @@ class FlowApi(val chainId: ChainIdProvider) {
     private val scriptsApi = ScriptsApi(baseUrl)
     private val transactionsApi = TransactionsApi(baseUrl)
 
-    suspend fun getAccount(address: String, blockHeight: String? = null, sealed: Boolean = true): Account {
-        return accountsApi.getAccount(address, blockHeight, sealed)
+    suspend fun getAccount(address: String, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.FINAL): Account {
+        return accountsApi.getAccount(address, blockHeight, blockStatus)
     }
 
-    suspend fun getBlock(id: String? = null, blockHeight: String? = null, sealed: Boolean = true): Block {
-        return blocksApi.getBlock(id, blockHeight, sealed)
+    suspend fun getBlock(id: String? = null, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.FINAL): Block {
+        return blocksApi.getBlock(id, blockHeight, blockStatus)
     }
 
     suspend fun getBlockHeader(
         id: String? = null,
         blockHeight: String? = null,
-        sealed: Boolean = true
+        blockStatus: BlockStatus = BlockStatus.FINAL
     ): BlockHeader {
-        return blocksApi.getBlockHeader(id, blockHeight, sealed)
+        return blocksApi.getBlockHeader(id, blockHeight, blockStatus)
     }
 
     suspend fun getCollection(id: String): Collection {

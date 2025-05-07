@@ -7,6 +7,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import org.onflow.flow.models.BlockHeader
+import org.onflow.flow.models.BlockStatus
 
 internal class BlocksApi(val baseUrl: String) : ApiBase() {
 
@@ -53,24 +54,23 @@ internal class BlocksApi(val baseUrl: String) : ApiBase() {
         }.body()
     }
 
-    internal suspend fun getBlock(id: String? = null, blockHeight: String? = null, sealed: Boolean = true): Block {
+    internal suspend fun getBlock(id: String? = null, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.FINAL): Block {
         val expand = setOf("payload")
         return if (id != null) {
             requestBlocksById(id, expand).first()
         } else if (blockHeight != null) {
             requestBlocksByHeight(setOf(blockHeight), expand = expand).first()
         } else {
-            val height = if (sealed) "sealed" else "final"
-            requestBlocksByHeight(setOf(height), expand = expand).first()
+            requestBlocksByHeight(setOf(blockStatus.value), expand = expand).first()
         }
     }
 
     internal suspend fun getBlockHeader(
         id: String? = null,
         blockHeight: String? = null,
-        sealed: Boolean = true
+        blockStatus: BlockStatus = BlockStatus.FINAL
     ): BlockHeader {
-        return getBlock(id, blockHeight, sealed).header
+        return getBlock(id, blockHeight, blockStatus).header
     }
 
 }
