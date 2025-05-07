@@ -9,18 +9,21 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.util.decodeBase64String
 import io.ktor.util.encodeBase64
 import org.onflow.flow.models.ScriptsPostRequest
+import org.onflow.flow.models.BlockStatus
 
 class ScriptsApi(val baseUrl: String) : ApiBase() {
 
     private suspend fun request(
         scriptsPostRequest: ScriptsPostRequest,
         blockId: String? = null,
-        blockHeight: String? = null
+        blockHeight: String? = null,
+        blockStatus: BlockStatus? = null
     ): String {
 
         val queryParams = mutableMapOf<String, List<String>>()
         blockId?.apply { queryParams["block_id"] = listOf("$blockId") }
         blockHeight?.apply { queryParams["block_height"] = listOf("$blockHeight") }
+        blockStatus?.apply { queryParams["block_status"] = listOf("$blockStatus") }
 
         val headers = mutableMapOf<String, String>()
         headers["Content-Type"] = "application/json"
@@ -50,17 +53,18 @@ class ScriptsApi(val baseUrl: String) : ApiBase() {
         script: String,
         arguments: List<Cadence.Value>? = null,
         blockId: String? = null,
-        blockHeight: String? = null
+        blockHeight: String? = null,
+        blockStatus: BlockStatus = BlockStatus.FINAL
     ): Cadence.Value {
         val request = ScriptsPostRequest(
             script.encodeBase64(),
             arguments?.map { it.encodeBase64() })
         val response = if (blockId != null) {
-            request(request, blockId)
+            request(request, blockId = blockId, blockStatus = blockStatus)
         } else if (blockHeight != null) {
-            request(request, blockHeight = blockHeight)
+            request(request, blockHeight = blockHeight, blockStatus = blockStatus)
         } else {
-            request(request, blockHeight = "final")
+            request(request, blockStatus = blockStatus)
         }
 
         println(response)

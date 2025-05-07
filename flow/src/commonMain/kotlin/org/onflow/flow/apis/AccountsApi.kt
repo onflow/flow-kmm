@@ -6,6 +6,7 @@ import io.ktor.client.request.parameter
 import org.onflow.flow.infrastructure.ApiBase
 import org.onflow.flow.infrastructure.toMultiValue
 import org.onflow.flow.models.Account
+import org.onflow.flow.models.BlockStatus
 
 internal class AccountsApi(val baseUrl: String) : ApiBase() {
 
@@ -30,18 +31,18 @@ internal class AccountsApi(val baseUrl: String) : ApiBase() {
 
     /**
      * Get an Account By Address
-     * Get an account data by provided address in latest \&quot;sealed\&quot; block or by provided block height.
+     * Get an account data by provided address in latest block with specified status or by provided block height.
      * @param address The address of the account.
-     * @param blockHeight The block height to query for the account details at the \&quot;sealed\&quot; is used by default. (optional)
+     * @param blockHeight The block height to query for the account details. If not provided, uses the latest block with specified status.
+     * @param blockStatus The status of the block to query (FINAL or SEALED). Defaults to FINAL.
      * @return Account
      */
-    internal suspend fun getAccount(address: String, blockHeight: String? = null, sealed: Boolean = true): Account {
+    internal suspend fun getAccount(address: String, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.FINAL): Account {
         val expand = setOf("contracts", "keys")
         return if (blockHeight != null) {
             request(address, blockHeight, expand)
         } else {
-            val height = if (sealed) "sealed" else "final"
-            request(address, height, expand)
+            request(address, blockStatus.value, expand)
         }
     }
 
