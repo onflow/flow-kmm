@@ -70,9 +70,10 @@ class FlowApi(val chainId: ChainIdProvider) {
         script: String,
         arguments: List<Cadence.Value>? = null,
         blockId: String? = null,
-        blockHeight: String? = null
+        blockHeight: String? = null,
+        blockStatus: BlockStatus = BlockStatus.FINAL
     ): Cadence.Value {
-        return scriptsApi.executeScript(script, arguments, blockId, blockHeight)
+        return scriptsApi.executeScript(script, arguments, blockId, blockHeight, blockStatus)
     }
 
     suspend fun getTransactionResult(transactionId: String): TransactionResult {

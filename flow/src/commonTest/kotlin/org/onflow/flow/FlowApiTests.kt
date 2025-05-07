@@ -168,4 +168,37 @@ class FlowApiTests {
             assertTrue(result == "Hello, Ryan")
         }
     }
+
+    @Test
+    fun testRunScriptWithBlockStatus() {
+        runBlocking {
+            // Test with FINAL status (default)
+            val finalResponse = api.executeScript(
+                """
+                access(all) fun main(name: String): String {
+                    let greeting = "Hello, "
+                    return greeting.concat(name)
+                }
+                """.trimIndent(),
+                listOf(Cadence.string("Ryan")),
+                blockStatus = BlockStatus.FINAL
+            )
+            val finalResult = finalResponse.decode<String>()
+            assertTrue(finalResult == "Hello, Ryan")
+
+            // Test with SEALED status
+            val sealedResponse = api.executeScript(
+                """
+                access(all) fun main(name: String): String {
+                    let greeting = "Hello, "
+                    return greeting.concat(name)
+                }
+                """.trimIndent(),
+                listOf(Cadence.string("Ryan")),
+                blockStatus = BlockStatus.SEALED
+            )
+            val sealedResult = sealedResponse.decode<String>()
+            assertTrue(sealedResult == "Hello, Ryan")
+        }
+    }
 }
