@@ -1,13 +1,11 @@
 package org.onflow.flow.models
 
+import org.onflow.flow.infrastructure.removeHexPrefix
+
 @OptIn(ExperimentalUnsignedTypes::class)
 fun ByteArray.bytesToHex(): String = asUByteArray().joinToString("") { it.toString(16).padStart(2, '0') }
 
-fun String.hexToBytes(): ByteArray {
-    val cleanHex = if (startsWith("0x")) substring(2) else this
-    if (cleanHex.isEmpty()) return ByteArray(0)
-    return cleanHex.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
-}
+fun String.hexToBytes(): ByteArray = removeHexPrefix().chunked(2).map { it.toInt(16).toByte() }.toByteArray()
 
 //fun ByteArray.sha3256Hash(): ByteArray = MessageDigest.getInstance("SHA3-256", "BC").digest(this)
 //

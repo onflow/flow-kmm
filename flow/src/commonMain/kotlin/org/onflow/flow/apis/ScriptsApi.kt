@@ -8,8 +8,10 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import io.ktor.util.decodeBase64String
 import io.ktor.util.encodeBase64
+import kotlinx.serialization.json.Json
 import org.onflow.flow.models.ScriptsPostRequest
 import org.onflow.flow.models.BlockStatus
+import org.onflow.flow.models.ScriptsErrorResponse
 
 class ScriptsApi(val baseUrl: String) : ApiBase() {
 
@@ -18,7 +20,7 @@ class ScriptsApi(val baseUrl: String) : ApiBase() {
         blockId: String? = null,
         blockHeight: String? = null,
         blockStatus: BlockStatus? = null
-    ): String {
+    ): Pair<HttpStatusCode, String> {
 
         val queryParams = mutableMapOf<String, List<String>>()
         blockId?.apply { queryParams["block_id"] = listOf("$blockId") }
@@ -43,10 +45,10 @@ class ScriptsApi(val baseUrl: String) : ApiBase() {
         }
 
         if (response.status == HttpStatusCode.OK) {
-            return response.bodyAsText().replace("\"", "").decodeBase64String()
+            return Pair(response.status, response.bodyAsText().replace("\"", "").decodeBase64String())
         }
 
-        return response.bodyAsText()
+        return Pair(response.status, response.bodyAsText())
     }
 
     internal suspend fun executeScript(
@@ -67,8 +69,12 @@ class ScriptsApi(val baseUrl: String) : ApiBase() {
             request(request, blockStatus = blockStatus)
         }
 
-        println(response)
+        if (response.first != HttpStatusCode.OK) {
+            ScriptsErrorResponse.serializer()
+            val error = Json.decodeFromString(ScriptsErrorResponse.serializer(), response.second)
+            throw Exception(error.message)
+        }
 
-        return Cadence.Value.decodeFromJson(response)
+        return Cadence.Value.decodeFromJson(response.second)
     }
 }

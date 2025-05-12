@@ -16,3 +16,9 @@ data class ScriptsPostResponse (
     val value: Base64ByteArray? = null
 )
 
+@Serializable
+data class ScriptsErrorResponse (
+    val code: Int? = null,
+    val message: String? = null
+)
+
