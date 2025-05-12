@@ -8,7 +8,7 @@ fun flowScript(block: ScriptBuilder.() -> Unit): ScriptBuilder {
     return ret
 }
 
-suspend fun FlowApi.simpleFlowScript(
+suspend fun FlowApi.query(
     chainId: ChainId = ChainId.Mainnet,
     block: ScriptBuilder.() -> Unit
 ): Cadence.Value {
