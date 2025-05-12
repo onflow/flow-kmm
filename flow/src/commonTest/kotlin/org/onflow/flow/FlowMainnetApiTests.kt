@@ -70,7 +70,7 @@ class FlowMainnetApiTests {
     @Test
     fun testScriptDSL() {
         runBlocking {
-            val result = api.simpleFlowScript {
+            val result = api.query {
                 script {
                     """
                     import EVM from 0xEVM
@@ -89,7 +89,9 @@ class FlowMainnetApiTests {
                 """.trimIndent()
                 }
 
-                arg(Cadence.address("0x84221fe0294044d7"))
+                arg {
+                    Cadence.address("0x84221fe0294044d7")
+                }
             }
             val info = result.decode<String?>()
             assertEquals("0x0000000000000000000000020c260f03355ff69d", info)
