@@ -8,15 +8,18 @@ fun flowScript(block: ScriptBuilder.() -> Unit): ScriptBuilder {
     return ret
 }
 
+suspend fun flowQuery(chainId: ChainId = ChainId.Mainnet, block: ScriptBuilder.() -> Unit): Cadence.Value {
+    val api = FlowApi(chainId)
+    return api.query(block)
+}
+
 suspend fun FlowApi.query(
-    chainId: ChainId = ChainId.Mainnet,
     block: ScriptBuilder.() -> Unit
 ): Cadence.Value {
-    val api = this
     val builder = flowScript(block)
     val registry = AddressRegistry()
     return try {
-        api.executeScript(
+        executeScript(
             script = registry.processScript(builder.script, chainId),
             arguments = builder.arguments
         )

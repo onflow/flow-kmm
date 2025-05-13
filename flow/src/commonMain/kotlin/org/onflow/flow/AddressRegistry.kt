@@ -18,7 +18,7 @@ class AddressRegistry {
         const val EVM = "0xEVM"
     }
 
-    private val SCRIPT_TOKEN_MAP: MutableMap<ChainId, MutableMap<String, FlowAddress>> = mutableMapOf()
+    private val SCRIPT_TOKEN_MAP: MutableMap<String, MutableMap<String, FlowAddress>> = mutableMapOf()
 
     var defaultChainId = ChainId.Mainnet
 
@@ -26,9 +26,9 @@ class AddressRegistry {
         registerDefaults()
     }
 
-    fun processScript(script: String, chainId: ChainId = defaultChainId, addresses: Map<String, FlowAddress> = mapOf()): String {
+    fun processScript(script: String, chainId: ChainIdProvider = defaultChainId, addresses: Map<String, FlowAddress> = mapOf()): String {
         var ret = script
-        SCRIPT_TOKEN_MAP[chainId]?.forEach {
+        SCRIPT_TOKEN_MAP[chainId.id]?.forEach {
             ret = ret.replace(it.key, it.value.formatted)
         }
         addresses.forEach {
@@ -37,13 +37,13 @@ class AddressRegistry {
         return ret
     }
 
-    fun addressOf(contract: String, chainId: ChainId = defaultChainId): FlowAddress? = SCRIPT_TOKEN_MAP[chainId]?.get(contract)
+    fun addressOf(contract: String, chainId: ChainIdProvider = defaultChainId): FlowAddress? = SCRIPT_TOKEN_MAP[chainId.id]?.get(contract)
 
-    fun register(contract: String, address: FlowAddress, chainId: ChainId = defaultChainId): AddressRegistry {
-        if (SCRIPT_TOKEN_MAP[chainId] == null) {
-            SCRIPT_TOKEN_MAP[chainId] = mutableMapOf()
+    fun register(contract: String, address: FlowAddress, chainId: ChainIdProvider = defaultChainId): AddressRegistry {
+        if (SCRIPT_TOKEN_MAP[chainId.id] == null) {
+            SCRIPT_TOKEN_MAP[chainId.id] = mutableMapOf()
         }
-        SCRIPT_TOKEN_MAP[chainId]?.set(contract, address)
+        SCRIPT_TOKEN_MAP[chainId.id]?.set(contract, address)
         return this
     }
 
@@ -58,8 +58,8 @@ class AddressRegistry {
         }
         return this
     }
-    fun deregister(contract: String, chainId: ChainId): AddressRegistry {
-        SCRIPT_TOKEN_MAP[chainId]?.remove(contract)
+    fun deregister(contract: String, chainId: ChainIdProvider): AddressRegistry {
+        SCRIPT_TOKEN_MAP[chainId.id]?.remove(contract)
         return this
     }
 
