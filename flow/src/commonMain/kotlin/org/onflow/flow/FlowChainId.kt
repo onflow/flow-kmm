@@ -35,7 +35,7 @@ abstract class ChainId: ChainIdProvider {
         override val id: String = "custom",
         override val baseUrl: String,
         override val description: String
-        ): ChainId()
+    ): ChainId()
 
     companion object {
         fun fromString(chainId: String): ChainId? {
