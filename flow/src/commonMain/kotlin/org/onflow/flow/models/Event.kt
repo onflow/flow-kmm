@@ -13,7 +13,6 @@ import kotlinx.serialization.*
  */
 @Serializable
 data class Event (
-
     /* The qualified event type. */
     @SerialName(value = "type") @Required val type: kotlin.String,
 
