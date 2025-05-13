@@ -15,9 +15,10 @@ class AddressRegistry {
         const val NON_FUNGIBLE_TOKEN = "0xNONFUNGIBLETOKEN"
         const val NFT_STOREFRONT = "0xNFTSTOREFRONT"
         const val TOKEN_FORWARDING = "0xTOKENFORWARDING"
+        const val EVM = "0xEVM"
     }
 
-    private val SCRIPT_TOKEN_MAP: MutableMap<ChainId, MutableMap<String, FlowAddress>> = mutableMapOf()
+    private val SCRIPT_TOKEN_MAP: MutableMap<String, MutableMap<String, FlowAddress>> = mutableMapOf()
 
     var defaultChainId = ChainId.Mainnet
 
@@ -25,9 +26,9 @@ class AddressRegistry {
         registerDefaults()
     }
 
-    fun processScript(script: String, chainId: ChainId = defaultChainId, addresses: Map<String, FlowAddress> = mapOf()): String {
+    fun processScript(script: String, chainId: ChainIdProvider = defaultChainId, addresses: Map<String, FlowAddress> = mapOf()): String {
         var ret = script
-        SCRIPT_TOKEN_MAP[chainId]?.forEach {
+        SCRIPT_TOKEN_MAP[chainId.id]?.forEach {
             ret = ret.replace(it.key, it.value.formatted)
         }
         addresses.forEach {
@@ -36,10 +37,13 @@ class AddressRegistry {
         return ret
     }
 
-    fun addressOf(contract: String, chainId: ChainId = defaultChainId): FlowAddress? = SCRIPT_TOKEN_MAP[chainId]?.get(contract)
+    fun addressOf(contract: String, chainId: ChainIdProvider = defaultChainId): FlowAddress? = SCRIPT_TOKEN_MAP[chainId.id]?.get(contract)
 
-    fun register(contract: String, address: FlowAddress, chainId: ChainId = defaultChainId): AddressRegistry {
-        SCRIPT_TOKEN_MAP[chainId]?.set(contract, address)
+    fun register(contract: String, address: FlowAddress, chainId: ChainIdProvider = defaultChainId): AddressRegistry {
+        if (SCRIPT_TOKEN_MAP[chainId.id] == null) {
+            SCRIPT_TOKEN_MAP[chainId.id] = mutableMapOf()
+        }
+        SCRIPT_TOKEN_MAP[chainId.id]?.set(contract, address)
         return this
     }
 
@@ -54,8 +58,8 @@ class AddressRegistry {
         }
         return this
     }
-    fun deregister(contract: String, chainId: ChainId): AddressRegistry {
-        SCRIPT_TOKEN_MAP[chainId]?.remove(contract)
+    fun deregister(contract: String, chainId: ChainIdProvider): AddressRegistry {
+        SCRIPT_TOKEN_MAP[chainId.id]?.remove(contract)
         return this
     }
 
@@ -79,7 +83,8 @@ class AddressRegistry {
                 LOCKED_TOKENS to FlowAddress("0x95e019a17d0e23d7"),
                 STAKING_PROXY to FlowAddress("0x7aad92e5a0715d21"),
                 NON_FUNGIBLE_TOKEN to FlowAddress("0x631e88ae7f1d7c20"),
-                NFT_STOREFRONT to FlowAddress("0x94b06cfca1d8a476")
+                NFT_STOREFRONT to FlowAddress("0x94b06cfca1d8a476"),
+                EVM to FlowAddress("0x8c5303eaa26202d6")
             ),
             ChainId.Mainnet to mutableMapOf(
                 FUNGIBLE_TOKEN to FlowAddress("0xf233dcee88fe0abe"),
@@ -90,7 +95,8 @@ class AddressRegistry {
                 STAKING_PROXY to FlowAddress("0x62430cf28c26d095"),
                 NON_FUNGIBLE_TOKEN to FlowAddress("0x1d7e57aa55817448"),
                 NFT_STOREFRONT to FlowAddress("0x4eb8a10cb9f87357"),
-                TOKEN_FORWARDING to FlowAddress("0xe544175ee0461c4b")
+                TOKEN_FORWARDING to FlowAddress("0xe544175ee0461c4b"),
+                EVM to FlowAddress("0xe467b9dd11fa00df")
             ),
         ).forEach { chain ->
             chain.value.forEach {

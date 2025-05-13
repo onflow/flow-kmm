@@ -66,4 +66,35 @@ class FlowMainnetApiTests {
             assertEquals(3, info.available)
         }
     }
+
+    @Test
+    fun testScriptDSL() {
+        runBlocking {
+            val result = api.query {
+                script {
+                    """
+                    import EVM from 0xEVM
+                    
+                    access(all) fun main(flowAddress: Address): String? {
+                        let account = getAuthAccount<auth(BorrowValue) &Account>(flowAddress)
+                        if let address = account.storage.borrow<&EVM.CadenceOwnedAccount>(from: /storage/evm)?.address() {
+                            let bytes: [UInt8] = []
+                            for byte in address.bytes {
+                                bytes.append(byte)
+                            }
+                            return "0x".concat(String.encodeHex(bytes))
+                        }
+                        return nil
+                    }
+                """.trimIndent()
+                }
+
+                arg {
+                    Cadence.address("0x84221fe0294044d7")
+                }
+            }
+            val info = result.decode<String?>()
+            assertEquals("0x0000000000000000000000020c260f03355ff69d", info)
+        }
+    }
 }
