@@ -56,7 +56,7 @@ class ScriptsApi(val baseUrl: String) : ApiBase() {
         arguments: List<Cadence.Value>? = null,
         blockId: String? = null,
         blockHeight: String? = null,
-        blockStatus: BlockStatus = BlockStatus.FINAL
+        blockStatus: BlockStatus = BlockStatus.SEALED
     ): Cadence.Value {
         val request = ScriptsPostRequest(
             script.encodeBase64(),

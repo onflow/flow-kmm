@@ -91,11 +91,11 @@ class FlowApiTests {
     fun testGetBlockWithHeight() {
         runBlocking {
             // First get a block to use its height
-            val initialBlock = api.getBlock()
+            val initialBlock = api.getBlock(blockStatus = BlockStatus.SEALED)
             val blockHeight = initialBlock.header.height
 
             // Test getting block at specific height
-            val block = api.getBlock(blockHeight = blockHeight)
+            val block = api.getBlock(blockHeight = blockHeight, blockStatus = BlockStatus.SEALED)
             assertNotNull(block)
             assertEquals(blockHeight, block.header.height)
         }
@@ -105,11 +105,11 @@ class FlowApiTests {
     fun testGetBlockWithId() {
         runBlocking {
             // First get a block to use its ID
-            val initialBlock = api.getBlock()
+            val initialBlock = api.getBlock(blockStatus = BlockStatus.SEALED)
             val blockId = initialBlock.header.id
 
             // Test getting block by ID
-            val block = api.getBlock(id = blockId)
+            val block = api.getBlock(id = blockId, blockStatus = BlockStatus.SEALED)
             assertNotNull(block)
             assertEquals(blockId, block.header.id)
         }
