@@ -123,7 +123,9 @@ class EVMManager(chainId: ChainId) {
                 script = script,
                 arguments = listOf(Cadence.address(flowAddress.base16Value))
             )
-            return result.decode<Map<String, ChildAccountMetadata>>()
+            // Filter out null values from the map before deserializing
+            val rawMap = result.decode<Map<String, ChildAccountMetadata?>>()
+            return rawMap.filterValues { it != null }.mapValues { it.value!! }
         }
     }
 }

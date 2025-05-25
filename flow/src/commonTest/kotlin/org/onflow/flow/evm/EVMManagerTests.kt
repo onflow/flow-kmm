@@ -63,7 +63,8 @@ class EVMManagerTests {
     @Test
     fun testGetChildAccountMetadata() {
         runBlocking {
-            val metadata = evmManager.getChildAccountMetadata(FlowAddress.of("0xcfa16944c93058bf".hexToBytes()))
+            val metadata = evmManager.getChildAccountMetadata(FlowAddress.of("0x552013bd8742476c".hexToBytes()))
+            println("Metadata: $metadata")
             // Verify the metadata structure
             metadata.forEach { (key, value) ->
                 assertTrue(key.isNotEmpty())
