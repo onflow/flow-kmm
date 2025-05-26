@@ -2,10 +2,6 @@ package org.onflow.flow.infrastructure.scripts
 
 import org.onflow.flow.ChainId
 
-/* ────────────────────────────────────────────────────────────
- *  PUBLIC API TYPES
- * ─────────────────────────────────────────────────────────── */
-
 /**
  * Implement this interface to refer to a Cadence file by (directory, filename)
  * instead of two plain strings.
@@ -30,10 +26,6 @@ expect class CadenceLoader(chainId: ChainId) {
 /** Platform-specific resource reader used by the platform `CadenceLoader`. */
 internal expect fun loadResource(path: String): String
 
-/* ────────────────────────────────────────────────────────────
- *  INSTANCE-SCOPED SCRIPT LOADER
- * ─────────────────────────────────────────────────────────── */
-
 /**
  * Loads Cadence scripts for a **single** Flow network.
  *
@@ -57,8 +49,6 @@ class CadenceScriptLoader(chainId: ChainId) {
     /** Overload that accepts a strongly-typed [CadenceLoaderProtocol]. */
     fun load(path: CadenceLoaderProtocol): String =
         load(path.filename, path.directory)
-
-    /* ───────────────────────────────────────────────────────── */
 
     private fun buildResourcePath(name: String, directory: String): String =
         buildString {
