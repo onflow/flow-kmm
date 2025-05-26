@@ -56,13 +56,13 @@ class EVMManager(chainId: ChainId) {
     data class ChildAccountMetadata(
         val name: String? = null,
         val description: String? = null,
-        val address: String = "",
+        val address: String? = null,
         val thumbnail: Thumbnail? = null
     )
 
     @Serializable
     data class Thumbnail(
-        val url: String = ""
+        val url: String? = null
     )
 
     private class EVMManagerImpl(
