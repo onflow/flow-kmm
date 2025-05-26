@@ -54,9 +54,9 @@ class EVMManager(chainId: ChainId) {
 
     @Serializable
     data class ChildAccountMetadata(
+        val name: String? = null,
+        val description: String? = null,
         val address: String = "",
-        val balance: String = "0",
-        val nonce: String = "0",
         val thumbnail: Thumbnail? = null
     )
 
@@ -128,13 +128,17 @@ class EVMManager(chainId: ChainId) {
                 script = script,
                 arguments = listOf(Cadence.address(flowAddress.base16Value))
             )
-            println(result)
             // Decode into a map that might contain null values for ChildAccountMetadata
             val decodedMapWithNulls = result.decode<Map<String, ChildAccountMetadata?>>()
-            // Filter out entries where the value is null and ensure non-null values
+            // Filter out entries where the value is null
+            // and then populate the address field from the map key
             return decodedMapWithNulls
                 .filterValues { it != null }
-                .mapValues { it.value!! }
+                .map { (key, value) -> // value is ChildAccountMetadata? here, but non-null due to filterValues
+                    // Create a new ChildAccountMetadata with the address field populated from the map key
+                    key to value!!.copy(address = key)
+                }
+                .toMap() // Convert the List<Pair<String, ChildAccountMetadata>> back to a Map
         }
     }
 }

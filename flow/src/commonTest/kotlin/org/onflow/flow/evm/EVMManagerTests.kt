@@ -69,30 +69,47 @@ class EVMManagerTests {
             // Ensure the metadata map is not empty
             assertTrue(metadata.isNotEmpty(), "Metadata map should not be empty")
 
-            // Expected addresses and their thumbnail URLs
+            data class ExpectedMetadata(
+                val name: String?,
+                val description: String?,
+                val address: String,
+                val thumbnailUrl: String
+            )
+
+            // Expected addresses and their metadata
             val expectedData = mapOf(
-                "0x73290be70dc6b89e" to "https://accounts.meetdapper.com/static/img/dapper/dapper.png",
-                "0x8e5a02ccc537163f" to "https://accounts.meetdapper.com/static/img/dapper/dapper.png"
+                "0x73290be70dc6b89e" to ExpectedMetadata(
+                    name = "Dapper Wallet",
+                    description = "Dapper Custodial Wallet",
+                    address = "0x73290be70dc6b89e",
+                    thumbnailUrl = "https://accounts.meetdapper.com/static/img/dapper/dapper.png"
+                ),
+                "0x8e5a02ccc537163f" to ExpectedMetadata(
+                    name = "Dapper Wallet",
+                    description = "Dapper Custodial Wallet",
+                    address = "0x8e5a02ccc537163f",
+                    thumbnailUrl = "https://accounts.meetdapper.com/static/img/dapper/dapper.png"
+                )
             )
 
             assertEquals(expectedData.size, metadata.size, "Metadata map should contain exactly ${expectedData.size} entries")
 
-            expectedData.forEach { (expectedAddress, expectedThumbnailUrl) ->
-                val accountMetadata = metadata[expectedAddress]
-                assertTrue(accountMetadata != null, "Metadata should exist for address $expectedAddress")
+            expectedData.forEach { (expectedAddressKey, expectedMeta) ->
+                val accountMetadata = metadata[expectedAddressKey]
+                assertTrue(accountMetadata != null, "Metadata should exist for address $expectedAddressKey")
 
-                accountMetadata.let {
-                    // Check default or expected values
-                    // The Cadence script might not return 'address', 'balance', 'nonce' for Display metadata,
-                    // so they might take default values from the ChildAccountMetadata data class.
-                    assertEquals("", it.address, "Address field should be empty or default for $expectedAddress")
-                    assertEquals("0", it.balance, "Balance field should be '0' or default for $expectedAddress")
-                    assertEquals("0", it.nonce, "Nonce field should be '0' or default for $expectedAddress")
+                accountMetadata?.let {
+                    // Check name and description
+                    assertEquals(expectedMeta.name, it.name, "Name should match for $expectedAddressKey")
+                    assertEquals(expectedMeta.description, it.description, "Description should match for $expectedAddressKey")
+
+                    // Check address field is now populated
+                    assertEquals(expectedMeta.address, it.address, "Address field should match map key for $expectedAddressKey")
 
                     // Check thumbnail
-                    assertTrue(it.thumbnail != null, "Thumbnail should exist for $expectedAddress")
+                    assertTrue(it.thumbnail != null, "Thumbnail should exist for $expectedAddressKey")
                     it.thumbnail?.let { thumbnail ->
-                        assertEquals(expectedThumbnailUrl, thumbnail.url, "Thumbnail URL should match for $expectedAddress")
+                        assertEquals(expectedMeta.thumbnailUrl, thumbnail.url, "Thumbnail URL should match for $expectedAddressKey")
                     }
                 }
             }
