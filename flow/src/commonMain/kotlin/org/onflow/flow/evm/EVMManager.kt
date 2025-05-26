@@ -19,7 +19,8 @@ class EVMManager(chainId: ChainId) {
         accountsApi = AccountsApi(baseUrl),
         blocksApi = BlocksApi(baseUrl),
         transactionsApi = TransactionsApi(baseUrl),
-        scriptsApi = ScriptsApi(baseUrl)
+        scriptsApi = ScriptsApi(baseUrl),
+        chainId = chainId
     )
 
     /**
@@ -49,34 +50,38 @@ class EVMManager(chainId: ChainId) {
      * @param flowAddress The Flow address to look up
      * @return Map of child account addresses to their metadata
      */
-    suspend fun getChildAccountMetadata(flowAddress: FlowAddress): Map<String, ChildAccountMetadata> =
-        impl.getChildAccountMetadata(flowAddress)
+    suspend fun getChildAccountMetadata(flowAddress: FlowAddress): Map<String, ChildAccountMetadata> = impl.getChildAccountMetadata(flowAddress)
 
     @Serializable
     data class ChildAccountMetadata(
-        val name: String? = null,
-        val description: String? = null,
+        val address: String = "",
+        val balance: String = "0",
+        val nonce: String = "0",
         val thumbnail: Thumbnail? = null
     )
 
     @Serializable
     data class Thumbnail(
-        val url: String? = null
+        val url: String = ""
     )
 
     private class EVMManagerImpl(
         private val accountsApi: AccountsApi,
         private val blocksApi: BlocksApi,
         private val transactionsApi: TransactionsApi,
-        private val scriptsApi: ScriptsApi
+        private val scriptsApi: ScriptsApi,
+        private val chainId: ChainId
     ) {
+
+        private val scriptLoader = CadenceScriptLoader(chainId)
+
         suspend fun createCOAAccount(
             proposer: FlowAddress,
             payer: FlowAddress,
             amount: Double,
             signers: List<Signer>
         ): String {
-            val script = CadenceScriptLoader.load("create_coa", "common/evm")
+            val script = scriptLoader.load("create_coa", "common/evm")
             val latestBlock = blocksApi.getBlock()
             val proposerAccount = accountsApi.getAccount(proposer.base16Value)
             val proposerKey = proposerAccount.keys?.firstOrNull()
@@ -109,7 +114,7 @@ class EVMManager(chainId: ChainId) {
         }
 
         suspend fun getEVMAddress(flowAddress: FlowAddress): String {
-            val script = CadenceScriptLoader.load("get_addr", "common/evm")
+            val script = scriptLoader.load("get_addr", "common/evm")
             val result = scriptsApi.executeScript(
                 script = script,
                 arguments = listOf(Cadence.address(flowAddress.base16Value))
@@ -118,14 +123,18 @@ class EVMManager(chainId: ChainId) {
         }
 
         suspend fun getChildAccountMetadata(flowAddress: FlowAddress): Map<String, ChildAccountMetadata> {
-            val script = CadenceScriptLoader.load("get_child_account_meta", "common/evm")
+            val script = scriptLoader.load("get_child_account_meta", "common/evm")
             val result = scriptsApi.executeScript(
                 script = script,
                 arguments = listOf(Cadence.address(flowAddress.base16Value))
             )
-            // Filter out null values from the map before deserializing
-            val rawMap = result.decode<Map<String, ChildAccountMetadata?>>()
-            return rawMap.filterValues { it != null }.mapValues { it.value!! }
+            println(result)
+            // Decode into a map that might contain null values for ChildAccountMetadata
+            val decodedMapWithNulls = result.decode<Map<String, ChildAccountMetadata?>>()
+            // Filter out entries where the value is null and ensure non-null values
+            return decodedMapWithNulls
+                .filterValues { it != null }
+                .mapValues { it.value!! }
         }
     }
 }

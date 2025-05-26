@@ -55,4 +55,42 @@ class ContractAddressRegisterTest {
         register.importAddresses(ChainId.Testnet, newAddresses)
         assertEquals("0x1234567890", register.getAddress("0xTest", ChainId.Testnet))
     }
+
+    @Test
+    fun testGetAddressMainnet() {
+        val register = ContractAddressRegister()
+        val address = register.getAddress("EVM", ChainId.Mainnet)
+        assertNotNull(address)
+        assertEquals("0xe467b9dd11fa00df", address)
+    }
+    
+    @Test
+    fun testContractExistsMainnet() {
+        val register = ContractAddressRegister()
+        assertTrue(register.contractExists("EVM", ChainId.Mainnet))
+    }
+    
+    @Test
+    fun testResolveImportsMainnet() {
+        val register = ContractAddressRegister()
+        val code = """
+            import EVM from 0xEVM
+            
+            access(all) fun main(flowAddress: Address): String? {
+                if let address: EVM.EVMAddress = getAuthAccount<auth(BorrowValue) &Account>(flowAddress)
+                    .storage.borrow<&EVM.CadenceOwnedAccount>(from: /storage/evm)?.address() {
+                    let bytes: [UInt8] = []
+                    for byte in address.bytes {
+                        bytes.append(byte)
+                    }
+                    return String.encodeHex(bytes)
+                }
+                return nil
+            }
+        """.trimIndent()
+        
+        val resolvedCode = register.resolveImports(code, ChainId.Mainnet)
+        println(resolvedCode)
+        assertTrue(resolvedCode.contains("import EVM from 0xe467b9dd11fa00df"))
+    }
 } 
