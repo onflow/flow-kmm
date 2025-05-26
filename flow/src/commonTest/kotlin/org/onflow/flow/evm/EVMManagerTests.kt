@@ -14,9 +14,9 @@ import org.onflow.flow.models.hexToBytes
 import kotlin.test.assertEquals
 
 class EVMManagerTests {
-    private val baseUrl = ChainId.Testnet.baseUrl
+    private val baseUrl = ChainId.Mainnet.baseUrl
     private val transactionsApi = TransactionsApi(baseUrl)
-    private val evmManager = EVMManager(ChainId.Testnet)
+    private val evmManager = EVMManager(ChainId.Mainnet)
 
     @Test
     fun testCreateCOAAccount() {
@@ -54,25 +54,63 @@ class EVMManagerTests {
     @Test
     fun testGetEVMAddress() {
         runBlocking {
-            val response = evmManager.getEVMAddress(FlowAddress.of("0xcfa16944c93058bf".hexToBytes()))
+            val response = evmManager.getEVMAddress(FlowAddress.of("0xe8264050e6f51923".hexToBytes()))
             println("EVM Address: $response")
-            assertEquals("0000000000000000000000029e7fe89acde8be4a", response)
+            assertEquals("00000000000000000000000213e14ccecdc48acc", response)
         }
     }
 
     @Test
     fun testGetChildAccountMetadata() {
         runBlocking {
-            val metadata = evmManager.getChildAccountMetadata(FlowAddress.of("0xcfa16944c93058bf".hexToBytes()))
-            // Verify the metadata structure
-            metadata.forEach { (key, value) ->
-                assertTrue(key.isNotEmpty())
-                // Check that the metadata object has the expected fields
-                assertTrue(value.name == null || value.name is String)
-                assertTrue(value.description == null || value.description is String)
-                assertTrue(value.thumbnail == null || value.thumbnail is EVMManager.Thumbnail)
-                value.thumbnail?.let { thumbnail ->
-                    assertTrue(thumbnail.url == null || thumbnail.url is String)
+            val metadata = evmManager.getChildAccountMetadata(FlowAddress.of("0xe8264050e6f51923".hexToBytes()))
+            println("Metadata: $metadata")
+
+            // Ensure the metadata map is not empty
+            assertTrue(metadata.isNotEmpty(), "Metadata map should not be empty")
+
+            data class ExpectedMetadata(
+                val name: String?,
+                val description: String?,
+                val address: String,
+                val thumbnailUrl: String
+            )
+
+            // Expected addresses and their metadata
+            val expectedData = mapOf(
+                "0x73290be70dc6b89e" to ExpectedMetadata(
+                    name = "Dapper Wallet",
+                    description = "Dapper Custodial Wallet",
+                    address = "0x73290be70dc6b89e",
+                    thumbnailUrl = "https://accounts.meetdapper.com/static/img/dapper/dapper.png"
+                ),
+                "0x8e5a02ccc537163f" to ExpectedMetadata(
+                    name = "Dapper Wallet",
+                    description = "Dapper Custodial Wallet",
+                    address = "0x8e5a02ccc537163f",
+                    thumbnailUrl = "https://accounts.meetdapper.com/static/img/dapper/dapper.png"
+                )
+            )
+
+            assertEquals(expectedData.size, metadata.size, "Metadata map should contain exactly ${expectedData.size} entries")
+
+            expectedData.forEach { (expectedAddressKey, expectedMeta) ->
+                val accountMetadata = metadata[expectedAddressKey]
+                assertTrue(accountMetadata != null, "Metadata should exist for address $expectedAddressKey")
+
+                accountMetadata?.let {
+                    // Check name and description
+                    assertEquals(expectedMeta.name, it.name, "Name should match for $expectedAddressKey")
+                    assertEquals(expectedMeta.description, it.description, "Description should match for $expectedAddressKey")
+
+                    // Check address field is now populated
+                    assertEquals(expectedMeta.address, it.address, "Address field should match map key for $expectedAddressKey")
+
+                    // Check thumbnail
+                    assertTrue(it.thumbnail != null, "Thumbnail should exist for $expectedAddressKey")
+                    it.thumbnail?.let { thumbnail ->
+                        assertEquals(expectedMeta.thumbnailUrl, thumbnail.url, "Thumbnail URL should match for $expectedAddressKey")
+                    }
                 }
             }
         }

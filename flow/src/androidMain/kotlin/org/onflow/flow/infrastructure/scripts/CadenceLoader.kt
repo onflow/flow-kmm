@@ -27,6 +27,5 @@ actual class CadenceLoader actual constructor(
  */
 internal actual fun loadResource(path: String): String {
     val content = ResourceLoader.loadResource("$path.cdc")
-
     return content ?: throw RuntimeException("Resource not found: $path")
 }
