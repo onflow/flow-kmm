@@ -42,8 +42,13 @@ private fun ByteArray.minimalStart() = indexOfFirst { it != 0.toByte() }.let { i
 fun Int.toMinimalByteArray() = toByteArray().let {
     it.copyOfRange(it.minimalStart(), 4)
 }
-fun ByteArray.removeLeadingZero() = if (first() == 0.toByte()) copyOfRange(1, size) else this
 
+fun ByteArray.removeLeadingZero(): ByteArray {
+    if (isEmpty()) return this // Return empty if already empty
+    if (size == 1 && first() == 0.toByte()) return this // If it's just [0], return it as is
+    if (first() == 0.toByte()) return copyOfRange(1, size) // Remove leading zero for other cases
+    return this
+}
 
 fun ByteArray.paddingZeroLeft(blockSize: Int = 8): ByteArray {
     if (size >= blockSize) {
