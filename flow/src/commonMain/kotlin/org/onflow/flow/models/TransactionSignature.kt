@@ -22,7 +22,6 @@ data class TransactionSignature (
     @Serializable(Base64HexSerializer::class)
     @SerialName(value = "signature") @Required val signature: String,
 
-    @Transient
     var signerIndex: Int = -1
 )
 
