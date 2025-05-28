@@ -10,7 +10,7 @@ import kotlinx.serialization.*
  * @param signature A variable length signature.
  */
 @Serializable
-data class TransactionSignature (
+data class TransactionSignature @OptIn(ExperimentalSerializationApi::class) constructor(
 
     /* The 8-byte address of an account. */
     @SerialName(value = "address") @Required val address: String,
@@ -22,7 +22,7 @@ data class TransactionSignature (
     @Serializable(Base64HexSerializer::class)
     @SerialName(value = "signature") @Required val signature: String,
 
-    @Transient
+    @EncodeDefault(EncodeDefault.Mode.NEVER)
     var signerIndex: Int = -1
 )
 
