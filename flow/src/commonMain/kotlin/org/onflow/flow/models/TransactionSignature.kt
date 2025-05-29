@@ -20,16 +20,13 @@ data class TransactionSignature @OptIn(ExperimentalSerializationApi::class) cons
 
     /* A variable length signature. */
     @Serializable(Base64HexSerializer::class)
-    @SerialName(value = "signature") @Required val signature: String,
-
-    @EncodeDefault(EncodeDefault.Mode.NEVER)
-    var signerIndex: Int = -1
+    @SerialName(value = "signature") @Required val signature: String
 )
 
 class CompareTransactionSignature {
     companion object : Comparator<TransactionSignature> {
         override fun compare(a: TransactionSignature, b: TransactionSignature): Int = when {
-            a.keyIndex == b.keyIndex -> a.signerIndex - b.signerIndex
+            a.address != b.address -> a.address.compareTo(b.address)
             else -> a.keyIndex - b.keyIndex
         }
     }
