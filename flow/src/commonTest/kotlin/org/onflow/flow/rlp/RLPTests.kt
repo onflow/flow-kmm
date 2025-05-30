@@ -9,6 +9,7 @@ import org.onflow.flow.models.payload
 import org.onflow.flow.infrastructure.Cadence
 import com.ionspin.kotlin.bignum.integer.BigInteger
 import io.ktor.util.*
+import org.onflow.flow.models.completeEnvelopeMessage
 import org.onflow.flow.models.createSigningRLP
 import org.onflow.flow.models.createSigningRLPJVMStyle
 import org.onflow.flow.models.envelopeMessageJVMStyle
@@ -412,6 +413,10 @@ class RLPTests {
         // Both should be valid RLP structures
         assertTrue(currentMsg.size > 32, "Current message should be valid")
         assertTrue(jvmStyleMsg.size > 32, "JVM style message should be valid")
+
+        // Verify it's different from current encoding (which uses addresses)
+        val currentEnvelope = tx.envelopeMessage().toHexString()
+        assertNotEquals(currentEnvelope.encodeToByteArray(), jvmStyleEnvelopeMsg, "JVM-style should differ from current address-based encoding")
     }
 
     @OptIn(ExperimentalStdlibApi::class)
@@ -739,14 +744,20 @@ class RLPTests {
             )
         )
         
-        // Envelope message should include both payload and envelope signatures
-        val envelopeMsg = txWithEnvelopeSig.envelopeMessage()
-        assertTrue(envelopeMsg.isNotEmpty(), "Should handle envelope signatures")
+        // Complete envelope message should include both payload and envelope signatures
+        val completeEnvelopeMsg = txWithEnvelopeSig.completeEnvelopeMessage()
+        assertTrue(completeEnvelopeMsg.isNotEmpty(), "Should handle envelope signatures")
         
         // Should be different from just payload signatures
-        val payloadOnlyMsg = baseTx.envelopeMessage()
-        assertNotEquals(payloadOnlyMsg.toHexString(), envelopeMsg.toHexString(), 
-                       "Envelope with envelope signatures should differ from payload-only")
+        val payloadOnlyEnvelope = baseTx.completeEnvelopeMessage()
+        assertNotEquals(payloadOnlyEnvelope.toHexString(), completeEnvelopeMsg.toHexString(), 
+                       "Complete envelope with envelope signatures should differ from payload-only")
+        
+        // Regular envelope message (for signing) should be the same regardless of envelope signatures
+        val envelopeForSigning1 = baseTx.envelopeMessage()
+        val envelopeForSigning2 = txWithEnvelopeSig.envelopeMessage()
+        assertEquals(envelopeForSigning1.toHexString(), envelopeForSigning2.toHexString(),
+                    "Envelope message for signing should not include envelope signatures")
         
         println("✅ Envelope signature compatibility tests passed")
     }
