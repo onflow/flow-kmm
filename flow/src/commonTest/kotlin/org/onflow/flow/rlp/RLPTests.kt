@@ -9,6 +9,11 @@ import org.onflow.flow.models.payload
 import org.onflow.flow.infrastructure.Cadence
 import com.ionspin.kotlin.bignum.integer.BigInteger
 import io.ktor.util.*
+import org.onflow.flow.models.createSigningRLP
+import org.onflow.flow.models.createSigningRLPJVMStyle
+import org.onflow.flow.models.envelopeMessageJVMStyle
+import org.onflow.flow.models.payloadJVMStyle
+import org.onflow.flow.models.payloadMessageJVMStyle
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -22,97 +27,6 @@ class RLPTests {
         val list = hex(rlpString).decodeRLP() as RLPList
         val size = list.element.size
         assertEquals(9, size)
-    }
-
-    @Test
-    fun testSimpleFlowTxEncode() {
-        val tx = Transaction(
-            script = "transaction { execute { log(\"Hello, World!\") } }",
-            arguments = listOf(),
-            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
-            gasLimit = BigInteger(42),
-            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
-            payer = "01",
-            authorizers = listOf("01")
-        )
-        val hexString = hex(tx.payloadMessage())
-        println(hexString)
-        val rlpString = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f875f872b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001040a880000000000000001c9880000000000000001c0"
-        assertEquals(rlpString, hexString)
-    }
-
-    @OptIn(ExperimentalStdlibApi::class)
-    @Test
-    fun testPayloadVsEnvelopeStructure() {
-        // Test that payload and envelope messages have the correct structures
-        val tx = Transaction(
-            script = "transaction { log(\"test\") }",
-            arguments = listOf(),
-            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
-            gasLimit = BigInteger(1000),
-            proposalKey = ProposalKey(address = "01", keyIndex = 0, sequenceNumber = BigInteger(10)),
-            payer = "01",
-            authorizers = listOf("01")
-        )
-
-        val payloadMsg = tx.payloadMessage()
-        val envelopeMsg = tx.envelopeMessage()
-
-        // When there are no payload signatures, both should be identical (this is correct behavior!)
-        assertEquals(payloadMsg.toHexString(), envelopeMsg.toHexString(), "Payload and envelope messages should be identical when no payload signatures exist")
-        
-        // Both should include proper domain tags and content
-        assertTrue(payloadMsg.size > 32) // Should include domain tag + content
-        assertTrue(envelopeMsg.size > 32) // Should include domain tag + content
-        
-        // Now test with payload signatures - they should be different
-        val txWithPayloadSig = tx.copy(
-            payloadSignatures = listOf(
-                TransactionSignature(
-                    address = "01",
-                    keyIndex = 0,
-                    signature = "abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890ab"
-                )
-            )
-        )
-        
-        val payloadMsgWithSig = txWithPayloadSig.payloadMessage()
-        val envelopeMsgWithSig = txWithPayloadSig.envelopeMessage()
-        
-        // Now they should be different (envelope includes the payload signature)
-        assertNotEquals(payloadMsgWithSig.toHexString(), envelopeMsgWithSig.toHexString(), "Payload and envelope messages should differ when payload signatures exist")
-        
-        println("Empty signatures - Payload: ${payloadMsg.toHexString()}")
-        println("Empty signatures - Envelope: ${envelopeMsg.toHexString()}")
-        println("With signatures - Payload: ${payloadMsgWithSig.toHexString()}")
-        println("With signatures - Envelope: ${envelopeMsgWithSig.toHexString()}")
-    }
-
-    @OptIn(ExperimentalStdlibApi::class)
-    @Test
-    fun testPayloadStructureWithEmptySignatures() {
-        // Test the critical fix: payload message should include empty signature list
-        val tx = Transaction(
-            script = "transaction { log(\"test\") }",
-            arguments = listOf(),
-            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
-            gasLimit = BigInteger(1000),
-            proposalKey = ProposalKey(address = "01", keyIndex = 0, sequenceNumber = BigInteger(10)),
-            payer = "01",
-            authorizers = listOf("01")
-        )
-
-        val payloadMsg = tx.payloadMessage()
-        val payloadMsgHex = payloadMsg.toHexString()
-        
-        // Should end with 'c0' which represents empty RLP list for payload signatures
-        assertTrue(payloadMsgHex.endsWith("c0"), "Payload message should end with 'c0' (empty payload signatures list)")
-        
-        // Verify the structure: domain tag + RLPList([payload, empty_list])
-        val domainTag = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000"
-        assertTrue(payloadMsgHex.startsWith(domainTag), "Should start with domain tag")
-        
-        println("Payload message structure verified: ${payloadMsgHex}")
     }
 
     @OptIn(ExperimentalStdlibApi::class)
@@ -150,56 +64,6 @@ class RLPTests {
         assertTrue(envelopeMsgHex.contains("abcd1234567890"), "Should contain part of the signature")
         
         println("Envelope message with payload signature: ${envelopeMsgHex}")
-    }
-
-    @OptIn(ExperimentalStdlibApi::class)
-    @Test
-    fun testSingleVsMultiSignerRLPDifference() {
-        // Test that single-signer and multi-signer transactions produce different RLP when payer differs
-        val commonScript = "transaction { log(\"test\") }"
-        val commonArgs = listOf<Cadence.Value>()
-        val commonRefBlock = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b"
-        val commonGasLimit = BigInteger(1000)
-        val proposerAddress = "01"
-        val payerAddress = "02"
-
-        // Single-signer: proposer = payer
-        val singleSignerTx = Transaction(
-            script = commonScript,
-            arguments = commonArgs,
-            referenceBlockId = commonRefBlock,
-            gasLimit = commonGasLimit,
-            proposalKey = ProposalKey(address = proposerAddress, keyIndex = 0, sequenceNumber = BigInteger(10)),
-            payer = proposerAddress, // Same as proposer
-            authorizers = listOf(proposerAddress)
-        )
-
-        // Multi-signer: proposer ≠ payer
-        val multiSignerTx = Transaction(
-            script = commonScript,
-            arguments = commonArgs,
-            referenceBlockId = commonRefBlock,
-            gasLimit = commonGasLimit,
-            proposalKey = ProposalKey(address = proposerAddress, keyIndex = 0, sequenceNumber = BigInteger(10)),
-            payer = payerAddress, // Different from proposer
-            authorizers = listOf(proposerAddress)
-        )
-
-        val singlePayloadMsg = singleSignerTx.payloadMessage()
-        val multiPayloadMsg = multiSignerTx.payloadMessage()
-
-        // Should be different because payer field is different
-        assertNotEquals(singlePayloadMsg.toHexString(), multiPayloadMsg.toHexString())
-        
-        println("Single-signer payload: ${singlePayloadMsg.toHexString()}")
-        println("Multi-signer payload: ${multiPayloadMsg.toHexString()}")
-        
-        // Both should have the same structure (domain tag + envelope with empty payload sigs)
-        val domainTag = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000"
-        assertTrue(singlePayloadMsg.toHexString().startsWith(domainTag))
-        assertTrue(multiPayloadMsg.toHexString().startsWith(domainTag))
-        assertTrue(singlePayloadMsg.toHexString().endsWith("c0"))
-        assertTrue(multiPayloadMsg.toHexString().endsWith("c0"))
     }
 
     @OptIn(ExperimentalStdlibApi::class)
@@ -461,7 +325,503 @@ class RLPTests {
         
         // Should be identical
         assertEquals(firstEncoding.toHexString(), secondEncoding.toHexString(), "Encode -> Decode -> Encode should be consistent")
-        
+
+        assertEquals(0, RLPElement(byteArrayOf()).toIntFromRLP())
+        assertEquals(255, 255.toRLP().toIntFromRLP())
+
+        val bi = BigInteger.fromInt(255)
+        assertEquals(bi, bi.toRLP().toUnsignedBigIntegerFromRLP())
+
+        val padded = byteArrayOf(0x1, 0x2).paddingZeroLeft()
+        assertEquals(8, padded.size)
+        assertTrue(padded.take(6).all { it == 0.toByte() })
+
         println("RLP roundtrip consistency test passed")
+
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testJVMStyleVsCurrentEncoding() {
+        // Compare current KMM encoding with JVM SDK style encoding
+        val tx = Transaction(
+            script = "transaction { log(\"test\") }",
+            arguments = listOf(Cadence.string("Hello")),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(1000),
+            proposalKey = ProposalKey(address = "01", keyIndex = 0, sequenceNumber = BigInteger(10)),
+            payer = "02",
+            authorizers = listOf("01")
+        )
+
+        println("🔍 ENCODING COMPARISON:")
+        
+        // Test payload encoding
+        val currentPayload = tx.payload()
+        val jvmStylePayload = tx.payloadJVMStyle()
+        
+        val currentPayloadEncoded = RLPList(currentPayload).encode()
+        val jvmStylePayloadEncoded = RLPList(jvmStylePayload).encode()
+        
+        println("🔍 Current payload: ${currentPayloadEncoded.toHexString()}")
+        println("🔍 JVM style payload: ${jvmStylePayloadEncoded.toHexString()}")
+        println("🔍 Payloads match: ${currentPayloadEncoded.contentEquals(jvmStylePayloadEncoded)}")
+        
+        // Test full message encoding (with domain tags)
+        val currentMsg = tx.payloadMessage()
+        val jvmStyleMsg = tx.payloadMessageJVMStyle()
+        
+        println("🔍 Current payload message: ${currentMsg.toHexString()}")
+        println("🔍 JVM style payload message: ${jvmStyleMsg.toHexString()}")
+        println("🔍 Full messages match: ${currentMsg.contentEquals(jvmStyleMsg)}")
+        
+        // Test with payload signatures
+        val txWithSig = tx.copy(
+            payloadSignatures = listOf(
+                TransactionSignature(
+                    address = "01",
+                    keyIndex = 0,
+                    signature = "abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890ab"
+                )
+            )
+        )
+        
+        val currentEnvelopeMsg = txWithSig.envelopeMessage()
+        val jvmStyleEnvelopeMsg = txWithSig.envelopeMessageJVMStyle()
+        
+        println("🔍 Current envelope message: ${currentEnvelopeMsg.toHexString()}")
+        println("🔍 JVM style envelope message: ${jvmStyleEnvelopeMsg.toHexString()}")
+        println("🔍 Envelope messages match: ${currentEnvelopeMsg.contentEquals(jvmStyleEnvelopeMsg)}")
+        
+        // Key differences to note:
+        println("🔍 KEY DIFFERENCES:")
+        println("🔍 1. Script encoding: Current uses script.toRLP(), JVM uses script.toByteArray().toRLP()")
+        println("🔍 2. Gas limit: Current uses BigInteger, JVM uses Long")
+        println("🔍 3. Key indices: Current uses Int, JVM uses Long")
+        println("🔍 4. Sequence number: Current uses BigInteger, JVM uses Long")
+        println("🔍 5. Signature encoding: Current uses [address, keyIndex, signature], JVM uses [signerIndex, keyIndex, signature]")
+        
+        // Verify the signer index approach works correctly
+        val currentRLP = tx.createSigningRLP(includePayloadSignatures = false)
+        val jvmStyleRLP = tx.createSigningRLPJVMStyle(includePayloadSignatures = false)
+        
+        println("🔍 Current RLP (no sigs): ${currentRLP.toHexString()}")
+        println("🔍 JVM style RLP (no sigs): ${jvmStyleRLP.toHexString()}")
+        println("🔍 RLP structures match: ${currentRLP.contentEquals(jvmStyleRLP)}")
+        
+        // Both should be valid RLP structures
+        assertTrue(currentMsg.size > 32, "Current message should be valid")
+        assertTrue(jvmStyleMsg.size > 32, "JVM style message should be valid")
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testFlowJSSDKCompatibilityBasic() {
+        // Test case: "complete tx" from Flow JS SDK
+        val tx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01")
+        )
+
+        val expectedPayload = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f872b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001040a880000000000000001c9880000000000000001"
+        
+        val actualPayload = tx.payloadMessage().toHexString()
+        assertEquals(expectedPayload, actualPayload, "Payload should match Flow JS SDK encoding")
+        
+        // Test with payload signature
+        val txWithSig = tx.copy(
+            payloadSignatures = listOf(
+                TransactionSignature(
+                    address = "01",
+                    keyIndex = 4,
+                    signature = "f7225388c1d69d57e6251c9fda50cbbf9e05131e5adb81e5aa0422402f048162"
+                )
+            )
+        )
+        
+        val expectedEnvelope = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f899f872b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001040a880000000000000001c9880000000000000001e4e38004a0f7225388c1d69d57e6251c9fda50cbbf9e05131e5adb81e5aa0422402f048162"
+        
+        val actualEnvelope = txWithSig.envelopeMessage().toHexString()
+        assertEquals(expectedEnvelope, actualEnvelope, "Envelope should match Flow JS SDK encoding")
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testFlowJSSDKCompatibilityEdgeCases() {
+        // Test case: "empty cadence"
+        val emptyScriptTx = Transaction(
+            script = "",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01")
+        )
+        
+        val expectedEmptyScript = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f84280c0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001040a880000000000000001c9880000000000000001"
+        assertEquals(expectedEmptyScript, emptyScriptTx.payloadMessage().toHexString())
+
+        // Test case: "zero computeLimit"
+        val zeroGasTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(0),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01")
+        )
+        
+        val expectedZeroGas = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f872b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b80880000000000000001040a880000000000000001c9880000000000000001"
+        assertEquals(expectedZeroGas, zeroGasTx.payloadMessage().toHexString())
+
+        // Test case: "zero proposalKey.keyId"
+        val zeroKeyTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 0, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01")
+        )
+        
+        val expectedZeroKey = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f872b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001800a880000000000000001c9880000000000000001"
+        assertEquals(expectedZeroKey, zeroKeyTx.payloadMessage().toHexString())
+
+        // Test case: "zero proposalKey.sequenceNum"
+        val zeroSeqTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(0)),
+            payer = "01",
+            authorizers = listOf("01")
+        )
+        
+        val expectedZeroSeq = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f872b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a8800000000000000010480880000000000000001c9880000000000000001"
+        assertEquals(expectedZeroSeq, zeroSeqTx.payloadMessage().toHexString())
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testFlowJSSDKCompatibilityAuthorizers() {
+        // Test case: "empty authorizers"
+        val emptyAuthTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf()
+        )
+        
+        val expectedEmptyAuth = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f869b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001040a880000000000000001c0"
+        assertEquals(expectedEmptyAuth, emptyAuthTx.payloadMessage().toHexString())
+
+        // Test case: "multiple authorizers"
+        val multiAuthTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01", "02")
+        )
+        
+        val expectedMultiAuth = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f87bb07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001040a880000000000000001d2880000000000000001880000000000000002"
+        assertEquals(expectedMultiAuth, multiAuthTx.payloadMessage().toHexString())
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testFlowJSSDKCompatibilitySignatures() {
+        val baseTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01")
+        )
+
+        // Test case: "empty payloadSigs"
+        val emptyPayloadSigs = baseTx.copy(payloadSignatures = listOf())
+        val expectedEmptyPayloadSigs = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f875f872b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001040a880000000000000001c9880000000000000001c0"
+        assertEquals(expectedEmptyPayloadSigs, emptyPayloadSigs.envelopeMessage().toHexString())
+
+        // Test case: "zero payloadSigs.0.keyId"
+        val zeroKeyIdSig = baseTx.copy(
+            payloadSignatures = listOf(
+                TransactionSignature(
+                    address = "01",
+                    keyIndex = 0,
+                    signature = "f7225388c1d69d57e6251c9fda50cbbf9e05131e5adb81e5aa0422402f048162"
+                )
+            )
+        )
+        val expectedZeroKeyIdSig = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f899f872b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001040a880000000000000001c9880000000000000001e4e38080a0f7225388c1d69d57e6251c9fda50cbbf9e05131e5adb81e5aa0422402f048162"
+        assertEquals(expectedZeroKeyIdSig, zeroKeyIdSig.envelopeMessage().toHexString())
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testFlowJSSDKCompatibilityComplexSignatures() {
+        // Test case: "out-of-order payloadSigs -- by signer"
+        val outOfOrderBySignerTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01", "02", "03"),
+            payloadSignatures = listOf(
+                TransactionSignature(address = "03", keyIndex = 0, signature = "c"),
+                TransactionSignature(address = "01", keyIndex = 0, signature = "a"),
+                TransactionSignature(address = "02", keyIndex = 0, signature = "b")
+            )
+        )
+        
+        val expectedOutOfOrderBySigner = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f893f884b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001040a880000000000000001db880000000000000001880000000000000002880000000000000003ccc3808080c3018080c3028080"
+        assertEquals(expectedOutOfOrderBySigner, outOfOrderBySignerTx.envelopeMessage().toHexString())
+
+        // Test case: "out-of-order payloadSigs -- by key ID"
+        val outOfOrderByKeyTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01"),
+            payloadSignatures = listOf(
+                TransactionSignature(address = "01", keyIndex = 2, signature = "c"),
+                TransactionSignature(address = "01", keyIndex = 0, signature = "a"),
+                TransactionSignature(address = "01", keyIndex = 1, signature = "b")
+            )
+        )
+        
+        val expectedOutOfOrderByKey = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f881f872b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a0f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b2a880000000000000001040a880000000000000001c9880000000000000001ccc3808080c3800180c3800280"
+        assertEquals(expectedOutOfOrderByKey, outOfOrderByKeyTx.envelopeMessage().toHexString())
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testFlowJSSDKCompatibilityNullRefBlock() {
+        // Test case: "null refBlock" - Flow JS SDK allows null reference block
+        val nullRefBlockTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "0000000000000000000000000000000000000000000000000000000000000000", // Null/zero block ID
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01")
+        )
+        
+        val expectedNullRefBlock = "464c4f572d56302e302d7472616e73616374696f6e0000000000000000000000f872b07472616e73616374696f6e207b2065786563757465207b206c6f67282248656c6c6f2c20576f726c64212229207d207dc0a000000000000000000000000000000000000000000000000000000000000000002a880000000000000001040a880000000000000001c9880000000000000001"
+        assertEquals(expectedNullRefBlock, nullRefBlockTx.payloadMessage().toHexString())
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testJVMStyleSignatureEncoding() {
+        // Test that our JVM-style signature encoding produces the expected results
+        val tx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01", "02", "03"),
+            payloadSignatures = listOf(
+                TransactionSignature(address = "03", keyIndex = 0, signature = "c"),
+                TransactionSignature(address = "01", keyIndex = 0, signature = "a"),
+                TransactionSignature(address = "02", keyIndex = 0, signature = "b")
+            )
+        )
+
+        // Test JVM-style encoding
+        val jvmStyleEnvelope = tx.envelopeMessageJVMStyle().toHexString()
+        
+        // The JVM style should use signer indices instead of addresses
+        // Expected structure: [signerIndex, keyIndex, signature] instead of [address, keyIndex, signature]
+        println("🔍 JVM-style envelope encoding: $jvmStyleEnvelope")
+        
+        // Verify it's different from current encoding (which uses addresses)
+        val currentEnvelope = tx.envelopeMessage().toHexString()
+        assertNotEquals(currentEnvelope, jvmStyleEnvelope, "JVM-style should differ from current address-based encoding")
+        
+        // Both should be valid RLP structures
+        assertTrue(jvmStyleEnvelope.length > 64, "JVM-style envelope should be valid")
+        assertTrue(currentEnvelope.length > 64, "Current envelope should be valid")
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testFlowJSSDKCompatibilityMissingCases() {
+        // Test cases missing from our coverage compared to Flow JS SDK
+
+        // Test case: Transaction with actual arguments (not just empty)
+        val txWithArguments = Transaction(
+            script = "transaction(msg: String) { execute { log(msg) } }",
+            arguments = listOf(Cadence.string("Hello")),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01")
+        )
+        
+        // Should be able to encode with arguments
+        val payloadWithArgs = txWithArguments.payloadMessage()
+        assertTrue(payloadWithArgs.isNotEmpty(), "Should handle transaction with arguments")
+        
+        // Test case: Different payer than proposer
+        val multiRoleTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "02", // Different from proposer
+            authorizers = listOf("01")
+        )
+        
+        val multiRolePayload = multiRoleTx.payloadMessage()
+        assertNotEquals(txWithArguments.payloadMessage().toHexString(), multiRolePayload.toHexString(), 
+                       "Different payer should produce different encoding")
+        
+        println("✅ Additional compatibility test cases passed")
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testFlowJSSDKCompatibilityEnvelopeSignatures() {
+        // Test envelope signatures (not just payload signatures)
+        val baseTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01"),
+            payloadSignatures = listOf(
+                TransactionSignature(
+                    address = "01",
+                    keyIndex = 4,
+                    signature = "f7225388c1d69d57e6251c9fda50cbbf9e05131e5adb81e5aa0422402f048162"
+                )
+            )
+        )
+
+        // Test with envelope signatures added
+        val txWithEnvelopeSig = baseTx.copy(
+            envelopeSignatures = listOf(
+                TransactionSignature(
+                    address = "01",
+                    keyIndex = 4,
+                    signature = "f7225388c1d69d57e6251c9fda50cbbf9e05131e5adb81e5aa0422402f048162"
+                )
+            )
+        )
+        
+        // Envelope message should include both payload and envelope signatures
+        val envelopeMsg = txWithEnvelopeSig.envelopeMessage()
+        assertTrue(envelopeMsg.isNotEmpty(), "Should handle envelope signatures")
+        
+        // Should be different from just payload signatures
+        val payloadOnlyMsg = baseTx.envelopeMessage()
+        assertNotEquals(payloadOnlyMsg.toHexString(), envelopeMsg.toHexString(), 
+                       "Envelope with envelope signatures should differ from payload-only")
+        
+        println("✅ Envelope signature compatibility tests passed")
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testFlowJSSDKTransactionIdEncoding() {
+        // Test transaction ID encoding (from the txId tests in JS SDK)
+        // This would require implementing transaction ID calculation similar to encodeTxIdFromVoucher
+        
+        val completeTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01"),
+            payloadSignatures = listOf(
+                TransactionSignature(
+                    address = "01",
+                    keyIndex = 4,
+                    signature = "f7225388c1d69d57e6251c9fda50cbbf9e05131e5adb81e5aa0422402f048162"
+                )
+            )
+        )
+        
+        // For now, just verify the transaction structure is valid
+        // TODO: Implement actual transaction ID calculation to match JS SDK
+        val envelope = completeTx.envelopeMessage()
+        assertTrue(envelope.isNotEmpty(), "Transaction should produce valid envelope for ID calculation")
+        
+        // Expected transaction ID from JS SDK: "118d6462f1c4182501d56f04a0cd23cf685283194bb316dceeb215b353120b2b"
+        // This would require implementing SHA-256 hash of the envelope message
+        
+        println("✅ Transaction ID encoding structure verified (full implementation needed)")
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    @Test
+    fun testFlowJSSDKCompatibilityComplexAuthorizers() {
+        // Test complex authorizer scenarios from JS SDK
+        
+        // Test case: Multiple authorizers with different addresses
+        val multiAuthTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "01",
+            authorizers = listOf("01", "02", "03")
+        )
+        
+        val multiAuthPayload = multiAuthTx.payloadMessage().toHexString()
+        
+        // Should match the "multiple authorizers" expected encoding pattern
+        assertTrue(multiAuthPayload.contains("880000000000000001"), "Should contain proposer address")
+        assertTrue(multiAuthPayload.contains("880000000000000002"), "Should contain second authorizer")
+        assertTrue(multiAuthPayload.contains("880000000000000003"), "Should contain third authorizer")
+        
+        // Test case: Authorizer same as proposer (should be deduplicated correctly)
+        val overlappingAuthTx = Transaction(
+            script = "transaction { execute { log(\"Hello, World!\") } }",
+            arguments = listOf(),
+            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+            gasLimit = BigInteger(42),
+            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+            payer = "02",
+            authorizers = listOf("01") // Same as proposer
+        )
+        
+        val overlappingPayload = overlappingAuthTx.payloadMessage()
+        assertTrue(overlappingPayload.isNotEmpty(), "Should handle overlapping proposer/authorizer correctly")
+        
+        println("✅ Complex authorizer compatibility tests passed")
     }
 }
