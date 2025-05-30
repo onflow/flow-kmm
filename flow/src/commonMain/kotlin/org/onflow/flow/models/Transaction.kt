@@ -229,7 +229,7 @@ data class Transaction(
  * @RLP(7) payer: ByteArray
  * @RLP(8) authorizers: List<ByteArray>
  */
-fun Transaction.payloadJVMStyle(): List<RLPType> = listOf(
+fun Transaction.payload(): List<RLPType> = listOf(
     script.toByteArray().toRLP(),                                    // ByteArray
     RLPList(arguments.map { it.encode().toByteArray().toRLP() }),    // List<ByteArray>
     hex(referenceBlockId).paddingZeroLeft(32).toRLP(),              // Pad to 32 bytes
@@ -245,7 +245,7 @@ fun Transaction.payloadJVMStyle(): List<RLPType> = listOf(
  * Create the payload message for signing
  */
 fun Transaction.payloadMessage(): ByteArray =
-    DomainTag.Transaction.bytes + RLPList(payloadJVMStyle()).encode()
+    DomainTag.Transaction.bytes + RLPList(payload()).encode()
 
 /**
  * Create the envelope message for signing
@@ -300,7 +300,7 @@ internal fun Transaction.createEnvelopeRLPFlowJSStyle(): ByteArray {
     
     return RLPList(
         listOf(
-            RLPList(payloadJVMStyle()),
+            RLPList(payload()),
             RLPList(payloadSignaturesList)
         )
     ).encode()
@@ -325,7 +325,7 @@ internal fun Transaction.createSigningRLP(includePayloadSignatures: Boolean = fa
     
     return RLPList(
         listOf(
-            RLPList(payloadJVMStyle()),
+            RLPList(payload()),
             RLPList(signaturesList)
         )
     ).encode()
@@ -371,7 +371,7 @@ internal fun Transaction.createSigningRLPJVMStyle(includePayloadSignatures: Bool
     
     return RLPList(
         listOf(
-            RLPList(payloadJVMStyle()),
+            RLPList(payload()),
             RLPList(signaturesList)
         )
     ).encode()
@@ -431,7 +431,7 @@ internal fun Transaction.createCompleteEnvelopeRLP(): ByteArray {
     
     return RLPList(
         listOf(
-            RLPList(payloadJVMStyle()),
+            RLPList(payload()),
             RLPList(payloadSignaturesList),
             RLPList(envelopeSignaturesList)
         )

@@ -9,7 +9,7 @@ import org.onflow.flow.infrastructure.Cadence
 import com.ionspin.kotlin.bignum.integer.BigInteger
 import io.ktor.util.*
 import org.onflow.flow.models.completeEnvelopeMessage
-import org.onflow.flow.models.payloadJVMStyle
+import org.onflow.flow.models.payload
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -76,7 +76,7 @@ class RLPTests {
             authorizers = listOf("c6de0d94160377cd", "1234567890abcdef")
         )
 
-        val payload = tx.payloadJVMStyle()
+        val payload = tx.payload()
         assertEquals(9, payload.size, "Payload should have exactly 9 components")
 
         // Verify each component type by encoding and checking structure
