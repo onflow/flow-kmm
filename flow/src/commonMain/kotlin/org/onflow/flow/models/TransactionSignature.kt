@@ -10,7 +10,7 @@ import kotlinx.serialization.*
  * @param signature A variable length signature.
  */
 @Serializable
-data class TransactionSignature @OptIn(ExperimentalSerializationApi::class) constructor(
+data class TransactionSignature(
 
     /* The 8-byte address of an account. */
     @SerialName(value = "address") @Required val address: String,
@@ -22,12 +22,3 @@ data class TransactionSignature @OptIn(ExperimentalSerializationApi::class) cons
     @Serializable(Base64HexSerializer::class)
     @SerialName(value = "signature") @Required val signature: String
 )
-
-class CompareTransactionSignature {
-    companion object : Comparator<TransactionSignature> {
-        override fun compare(a: TransactionSignature, b: TransactionSignature): Int = when {
-            a.address != b.address -> a.address.compareTo(b.address)
-            else -> a.keyIndex - b.keyIndex
-        }
-    }
-}
