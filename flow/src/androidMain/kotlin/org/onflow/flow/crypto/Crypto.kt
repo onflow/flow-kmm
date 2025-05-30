@@ -136,7 +136,7 @@ actual object Crypto {
             // x and y must be guaranteed to be less than curveFieldSize each at this point
             xBytes.copyInto(paddedPKBytes, max(curveFieldSize - xBytes.size, 0), max(xBytes.size - curveFieldSize, 0))
             yBytes.copyInto(paddedPKBytes, curveFieldSize + max(curveFieldSize - yBytes.size, 0), max(yBytes.size - curveFieldSize, 0))
-            (xBytes + yBytes).bytesToHex()
+            paddedPKBytes.bytesToHex()
         } else {
             throw IllegalArgumentException("PublicKey must be an ECPublicKey")
         }
@@ -188,8 +188,9 @@ actual object Crypto {
     @JvmStatic
     fun formatSignature(r: BigInteger, s: BigInteger, curveOrderSize: Int): ByteArray {
         val paddedSignature = ByteArray(2 * curveOrderSize)
-        val rBytes = r.toByteArray()
-        val sBytes = s.toByteArray()
+        // Handle BigInteger.ZERO case specifically to match RLP encoding behavior
+        val rBytes = if (r == BigInteger.ZERO) byteArrayOf() else r.toByteArray()
+        val sBytes = if (s == BigInteger.ZERO) byteArrayOf() else s.toByteArray()
 
         // occasionally R/S bytes representation has leading zeroes, so make sure to copy them appropriately
         rBytes.copyInto(
