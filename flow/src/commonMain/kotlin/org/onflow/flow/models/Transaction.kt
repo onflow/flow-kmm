@@ -106,7 +106,7 @@ data class Transaction(
             for (signUser in signerList) {
                 // Use payloadMessage() which already includes domain tags
                 val messageToSign = payloadMessage()
-                val signature = signUser.sign(messageToSign)  // Fix: Use sign() not signAsTransaction() since message has domain tags
+                val signature = signUser.sign(messageToSign)
                 val txSignature = TransactionSignature(
                     address = signUser.address,
                     keyIndex = signUser.keyIndex,
@@ -126,7 +126,7 @@ data class Transaction(
                 for (signUser in signerList) {
                     // Use payloadMessage() which already includes domain tags
                     val messageToSign = payloadMessage()
-                    val signature = signUser.sign(messageToSign)  // Fix: Use sign() not signAsTransaction() since message has domain tags
+                    val signature = signUser.sign(messageToSign)
                     val txSignature = TransactionSignature(
                         address = signUser.address,
                         keyIndex = signUser.keyIndex,
@@ -138,7 +138,6 @@ data class Transaction(
             }
         }
 
-        // NO SORTING! Order is strictly determined by Flow specification
         return copy(payloadSignatures = payloadSignatures)
     }
 
@@ -150,7 +149,7 @@ data class Transaction(
         for (signUser in signerList) {
             // Use envelopeMessage() which already includes domain tags
             val messageToSign = envelopeMessage()
-            val signature = signUser.sign(messageToSign)  // Fix: Use sign() not signAsTransaction() since message has domain tags
+            val signature = signUser.sign(messageToSign)
             val txSignature = TransactionSignature(
                 address = signUser.address,
                 keyIndex = signUser.keyIndex,
@@ -159,12 +158,11 @@ data class Transaction(
             envelopeSignatures.add(txSignature)
         }
 
-        // NO SORTING! Order is strictly determined by Flow specification
         return copy(envelopeSignatures = envelopeSignatures)
     }
 
     suspend fun sign(signers: List<Signer>): Transaction {
-        // Check if this is a single-signer transaction (all roles performed by same account)
+        // Check if this is a single-signer transaction
         val allSignerAddresses = signers.map { it.address.removeHexPrefix() }.toSet()
         val proposerAddress = proposalKey.address.removeHexPrefix()
         val payerAddress = payer.removeHexPrefix()
@@ -174,46 +172,44 @@ data class Transaction(
         
         // If all roles are performed by the same single account, only sign envelope
         if (allRoleAddresses.size == 1 && allSignerAddresses.size == 1 && allRoleAddresses == allSignerAddresses) {
-            println("🔍 Single-signer transaction detected - only signing envelope")
+            println("Single-signer transaction detected - only signing envelope")
             return signEnvelope(signers)
         } else {
-            println("🔍 Multi-signer transaction detected - signing both payload and envelope")
+            println("Multi-signer transaction detected - signing both payload and envelope")
             return signPayload(signers).signEnvelope(signers)
         }
     }
 
     /**
-     * Add a payload signature to the transaction (like JVM SDK)
-     * Note: This method preserves Flow's strict signature ordering
+     * Add a payload signature to the transaction
      */
     suspend fun addPayloadSignature(address: String, keyIndex: Int, signer: Signer): Transaction {
         // Use payloadMessage() which already includes domain tags
         val messageToSign = payloadMessage()
-        val signature = signer.sign(messageToSign)  // Fix: Use sign() not signAsTransaction() since message has domain tags
+        val signature = signer.sign(messageToSign)
         val txSignature = TransactionSignature(
             address = address,
             keyIndex = keyIndex,
             signature = signature.toHexString()
         )
-        // DO NOT SORT - preserve the order signatures are added (Flow requirement)
+        // DO NOT SORT - preserve the order signatures are added
         val newPayloadSignatures = payloadSignatures + txSignature
         return copy(payloadSignatures = newPayloadSignatures)
     }
 
     /**
-     * Add an envelope signature to the transaction (like JVM SDK)
-     * Note: This method preserves Flow's strict signature ordering
+     * Add an envelope signature to the transaction
      */
     suspend fun addEnvelopeSignature(address: String, keyIndex: Int, signer: Signer): Transaction {
         // Use envelopeMessage() which already includes domain tags
         val messageToSign = envelopeMessage()
-        val signature = signer.sign(messageToSign)  // Fix: Use sign() not signAsTransaction() since message has domain tags
+        val signature = signer.sign(messageToSign)
         val txSignature = TransactionSignature(
             address = address,
             keyIndex = keyIndex,
             signature = signature.toHexString()
         )
-        // DO NOT SORT - preserve the order signatures are added (Flow requirement)
+        // Preserve the order signatures are added
         val newEnvelopeSignatures = envelopeSignatures + txSignature
         return copy(envelopeSignatures = newEnvelopeSignatures)
     }
@@ -248,8 +244,8 @@ fun Transaction.payload(): List<RLPType> = listOf(
 fun Transaction.payloadJVMStyle(): List<RLPType> = listOf(
     script.toByteArray().toRLP(),                                    // ByteArray
     RLPList(arguments.map { it.encode().toByteArray().toRLP() }),    // List<ByteArray>
-    hex(referenceBlockId).paddingZeroLeft(32).toRLP(),              // Fix: Pad to 32 bytes like Flow JS SDK
-    gasLimit.intValue().toRLP(),                                     // Convert BigInteger to Int (which can be used as Long)
+    hex(referenceBlockId).paddingZeroLeft(32).toRLP(),              // Pad to 32 bytes
+    gasLimit.intValue().toRLP(),                                     // Convert BigInteger to Int
     hex(proposalKey.address).paddingZeroLeft().toRLP(),             // ByteArray (8 bytes)
     proposalKey.keyIndex.toRLP(),                                    // Int (compatible with Long)
     proposalKey.sequenceNumber.intValue().toRLP(),                   // Convert BigInteger to Int
@@ -258,15 +254,13 @@ fun Transaction.payloadJVMStyle(): List<RLPType> = listOf(
 )
 
 /**
- * Create the payload message for signing - should be just the payload structure for Flow JS SDK compatibility
- * This matches the Flow JS SDK behavior exactly
+ * Create the payload message for signing
  */
 fun Transaction.payloadMessage(): ByteArray =
     DomainTag.Transaction.bytes + RLPList(payload()).encode()
 
 /**
- * Create the envelope message for signing - should include existing payload signatures with JVM-style encoding
- * This matches the Flow JS SDK behavior exactly  
+ * Create the envelope message for signing
  */
 fun Transaction.envelopeMessage(): ByteArray =
     DomainTag.Transaction.bytes + createEnvelopeRLPFlowJSStyle()
@@ -283,11 +277,9 @@ fun Transaction.completeEnvelopeMessage(): ByteArray =
  * Structure: [payload, payloadSignatures] where signatures use signer indices
  */
 internal fun Transaction.createEnvelopeRLPFlowJSStyle(): ByteArray {
-    // Build signer list like JVM SDK
     val signerList = mutableListOf<String>()
     val seen = mutableSetOf<String>()
     
-    // Add signers in JVM SDK order: proposer, payer, then authorizers
     fun addSigner(address: String) {
         val normalized = address.removeHexPrefix()
         if (normalized !in seen) {
@@ -320,7 +312,7 @@ internal fun Transaction.createEnvelopeRLPFlowJSStyle(): ByteArray {
     
     return RLPList(
         listOf(
-            RLPList(payloadJVMStyle()),  // Fix: Use payloadJVMStyle() to match JS SDK script encoding
+            RLPList(payloadJVMStyle()),
             RLPList(payloadSignaturesList)
         )
     ).encode()
@@ -329,14 +321,6 @@ internal fun Transaction.createEnvelopeRLPFlowJSStyle(): ByteArray {
 /**
  * Helper function to create RLP-encoded transaction data for signing
  * @param includePayloadSignatures Whether to include existing payload signatures in the structure
- * 
- * NOTE: This implementation differs from Flow JVM SDK in signature encoding:
- * - JVM SDK uses: [signerIndex: Int, keyIndex: Int, signature: ByteArray]
- * - This KMM uses: [address: ByteArray(8), keyIndex: Int, signature: ByteArray]
- * 
- * The JVM SDK approach uses signer indices (position in signerList) while this uses addresses.
- * Both should produce valid Flow transactions, but for maximum compatibility with JVM SDK,
- * consider using createSigningRLPJVMStyle() instead.
  */
 internal fun Transaction.createSigningRLP(includePayloadSignatures: Boolean = false): ByteArray {
     val signaturesList = if (includePayloadSignatures) {
@@ -368,7 +352,7 @@ internal fun Transaction.createSigningRLPJVMStyle(includePayloadSignatures: Bool
     val signerList = mutableListOf<String>()
     val seen = mutableSetOf<String>()
     
-    // Add signers in JVM SDK order: proposer, payer, then authorizers
+    // Add signers in order: proposer, payer, then authorizers
     fun addSigner(address: String) {
         val normalized = address.removeHexPrefix()
         if (normalized !in seen) {
@@ -399,33 +383,21 @@ internal fun Transaction.createSigningRLPJVMStyle(includePayloadSignatures: Bool
     
     return RLPList(
         listOf(
-            RLPList(payloadJVMStyle()),  // Fix: Use payloadJVMStyle() to match JS SDK script encoding
+            RLPList(payloadJVMStyle()),
             RLPList(signaturesList)
         )
     ).encode()
 }
 
 /**
- * Public function for testing JVM-style payload message creation
- */
-fun Transaction.payloadMessageJVMStyle(): ByteArray =
-    DomainTag.Transaction.bytes + createSigningRLPJVMStyle(includePayloadSignatures = false)
-
-/**
- * Public function for testing JVM-style envelope message creation
- */
-fun Transaction.envelopeMessageJVMStyle(): ByteArray =
-    DomainTag.Transaction.bytes + createSigningRLPJVMStyle(includePayloadSignatures = true)
-
-/**
  * Helper function to create complete envelope RLP with both payload and envelope signatures
  */
 internal fun Transaction.createCompleteEnvelopeRLP(): ByteArray {
-    // Build signer list like JVM SDK
+    // Build signer list
     val signerList = mutableListOf<String>()
     val seen = mutableSetOf<String>()
     
-    // Add signers in JVM SDK order: proposer, payer, then authorizers
+    // Add signers in order: proposer, payer, then authorizers
     fun addSigner(address: String) {
         val normalized = address.removeHexPrefix()
         if (normalized !in seen) {
@@ -471,7 +443,7 @@ internal fun Transaction.createCompleteEnvelopeRLP(): ByteArray {
     
     return RLPList(
         listOf(
-            RLPList(payloadJVMStyle()),  // Fix: Use payloadJVMStyle() to match JS SDK script encoding
+            RLPList(payloadJVMStyle()),
             RLPList(payloadSignaturesList),
             RLPList(envelopeSignaturesList)
         )

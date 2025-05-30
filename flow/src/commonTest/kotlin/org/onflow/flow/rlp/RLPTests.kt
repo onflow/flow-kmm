@@ -10,11 +10,6 @@ import org.onflow.flow.infrastructure.Cadence
 import com.ionspin.kotlin.bignum.integer.BigInteger
 import io.ktor.util.*
 import org.onflow.flow.models.completeEnvelopeMessage
-import org.onflow.flow.models.createSigningRLP
-import org.onflow.flow.models.createSigningRLPJVMStyle
-import org.onflow.flow.models.envelopeMessageJVMStyle
-import org.onflow.flow.models.payloadJVMStyle
-import org.onflow.flow.models.payloadMessageJVMStyle
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -350,84 +345,6 @@ class RLPTests {
 
     @OptIn(ExperimentalStdlibApi::class)
     @Test
-    fun testJVMStyleVsCurrentEncoding() {
-        // Compare current KMM encoding with JVM SDK style encoding
-        val tx = Transaction(
-            script = "transaction { log(\"test\") }",
-            arguments = listOf(Cadence.string("Hello")),
-            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
-            gasLimit = BigInteger(1000),
-            proposalKey = ProposalKey(address = "01", keyIndex = 0, sequenceNumber = BigInteger(10)),
-            payer = "02",
-            authorizers = listOf("01")
-        )
-
-        println("🔍 ENCODING COMPARISON:")
-        
-        // Test payload encoding
-        val currentPayload = tx.payload()
-        val jvmStylePayload = tx.payloadJVMStyle()
-        
-        val currentPayloadEncoded = RLPList(currentPayload).encode()
-        val jvmStylePayloadEncoded = RLPList(jvmStylePayload).encode()
-        
-        println("🔍 Current payload: ${currentPayloadEncoded.toHexString()}")
-        println("🔍 JVM style payload: ${jvmStylePayloadEncoded.toHexString()}")
-        println("🔍 Payloads match: ${currentPayloadEncoded.contentEquals(jvmStylePayloadEncoded)}")
-        
-        // Test full message encoding (with domain tags)
-        val currentMsg = tx.payloadMessage()
-        val jvmStyleMsg = tx.payloadMessageJVMStyle()
-        
-        println("🔍 Current payload message: ${currentMsg.toHexString()}")
-        println("🔍 JVM style payload message: ${jvmStyleMsg.toHexString()}")
-        println("🔍 Full messages match: ${currentMsg.contentEquals(jvmStyleMsg)}")
-        
-        // Test with payload signatures
-        val txWithSig = tx.copy(
-            payloadSignatures = listOf(
-                TransactionSignature(
-                    address = "01",
-                    keyIndex = 0,
-                    signature = "abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234567890ab"
-                )
-            )
-        )
-        
-        val currentEnvelopeMsg = txWithSig.envelopeMessage()
-        val jvmStyleEnvelopeMsg = txWithSig.envelopeMessageJVMStyle()
-        
-        println("🔍 Current envelope message: ${currentEnvelopeMsg.toHexString()}")
-        println("🔍 JVM style envelope message: ${jvmStyleEnvelopeMsg.toHexString()}")
-        println("🔍 Envelope messages match: ${currentEnvelopeMsg.contentEquals(jvmStyleEnvelopeMsg)}")
-        
-        // Key differences to note:
-        println("🔍 KEY DIFFERENCES:")
-        println("🔍 1. Script encoding: Current uses script.toRLP(), JVM uses script.toByteArray().toRLP()")
-        println("🔍 2. Gas limit: Current uses BigInteger, JVM uses Long")
-        println("🔍 3. Key indices: Current uses Int, JVM uses Long")
-        println("🔍 4. Sequence number: Current uses BigInteger, JVM uses Long")
-        println("🔍 5. Signature encoding: Current uses [address, keyIndex, signature], JVM uses [signerIndex, keyIndex, signature]")
-        
-        // Verify the signer index approach works correctly
-        val currentRLP = tx.createSigningRLP(includePayloadSignatures = false)
-        val jvmStyleRLP = tx.createSigningRLPJVMStyle(includePayloadSignatures = false)
-        
-        println("🔍 Current RLP (no sigs): ${currentRLP.toHexString()}")
-        println("🔍 JVM style RLP (no sigs): ${jvmStyleRLP.toHexString()}")
-        println("🔍 RLP structures match: ${currentRLP.contentEquals(jvmStyleRLP)}")
-        
-        // Both should be valid RLP structures
-        assertTrue(currentMsg.size > 32, "Current message should be valid")
-        assertTrue(jvmStyleMsg.size > 32, "JVM style message should be valid")
-
-        // Verify it's different from current encoding (which uses addresses)
-        val currentEnvelope = tx.envelopeMessage().toHexString()
-        assertNotEquals(currentEnvelope.encodeToByteArray(), jvmStyleEnvelopeMsg, "JVM-style should differ from current address-based encoding")
-    }
-
-    @OptIn(ExperimentalStdlibApi::class)
-    @Test
     fun testFlowJSSDKCompatibilityBasic() {
         // Test case: "complete tx" from Flow JS SDK
         val tx = Transaction(
@@ -655,40 +572,40 @@ class RLPTests {
         assertEquals(expectedNullRefBlock, nullRefBlockTx.payloadMessage().toHexString())
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
-    @Test
-    fun testJVMStyleSignatureEncoding() {
-        // Test that our JVM-style signature encoding produces the expected results
-        val tx = Transaction(
-            script = "transaction { execute { log(\"Hello, World!\") } }",
-            arguments = listOf(),
-            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
-            gasLimit = BigInteger(42),
-            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
-            payer = "01",
-            authorizers = listOf("01", "02", "03"),
-            payloadSignatures = listOf(
-                TransactionSignature(address = "03", keyIndex = 0, signature = "c"),
-                TransactionSignature(address = "01", keyIndex = 0, signature = "a"),
-                TransactionSignature(address = "02", keyIndex = 0, signature = "b")
-            )
-        )
-
-        // Test JVM-style encoding
-        val jvmStyleEnvelope = tx.envelopeMessageJVMStyle().toHexString()
-        
-        // The JVM style should use signer indices instead of addresses
-        // Expected structure: [signerIndex, keyIndex, signature] instead of [address, keyIndex, signature]
-        println("🔍 JVM-style envelope encoding: $jvmStyleEnvelope")
-        
-        // Verify it's different from current encoding (which uses addresses)
-        val currentEnvelope = tx.envelopeMessage().toHexString()
-        assertNotEquals(currentEnvelope, jvmStyleEnvelope, "JVM-style should differ from current address-based encoding")
-        
-        // Both should be valid RLP structures
-        assertTrue(jvmStyleEnvelope.length > 64, "JVM-style envelope should be valid")
-        assertTrue(currentEnvelope.length > 64, "Current envelope should be valid")
-    }
+//    @OptIn(ExperimentalStdlibApi::class)
+//    @Test
+//    fun testJVMStyleSignatureEncoding() {
+//        // Test that our JVM-style signature encoding produces the expected results
+//        val tx = Transaction(
+//            script = "transaction { execute { log(\"Hello, World!\") } }",
+//            arguments = listOf(),
+//            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
+//            gasLimit = BigInteger(42),
+//            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
+//            payer = "01",
+//            authorizers = listOf("01", "02", "03"),
+//            payloadSignatures = listOf(
+//                TransactionSignature(address = "03", keyIndex = 0, signature = "c"),
+//                TransactionSignature(address = "01", keyIndex = 0, signature = "a"),
+//                TransactionSignature(address = "02", keyIndex = 0, signature = "b")
+//            )
+//        )
+//
+//        // Test JVM-style encoding
+//        val jvmStyleEnvelope = tx.envelopeMessageJVMStyle().toHexString()
+//
+//        // The JVM style should use signer indices instead of addresses
+//        // Expected structure: [signerIndex, keyIndex, signature] instead of [address, keyIndex, signature]
+//        println("🔍 JVM-style envelope encoding: $jvmStyleEnvelope")
+//
+//        // Verify it's different from current encoding (which uses addresses)
+//        val currentEnvelope = tx.envelopeMessage().toHexString()
+//        assertNotEquals(currentEnvelope, jvmStyleEnvelope, "JVM-style should differ from current address-based encoding")
+//
+//        // Both should be valid RLP structures
+//        assertTrue(jvmStyleEnvelope.length > 64, "JVM-style envelope should be valid")
+//        assertTrue(currentEnvelope.length > 64, "Current envelope should be valid")
+//    }
 
     @OptIn(ExperimentalStdlibApi::class)
     @Test
