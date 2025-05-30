@@ -5,11 +5,11 @@ import org.onflow.flow.models.Transaction
 import org.onflow.flow.models.TransactionSignature
 import org.onflow.flow.models.payloadMessage
 import org.onflow.flow.models.envelopeMessage
-import org.onflow.flow.models.payload
 import org.onflow.flow.infrastructure.Cadence
 import com.ionspin.kotlin.bignum.integer.BigInteger
 import io.ktor.util.*
 import org.onflow.flow.models.completeEnvelopeMessage
+import org.onflow.flow.models.payloadJVMStyle
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -76,7 +76,7 @@ class RLPTests {
             authorizers = listOf("c6de0d94160377cd", "1234567890abcdef")
         )
 
-        val payload = tx.payload()
+        val payload = tx.payloadJVMStyle()
         assertEquals(9, payload.size, "Payload should have exactly 9 components")
 
         // Verify each component type by encoding and checking structure
@@ -186,7 +186,7 @@ class RLPTests {
         assertEquals("dog", shortDecoded.toStringFromRLP())
         
         // Test empty list
-        val emptyList = RLPList(emptyList<RLPType>())
+        val emptyList = RLPList(emptyList())
         val emptyListEncoded = emptyList.encode()
         assertEquals("c0", emptyListEncoded.toHexString())
         val emptyListDecoded = emptyListEncoded.decodeRLP() as RLPList
@@ -276,7 +276,7 @@ class RLPTests {
         // Create a structure similar to what we use in Flow transactions
         val nestedList = RLPList(listOf(
             "script".toRLP(),                              // Script
-            RLPList(emptyList<RLPType>()),                 // Empty arguments
+            RLPList(emptyList()),                 // Empty arguments
             hex("deadbeef").toRLP(),                       // Reference block ID (4 bytes for test)
             BigInteger(1000).toRLP(),                      // Gas limit
             hex("01").paddingZeroLeft(8).toRLP(),          // Proposer address
@@ -572,46 +572,9 @@ class RLPTests {
         assertEquals(expectedNullRefBlock, nullRefBlockTx.payloadMessage().toHexString())
     }
 
-//    @OptIn(ExperimentalStdlibApi::class)
-//    @Test
-//    fun testJVMStyleSignatureEncoding() {
-//        // Test that our JVM-style signature encoding produces the expected results
-//        val tx = Transaction(
-//            script = "transaction { execute { log(\"Hello, World!\") } }",
-//            arguments = listOf(),
-//            referenceBlockId = "f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b",
-//            gasLimit = BigInteger(42),
-//            proposalKey = ProposalKey(address = "01", keyIndex = 4, sequenceNumber = BigInteger(10)),
-//            payer = "01",
-//            authorizers = listOf("01", "02", "03"),
-//            payloadSignatures = listOf(
-//                TransactionSignature(address = "03", keyIndex = 0, signature = "c"),
-//                TransactionSignature(address = "01", keyIndex = 0, signature = "a"),
-//                TransactionSignature(address = "02", keyIndex = 0, signature = "b")
-//            )
-//        )
-//
-//        // Test JVM-style encoding
-//        val jvmStyleEnvelope = tx.envelopeMessageJVMStyle().toHexString()
-//
-//        // The JVM style should use signer indices instead of addresses
-//        // Expected structure: [signerIndex, keyIndex, signature] instead of [address, keyIndex, signature]
-//        println("🔍 JVM-style envelope encoding: $jvmStyleEnvelope")
-//
-//        // Verify it's different from current encoding (which uses addresses)
-//        val currentEnvelope = tx.envelopeMessage().toHexString()
-//        assertNotEquals(currentEnvelope, jvmStyleEnvelope, "JVM-style should differ from current address-based encoding")
-//
-//        // Both should be valid RLP structures
-//        assertTrue(jvmStyleEnvelope.length > 64, "JVM-style envelope should be valid")
-//        assertTrue(currentEnvelope.length > 64, "Current envelope should be valid")
-//    }
-
     @OptIn(ExperimentalStdlibApi::class)
     @Test
     fun testFlowJSSDKCompatibilityMissingCases() {
-        // Test cases missing from our coverage compared to Flow JS SDK
-
         // Test case: Transaction with actual arguments (not just empty)
         val txWithArguments = Transaction(
             script = "transaction(msg: String) { execute { log(msg) } }",
@@ -697,9 +660,7 @@ class RLPTests {
 
     @Test
     fun testFlowJSSDKTransactionIdEncoding() {
-        // Test transaction ID encoding (from the txId tests in JS SDK)
-        // This would require implementing transaction ID calculation similar to encodeTxIdFromVoucher
-        
+
         val completeTx = Transaction(
             script = "transaction { execute { log(\"Hello, World!\") } }",
             arguments = listOf(),
@@ -717,13 +678,8 @@ class RLPTests {
             )
         )
         
-        // For now, just verify the transaction structure is valid
-        // TODO: Implement actual transaction ID calculation to match JS SDK
         val envelope = completeTx.envelopeMessage()
         assertTrue(envelope.isNotEmpty(), "Transaction should produce valid envelope for ID calculation")
-        
-        // Expected transaction ID from JS SDK: "118d6462f1c4182501d56f04a0cd23cf685283194bb316dceeb215b353120b2b"
-        // This would require implementing SHA-256 hash of the envelope message
         
         println("✅ Transaction ID encoding structure verified (full implementation needed)")
     }

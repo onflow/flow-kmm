@@ -215,18 +215,6 @@ data class Transaction(
     }
 }
 
-fun Transaction.payload(): List<RLPType> = listOf(
-    script.toRLP(),
-    RLPList(arguments.map { it.encode().toByteArray().toRLP() }),
-    hex(referenceBlockId).paddingZeroLeft(32).toRLP(),
-    gasLimit.toRLP(),
-    hex(proposalKey.address).paddingZeroLeft().toRLP(),
-    proposalKey.keyIndex.toRLP(),
-    proposalKey.sequenceNumber.toRLP(),
-    hex(payer).paddingZeroLeft().toRLP(),
-    RLPList(authorizers.map { hex(it).paddingZeroLeft().toRLP() })
-)
-
 /**
  * Create payload that exactly matches Flow JVM SDK structure
  * 
@@ -257,7 +245,7 @@ fun Transaction.payloadJVMStyle(): List<RLPType> = listOf(
  * Create the payload message for signing
  */
 fun Transaction.payloadMessage(): ByteArray =
-    DomainTag.Transaction.bytes + RLPList(payload()).encode()
+    DomainTag.Transaction.bytes + RLPList(payloadJVMStyle()).encode()
 
 /**
  * Create the envelope message for signing
@@ -337,7 +325,7 @@ internal fun Transaction.createSigningRLP(includePayloadSignatures: Boolean = fa
     
     return RLPList(
         listOf(
-            RLPList(payload()),
+            RLPList(payloadJVMStyle()),
             RLPList(signaturesList)
         )
     ).encode()

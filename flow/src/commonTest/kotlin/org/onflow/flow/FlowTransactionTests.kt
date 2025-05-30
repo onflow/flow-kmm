@@ -81,8 +81,8 @@ class FlowTransactionTests {
         // ===== SUBMISSION AND VERIFICATION =====
         val result = api.sendTransaction(signedTransaction)
         assertNotNull(result.id, "Transaction ID should not be null")
-        
-        val seal = api.waitForSeal(result.id!!)
+
+        api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
         
         assertEquals(TransactionStatus.SEALED, finalResult.status)
@@ -136,8 +136,8 @@ class FlowTransactionTests {
         // ===== SUBMISSION AND VERIFICATION =====
         val result = api.sendTransaction(signedTransaction)
         assertNotNull(result.id, "Transaction ID should not be null")
-        
-        val seal = api.waitForSeal(result.id!!)
+
+        api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
         
         assertEquals(TransactionStatus.SEALED, finalResult.status)
@@ -190,8 +190,8 @@ class FlowTransactionTests {
         // ===== SUBMISSION AND VERIFICATION =====
         val result = api.sendTransaction(signedTransaction)
         assertNotNull(result.id, "Transaction ID should not be null")
-        
-        val seal = api.waitForSeal(result.id!!)
+
+        api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
         
         assertEquals(TransactionStatus.SEALED, finalResult.status)
@@ -244,8 +244,8 @@ class FlowTransactionTests {
         // ===== SUBMISSION AND VERIFICATION =====
         val result = api.sendTransaction(signedTransaction)
         assertNotNull(result.id, "Transaction ID should not be null")
-        
-        val seal = api.waitForSeal(result.id!!)
+
+        api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
         
         assertEquals(TransactionStatus.SEALED, finalResult.status)
@@ -321,8 +321,8 @@ class FlowTransactionTests {
         // ===== SUBMISSION AND VERIFICATION =====
         val result = api.sendTransaction(fullySignedTransaction)
         assertNotNull(result.id, "Transaction ID should not be null")
-        
-        val seal = api.waitForSeal(result.id!!)
+
+        api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
         
         assertEquals(TransactionStatus.SEALED, finalResult.status)
@@ -627,8 +627,8 @@ class FlowTransactionTests {
         try {
             val manualResult = api.sendTransaction(manualTransaction)
             println("Manual transaction submitted successfully: ${manualResult.id}")
-            
-            val manualSeal = api.waitForSeal(manualResult.id!!)
+
+            api.waitForSeal(manualResult.id!!)
             println("Manual transaction sealed successfully!")
             
         } catch (e: Exception) {
@@ -640,8 +640,8 @@ class FlowTransactionTests {
         try {
             val autoResult = api.sendTransaction(autoSignedTransaction)
             println("Auto transaction submitted successfully: ${autoResult.id}")
-            
-            val autoSeal = api.waitForSeal(autoResult.id!!)
+
+            api.waitForSeal(autoResult.id!!)
             println("Auto transaction sealed successfully!")
             
         } catch (e: Exception) {
