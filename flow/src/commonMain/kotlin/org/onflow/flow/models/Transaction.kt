@@ -171,12 +171,10 @@ data class Transaction(
         val allRoleAddresses = setOf(proposerAddress, payerAddress) + authorizerAddresses
         
         // If all roles are performed by the same single account, only sign envelope
-        if (allRoleAddresses.size == 1 && allSignerAddresses.size == 1 && allRoleAddresses == allSignerAddresses) {
-            println("Single-signer transaction detected - only signing envelope")
-            return signEnvelope(signers)
+        return if (allRoleAddresses.size == 1 && allSignerAddresses.size == 1 && allRoleAddresses == allSignerAddresses) {
+            signEnvelope(signers)
         } else {
-            println("Multi-signer transaction detected - signing both payload and envelope")
-            return signPayload(signers).signEnvelope(signers)
+            signPayload(signers).signEnvelope(signers)
         }
     }
 
