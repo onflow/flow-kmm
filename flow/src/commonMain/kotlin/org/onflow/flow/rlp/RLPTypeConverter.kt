@@ -12,7 +12,9 @@ import io.ktor.utils.io.core.*
 
 fun String.toRLP() = RLPElement(toByteArray())
 fun Int.toRLP() = RLPElement(toMinimalByteArray())
-fun BigInteger.toRLP() = RLPElement(toByteArray().removeLeadingZero())
+fun BigInteger.toRLP() = RLPElement(
+    if (this == BigInteger.ZERO) byteArrayOf() else toByteArray().removeLeadingZero()
+)
 fun ByteArray.toRLP() = RLPElement(this)
 fun Byte.toRLP() = RLPElement(ByteArray(1) { this })
 fun List<RLPType>.toRLP() = RLPElement(RLPList(this.map { it }).encode())
