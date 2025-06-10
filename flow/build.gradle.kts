@@ -62,6 +62,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("io.ktor:ktor-client-websockets:$ktorVersion")
 
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
                 implementation("com.ionspin.kotlin:bignum:0.3.10")
@@ -76,6 +77,8 @@ kotlin {
             resources.srcDirs("src/commonTest/resources")
             dependencies {
                 implementation(kotlin("test"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion")
+                implementation("org.slf4j:slf4j-simple:2.0.9")
             }
         }
         androidUnitTest {
