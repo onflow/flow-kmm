@@ -22,7 +22,7 @@ allprojects {
     }
 
     group = "org.onflow.flow"
-    val defaultVersion = "0.0.13"
+    val defaultVersion = "0.0.14"
     version = System.getenv("GITHUB_REF")?.split('/')?.last() ?: defaultVersion
 }
 
