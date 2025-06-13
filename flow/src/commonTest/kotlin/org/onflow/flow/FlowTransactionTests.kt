@@ -650,4 +650,154 @@ class FlowTransactionTests {
         
         println("✅ Multi-signer debug test completed")
     }
+
+    /**
+     * Test UFix64 scientific notation handling in real transactions
+     * This test verifies that values like 1.0E-8 are properly encoded and don't cause transaction failures
+     */
+    @Test
+    fun testUFix64ScientificNotationTransaction() = runBlocking {
+        // ===== SETUP =====
+        val accountAddress = "c6de0d94160377cd"
+        val privateKey = "c9c0f04adddf7674d265c395de300a65a777d3ec412bba5bfdfd12cffbbb78d9"
+
+        // Get on-chain account information
+        val account = api.getAccount(accountAddress)
+        assertNotNull(account, "Account should exist")
+        val accountKey = account.keys!!.first { it.index.toInt() == 0 }
+
+        // Create signer with on-chain algorithms
+        val signer = Crypto.getSigner(
+            Crypto.decodePrivateKey(privateKey, accountKey.signingAlgorithm),
+            accountKey.hashingAlgorithm
+        ).apply {
+            address = accountAddress
+            keyIndex = 0
+        }
+
+        val latestBlock = api.getBlockHeader()
+
+        // ===== TRANSACTION WITH SCIENTIFIC NOTATION UFix64 =====
+        // Test the exact scenario that was failing: 1.0E-8 as UFix64
+        val scientificValue = 1.0E-8  // This would previously cause "invalid UFix64: invalid fractional part"
+        
+        val transaction = TransactionBuilder(
+            script = """
+                transaction(amount: UFix64) {
+                    prepare(signer: auth(Storage) &Account) {
+                        log("Testing UFix64 scientific notation: ".concat(amount.toString()))
+                        
+                        // Verify the amount is the expected value (0.00000001)
+                        assert(amount == 0.00000001, message: "Amount should be 0.00000001")
+                        
+                        log("UFix64 scientific notation test passed!")
+                    }
+                }
+            """.trimIndent(),
+            arguments = listOf(Cadence.ufix64(scientificValue))
+        )
+            .withProposalKey(accountAddress, 0, accountKey.sequenceNumber.toBigInteger())
+            .withPayer(accountAddress)
+            .withAuthorizers(listOf(accountAddress))
+            .withReferenceBlockId(latestBlock.id)
+            .build()
+
+        // ===== SIGNING =====
+        val signedTransaction = transaction.sign(listOf(signer))
+
+        // ===== SUBMISSION AND VERIFICATION =====
+        val result = api.sendTransaction(signedTransaction)
+        assertNotNull(result.id, "Transaction ID should not be null")
+
+        api.waitForSeal(result.id!!)
+        val finalResult = api.getTransactionResult(result.id!!)
+        
+        assertEquals(TransactionStatus.SEALED, finalResult.status)
+        
+        // Verify no errors occurred - this would previously fail with UFix64 encoding error
+        assertTrue(finalResult.errorMessage.isNullOrEmpty(), "Transaction should not have any errors")
+        
+        println("✅ UFix64 scientific notation transaction sealed successfully")
+        println("   Original value: $scientificValue")
+        println("   Transaction ID: ${result.id}")
+    }
+
+    /**
+     * Test multiple UFix64 values including edge cases
+     */
+    @Test
+    fun testMultipleUFix64ValuesTransaction() = runBlocking {
+        // ===== SETUP =====
+        val accountAddress = "c6de0d94160377cd"
+        val privateKey = "c9c0f04adddf7674d265c395de300a65a777d3ec412bba5bfdfd12cffbbb78d9"
+
+        // Get on-chain account information
+        val account = api.getAccount(accountAddress)
+        assertNotNull(account, "Account should exist")
+        val accountKey = account.keys!!.first { it.index.toInt() == 0 }
+
+        // Create signer with on-chain algorithms
+        val signer = Crypto.getSigner(
+            Crypto.decodePrivateKey(privateKey, accountKey.signingAlgorithm),
+            accountKey.hashingAlgorithm
+        ).apply {
+            address = accountAddress
+            keyIndex = 0
+        }
+
+        val latestBlock = api.getBlockHeader()
+
+        // ===== TEST MULTIPLE UFix64 VALUES =====
+        val scientificValue = 1.0E-8     // 0.00000001
+        val anotherSmallValue = 5.0E-7   // 0.0000005
+        val regularValue = 1.5           // 1.5
+        
+        val transaction = TransactionBuilder(
+            script = """
+                transaction(scientific: UFix64, small: UFix64, regular: UFix64) {
+                    prepare(signer: auth(Storage) &Account) {
+                        log("Scientific notation value: ".concat(scientific.toString()))
+                        log("Small value: ".concat(small.toString()))
+                        log("Regular value: ".concat(regular.toString()))
+                        
+                        // Verify the values are correct
+                        assert(scientific == 0.00000001, message: "Scientific value should be 0.00000001")
+                        assert(small == 0.0000005, message: "Small value should be 0.0000005")
+                        assert(regular == 1.5, message: "Regular value should be 1.5")
+                        
+                        log("Multiple UFix64 values test passed!")
+                    }
+                }
+            """.trimIndent(),
+            arguments = listOf(
+                Cadence.ufix64(scientificValue),
+                Cadence.ufix64(anotherSmallValue),
+                Cadence.ufix64(regularValue)
+            )
+        )
+            .withProposalKey(accountAddress, 0, accountKey.sequenceNumber.toBigInteger())
+            .withPayer(accountAddress)
+            .withAuthorizers(listOf(accountAddress))
+            .withReferenceBlockId(latestBlock.id)
+            .build()
+
+        // ===== SIGNING =====
+        val signedTransaction = transaction.sign(listOf(signer))
+
+        // ===== SUBMISSION AND VERIFICATION =====
+        val result = api.sendTransaction(signedTransaction)
+        assertNotNull(result.id, "Transaction ID should not be null")
+
+        api.waitForSeal(result.id!!)
+        val finalResult = api.getTransactionResult(result.id!!)
+        
+        assertEquals(TransactionStatus.SEALED, finalResult.status)
+        assertTrue(finalResult.errorMessage.isNullOrEmpty(), "Transaction should not have any errors")
+        
+        println("✅ Multiple UFix64 values transaction sealed successfully")
+        println("   Scientific: $scientificValue")
+        println("   Small: $anotherSmallValue") 
+        println("   Regular: $regularValue")
+        println("   Transaction ID: ${result.id}")
+    }
 }
