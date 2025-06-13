@@ -97,38 +97,39 @@ object SafeStringSerializer : KSerializer<String> {
     }
     
     override fun deserialize(decoder: Decoder): String {
-        return try {
-            // Try to decode as string first
-            decoder.decodeString()
-        } catch (e: Exception) {
-            try {
-                // If that fails, try to decode as JsonElement and convert to string
-                val jsonDecoder = decoder as? JsonDecoder
-                if (jsonDecoder != null) {
-                    val element = jsonDecoder.decodeJsonElement()
-                    when (element) {
-                        is JsonPrimitive -> {
-                            // Handle both quoted strings and unquoted numbers
-                            if (element.isString) {
-                                element.content
-                            } else {
-                                // Convert numeric value to string
-                                element.content
-                            }
-                        }
-                        else -> element.toString()
+        // First, check if we have a JsonDecoder to work with
+        val jsonDecoder = decoder as? JsonDecoder
+        if (jsonDecoder != null) {
+            return try {
+                val element = jsonDecoder.decodeJsonElement()
+                when (element) {
+                    is JsonPrimitive -> {
+                        // Get the raw content as string regardless of whether it's quoted or not
+                        element.content
                     }
-                } else {
-                    // Fallback: try to decode as long and convert to string
-                    decoder.decodeLong().toString()
+                    else -> element.toString()
                 }
-            } catch (e2: Exception) {
+            } catch (e: Exception) {
+                // If JSON element parsing fails, try string decoding
                 try {
-                    // Last resort: try to decode as double and convert to string
-                    decoder.decodeDouble().toString()
-                } catch (e3: Exception) {
-                    // If all else fails, return "0" as a safe default
-                    "0"
+                    decoder.decodeString()
+                } catch (e2: Exception) {
+                    "0" // Safe fallback
+                }
+            }
+        } else {
+            // For non-JSON decoders, try multiple approaches
+            return try {
+                decoder.decodeString()
+            } catch (e: Exception) {
+                try {
+                    decoder.decodeLong().toString()
+                } catch (e2: Exception) {
+                    try {
+                        decoder.decodeDouble().toString()
+                    } catch (e3: Exception) {
+                        "0" // Safe fallback
+                    }
                 }
             }
         }
