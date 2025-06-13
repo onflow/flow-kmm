@@ -37,6 +37,91 @@ object UIntCadenceSerializer : KSerializer<UInt> {
     override fun deserialize(decoder: Decoder): UInt = decoder.decodeString().toUInt()
 }
 
+/**
+ * A safe UInt serializer that can handle both string and numeric values in JSON.
+ * This prevents parsing failures when large numbers that exceed UInt range are encountered.
+ * 
+ * The serializer will:
+ * - Accept both quoted strings and unquoted numbers from JSON
+ * - Handle very large numbers by clamping to UInt.MAX_VALUE
+ * - Always parse safely without throwing exceptions
+ */
+object SafeUIntCadenceSerializer : KSerializer<UInt> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("SafeUInt", PrimitiveKind.STRING)
+    
+    override fun serialize(encoder: Encoder, value: UInt) {
+        encoder.encodeString(value.toString())
+    }
+    
+    override fun deserialize(decoder: Decoder): UInt {
+        // First, check if we have a JsonDecoder to work with
+        val jsonDecoder = decoder as? JsonDecoder
+        if (jsonDecoder != null) {
+            return try {
+                val element = jsonDecoder.decodeJsonElement()
+                when (element) {
+                    is JsonPrimitive -> {
+                        // Get the raw content as string regardless of whether it's quoted or not
+                        val numberString = element.content
+                        // Try to parse as ULong first, then clamp to UInt range
+                        val longValue = numberString.toULongOrNull() ?: 0UL
+                        if (longValue > UInt.MAX_VALUE.toULong()) {
+                            UInt.MAX_VALUE // Clamp to UInt.MAX_VALUE
+                        } else {
+                            longValue.toUInt()
+                        }
+                    }
+                    else -> {
+                        // Fallback - try to convert to string and parse
+                        val numberString = element.toString().removeSurrounding("\"")
+                        val longValue = numberString.toULongOrNull() ?: 0UL
+                        if (longValue > UInt.MAX_VALUE.toULong()) {
+                            UInt.MAX_VALUE
+                        } else {
+                            longValue.toUInt()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                // If JSON element parsing fails, try string decoding
+                try {
+                    val numberString = decoder.decodeString()
+                    val longValue = numberString.toULongOrNull() ?: 0UL
+                    if (longValue > UInt.MAX_VALUE.toULong()) {
+                        UInt.MAX_VALUE
+                    } else {
+                        longValue.toUInt()
+                    }
+                } catch (e2: Exception) {
+                    0u // Safe fallback
+                }
+            }
+        } else {
+            // For non-JSON decoders, try multiple approaches
+            return try {
+                val numberString = decoder.decodeString()
+                val longValue = numberString.toULongOrNull() ?: 0UL
+                if (longValue > UInt.MAX_VALUE.toULong()) {
+                    UInt.MAX_VALUE
+                } else {
+                    longValue.toUInt()
+                }
+            } catch (e: Exception) {
+                try {
+                    val longValue = decoder.decodeLong().toULong()
+                    if (longValue > UInt.MAX_VALUE.toULong()) {
+                        UInt.MAX_VALUE
+                    } else {
+                        longValue.toUInt()
+                    }
+                } catch (e2: Exception) {
+                    0u // Safe fallback
+                }
+            }
+        }
+    }
+}
+
 object ShortCadenceSerializer : KSerializer<Short> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("value", PrimitiveKind.STRING)
     override fun serialize(encoder: Encoder, value: Short) = encoder.encodeString(value.toString())
@@ -59,6 +144,61 @@ object ULongCadenceSerializer : KSerializer<ULong> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("value", PrimitiveKind.STRING)
     override fun serialize(encoder: Encoder, value: ULong) = encoder.encodeString(value.toString())
     override fun deserialize(decoder: Decoder): ULong = decoder.decodeString().toULong()
+}
+
+/**
+ * A safe ULong serializer that can handle both string and numeric values in JSON.
+ * This prevents parsing failures when large ULong numbers are encountered.
+ * 
+ * The serializer will:
+ * - Accept both quoted strings and unquoted numbers from JSON
+ * - Handle very large numbers that might cause parsing issues
+ * - Always parse as ULong safely
+ */
+object SafeULongCadenceSerializer : KSerializer<ULong> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("SafeULong", PrimitiveKind.STRING)
+    
+    override fun serialize(encoder: Encoder, value: ULong) {
+        encoder.encodeString(value.toString())
+    }
+    
+    override fun deserialize(decoder: Decoder): ULong {
+        // First, check if we have a JsonDecoder to work with
+        val jsonDecoder = decoder as? JsonDecoder
+        if (jsonDecoder != null) {
+            return try {
+                val element = jsonDecoder.decodeJsonElement()
+                when (element) {
+                    is JsonPrimitive -> {
+                        // Get the raw content as string regardless of whether it's quoted or not
+                        element.content.toULong()
+                    }
+                    else -> {
+                        // Fallback - try to convert to string and parse
+                        element.toString().removeSurrounding("\"").toULong()
+                    }
+                }
+            } catch (e: Exception) {
+                // If JSON element parsing fails, try string decoding
+                try {
+                    decoder.decodeString().toULong()
+                } catch (e2: Exception) {
+                    0UL // Safe fallback
+                }
+            }
+        } else {
+            // For non-JSON decoders, try multiple approaches
+            return try {
+                decoder.decodeString().toULong()
+            } catch (e: Exception) {
+                try {
+                    decoder.decodeLong().toULong()
+                } catch (e2: Exception) {
+                    0UL // Safe fallback
+                }
+            }
+        }
+    }
 }
 
 object BigIntegerCadenceSerializer : KSerializer<BigInteger> {

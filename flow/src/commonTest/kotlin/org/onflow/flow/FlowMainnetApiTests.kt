@@ -33,6 +33,34 @@ class FlowMainnetApiTests {
     }
 
     @Test
+    fun testLargeNumberParsingIssue() {
+        runBlocking {
+            try {
+                // This is the specific transaction ID from the user's logs that's causing the parsing error
+                val result = api.getTransactionResult("41741c38f870842971808eaa93599211e241036b87727c87713e2329a767d4d7")
+                println("Transaction result retrieved successfully")
+                println("Events count: ${result.events.size}")
+                println("Computation used: ${result.computationUsed}")
+                println("Status: ${result.status}")
+                
+                // Log event details to see where the large number appears
+                result.events.forEachIndexed { index, event ->
+                    println("Event $index:")
+                    println("  Type: ${event.type}")
+                    println("  Transaction Index: ${event.transactionIndex}")
+                    println("  Event Index: ${event.eventIndex}")
+                    println("  Payload: ${event.payload}")
+                }
+            } catch (e: Exception) {
+                println("Failed to parse transaction result: ${e.message}")
+                println("Exception type: ${e::class.simpleName}")
+                e.printStackTrace()
+                throw e
+            }
+        }
+    }
+
+    @Test
     fun decodeStruct() {
         runBlocking {
             val result = api.executeScript(
