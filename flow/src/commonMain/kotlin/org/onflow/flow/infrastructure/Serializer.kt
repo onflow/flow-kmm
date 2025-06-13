@@ -215,9 +215,89 @@ object BigDecimalCadenceSerializer : KSerializer<BigDecimal> {
 
 object DoubleCadenceSerializer : KSerializer<Double> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("value", PrimitiveKind.STRING)
-    override fun serialize(encoder: Encoder, value: Double) =
-        encoder.encodeString(FixedPointFormatter.format(value.toString(), 8UL) ?: "")
+    override fun serialize(encoder: Encoder, value: Double) {
+        // Convert scientific notation to proper decimal format
+        val decimalString = formatDoubleAsDecimal(value)
+        encoder.encodeString(FixedPointFormatter.format(decimalString, 8UL) ?: "")
+    }
     override fun deserialize(decoder: Decoder): Double = decoder.decodeString().toDouble()
+    
+    private fun formatDoubleAsDecimal(value: Double): String {
+        // Handle special cases
+        if (value == 0.0) return "0"
+        if (value.isNaN()) return "0"
+        if (value.isInfinite()) return "0"
+        
+        val stringValue = value.toString()
+        
+        // If already in decimal format, return as is
+        if (!stringValue.contains('E') && !stringValue.contains('e')) {
+            return stringValue
+        }
+        
+        // For scientific notation, manually convert to decimal
+        return try {
+            // Handle the specific case of 1.0E-8 and similar small values
+            when {
+                value >= 1.0 -> {
+                    // For values >= 1, should not normally be in scientific notation for our use case
+                    val longValue = value.toLong()
+                    if (value == longValue.toDouble()) longValue.toString() else stringValue
+                }
+                value > 0.0 -> {
+                    // For positive values < 1, convert scientific notation to decimal
+                    val decimalValue = convertSmallNumberToDecimal(value)
+                    decimalValue
+                }
+                value < 0.0 -> {
+                    // For negative values, handle recursively
+                    "-" + formatDoubleAsDecimal(-value)
+                }
+                else -> "0"
+            }
+        } catch (e: Exception) {
+            // Fallback: use a safe default for UFix64
+            if (value > 0 && value <= 1e-8) "0.00000001" else "0"
+        }
+    }
+    
+    private fun convertSmallNumberToDecimal(value: Double): String {
+        // Handle conversion of small numbers like 1.0E-8 to 0.00000001
+        val stringValue = value.toString()
+        
+        if (stringValue.contains("E-") || stringValue.contains("e-")) {
+            // Extract exponent
+            val parts = stringValue.uppercase().split("E")
+            if (parts.size == 2) {
+                val coefficient = parts[0].toDoubleOrNull() ?: return "0"
+                val exponent = parts[1].toIntOrNull() ?: return "0"
+                
+                // For 1.0E-8: coefficient=1.0, exponent=-8
+                // We want: 0.00000001 (8 decimal places total)
+                val totalDecimalPlaces = kotlin.math.abs(exponent)
+                
+                // Convert coefficient to integer representation
+                val coefficientInt = if (coefficient == coefficient.toInt().toDouble()) {
+                    coefficient.toInt()
+                } else {
+                    // Handle coefficients with decimals
+                    (coefficient * 10).toInt()
+                }
+                
+                // Build the decimal string
+                return when {
+                    totalDecimalPlaces == 0 -> coefficientInt.toString()
+                    totalDecimalPlaces == 1 -> "0.$coefficientInt"
+                    else -> {
+                        val leadingZeros = totalDecimalPlaces - 1
+                        "0." + "0".repeat(leadingZeros) + coefficientInt.toString()
+                    }
+                }
+            }
+        }
+        
+        return stringValue
+    }
 }
 
 /**
