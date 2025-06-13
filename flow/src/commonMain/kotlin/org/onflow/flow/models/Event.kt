@@ -1,6 +1,7 @@
 package org.onflow.flow.models
 import org.onflow.flow.infrastructure.Cadence
 import kotlinx.serialization.*
+import org.onflow.flow.infrastructure.SafeStringSerializer
 
 /**
  * 
@@ -20,9 +21,13 @@ data class Event (
     /* A 32-byte unique identifier for an entity. */
     @SerialName(value = "transaction_id") @Required val transactionId: kotlin.String,
 
-    @SerialName(value = "transaction_index") @Required val transactionIndex: kotlin.String,
+    @SerialName(value = "transaction_index") 
+    @Serializable(with = SafeStringSerializer::class)
+    @Required val transactionIndex: kotlin.String,
 
-    @SerialName(value = "event_index") @Required val eventIndex: kotlin.String,
+    @SerialName(value = "event_index") 
+    @Serializable(with = SafeStringSerializer::class)
+    @Required val eventIndex: kotlin.String,
 
     @Serializable(CadenceBase64Serializer::class)
     @SerialName(value = "payload") @Required val payload: Cadence.Value

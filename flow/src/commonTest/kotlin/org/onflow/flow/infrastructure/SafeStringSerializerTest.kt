@@ -40,6 +40,13 @@ class SafeStringSerializerTest {
     }
     
     @Test
+    fun `test specific error number from logs`() {
+        val jsonString = """{"value":1604440348859079121}"""
+        val result = json.decodeFromString<TestData>(jsonString)
+        assertEquals("1604440348859079121", result.value)
+    }
+    
+    @Test
     fun `test large number as quoted string`() {
         val jsonString = """{"value":"1544440348859079121"}"""
         val result = json.decodeFromString<TestData>(jsonString)

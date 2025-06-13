@@ -248,7 +248,7 @@ class Cadence {
         @Serializable
         @SerialName(TYPE_UINT)
         data class UIntValue(
-            @Serializable(UIntCadenceSerializer::class)
+            @Serializable(SafeUIntCadenceSerializer::class)
             override val value: UInt): Value()
 
         @Serializable
@@ -296,7 +296,7 @@ class Cadence {
         @Serializable
         @SerialName(TYPE_UINT64)
         data class UInt64Value(
-            @Serializable(ULongCadenceSerializer::class)
+            @Serializable(SafeULongCadenceSerializer::class)
             override val value: ULong): Value()
 
         @Serializable
@@ -351,13 +351,13 @@ class Cadence {
         @Serializable
         @SerialName(TYPE_WORD32)
         data class Word32Value(
-            @Serializable(UIntCadenceSerializer::class)
+            @Serializable(SafeUIntCadenceSerializer::class)
             override val value: UInt): Value()
 
         @Serializable
         @SerialName(TYPE_WORD64)
         data class Word64Value(
-            @Serializable(ULongCadenceSerializer::class)
+            @Serializable(SafeULongCadenceSerializer::class)
             override val value: ULong): Value()
 
         @Serializable
