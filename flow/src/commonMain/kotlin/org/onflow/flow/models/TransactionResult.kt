@@ -1,5 +1,6 @@
 package org.onflow.flow.models
 import kotlinx.serialization.*
+import org.onflow.flow.infrastructure.SafeStringSerializer
 
 /**
  * 
@@ -26,7 +27,9 @@ data class TransactionResult (
     /* Provided transaction error in case the transaction wasn't successful. */
     @SerialName(value = "error_message") @Required val errorMessage: String,
 
-    @SerialName(value = "computation_used") @Required val computationUsed: String,
+    @SerialName(value = "computation_used") 
+    @Serializable(with = SafeStringSerializer::class)
+    @Required val computationUsed: String,
 
     @SerialName(value = "events") @Required val events: List<Event>,
 

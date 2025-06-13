@@ -3,6 +3,7 @@ package org.onflow.flow.models
 import org.onflow.flow.infrastructure.Base64ByteArray
 import kotlinx.serialization.*
 import org.onflow.flow.infrastructure.Base64ByteArraySerializer
+import org.onflow.flow.infrastructure.SafeStringSerializer
 
 /**
  * 
@@ -43,7 +44,9 @@ data class Chunk (
 
     @SerialName(value = "number_of_transactions") @Required val numberOfTransactions: kotlin.String,
 
-    @SerialName(value = "total_computation_used") @Required val totalComputationUsed: kotlin.String
+    @SerialName(value = "total_computation_used") 
+    @Serializable(with = SafeStringSerializer::class)
+    @Required val totalComputationUsed: kotlin.String
 
 )
 

@@ -11,6 +11,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.*
 
 object ByteCadenceSerializer : KSerializer<Byte> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("value", PrimitiveKind.STRING)
@@ -77,6 +78,61 @@ object DoubleCadenceSerializer : KSerializer<Double> {
     override fun serialize(encoder: Encoder, value: Double) =
         encoder.encodeString(FixedPointFormatter.format(value.toString(), 8UL) ?: "")
     override fun deserialize(decoder: Decoder): Double = decoder.decodeString().toDouble()
+}
+
+/**
+ * A safe string serializer that can handle both string and numeric values in JSON.
+ * This prevents parsing failures when large numbers are encountered in string fields.
+ * 
+ * The serializer will:
+ * - Accept both quoted strings and unquoted numbers from JSON
+ * - Always return a string representation
+ * - Handle very large numbers that might cause parsing issues
+ */
+object SafeStringSerializer : KSerializer<String> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("SafeString", PrimitiveKind.STRING)
+    
+    override fun serialize(encoder: Encoder, value: String) {
+        encoder.encodeString(value)
+    }
+    
+    override fun deserialize(decoder: Decoder): String {
+        return try {
+            // Try to decode as string first
+            decoder.decodeString()
+        } catch (e: Exception) {
+            try {
+                // If that fails, try to decode as JsonElement and convert to string
+                val jsonDecoder = decoder as? JsonDecoder
+                if (jsonDecoder != null) {
+                    val element = jsonDecoder.decodeJsonElement()
+                    when (element) {
+                        is JsonPrimitive -> {
+                            // Handle both quoted strings and unquoted numbers
+                            if (element.isString) {
+                                element.content
+                            } else {
+                                // Convert numeric value to string
+                                element.content
+                            }
+                        }
+                        else -> element.toString()
+                    }
+                } else {
+                    // Fallback: try to decode as long and convert to string
+                    decoder.decodeLong().toString()
+                }
+            } catch (e2: Exception) {
+                try {
+                    // Last resort: try to decode as double and convert to string
+                    decoder.decodeDouble().toString()
+                } catch (e3: Exception) {
+                    // If all else fails, return "0" as a safe default
+                    "0"
+                }
+            }
+        }
+    }
 }
 
 object CadenceTypeSerializer : KSerializer<Cadence.Type> {
