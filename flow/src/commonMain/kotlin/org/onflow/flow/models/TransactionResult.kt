@@ -1,7 +1,6 @@
 package org.onflow.flow.models
 import kotlinx.serialization.*
 import org.onflow.flow.infrastructure.SafeStringSerializer
-import org.onflow.flow.infrastructure.SafeTransactionExecutionSerializer
 
 /**
  * 
@@ -34,9 +33,7 @@ data class TransactionResult (
 
     @SerialName(value = "events") @Required val events: List<Event>,
 
-    @SerialName(value = "execution") 
-    @Serializable(with = SafeTransactionExecutionSerializer::class)
-    val execution: TransactionExecution? = null,
+    @SerialName(value = "execution") val execution: TransactionExecution? = null,
 
     @SerialName(value = "_links") val links: Links? = null
 
