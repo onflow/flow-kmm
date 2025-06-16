@@ -21,7 +21,7 @@ class FlowTransactionTests {
 
     /**
      * Test multi-signer transaction where proposer ≠ payer (gas sponsored scenario)
-     * 
+     *
      * Flow: Proposer signs payload, Payer signs envelope
      */
     @Test
@@ -46,7 +46,7 @@ class FlowTransactionTests {
             address = proposerAddress
             keyIndex = 0
         }
-        
+
         val payerSigner = Crypto.getSigner(
             Crypto.decodePrivateKey(payerPrivateKey, payerKey.signingAlgorithm),
             payerKey.hashingAlgorithm
@@ -84,7 +84,7 @@ class FlowTransactionTests {
 
         api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
-        
+
         assertEquals(TransactionStatus.SEALED, finalResult.status)
         println("✅ Gas sponsored transaction sealed successfully")
     }
@@ -139,7 +139,7 @@ class FlowTransactionTests {
 
         api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
-        
+
         assertEquals(TransactionStatus.SEALED, finalResult.status)
         println("✅ Single signer transaction sealed successfully")
     }
@@ -193,7 +193,7 @@ class FlowTransactionTests {
 
         api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
-        
+
         assertEquals(TransactionStatus.SEALED, finalResult.status)
         println("✅ Proposer solo transaction sealed successfully")
     }
@@ -247,14 +247,14 @@ class FlowTransactionTests {
 
         api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
-        
+
         assertEquals(TransactionStatus.SEALED, finalResult.status)
         println("✅ Payer solo transaction sealed successfully")
     }
 
     /**
      * Test manual step-by-step signature addition (JVM SDK style)
-     * 
+     *
      * This test demonstrates the step-by-step approach used by the Flow JVM SDK
      */
     @Test
@@ -279,7 +279,7 @@ class FlowTransactionTests {
             address = proposerAddress
             keyIndex = 0
         }
-        
+
         val payerSigner = Crypto.getSigner(
             Crypto.decodePrivateKey(payerPrivateKey, payerKey.signingAlgorithm),
             payerKey.hashingAlgorithm
@@ -312,7 +312,7 @@ class FlowTransactionTests {
         val transactionWithPayloadSig = unsignedTransaction.addPayloadSignature(
             proposerAddress, 0, proposerSigner
         )
-        
+
         // Step 2: Add envelope signature (payer signs envelope)
         val fullySignedTransaction = transactionWithPayloadSig.addEnvelopeSignature(
             payerAddress, 0, payerSigner
@@ -324,14 +324,14 @@ class FlowTransactionTests {
 
         api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
-        
+
         assertEquals(TransactionStatus.SEALED, finalResult.status)
         println("✅ Manual step-by-step transaction sealed successfully")
     }
 
     /**
      * Test payload message debugging and comparison
-     * 
+     *
      * This test compares payload messages between single-signer and multi-signer scenarios
      */
     @Test
@@ -429,7 +429,7 @@ class FlowTransactionTests {
         // Create signer and verify key derivation
         val privateKeyDecoded = Crypto.decodePrivateKey(proposerPrivateKey, proposerKey.signingAlgorithm)
         val derivedPublicKey = privateKeyDecoded.publicKey
-        
+
         println("Derived public key: ${derivedPublicKey.key}")
         // Fix: Compare hex strings properly by removing 0x prefix
         val onChainHex = proposerKey.publicKey.removePrefix("0x")
@@ -474,7 +474,7 @@ class FlowTransactionTests {
         // Test different RLP creation methods
         val currentRLP = transaction.createSigningRLP(includePayloadSignatures = false)
         val jvmStyleRLP = transaction.createSigningRLPJVMStyle(includePayloadSignatures = false)
-        
+
         println("Current RLP: ${currentRLP.toHexString()}")
         println("JVM Style RLP: ${jvmStyleRLP.toHexString()}")
         println("RLP methods match: ${currentRLP.contentEquals(jvmStyleRLP)}")
@@ -483,7 +483,7 @@ class FlowTransactionTests {
         val rawRLPData = transaction.createSigningRLPJVMStyle(includePayloadSignatures = false)
         val signAsTransactionResult = proposerSigner.signAsTransaction(rawRLPData)
         val manualSignResult = proposerSigner.sign(payloadMessage)
-        
+
         println("Raw RLP data: ${rawRLPData.toHexString()}")
         println("SignAsTransaction result: ${signAsTransactionResult.toHexString()}")
         println("Manual sign result: ${manualSignResult.toHexString()}")
@@ -523,7 +523,7 @@ class FlowTransactionTests {
             address = proposerAddress
             keyIndex = 0
         }
-        
+
         val payerSigner = Crypto.getSigner(
             Crypto.decodePrivateKey(payerPrivateKey, payerKey.signingAlgorithm),
             payerKey.hashingAlgorithm
@@ -557,10 +557,10 @@ class FlowTransactionTests {
         // Step 1: Test payload signing manually (corrected approach)
         val payloadMessageToSign = transaction.payloadMessage()
         val proposerPayloadSig = proposerSigner.sign(payloadMessageToSign)  // Fix: Use corrected approach
-        
+
         println("Payload message to sign: ${payloadMessageToSign.toHexString()}")
         println("Proposer payload signature: ${proposerPayloadSig.toHexString()}")
-        
+
         // Add the payload signature
         val txWithPayloadSig = transaction.copy(
             payloadSignatures = listOf(
@@ -571,22 +571,22 @@ class FlowTransactionTests {
                 )
             )
         )
-        
+
         println("Transaction after adding payload sig - payloadSignatures: ${txWithPayloadSig.payloadSignatures.size}")
 
         // Step 2: Test envelope signing manually (corrected approach)
         val envelopeMessageToSign = txWithPayloadSig.envelopeMessage()
         val payerEnvelopeSig = payerSigner.sign(envelopeMessageToSign)  // Fix: Use corrected approach
-        
+
         println("Envelope message to sign: ${envelopeMessageToSign.toHexString()}")
         println("Payer envelope signature: ${payerEnvelopeSig.toHexString()}")
 
         // Test automatic signing vs manual signing
         val autoSignedTransaction = transaction.sign(listOf(proposerSigner, payerSigner))
-        
+
         println("Auto-signed transaction - payloadSignatures: ${autoSignedTransaction.payloadSignatures.size}")
         println("Auto-signed transaction - envelopeSignatures: ${autoSignedTransaction.envelopeSignatures.size}")
-        
+
         if (autoSignedTransaction.payloadSignatures.isNotEmpty()) {
             println("Auto payload signature: ${autoSignedTransaction.payloadSignatures[0].signature}")
         }
@@ -596,11 +596,11 @@ class FlowTransactionTests {
 
         // Compare signatures
         val manualPayloadSig = proposerPayloadSig.toHexString()
-        val autoPayloadSig = if (autoSignedTransaction.payloadSignatures.isNotEmpty()) 
+        val autoPayloadSig = if (autoSignedTransaction.payloadSignatures.isNotEmpty())
             autoSignedTransaction.payloadSignatures[0].signature else "NONE"
-        
+
         val manualEnvelopeSig = payerEnvelopeSig.toHexString()
-        val autoEnvelopeSig = if (autoSignedTransaction.envelopeSignatures.isNotEmpty()) 
+        val autoEnvelopeSig = if (autoSignedTransaction.envelopeSignatures.isNotEmpty())
             autoSignedTransaction.envelopeSignatures[0].signature else "NONE"
 
         println("Manual vs Auto payload signature match: ${manualPayloadSig == autoPayloadSig}")
@@ -609,7 +609,7 @@ class FlowTransactionTests {
         // The key test: Do both payload messages for signing match?
         val manualPayloadMessage = transaction.payloadMessage()
         val autoPayloadMessage = transaction.payloadMessage()  // These should be identical
-        
+
         println("Manual vs Auto payload message match: ${manualPayloadMessage.contentEquals(autoPayloadMessage)}")
 
         // CRITICAL TEST: Try submitting the manual transaction
@@ -623,18 +623,18 @@ class FlowTransactionTests {
                 )
             )
         )
-        
+
         try {
             val manualResult = api.sendTransaction(manualTransaction)
             println("Manual transaction submitted successfully: ${manualResult.id}")
 
             api.waitForSeal(manualResult.id!!)
             println("Manual transaction sealed successfully!")
-            
+
         } catch (e: Exception) {
             println("Manual transaction failed: ${e.message}")
         }
-        
+
         // TEST: Try submitting the automatic transaction
         println("Testing automatic transaction submission...")
         try {
@@ -643,11 +643,11 @@ class FlowTransactionTests {
 
             api.waitForSeal(autoResult.id!!)
             println("Auto transaction sealed successfully!")
-            
+
         } catch (e: Exception) {
             println("Auto transaction failed: ${e.message}")
         }
-        
+
         println("✅ Multi-signer debug test completed")
     }
 
@@ -680,7 +680,7 @@ class FlowTransactionTests {
         // ===== TRANSACTION WITH SCIENTIFIC NOTATION UFix64 =====
         // Test the exact scenario that was failing: 1.0E-8 as UFix64
         val scientificValue = 1.0E-8  // This would previously cause "invalid UFix64: invalid fractional part"
-        
+
         val transaction = TransactionBuilder(
             script = """
                 transaction(amount: UFix64) {
@@ -711,12 +711,12 @@ class FlowTransactionTests {
 
         api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
-        
+
         assertEquals(TransactionStatus.SEALED, finalResult.status)
-        
+
         // Verify no errors occurred - this would previously fail with UFix64 encoding error
         assertTrue(finalResult.errorMessage.isNullOrEmpty(), "Transaction should not have any errors")
-        
+
         println("✅ UFix64 scientific notation transaction sealed successfully")
         println("   Original value: $scientificValue")
         println("   Transaction ID: ${result.id}")
@@ -751,7 +751,7 @@ class FlowTransactionTests {
         val scientificValue = 1.0E-8     // 0.00000001
         val anotherSmallValue = 5.0E-7   // 0.0000005
         val regularValue = 1.5           // 1.5
-        
+
         val transaction = TransactionBuilder(
             script = """
                 transaction(scientific: UFix64, small: UFix64, regular: UFix64) {
@@ -790,13 +790,13 @@ class FlowTransactionTests {
 
         api.waitForSeal(result.id!!)
         val finalResult = api.getTransactionResult(result.id!!)
-        
+
         assertEquals(TransactionStatus.SEALED, finalResult.status)
         assertTrue(finalResult.errorMessage.isNullOrEmpty(), "Transaction should not have any errors")
-        
+
         println("✅ Multiple UFix64 values transaction sealed successfully")
         println("   Scientific: $scientificValue")
-        println("   Small: $anotherSmallValue") 
+        println("   Small: $anotherSmallValue")
         println("   Regular: $regularValue")
         println("   Transaction ID: ${result.id}")
     }
@@ -835,16 +835,16 @@ class FlowTransactionTests {
                 ignoreUnknownKeys = true
                 isLenient = true
             }
-            
+
             val transactionResult = json.decodeFromString<org.onflow.flow.models.TransactionResult>(complexTransactionResultJson)
-            
+
             // Verify the basic fields parsed correctly
             assertEquals("9326a6ae294eeb58f0f984b512b89f48579fea7c84d48d07bd2f316856f4ab91", transactionResult.blockId)
             assertEquals(TransactionStatus.SEALED, transactionResult.status)
             assertEquals(0, transactionResult.statusCode)
             assertEquals("", transactionResult.errorMessage)
             assertEquals("123", transactionResult.computationUsed)
-            
+
             // Verify events parsed correctly
             assertEquals(1, transactionResult.events.size)
             val event = transactionResult.events[0]
@@ -852,18 +852,18 @@ class FlowTransactionTests {
             assertEquals("4e4f0789748dc1d3e2ac3e1829d771ca31133a6609133076377bca1164c54afb", event.transactionId)
             assertEquals("0", event.transactionIndex)
             assertEquals("0", event.eventIndex)
-            
+
             // Verify the payload can be decoded (base64 encoded Cadence value)
             assertNotNull(event.payload)
-            
+
             // Verify execution field with complex type structure
             assertNotNull(transactionResult.execution)
-            
+
             println("✅ Complex JSON parsing test passed successfully")
             println("   - TransactionResult parsed without errors")
             println("   - Events with ResourceValue payloads handled correctly")
             println("   - Complex type structures with fields and initializers parsed")
-            
+
         } catch (e: Exception) {
             println("❌ Complex JSON parsing test failed: ${e.message}")
             e.printStackTrace()
@@ -907,10 +907,10 @@ class FlowTransactionTests {
                 ignoreUnknownKeys = true
                 isLenient = true
             }
-            
+
             // Test that we can parse the Kind structure that was causing failures
             val kind = json.decodeFromString<Cadence.Kind>(resourceTypeJson)
-            
+
             // Verify the parsed structure
             assertEquals("A.231cc0dbbcffc4b7.ceMATIC.Vault", kind.typeID)
             assertEquals("", kind.type)
@@ -962,23 +962,23 @@ class FlowTransactionTests {
         try {
             // Test that we can parse complex Cadence ResourceValue structures
             val cadenceValue = Cadence.Value.decodeFromJson(cadenceResourceJson)
-            
+
             // Verify it's a ResourceValue
             assertTrue(cadenceValue is Cadence.Value.ResourceValue, "Should be a ResourceValue")
-            
+
             val resourceValue = cadenceValue as Cadence.Value.ResourceValue
             assertEquals("A.231cc0dbbcffc4b7.ceMATIC.Vault", resourceValue.value.id)
             assertEquals(2, resourceValue.value.fields.size)
-            
+
             // Verify fields
             val uuidField = resourceValue.value.fields.find { it.name == "uuid" }
             assertNotNull(uuidField)
             assertTrue(uuidField!!.value is Cadence.Value.UInt64Value)
-            
+
             val balanceField = resourceValue.value.fields.find { it.name == "balance" }
             assertNotNull(balanceField)
             assertTrue(balanceField!!.value is Cadence.Value.UFix64Value)
-            
+
             println("✅ Cadence ResourceValue parsing test passed successfully")
             println("   - ResourceValue parsed correctly")
             println("   - Composite fields parsed: ${resourceValue.value.fields.size}")
@@ -1030,35 +1030,35 @@ class FlowTransactionTests {
                 ignoreUnknownKeys = true
                 isLenient = true
             }
-            
+
             val transactionResult = json.decodeFromString<org.onflow.flow.models.TransactionResult>(complexRealWorldJson)
-            
+
             // Verify parsing succeeded
             assertEquals("9326a6ae294eeb58f0f984b512b89f48579fea7c84d48d07bd2f316856f4ab91", transactionResult.blockId)
             assertEquals(TransactionStatus.SEALED, transactionResult.status)
             assertEquals(0, transactionResult.statusCode)
             assertEquals("", transactionResult.errorMessage)
             assertEquals("456", transactionResult.computationUsed)
-            
+
             // Verify complex events parsed
             assertEquals(2, transactionResult.events.size)
-            
+
             val flowTokenEvent = transactionResult.events[0]
             assertEquals("A.1654653399040a61.FlowToken.TokensWithdrawn", flowTokenEvent.type)
             assertEquals("36e7f5155d40799b8ac41e75ea7998e589ee4287fcc274ae3d5f2883b37f7380", flowTokenEvent.transactionId)
-            
-            val cematicEvent = transactionResult.events[1] 
+
+            val cematicEvent = transactionResult.events[1]
             assertEquals("A.231cc0dbbcffc4b7.ceMATIC.TokensDeposited", cematicEvent.type)
             assertEquals("36e7f5155d40799b8ac41e75ea7998e589ee4287fcc274ae3d5f2883b37f7380", cematicEvent.transactionId)
-            
+
             // Verify complex execution structure
             assertNotNull(transactionResult.execution)
-            
+
             println("✅ Complex real-world transaction parsing test passed successfully")
             println("   - Multiple complex events parsed correctly")
             println("   - Deeply nested type structures handled")
             println("   - Real transaction ID: 36e7f5155d40799b8ac41e75ea7998e589ee4287fcc274ae3d5f2883b37f7380")
-            
+
         } catch (e: Exception) {
             println("❌ Complex real-world transaction parsing test failed: ${e.message}")
             e.printStackTrace()
