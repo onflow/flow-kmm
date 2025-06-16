@@ -12,6 +12,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.*
+import org.onflow.flow.models.TransactionExecution
 
 object ByteCadenceSerializer : KSerializer<Byte> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("value", PrimitiveKind.STRING)
@@ -370,6 +371,54 @@ object CadenceTypeSerializer : KSerializer<Cadence.Type> {
             Cadence.Type.findByKey(key)
         } catch (e: IllegalArgumentException) {
             Cadence.Type.VOID
+        }
+    }
+}
+
+/**
+ * A safe TransactionExecution serializer that can handle both simple enum strings and complex objects
+ * This prevents parsing failures when the Flow network returns complex objects instead of simple strings
+ */
+object SafeTransactionExecutionSerializer : KSerializer<TransactionExecution?> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("SafeTransactionExecution", PrimitiveKind.STRING)
+    
+    override fun serialize(encoder: Encoder, value: TransactionExecution?) {
+        if (value != null) {
+            encoder.encodeString(value.value)
+        } else {
+            encoder.encodeNull()
+        }
+    }
+    
+    override fun deserialize(decoder: Decoder): TransactionExecution? {
+        // First, check if we have a JsonDecoder to work with
+        val jsonDecoder = decoder as? JsonDecoder
+        if (jsonDecoder != null) {
+            return try {
+                val element = jsonDecoder.decodeJsonElement()
+                when (element) {
+                    is JsonPrimitive -> {
+                        // Normal case - simple string value
+                        TransactionExecution.decode(element.content)
+                    }
+                    is JsonObject -> {
+                        // Complex object case - try to extract meaningful info or default to null
+                        // For now, we'll just return null for complex objects
+                        null
+                    }
+                    else -> null
+                }
+            } catch (e: Exception) {
+                null
+            }
+        } else {
+            // For non-JSON decoders, try string decoding
+            return try {
+                val stringValue = decoder.decodeString()
+                TransactionExecution.decode(stringValue)
+            } catch (e: Exception) {
+                null
+            }
         }
     }
 }
