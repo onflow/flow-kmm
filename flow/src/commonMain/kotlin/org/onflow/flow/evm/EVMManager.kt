@@ -84,15 +84,19 @@ class EVMManager(chainId: ChainId) {
             val script = scriptLoader.load("create_coa", "common/evm")
             val latestBlock = blocksApi.getBlock()
             val proposerAccount = accountsApi.getAccount(proposer.base16Value)
-            val proposerKey = proposerAccount.keys?.firstOrNull()
-                ?: throw IllegalArgumentException("Proposer has no keys")
+            
+            // Find the first non-revoked key instead of just the first key
+            val proposerKey = proposerAccount.keys?.firstOrNull { !it.revoked }
+                ?: throw IllegalArgumentException("Proposer has no non-revoked keys")
 
             // Fill in keyIndex dynamically if not set
             signers.forEach { signer ->
                 if (signer.keyIndex == -1) {
                     val account = accountsApi.getAccount(signer.address)
-                    signer.keyIndex = account.keys?.firstOrNull()?.index?.toInt()
-                        ?: throw IllegalStateException("No key found for ${signer.address}")
+                    // Find the first non-revoked key instead of just the first key
+                    val validKey = account.keys?.firstOrNull { !it.revoked }
+                        ?: throw IllegalStateException("No non-revoked key found for ${signer.address}")
+                    signer.keyIndex = validKey.index.toInt()
                 }
             }
 
