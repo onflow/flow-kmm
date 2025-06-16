@@ -38,7 +38,7 @@ object CadenceBase64Serializer : KSerializer<Cadence.Value> {
         return try {
             Cadence.Value.decodeFromBase64(decoder.decodeString())
         } catch (e: Exception) {
-            // Graceful fallback for problematic Cadence values
+            // Minimal fallback for problematic Cadence values (e.g., empty type fields)
             Cadence.void()
         }
     }
