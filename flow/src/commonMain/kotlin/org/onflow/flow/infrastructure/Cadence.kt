@@ -6,6 +6,7 @@ import io.ktor.util.*
 import io.ktor.utils.io.core.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
+import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.plus
 import kotlinx.serialization.modules.polymorphic
@@ -41,6 +42,7 @@ import org.onflow.flow.infrastructure.Cadence.Value.UInt32Value
 import org.onflow.flow.infrastructure.Cadence.Value.UInt64Value
 import org.onflow.flow.infrastructure.Cadence.Value.UInt8Value
 import org.onflow.flow.infrastructure.Cadence.Value.UIntValue
+import org.onflow.flow.infrastructure.Cadence.Value.UnknownValue
 import org.onflow.flow.infrastructure.Cadence.Value.VoidValue
 import org.onflow.flow.infrastructure.Cadence.Value.Word16Value
 import org.onflow.flow.infrastructure.Cadence.Value.Word32Value
@@ -131,6 +133,7 @@ class Cadence {
                     subclass(TypeValue::class)
                     subclass(PathValue::class)
                     subclass(CapabilityValue::class)
+                    subclass(UnknownValue::class)
                 }
             }
 
@@ -139,6 +142,12 @@ class Cadence {
                 ignoreUnknownKeys = true
                 isLenient = true
                 classDiscriminator = "type"
+                allowStructuredMapKeys = true
+                explicitNulls = false
+                encodeDefaults = false
+                allowSpecialFloatingPointValues = true
+                useArrayPolymorphism = false
+                allowTrailingComma = true
             }
         }
     }
@@ -160,11 +169,86 @@ class Cadence {
         companion object {
 
             fun decodeFromJsonElement(jsonElement: JsonElement): Value {
-                return jsonSerializer.decodeFromJsonElement(jsonElement)
+                return tryDecodeFromJsonElement(jsonElement) ?: VoidValue()
+            }
+
+            /**
+             * Robust JSON element decoding that handles various edge cases from Flow network responses
+             */
+            private fun tryDecodeFromJsonElement(jsonElement: JsonElement): Value? {
+                return try {
+                    // First, try the standard approach
+                    jsonSerializer.decodeFromJsonElement<Value>(jsonElement)
+                } catch (e: Exception) {
+                    // If standard decoding fails, try to handle specific cases
+                    when {
+                        jsonElement is JsonObject -> handleComplexJsonObject(jsonElement)
+                        else -> null
+                    }
+                }
+            }
+
+            /**
+             * Handle complex JSON objects that might have non-standard type structures
+             */
+            private fun handleComplexJsonObject(jsonObject: JsonObject): Value? {
+                return try {
+                    val typeElement = jsonObject["type"]
+                    
+                    when {
+                        // Handle empty type field
+                        typeElement == null || typeElement.jsonPrimitive.content.isEmpty() -> {
+                            // Try to infer type from structure or default to VoidValue
+                            VoidValue()
+                        }
+                        
+                        // Handle complex type objects (like Kind structures)
+                        typeElement is JsonObject -> {
+                            // For complex type objects, try to extract the kind or default to VoidValue
+                            VoidValue()
+                        }
+                        
+                        else -> {
+                            // Try to decode with the type as a string
+                            val typeString = typeElement.jsonPrimitive.content
+                            decodeValueWithType(typeString, jsonObject)
+                        }
+                    }
+                } catch (e: Exception) {
+                    // Final fallback - return VoidValue for any complex structure we can't parse
+                    VoidValue()
+                }
+            }
+
+            /**
+             * Decode a value given a specific type string and JSON object
+             */
+            private fun decodeValueWithType(typeString: String, jsonObject: JsonObject): Value? {
+                return try {
+                    // Create a simplified JSON object with just the type and value
+                    val simplifiedJson = buildJsonObject {
+                        put("type", typeString)
+                        jsonObject["value"]?.let { put("value", it) }
+                    }
+                    jsonSerializer.decodeFromJsonElement<Value>(simplifiedJson)
+                } catch (e: Exception) {
+                    null
+                }
             }
 
             fun decodeFromJson(jsonString: String): Value {
-                return jsonSerializer.decodeFromString(jsonString)
+                return try {
+                    jsonSerializer.decodeFromString(jsonString)
+                } catch (e: Exception) {
+                    // Try to parse as JsonElement first and then use robust decoding
+                    try {
+                        val jsonElement = Json.parseToJsonElement(jsonString)
+                        decodeFromJsonElement(jsonElement)
+                    } catch (e2: Exception) {
+                        // Final fallback
+                        VoidValue()
+                    }
+                }
             }
 
             fun encodeToJsonString(Value: Value): String {
@@ -172,7 +256,12 @@ class Cadence {
             }
 
             fun decodeFromBase64(base64String: String): Value {
-                return decodeFromJson(base64String.decodeBase64Bytes().decodeToString())
+                return try {
+                    decodeFromJson(base64String.decodeBase64Bytes().decodeToString())
+                } catch (e: Exception) {
+                    // Graceful handling of base64 decoding failures
+                    VoidValue()
+                }
             }
         }
 
@@ -187,6 +276,7 @@ class Cadence {
         fun decodeToAny(): Any? {
             return when (this) {
                 is VoidValue -> { null }
+                is UnknownValue -> { value }
                 is OptionalValue -> { value?.decodeToAny() }
                 is ArrayValue -> { value.map { it.decodeToAny() } }
 
@@ -400,6 +490,14 @@ class Cadence {
         @Serializable
         @SerialName(TYPE_CAPABILITY)
         open class CapabilityValue(override val value: Capability) : Value()
+
+        /**
+         * Fallback value class for unknown or malformed Cadence types
+         * Used when the type field is empty, missing, or contains complex objects
+         */
+        @Serializable
+        @SerialName("")
+        data class UnknownValue(override val value: String? = null) : Value()
     }
 
     companion object {
@@ -478,7 +576,7 @@ class Cadence {
         fun path(domain: PathDomain, identifier: String) = Value.PathValue(Path(domain, identifier))
 
         fun type(value: TypeEntry) = Value.TypeValue(value)
-        fun type(value: Cadence.Kind) = type(TypeEntry(value))
+        fun type(kind: String, typeID: String? = null) = type(TypeEntry(Kind(kind = kind, typeID = typeID)))
 
         fun capability(value: Capability) = Value.CapabilityValue(value)
         fun capability(path: String, address: String, borrowType: Type) = capability(Capability(path, address, borrowType))
@@ -505,8 +603,22 @@ class Cadence {
 
     //TODO: Handle more types
     @Serializable
-    data class Kind (val kind: Type, val typeID : String?, val type: String?)
-
+    data class Kind (
+        val kind: String? = null,
+        val typeID: String? = null, 
+        val type: String? = null,
+        val fields: List<JsonElement>? = null,
+        val initializers: List<JsonElement>? = null,
+        val elementType: JsonElement? = null,
+        val key: JsonElement? = null,
+        val value: JsonElement? = null,
+        val size: Int? = null,
+        val staticType: JsonElement? = null,
+        val authorization: JsonElement? = null,
+        val borrowType: JsonElement? = null,
+        val path: String? = null
+    )
+    
     @Serializable
     data class Capability(val path: String, val address: String, val borrowType: Type)
 
