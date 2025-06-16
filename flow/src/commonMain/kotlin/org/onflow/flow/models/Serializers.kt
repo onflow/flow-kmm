@@ -34,7 +34,14 @@ object Base64HexSerializer : KSerializer<String> {
 object CadenceBase64Serializer : KSerializer<Cadence.Value> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("CadenceBase64", PrimitiveKind.STRING)
     override fun serialize(encoder: Encoder, value: Cadence.Value) = encoder.encodeString(value.encodeBase64())
-    override fun deserialize(decoder: Decoder): Cadence.Value = Cadence.Value.decodeFromBase64(decoder.decodeString())
+    override fun deserialize(decoder: Decoder): Cadence.Value {
+        return try {
+            Cadence.Value.decodeFromBase64(decoder.decodeString())
+        } catch (e: Exception) {
+            // Minimal fallback for problematic Cadence values (e.g., empty type fields)
+            Cadence.void()
+        }
+    }
 }
 
 class CadenceBase64ListSerializer : KSerializer<List<Cadence.Value>> {
