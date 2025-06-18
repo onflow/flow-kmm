@@ -20,24 +20,11 @@ open class ApiBase {
                 connectTimeoutMillis = 20000L // Increased to 20 seconds  
                 socketTimeoutMillis = 45000L  // Increased to 45 seconds
             }
-            
+
             install(HttpRequestRetry) {
-                retryOnServerErrors(maxRetries = 5)
-                retryOnException(maxRetries = 3) { _, cause ->
-                    // Retry on connection-related exceptions
-                    cause.message?.contains("Connection reset by peer", ignoreCase = true) == true ||
-                    cause.message?.contains("IOException", ignoreCase = true) == true ||
-                    cause.message?.contains("ConnectException", ignoreCase = true) == true ||
-                    cause.message?.contains("SocketTimeoutException", ignoreCase = true) == true ||
-                    cause.message?.contains("Channel was closed", ignoreCase = true) == true ||
-                    cause.message?.contains("ClosedReceiveChannelException", ignoreCase = true) == true ||
-                    cause.message?.contains("ClosedSendChannelException", ignoreCase = true) == true ||
-                    cause.message?.contains("TLS", ignoreCase = true) == true ||
-                    // Check class names for Kotlin exceptions
-                    cause.javaClass.simpleName.contains("ClosedReceiveChannelException", ignoreCase = true) ||
-                    cause.javaClass.simpleName.contains("ClosedSendChannelException", ignoreCase = true)
-                }
-                exponentialDelay(base = 2.0, maxDelayMs = 10000L)
+                retryOnServerErrors(maxRetries = 3)
+                retryOnException(maxRetries = 3, retryOnTimeout = true)
+                exponentialDelay() // Use exponential backoff
             }
 
             install(Logging) {
