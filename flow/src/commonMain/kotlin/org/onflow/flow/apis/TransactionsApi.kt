@@ -93,33 +93,66 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
 
     internal suspend fun waitForSeal(transactionId: String): TransactionResult {
         var attempts = 0
-        val maxAttempts = 30 // 30 seconds timeout
+        val maxAttempts = 60 // Increased to 60 attempts (up to 2 minutes)
+        var lastError: Exception? = null
 
         while (attempts < maxAttempts) {
-            val result = getTransactionResult(transactionId)
-            when (result.status ?: TransactionStatus.EMPTY) {
-                TransactionStatus.SEALED -> {
-                    if (result.errorMessage.isNotBlank() || result.execution == TransactionExecution.failure) {
-                        throw RuntimeException("Transaction failed: ${result.errorMessage}")
+            try {
+                val result = getTransactionResult(transactionId)
+                when (result.status ?: TransactionStatus.EMPTY) {
+                    TransactionStatus.SEALED -> {
+                        if (result.errorMessage.isNotBlank() || result.execution == TransactionExecution.failure) {
+                            throw RuntimeException("Transaction failed: ${result.errorMessage}")
+                        }
+                        return result
                     }
-                    return result
-                }
 
-                TransactionStatus.EXPIRED -> throw RuntimeException("Transaction expired")
-                TransactionStatus.EMPTY, TransactionStatus.UNKNOWN -> {
-                    // Treat empty/unknown status as pending
-                    attempts++
-                    delay(1000)
-                }
+                    TransactionStatus.EXPIRED -> throw RuntimeException("Transaction expired")
+                    TransactionStatus.EMPTY, TransactionStatus.UNKNOWN -> {
+                        // Treat empty/unknown status as pending
+                        attempts++
+                        // Use exponential backoff with jitter for first few attempts, then stabilize
+                        val delayMs = when {
+                            attempts <= 5 -> 1000L // First 5 attempts: 1 second
+                            attempts <= 15 -> 2000L // Next 10 attempts: 2 seconds  
+                            else -> 3000L // Remaining attempts: 3 seconds
+                        }
+                        delay(delayMs)
+                    }
 
-                else -> {
-                    attempts++
-                    delay(1000)
+                    else -> {
+                        attempts++
+                        val delayMs = when {
+                            attempts <= 5 -> 1000L
+                            attempts <= 15 -> 2000L
+                            else -> 3000L
+                        }
+                        delay(delayMs)
+                    }
                 }
+            } catch (e: Exception) {
+                lastError = e
+                attempts++
+                
+                // Log the error (in a real implementation you'd use proper logging)
+                println("Error fetching transaction result for $transactionId (attempt $attempts): ${e.message}")
+                
+                // If we're getting consistent errors, increase delay to avoid hammering the server
+                val errorDelayMs = when {
+                    attempts <= 5 -> 2000L // 2 seconds for early failures
+                    attempts <= 15 -> 5000L // 5 seconds for persistent failures
+                    else -> 10000L // 10 seconds for repeated failures
+                }
+                delay(errorDelayMs)
             }
         }
 
-        throw RuntimeException("Transaction not sealed after $maxAttempts seconds")
+        val timeoutMessage = if (lastError != null) {
+            "Transaction not sealed after $maxAttempts attempts. Last error: ${lastError.message}"
+        } else {
+            "Transaction not sealed after $maxAttempts attempts"
+        }
+        throw RuntimeException(timeoutMessage)
     }
 
     private suspend fun resolveKeyIndex(address: FlowAddress, accountsApi: AccountsApi): Int {
