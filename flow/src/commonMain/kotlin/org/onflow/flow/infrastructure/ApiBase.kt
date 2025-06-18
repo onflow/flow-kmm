@@ -16,14 +16,28 @@ open class ApiBase {
     companion object {
         val client = HttpClient {
             install(HttpTimeout) {
-                requestTimeoutMillis = 30000L // 30 seconds
-                connectTimeoutMillis = 15000L // 15 seconds  
-                socketTimeoutMillis = 30000L  // 30 seconds
+                requestTimeoutMillis = 45000L // Increased to 45 seconds
+                connectTimeoutMillis = 20000L // Increased to 20 seconds  
+                socketTimeoutMillis = 45000L  // Increased to 45 seconds
             }
             
             install(HttpRequestRetry) {
                 retryOnServerErrors(maxRetries = 5)
-                exponentialDelay()
+                retryOnException(maxRetries = 3) { _, cause ->
+                    // Retry on connection-related exceptions
+                    cause.message?.contains("Connection reset by peer", ignoreCase = true) == true ||
+                    cause.message?.contains("IOException", ignoreCase = true) == true ||
+                    cause.message?.contains("ConnectException", ignoreCase = true) == true ||
+                    cause.message?.contains("SocketTimeoutException", ignoreCase = true) == true ||
+                    cause.message?.contains("Channel was closed", ignoreCase = true) == true ||
+                    cause.message?.contains("ClosedReceiveChannelException", ignoreCase = true) == true ||
+                    cause.message?.contains("ClosedSendChannelException", ignoreCase = true) == true ||
+                    cause.message?.contains("TLS", ignoreCase = true) == true ||
+                    // Check class names for Kotlin exceptions
+                    cause.javaClass.simpleName.contains("ClosedReceiveChannelException", ignoreCase = true) ||
+                    cause.javaClass.simpleName.contains("ClosedSendChannelException", ignoreCase = true)
+                }
+                exponentialDelay(base = 2.0, maxDelayMs = 10000L)
             }
 
             install(Logging) {
