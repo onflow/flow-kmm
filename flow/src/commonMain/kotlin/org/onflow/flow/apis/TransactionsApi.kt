@@ -134,9 +134,7 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
                 lastError = e
                 attempts++
                 
-                // Log the error (in a real implementation you'd use proper logging)
-                println("Error fetching transaction result for $transactionId (attempt $attempts): ${e.message}")
-                
+
                 // If we're getting consistent errors, increase delay to avoid hammering the server
                 val errorDelayMs = when {
                     attempts <= 5 -> 2000L // 2 seconds for early failures
