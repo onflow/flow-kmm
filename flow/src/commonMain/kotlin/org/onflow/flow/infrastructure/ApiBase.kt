@@ -2,7 +2,6 @@ package org.onflow.flow.infrastructure
 
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpRequestRetry
-import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.Logger
@@ -15,16 +14,9 @@ open class ApiBase {
 
     companion object {
         val client = HttpClient {
-            install(HttpTimeout) {
-                requestTimeoutMillis = 45000L // Increased to 45 seconds
-                connectTimeoutMillis = 20000L // Increased to 20 seconds  
-                socketTimeoutMillis = 45000L  // Increased to 45 seconds
-            }
-
             install(HttpRequestRetry) {
-                retryOnServerErrors(maxRetries = 3)
-                retryOnException(maxRetries = 3, retryOnTimeout = true)
-                exponentialDelay() // Use exponential backoff
+                retryOnServerErrors(maxRetries = 5)
+                exponentialDelay()
             }
 
             install(Logging) {
