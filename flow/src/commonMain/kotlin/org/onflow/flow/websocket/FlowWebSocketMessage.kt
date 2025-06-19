@@ -6,9 +6,11 @@ import kotlinx.serialization.json.JsonElement
 import org.onflow.flow.models.Event
 import org.onflow.flow.models.TransactionResult
 
-@Serializable
-sealed class FlowWebSocketMessage {
-    abstract val subscriptionId: String?
+/**
+ * Base interface for WebSocket messages to avoid sealed class ASM transformation issues
+ */
+interface FlowWebSocketMessage {
+    val subscriptionId: String?
 }
 
 @Serializable
@@ -18,7 +20,7 @@ data class FlowWebSocketRequest(
     val action: String,
     val topic: String? = null,
     val arguments: Map<String, JsonElement>? = null
-) : FlowWebSocketMessage()
+) : FlowWebSocketMessage
 
 @Serializable
 data class FlowWebSocketResponse(
@@ -28,7 +30,7 @@ data class FlowWebSocketResponse(
     val topic: String? = null,
     val payload: JsonElement? = null,
     val error: FlowWebSocketError? = null
-) : FlowWebSocketMessage()
+) : FlowWebSocketMessage
 
 @Serializable
 data class BlockEventPayload(
