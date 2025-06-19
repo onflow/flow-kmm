@@ -230,7 +230,11 @@ class FlowWebSocketClient(
 
     private suspend fun sendMessage(message: FlowWebSocketMessage) {
         val session = webSocketSession ?: throw IllegalStateException("Not connected")
-        val text = json.encodeToString(FlowWebSocketMessage.serializer(), message)
+        val text = when (message) {
+            is FlowWebSocketRequest -> json.encodeToString(FlowWebSocketRequest.serializer(), message)
+            is FlowWebSocketResponse -> json.encodeToString(FlowWebSocketResponse.serializer(), message)
+            else -> throw IllegalArgumentException("Unknown message type: ${message::class}")
+        }
         session.send(Frame.Text(text))
     }
 
