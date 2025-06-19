@@ -105,26 +105,23 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
                         // since finalized transactions haven't been executed yet
                         return result
                     }
-
+                    TransactionStatus.EXECUTED -> {
+                        // Transaction is executed, return result
+                        return result
+                    }
+                    TransactionStatus.SEALED -> {
+                        // Transaction is sealed, return result
+                        return result
+                    }
                     TransactionStatus.EXPIRED -> throw RuntimeException("Transaction expired")
-                    TransactionStatus.EMPTY, TransactionStatus.UNKNOWN -> {
-                        // Treat empty/unknown status as pending
+                    TransactionStatus.EMPTY, TransactionStatus.UNKNOWN, TransactionStatus.PENDING -> {
+                        // Treat empty/unknown/pending status as still processing, continue polling
                         attempts++
                         // Use exponential backoff with jitter for first few attempts, then stabilize
                         val delayMs = when {
                             attempts <= 5 -> 1000L // First 5 attempts: 1 second
                             attempts <= 15 -> 2000L // Next 10 attempts: 2 seconds  
                             else -> 3000L // Remaining attempts: 3 seconds
-                        }
-                        delay(delayMs)
-                    }
-
-                    else -> {
-                        attempts++
-                        val delayMs = when {
-                            attempts <= 5 -> 1000L
-                            attempts <= 15 -> 2000L
-                            else -> 3000L
                         }
                         delay(delayMs)
                     }
