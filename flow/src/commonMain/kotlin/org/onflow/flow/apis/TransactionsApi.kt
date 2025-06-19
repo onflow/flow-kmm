@@ -100,10 +100,9 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
             try {
                 val result = getTransactionResult(transactionId)
                 when (result.status ?: TransactionStatus.EMPTY) {
-                    TransactionStatus.SEALED -> {
-                        if (result.errorMessage.isNotBlank() || result.execution == TransactionExecution.failure) {
-                            throw RuntimeException("Transaction failed: ${result.errorMessage}")
-                        }
+                    TransactionStatus.FINALIZED -> {
+                        // Transaction is finalized, return immediately without checking for errors
+                        // since finalized transactions haven't been executed yet
                         return result
                     }
 
@@ -146,9 +145,9 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         }
 
         val timeoutMessage = if (lastError != null) {
-            "Transaction not sealed after $maxAttempts attempts. Last error: ${lastError.message}"
+            "Transaction not finalized after $maxAttempts attempts. Last error: ${lastError.message}"
         } else {
-            "Transaction not sealed after $maxAttempts attempts"
+            "Transaction not finalized after $maxAttempts attempts"
         }
         throw RuntimeException(timeoutMessage)
     }

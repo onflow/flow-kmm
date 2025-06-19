@@ -29,18 +29,18 @@ class FlowApi(val chainId: ChainIdProvider) {
     private val scriptsApi = ScriptsApi(baseUrl)
     private val transactionsApi = TransactionsApi(baseUrl)
 
-    suspend fun getAccount(address: String, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.SEALED): Account {
+    suspend fun getAccount(address: String, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.FINAL): Account {
         return accountsApi.getAccount(address, blockHeight, blockStatus)
     }
 
-    suspend fun getBlock(id: String? = null, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.SEALED): Block {
+    suspend fun getBlock(id: String? = null, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.FINAL): Block {
         return blocksApi.getBlock(id, blockHeight, blockStatus)
     }
 
     suspend fun getBlockHeader(
         id: String? = null,
         blockHeight: String? = null,
-        blockStatus: BlockStatus = BlockStatus.SEALED
+        blockStatus: BlockStatus = BlockStatus.FINAL
     ): BlockHeader {
         return blocksApi.getBlockHeader(id, blockHeight, blockStatus)
     }
@@ -71,7 +71,7 @@ class FlowApi(val chainId: ChainIdProvider) {
         arguments: List<Cadence.Value>? = null,
         blockId: String? = null,
         blockHeight: String? = null,
-        blockStatus: BlockStatus = BlockStatus.SEALED
+        blockStatus: BlockStatus = BlockStatus.FINAL
     ): Cadence.Value {
         return scriptsApi.executeScript(script, arguments, blockId, blockHeight, blockStatus)
     }
