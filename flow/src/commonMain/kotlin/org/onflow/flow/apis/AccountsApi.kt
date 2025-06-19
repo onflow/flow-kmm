@@ -37,7 +37,7 @@ internal class AccountsApi(val baseUrl: String) : ApiBase() {
      * @param blockStatus The status of the block to query (FINAL or SEALED). Defaults to FINAL.
      * @return Account
      */
-    internal suspend fun getAccount(address: String, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.SEALED): Account {
+    internal suspend fun getAccount(address: String, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.FINAL): Account {
         val expand = setOf("contracts", "keys")
         return if (blockHeight != null) {
             request(address, blockHeight, expand)

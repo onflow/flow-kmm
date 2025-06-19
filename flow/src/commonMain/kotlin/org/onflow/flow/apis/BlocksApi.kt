@@ -54,7 +54,7 @@ internal class BlocksApi(val baseUrl: String) : ApiBase() {
         }.body()
     }
 
-    internal suspend fun getBlock(id: String? = null, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.SEALED): Block {
+    internal suspend fun getBlock(id: String? = null, blockHeight: String? = null, blockStatus: BlockStatus = BlockStatus.FINAL): Block {
         val expand = setOf("payload")
         return if (id != null) {
             requestBlocksById(id, expand).first()
@@ -68,7 +68,7 @@ internal class BlocksApi(val baseUrl: String) : ApiBase() {
     internal suspend fun getBlockHeader(
         id: String? = null,
         blockHeight: String? = null,
-        blockStatus: BlockStatus = BlockStatus.SEALED
+        blockStatus: BlockStatus = BlockStatus.FINAL
     ): BlockHeader {
         return getBlock(id, blockHeight, blockStatus).header
     }
