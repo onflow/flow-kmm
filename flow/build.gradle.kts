@@ -142,4 +142,3 @@ tasks.withType<KotlinNativeTest>().configureEach {
 tasks.named("build") { finalizedBy("createXCFramework") }
 tasks.named("clean") { doFirst { delete("swiftpackage") } }
 
-
