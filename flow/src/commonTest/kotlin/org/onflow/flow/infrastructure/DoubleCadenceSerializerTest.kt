@@ -68,8 +68,8 @@ class DoubleCadenceSerializerTest {
         
         val json = Json.encodeToString(ufixValue)
         
-        assertTrue("Should contain zero") {
-            json.contains("\"0\"")
+        assertTrue("Should contain zero with decimal point") {
+            json.contains("\"0.0\"")
         }
     }
     
@@ -94,6 +94,56 @@ class DoubleCadenceSerializerTest {
         }
     }
     
+    @Test
+    fun testUFix64ZeroValueSerialization() {
+        // Test the exact scenario that was failing: UFix64 with zero value
+        val zeroValue = 0.0
+        val ufixValue = Cadence.ufix64(zeroValue)
+        
+        // Serialize to JSON
+        val json = Json.encodeToString(ufixValue)
+        println("Zero value JSON: $json")
+        
+        // Parse the JSON to extract the value
+        val jsonElement = Json.parseToJsonElement(json)
+        val valueString = jsonElement.jsonObject["value"]?.jsonPrimitive?.content ?: ""
+        
+        // The critical test: verify zero value has decimal point
+        assertEquals("0.0", valueString, "Zero UFix64 value must be serialized as '0.0' not '0'")
+        
+        // Verify it can be deserialized back
+        val deserializedValue = Json.decodeFromString<Cadence.Value.UFix64Value>(json)
+        assertEquals(zeroValue, deserializedValue.value, "Deserialized value should match original")
+        
+        println("✅ UFix64 zero value serialization test passed")
+        println("   Serialized as: $valueString")
+    }
+
+    @Test
+    fun testUFix64WholeNumbersSerialization() {
+        // Test that whole numbers also get proper decimal formatting
+        val wholeNumbers = listOf(1.0, 5.0, 100.0, 1000.0)
+        
+        for (wholeNumber in wholeNumbers) {
+            val ufixValue = Cadence.ufix64(wholeNumber)
+            val json = Json.encodeToString(ufixValue)
+            
+            val jsonElement = Json.parseToJsonElement(json)
+            val valueString = jsonElement.jsonObject["value"]?.jsonPrimitive?.content ?: ""
+            
+            // Verify whole numbers include decimal point
+            assertTrue("Whole number $wholeNumber should have decimal point in serialized form: $valueString") {
+                valueString.contains(".")
+            }
+            
+            // Verify it deserializes correctly
+            val deserializedValue = Json.decodeFromString<Cadence.Value.UFix64Value>(json)
+            assertEquals(wholeNumber, deserializedValue.value, "Deserialized value should match original")
+        }
+        
+        println("✅ UFix64 whole numbers serialization test passed")
+    }
+
     @Test
     fun testDirectConversion() {
         // Test the conversion logic directly
