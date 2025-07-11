@@ -100,11 +100,6 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
             try {
                 val result = getTransactionResult(transactionId)
                 when (result.status ?: TransactionStatus.EMPTY) {
-                    TransactionStatus.FINALIZED -> {
-                        // Transaction is finalized, return immediately without checking for errors
-                        // since finalized transactions haven't been executed yet
-                        return result
-                    }
                     TransactionStatus.EXECUTED -> {
                         // Transaction is executed, return result
                         return result
@@ -114,7 +109,7 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
                         return result
                     }
                     TransactionStatus.EXPIRED -> throw RuntimeException("Transaction expired")
-                    TransactionStatus.EMPTY, TransactionStatus.UNKNOWN, TransactionStatus.PENDING -> {
+                    TransactionStatus.EMPTY, TransactionStatus.UNKNOWN, TransactionStatus.PENDING, TransactionStatus.FINALIZED -> {
                         // Treat empty/unknown/pending status as still processing, continue polling
                         attempts++
                         // Use exponential backoff with jitter for first few attempts, then stabilize
