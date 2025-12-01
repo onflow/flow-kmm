@@ -16,11 +16,12 @@ class AddressRegistry {
         const val NFT_STOREFRONT = "0xNFTSTOREFRONT"
         const val TOKEN_FORWARDING = "0xTOKENFORWARDING"
         const val EVM = "0xEVM"
+        const val HYBRID_CUSTODY = "0xHYBRIDCUSTODY"
     }
 
     private val SCRIPT_TOKEN_MAP: MutableMap<String, MutableMap<String, FlowAddress>> = mutableMapOf()
 
-    var defaultChainId = ChainId.Mainnet
+    var defaultChainId: ChainIdProvider = ChainId.Mainnet
 
     init {
         registerDefaults()
@@ -84,7 +85,8 @@ class AddressRegistry {
                 STAKING_PROXY to FlowAddress("0x7aad92e5a0715d21"),
                 NON_FUNGIBLE_TOKEN to FlowAddress("0x631e88ae7f1d7c20"),
                 NFT_STOREFRONT to FlowAddress("0x94b06cfca1d8a476"),
-                EVM to FlowAddress("0x8c5303eaa26202d6")
+                EVM to FlowAddress("0x8c5303eaa26202d6"),
+                HYBRID_CUSTODY to FlowAddress("0x294e44e1ec6993c6")
             ),
             ChainId.Mainnet to mutableMapOf(
                 FUNGIBLE_TOKEN to FlowAddress("0xf233dcee88fe0abe"),
@@ -96,7 +98,8 @@ class AddressRegistry {
                 NON_FUNGIBLE_TOKEN to FlowAddress("0x1d7e57aa55817448"),
                 NFT_STOREFRONT to FlowAddress("0x4eb8a10cb9f87357"),
                 TOKEN_FORWARDING to FlowAddress("0xe544175ee0461c4b"),
-                EVM to FlowAddress("0xe467b9dd11fa00df")
+                EVM to FlowAddress("0xe467b9dd11fa00df"),
+                HYBRID_CUSTODY to FlowAddress("0xd8a7e05a7ac670c0")
             ),
         ).forEach { chain ->
             chain.value.forEach {

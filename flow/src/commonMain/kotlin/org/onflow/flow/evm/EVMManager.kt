@@ -6,12 +6,13 @@ import org.onflow.flow.apis.AccountsApi
 import org.onflow.flow.apis.BlocksApi
 import org.onflow.flow.apis.TransactionsApi
 import org.onflow.flow.apis.ScriptsApi
+import org.onflow.flow.FlowApi
+import org.onflow.flow.sendTransaction
+import org.onflow.flow.cadence.ChildAccountMetadata
 import org.onflow.flow.models.FlowAddress
 import org.onflow.flow.models.Signer
-import kotlinx.serialization.Serializable
 import org.onflow.flow.infrastructure.Cadence
 import org.onflow.flow.infrastructure.scripts.CadenceScriptLoader
-import org.onflow.flow.models.TransactionBuilder
 
 class EVMManager(chainId: ChainId) {
     private val baseUrl = chainId.baseUrl
@@ -39,6 +40,30 @@ class EVMManager(chainId: ChainId) {
     ): String = impl.createCOAAccount(proposer, payer, amount, signers)
 
     /**
+     * Execute an EVM transaction via Cadence `evm_run`
+     */
+    suspend fun runEVMTransaction(
+        proposer: FlowAddress,
+        payer: FlowAddress,
+        rlpEncodedTransaction: ByteArray,
+        coinbaseAddress: String,
+        signers: List<Signer>
+    ): String = impl.runEVMTransaction(proposer, payer, rlpEncodedTransaction, coinbaseAddress, signers)
+
+    /**
+     * Call an EVM contract from a COA via `call_contract`
+     */
+    suspend fun callEVMContract(
+        proposer: FlowAddress,
+        payer: FlowAddress,
+        toEVMAddressHex: String,
+        amount: Double,
+        data: ByteArray,
+        gasLimit: ULong,
+        signers: List<Signer>
+    ): String = impl.callEVMContract(proposer, payer, toEVMAddressHex, amount, data, gasLimit, signers)
+
+    /**
      * Gets the EVM address associated with a Flow address
      * @param flowAddress The Flow address to look up
      * @return The EVM address as a hex string
@@ -52,19 +77,6 @@ class EVMManager(chainId: ChainId) {
      */
     suspend fun getChildAccountMetadata(flowAddress: FlowAddress): Map<String, ChildAccountMetadata> = impl.getChildAccountMetadata(flowAddress)
 
-    @Serializable
-    data class ChildAccountMetadata(
-        val name: String? = null,
-        val description: String? = null,
-        val address: String? = null,
-        val thumbnail: Thumbnail? = null
-    )
-
-    @Serializable
-    data class Thumbnail(
-        val url: String? = null
-    )
-
     private class EVMManagerImpl(
         private val accountsApi: AccountsApi,
         private val blocksApi: BlocksApi,
@@ -74,6 +86,10 @@ class EVMManager(chainId: ChainId) {
     ) {
 
         private val scriptLoader = CadenceScriptLoader(chainId)
+        private val flowApi = FlowApi(chainId)
+
+        private fun ByteArray.toCadenceUInt8Array(): Cadence.Value =
+            Cadence.array(this.map { Cadence.uint8(it.toUByte()) })
 
         suspend fun createCOAAccount(
             proposer: FlowAddress,
@@ -82,35 +98,77 @@ class EVMManager(chainId: ChainId) {
             signers: List<Signer>
         ): String {
             val script = scriptLoader.load("create_coa", "common/evm")
-            val latestBlock = blocksApi.getBlock()
-            val proposerAccount = accountsApi.getAccount(proposer.base16Value)
-            val proposerKey = proposerAccount.keys?.firstOrNull()
-                ?: throw IllegalArgumentException("Proposer has no keys")
-
-            // Fill in keyIndex dynamically if not set
-            signers.forEach { signer ->
-                if (signer.keyIndex == -1) {
-                    val account = accountsApi.getAccount(signer.address)
-                    signer.keyIndex = account.keys?.firstOrNull()?.index?.toInt()
-                        ?: throw IllegalStateException("No key found for ${signer.address}")
-                }
+            val resultTx = flowApi.sendTransaction(
+                signers = signers,
+                chainId = chainId
+            ) {
+                cadence { script }
+                arguments { listOf(Cadence.ufix64(amount)) }
+                proposer(proposer.base16Value)
+                payer(payer.base16Value)
+                authorizers(proposer.base16Value)
             }
 
-            // Create and sign transaction in one step
-            val signedTransaction = TransactionBuilder(script, listOf(Cadence.ufix64(amount)))
-                .withReferenceBlockId(latestBlock.header.id)
-                .withPayer(payer.base16Value)
-                .withProposalKey(
-                    address = proposer.base16Value,
-                    keyIndex = proposerKey.index.toInt(),
-                    sequenceNumber = proposerKey.sequenceNumber.toBigInteger()
-                )
-                .withAuthorizers(listOf(proposer.base16Value))
-                .withSigners(signers)
-                .buildAndSign()
+            return resultTx.id ?: throw IllegalStateException("Transaction did not return an ID")
+        }
 
-            val result = transactionsApi.sendTransaction(signedTransaction)
-            return result.id ?: throw IllegalStateException("Transaction did not return an ID")
+        suspend fun runEVMTransaction(
+            proposer: FlowAddress,
+            payer: FlowAddress,
+            rlpEncodedTransaction: ByteArray,
+            coinbaseAddress: String,
+            signers: List<Signer>
+        ): String {
+            val script = scriptLoader.load("evm_run", "common/evm")
+            val txArgs = listOf(
+                rlpEncodedTransaction.toCadenceUInt8Array(),
+                Cadence.string(coinbaseAddress)
+            )
+
+            val resultTx = flowApi.sendTransaction(
+                signers = signers,
+                chainId = chainId
+            ) {
+                cadence { script }
+                arguments { txArgs }
+                proposer(proposer.base16Value)
+                payer(payer.base16Value)
+                authorizers(proposer.base16Value)
+            }
+
+            return resultTx.id ?: throw IllegalStateException("Transaction did not return an ID")
+        }
+
+        suspend fun callEVMContract(
+            proposer: FlowAddress,
+            payer: FlowAddress,
+            toEVMAddressHex: String,
+            amount: Double,
+            data: ByteArray,
+            gasLimit: ULong,
+            signers: List<Signer>
+        ): String {
+            val script = scriptLoader.load("call_contract", "common/evm")
+            val txArgs = listOf(
+                Cadence.string(toEVMAddressHex),
+                Cadence.ufix64(amount),
+                data.toCadenceUInt8Array(),
+                Cadence.uint64(gasLimit)
+            )
+
+            val resultTx = flowApi.sendTransaction(
+                signers = signers,
+                chainId = chainId
+            ) {
+                cadence { script }
+                arguments { txArgs }
+                proposer(proposer.base16Value)
+                payer(payer.base16Value)
+                authorizers(proposer.base16Value)
+                gasLimit(gasLimit.toLong().toBigInteger())
+            }
+
+            return resultTx.id ?: throw IllegalStateException("Transaction did not return an ID")
         }
 
         suspend fun getEVMAddress(flowAddress: FlowAddress): String {
@@ -123,7 +181,7 @@ class EVMManager(chainId: ChainId) {
         }
 
         suspend fun getChildAccountMetadata(flowAddress: FlowAddress): Map<String, ChildAccountMetadata> {
-            val script = scriptLoader.load("get_child_account_meta", "common/evm")
+            val script = scriptLoader.load("get_child_account_meta", "common/child")
             val result = scriptsApi.executeScript(
                 script = script,
                 arguments = listOf(Cadence.address(flowAddress.base16Value))
