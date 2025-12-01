@@ -1,0 +1,30 @@
+name: Presubmit.ai
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+on:
+  pull_request_target:
+    types: [opened, synchronize]
+  pull_request_review_comment:
+    types: [created]
+  push:
+    branches: [main, dev, "release/*"]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check required secrets
+        run: |
+          if [ -z "${{ secrets.ANTHROPIC_API_KEY }}" ]; then
+            echo "Error: ANTHROPIC_API_KEY secret is not configured"
+            exit 1
+          fi
+      - uses: outblock/ai-reviewer@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LLM_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LLM_MODEL: "claude-opus-4-5-20251101"
