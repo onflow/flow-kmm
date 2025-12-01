@@ -23,12 +23,13 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         expand: Set<String>? = null,
         select: Set<String>? = null
     ): TransactionResult {
+        val normalizedId = transactionId.removePrefix("0x")
 
         val queryParams = mutableMapOf<String, List<String>>()
         expand?.apply { queryParams["expand"] = toMultiValue(this, "csv") }
         select?.apply { queryParams["select"] = toMultiValue(this, "csv") }
 
-        return client.get("$baseUrl/transaction_results/$transactionId") {
+        return client.get("$baseUrl/transaction_results/$normalizedId") {
             queryParams.forEach { queryParam ->
                 queryParam.value.forEach { value ->
                     parameter(queryParam.key, value)
@@ -42,12 +43,13 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
         expand: Set<String>? = null,
         select: Set<String>? = null
     ): Transaction {
+        val normalizedId = id.removePrefix("0x")
 
         val queryParams = mutableMapOf<String, List<String>>()
         expand?.apply { queryParams["expand"] = toMultiValue(this, "csv") }
         select?.apply { queryParams["select"] = toMultiValue(this, "csv") }
 
-        val result = client.get("$baseUrl/transactions/$id") {
+        val result = client.get("$baseUrl/transactions/$normalizedId") {
             queryParams.forEach { queryParam ->
                 queryParam.value.forEach { value ->
                     parameter(queryParam.key, value)
@@ -80,11 +82,11 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
     }
 
     internal suspend fun getTransactionResult(transactionId: String): TransactionResult {
-        return requestTransactionResultById(transactionId)
+        return requestTransactionResultById(transactionId.removePrefix("0x"))
     }
 
     internal suspend fun getTransaction(transactionId: String): Transaction {
-        return requestTransactionById(transactionId)
+        return requestTransactionById(transactionId.removePrefix("0x"))
     }
 
     internal suspend fun sendTransaction(request: Transaction): Transaction {
@@ -92,13 +94,14 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
     }
 
     internal suspend fun waitForSeal(transactionId: String): TransactionResult {
+        val normalizedId = transactionId.removePrefix("0x")
         var attempts = 0
         val maxAttempts = 60 // Increased to 60 attempts (up to 2 minutes)
         var lastError: Exception? = null
 
         while (attempts < maxAttempts) {
             try {
-                val result = getTransactionResult(transactionId)
+                val result = getTransactionResult(normalizedId)
                 when (result.status ?: TransactionStatus.EMPTY) {
                     TransactionStatus.EXECUTED -> {
                         // Transaction is executed, return result
@@ -142,11 +145,5 @@ internal class TransactionsApi(val baseUrl: String) : ApiBase() {
             "Transaction not finalized after $maxAttempts attempts"
         }
         throw RuntimeException(timeoutMessage)
-    }
-
-    private suspend fun resolveKeyIndex(address: FlowAddress, accountsApi: AccountsApi): Int {
-        val account = accountsApi.getAccount(address.base16Value)
-        return account.keys?.firstOrNull()?.index?.toInt()
-            ?: throw IllegalStateException("No keys found for address $address")
     }
 }
