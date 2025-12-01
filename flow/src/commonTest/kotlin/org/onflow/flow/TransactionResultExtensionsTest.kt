@@ -13,13 +13,13 @@ class TransactionResultExtensionsTest {
 
     @Test
     fun `getCreatedAddress should return address when event present`() {
-        val payload = Cadence.eventValue(
+        val payload = Cadence.Value.EventValue(
             Cadence.CompositeValue(
                 id = "flow.AccountCreated",
                 fields = listOf(
                     Cadence.CompositeAttribute(
                         name = "address",
-                        value = Cadence.address("0xabc")
+                        value = Cadence.address("0x1234567890abcdef")
                     )
                 )
             )
@@ -42,7 +42,9 @@ class TransactionResultExtensionsTest {
             events = listOf(event)
         )
 
-        assertEquals("0xabc", txResult.getCreatedAddress())
+        val test = txResult.findEvent("flow.AccountCreated")
+        val test2 = test?.getField<String>("address")
+        assertEquals("0x1234567890abcdef", txResult.getCreatedAddress())
     }
 
     @Test
