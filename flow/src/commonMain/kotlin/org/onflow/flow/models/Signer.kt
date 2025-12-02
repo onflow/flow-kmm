@@ -3,11 +3,12 @@ package org.onflow.flow.models
 interface Signer {
     var address: String
     var keyIndex: Int
-    suspend fun sign(transaction: Transaction? = null, bytes: ByteArray): ByteArray
-    suspend fun sign(bytes: ByteArray): ByteArray
-    suspend fun signWithDomain(bytes: ByteArray, domain: ByteArray): ByteArray = sign(domain + bytes)
+    suspend fun sign(bytes: ByteArray, transaction: Transaction? = null): ByteArray
+    suspend fun signWithDomain(bytes: ByteArray, domain: ByteArray, transaction: Transaction? = null): ByteArray =
+        sign(domain + bytes, transaction)
     suspend fun signAsUser(bytes: ByteArray): ByteArray = signWithDomain(bytes, DomainTag.User.bytes)
-    suspend fun signAsTransaction(bytes: ByteArray): ByteArray = signWithDomain(bytes, DomainTag.Transaction.bytes)
+    suspend fun signAsTransaction(bytes: ByteArray, transaction: Transaction? = null): ByteArray =
+        signWithDomain(bytes, DomainTag.Transaction.bytes, transaction)
 }
 
 interface Hasher {

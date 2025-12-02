@@ -31,7 +31,7 @@ actual class ContractAddressRegister {
                     }
 
                     if (network != null) {
-                        addresses[network] = contractAddresses.mapKeys { it.key.removePrefix("0x") }.toMutableMap()
+                        addresses[network] = contractAddresses.mapKeys { it.key.removePrefix("0x").uppercase() }.toMutableMap()
                     } else {
                         println("Warning: Invalid network name: $networkStr")
                     }
@@ -58,7 +58,10 @@ actual class ContractAddressRegister {
     }
     
     actual fun getAddress(contract: String, network: ChainId): String? {
-        return addresses[network]?.get(contract)
+        val key = contract.removePrefix("0x")
+        val candidateKeys = listOf(key, key.uppercase(), key.lowercase())
+        val map = addresses[network] ?: return null
+        return candidateKeys.mapNotNull { map[it.uppercase()] ?: map[it] }.firstOrNull()
     }
     
     actual fun getAddresses(network: ChainId): Map<String, String> {
@@ -76,8 +79,10 @@ actual class ContractAddressRegister {
     actual fun resolveImports(code: String, network: ChainId): String {
         var result = code
         getAddresses(network).forEach { (contract, address) ->
-            val pattern = "\\b0x${Regex.escape(contract)}\\b"
-            result = result.replace(Regex(pattern), address)
+            val normalized = contract.removePrefix("0x")
+            // Only replace 0x<Contract> placeholders (case-insensitive), avoid bare "evm" or "EVM.foo"
+            val pattern = Regex("\\b0x${Regex.escape(normalized)}\\b", RegexOption.IGNORE_CASE)
+            result = result.replace(pattern, address)
         }
         return result
     }

@@ -228,11 +228,7 @@ internal class SignerImpl(
         Crypto.checkHashAlgoForSigning(hashAlgo)
     }
 
-    override suspend fun sign(transaction: Transaction?, bytes: ByteArray): ByteArray {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun sign(bytes: ByteArray): ByteArray {
+    override suspend fun sign(bytes: ByteArray, transaction: Transaction?): ByteArray {
         // check the private key is of the correct type
         val ecSK = if (privateKey.privateKey is ECPrivateKey) {
             privateKey.privateKey

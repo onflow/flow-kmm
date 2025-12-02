@@ -18,6 +18,9 @@ data class FlowAddress(val bytes: ByteArray) {
 
     val base16Value: String get() = bytes.toHexString()
 
+    // Alias for base16Value for more idiomatic naming
+    val hex: String get() = base16Value
+
     val formatted: String = "0x$base16Value"
 
     override fun hashCode(): Int {
