@@ -5,7 +5,7 @@
     <key>CFBundleExecutable</key>
     <string>Flow</string>
     <key>CFBundleIdentifier</key>
-    <string>org.onflow.flow.Flow</string>
+    <string>Flow</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>

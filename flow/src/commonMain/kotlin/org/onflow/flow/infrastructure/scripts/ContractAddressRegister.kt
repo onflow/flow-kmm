@@ -6,7 +6,7 @@ import org.onflow.flow.ChainId
  * Contract Address Register manages the mapping of contract names to their addresses
  * for different Flow networks (mainnet, testnet)
  */
-expect class ContractAddressRegister {
+expect class ContractAddressRegister() {
     /**
      * Contract addresses for each network
      */

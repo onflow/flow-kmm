@@ -45,7 +45,8 @@ actual class ContractAddressRegister {
     }
 
     actual fun importAddresses(network: ChainId, dict: Map<String, String>) {
-        addresses.getOrPut(network) { mutableMapOf() }.putAll(dict)
+        val normalized = dict.mapKeys { it.key.removePrefix("0x").uppercase() }
+        addresses.getOrPut(network) { mutableMapOf() }.putAll(normalized)
     }
 
     actual fun importAddresses(network: ChainId, json: String) {

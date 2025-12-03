@@ -6,9 +6,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class FlowAddressRegistryCompanion, FlowFlowAddress, FlowChainId, FlowAddressRegistry, FlowChainIdMainnet, FlowChainIdCompanion, FlowChainIdCanary, FlowChainIdCustom, FlowChainIdEmulator, FlowChainIdTestnet, FlowCadenceValue, FlowAccount, FlowBlock, FlowBlockHeader, FlowCollection, FlowBlockEvents, FlowExecutionResult, FlowTransaction, FlowTransactionResult, FlowApiBaseCompanion, FlowKtor_client_coreHttpClient, FlowKotlinByteArray, FlowBase64ByteArraySerializer, FlowBase64ByteArray, FlowBigDecimalCadenceSerializer, FlowBignumBigDecimal, FlowBigIntegerCadenceSerializer, FlowBignumBigInteger, FlowByteCadenceSerializer, FlowCadenceCompanion, FlowCadenceType, FlowCadenceCapabilityCompanion, FlowCadenceCapability, FlowCadenceValueAddressValue, FlowCadenceValueArrayValue, FlowCadenceValueBooleanValue, FlowCadenceValueCapabilityValue, FlowCadenceValueContractValue, FlowCadenceCompositeValue, FlowCadenceValueDictionaryValue, FlowCadenceDictionaryFieldEntry, FlowCadenceValueFix64Value, FlowCadenceValueIntValue, FlowCadenceValueInt128Value, FlowCadenceValueInt16Value, FlowCadenceValueInt256Value, FlowCadenceValueInt32Value, FlowCadenceValueInt64Value, FlowCadenceValueInt8Value, FlowCadenceValueOptionalValue, FlowCadenceValuePathValue, FlowCadencePath, FlowCadencePathDomain, FlowCadenceValueStringValue, FlowCadenceValueStructValue, FlowCadenceValueTypeValue, FlowCadenceKind, FlowCadenceTypeEntry, FlowCadenceValueUFix64Value, FlowCadenceValueUIntValue, FlowCadenceValueUInt128Value, FlowCadenceValueUInt16Value, FlowCadenceValueUInt256Value, FlowCadenceValueUInt32Value, FlowCadenceValueUInt64Value, FlowCadenceValueUInt8Value, FlowCadenceValueVoidValue, FlowCadenceValueWord16Value, FlowCadenceValueWord32Value, FlowCadenceValueWord64Value, FlowCadenceValueWord8Value, FlowCadenceCompositeAttributeCompanion, FlowCadenceCompositeAttribute, FlowCadenceCompositeValueCompanion, FlowKotlinPair<__covariant A, __covariant B>, FlowCadenceDictionaryFieldEntryCompanion, FlowCadenceKindCompanion, FlowCadencePathCompanion, FlowKotlinEnumCompanion, FlowKotlinEnum<E>, FlowCadencePathDomainCompanion, FlowKotlinArray<T>, FlowCadenceTypeCompanion, FlowKotlinx_serialization_jsonJson, FlowCadenceTypeEntryCompanion, FlowCadenceValueCompanion, FlowCadenceValueAddressValueCompanion, FlowCadenceValueArrayValueCompanion, FlowCadenceValueBooleanValueCompanion, FlowCadenceValueCapabilityValueCompanion, FlowKotlinx_serialization_jsonJsonElement, FlowCadenceValueContractValueCompanion, FlowCadenceValueDictionaryValueCompanion, FlowCadenceValueEnumValueCompanion, FlowCadenceValueEnumValue, FlowCadenceValueEventValueCompanion, FlowCadenceValueEventValue, FlowCadenceValueFix64ValueCompanion, FlowCadenceValueInt128ValueCompanion, FlowCadenceValueInt16ValueCompanion, FlowCadenceValueInt256ValueCompanion, FlowCadenceValueInt32ValueCompanion, FlowCadenceValueInt64ValueCompanion, FlowCadenceValueInt8ValueCompanion, FlowCadenceValueIntValueCompanion, FlowCadenceValueOptionalValueCompanion, FlowCadenceValuePathValueCompanion, FlowCadenceValueResourceValueCompanion, FlowCadenceValueResourceValue, FlowCadenceValueStringValueCompanion, FlowCadenceValueStructValueCompanion, FlowCadenceValueTypeValueCompanion, FlowCadenceValueUFix64ValueCompanion, FlowCadenceValueUInt128ValueCompanion, FlowCadenceValueUInt16ValueCompanion, FlowCadenceValueUInt256ValueCompanion, FlowCadenceValueUInt32ValueCompanion, FlowCadenceValueUInt64ValueCompanion, FlowCadenceValueUInt8ValueCompanion, FlowCadenceValueUIntValueCompanion, FlowKotlinUnit, FlowCadenceValueVoidValueCompanion, FlowCadenceValueWord16ValueCompanion, FlowCadenceValueWord32ValueCompanion, FlowCadenceValueWord64ValueCompanion, FlowCadenceValueWord8ValueCompanion, FlowCadenceTypeSerializer, FlowDoubleCadenceSerializer, FlowFixedPointFormatter, FlowIntCadenceSerializer, FlowLongCadenceSerializer, FlowShortCadenceSerializer, FlowUByteCadenceSerializer, FlowUIntCadenceSerializer, FlowULongCadenceSerializer, FlowUShortCadenceSerializer, FlowAccountExpandable, FlowAccountPublicKey, FlowLinks, FlowAccountCompanion, FlowAccountExpandableCompanion, FlowSigningAlgorithm, FlowHashingAlgorithm, FlowAccountPublicKeyCompanion, FlowAggregatedSignatureCompanion, FlowAggregatedSignature, FlowBase64HexSerializer, FlowBase64UFT8Serializer, FlowBlockExpandable, FlowBlockPayload, FlowBlockCompanion, FlowEvent, FlowBlockEventsCompanion, FlowBlockExpandableCompanion, FlowBlockHeaderCompanion, FlowBlockHeightOneOfCompanion, FlowBlockHeightOneOf, FlowCollectionGuarantee, FlowBlockSeal, FlowBlockPayloadCompanion, FlowBlockSealCompanion, FlowCadenceBase64Serializer, FlowChunkCompanion, FlowChunk, FlowCollectionExpandable, FlowCollectionCompanion, FlowCollectionExpandableCompanion, FlowCollectionGuaranteeCompanion, FlowCompareTransactionSignatureCompanion, FlowTransactionSignature, FlowDomainTag, FlowDomainTagAccountProof, FlowDomainTagCustom, FlowDomainTagTransaction, FlowDomainTagUser, FlowErrorCompanion, FlowError, FlowEventCompanion, FlowExecutionResultCompanion, FlowFlowAddressCompanion, FlowHashingAlgorithmCompanion, FlowLinksCompanion, FlowProposalKeyCompanion, FlowProposalKey, FlowScriptsPostRequestCompanion, FlowScriptsPostRequest, FlowScriptsPostResponseCompanion, FlowScriptsPostResponse, FlowSigningAlgorithmCompanion, FlowStringIntSerializer, FlowTransactionExpandable, FlowTransactionCompanion, FlowTransactionExecutionCompanion, FlowTransactionExecution, FlowTransactionExpandableCompanion, FlowTransactionStatus, FlowTransactionResultCompanion, FlowTransactionSignatureCompanion, FlowTransactionStatusCompanion, FlowKotlinThrowable, FlowKotlinException, FlowKotlinRuntimeException, FlowKotlinIllegalArgumentException, FlowRLPType, FlowRLPElement, FlowRLPList, FlowBignumBigIntegerCompanion, FlowBignumBigIntegerQuotientAndRemainder, FlowBignumSign, FlowBignumBigIntegerBigIntegerRange, FlowBignumBigIntegerSqareRootAndRemainder, FlowBignumModularBigInteger, FlowKotlinByteIterator, FlowFlowApi, FlowKotlinIllegalStateException, FlowKtor_client_coreHttpClientEngineConfig, FlowKtor_client_coreHttpClientConfig<T>, FlowKtor_eventsEvents, FlowKtor_client_coreHttpReceivePipeline, FlowKtor_client_coreHttpRequestPipeline, FlowKtor_client_coreHttpResponsePipeline, FlowKtor_client_coreHttpSendPipeline, FlowKotlinx_serialization_coreSerializersModule, FlowKotlinx_serialization_coreSerialKind, FlowKotlinNothing, FlowBignumBigDecimalCompanion, FlowBignumDecimalMode, FlowBignumRoundingMode, FlowKotlinx_serialization_jsonJsonDefault, FlowKotlinx_serialization_jsonJsonConfiguration, FlowKotlinx_serialization_jsonJsonElementCompanion, FlowBignumModularBigIntegerCompanion, FlowBignumModularQuotientAndRemainder, FlowKtor_client_coreHttpRequestData, FlowKtor_client_coreHttpResponseData, FlowKotlinx_coroutines_coreCoroutineDispatcher, FlowKtor_client_coreProxyConfig, FlowKtor_utilsAttributeKey<T>, FlowKtor_eventsEventDefinition<T>, FlowKtor_utilsPipelinePhase, FlowKtor_utilsPipeline<TSubject, TContext>, FlowKtor_client_coreHttpReceivePipelinePhases, FlowKtor_client_coreHttpResponse, FlowKtor_client_coreHttpRequestPipelinePhases, FlowKtor_client_coreHttpRequestBuilder, FlowKtor_client_coreHttpResponsePipelinePhases, FlowKtor_client_coreHttpResponseContainer, FlowKtor_client_coreHttpClientCall, FlowKtor_client_coreHttpSendPipelinePhases, FlowBignumDecimalModeCompanion, FlowKotlinx_serialization_jsonClassDiscriminatorMode, FlowKtor_httpUrl, FlowKtor_httpHttpMethod, FlowKtor_httpOutgoingContent, FlowKtor_httpHttpStatusCode, FlowKtor_utilsGMTDate, FlowKtor_httpHttpProtocolVersion, FlowKotlinAbstractCoroutineContextElement, FlowKotlinx_coroutines_coreCoroutineDispatcherKey, FlowKtor_utilsTypeInfo, FlowKtor_httpHeadersBuilder, FlowKtor_client_coreHttpRequestBuilderCompanion, FlowKtor_httpURLBuilder, FlowKtor_client_coreHttpClientCallCompanion, FlowKtor_httpUrlCompanion, FlowKtor_httpURLProtocol, FlowKtor_httpHttpMethodCompanion, FlowKtor_httpContentType, FlowKotlinCancellationException, FlowKtor_httpHttpStatusCodeCompanion, FlowKtor_utilsWeekDay, FlowKtor_utilsMonth, FlowKtor_utilsGMTDateCompanion, FlowKtor_httpHttpProtocolVersionCompanion, FlowKotlinAbstractCoroutineContextKey<B, E>, FlowKtor_utilsStringValuesBuilderImpl, FlowKtor_httpURLBuilderCompanion, FlowKtor_httpURLProtocolCompanion, FlowKtor_httpHeaderValueParam, FlowKtor_httpHeaderValueWithParametersCompanion, FlowKtor_httpHeaderValueWithParameters, FlowKtor_httpContentTypeCompanion, FlowKtor_utilsWeekDayCompanion, FlowKtor_utilsMonthCompanion, FlowKotlinKTypeProjection, FlowKotlinx_io_coreBuffer, FlowKotlinKVariance, FlowKotlinKTypeProjectionCompanion;
+@class FlowAddressRegistryCompanion, FlowFlowAddress, FlowAddressRegistry, FlowCadenceTargetType, FlowCadenceValue, FlowCadenceTarget, FlowKotlinEnumCompanion, FlowKotlinEnum<E>, FlowKotlinArray<T>, FlowChainIdCompanion, FlowChainId, FlowChainIdCanary, FlowChainIdCustom, FlowChainIdEmulator, FlowChainIdMainnet, FlowChainIdTestnet, FlowBlockStatus, FlowAccount, FlowBlock, FlowBlockHeader, FlowCollection, FlowBlockEvents, FlowExecutionResult, FlowTransaction, FlowTransactionResult, FlowKotlinByteArray, FlowBignumBigInteger, FlowApiBaseCompanion, FlowApiBase, FlowChildAccountThumbnail, FlowChildAccountMetadataCompanion, FlowChildAccountMetadata, FlowChildAccountThumbnailCompanion, FlowStakingNodeCompanion, FlowStakingNode, FlowCrypto, FlowPrivateKey, FlowSigningAlgorithm, FlowKeyPair, FlowHashingAlgorithm, FlowPublicKey, FlowKtor_client_coreHttpClient, FlowBase64ByteArraySerializer, FlowBase64ByteArray, FlowBigDecimalCadenceSerializer, FlowBignumBigDecimal, FlowBigIntegerCadenceSerializer, FlowByteCadenceSerializer, FlowCadenceCompanion, FlowCadenceType, FlowCadenceCapabilityCompanion, FlowCadenceCapability, FlowCadenceValueAddressValue, FlowCadenceValueArrayValue, FlowCadenceValueBooleanValue, FlowCadenceValueCapabilityValue, FlowCadenceValueContractValue, FlowCadenceCompositeValue, FlowCadenceValueDictionaryValue, FlowCadenceDictionaryFieldEntry, FlowCadenceValueFix64Value, FlowCadenceValueIntValue, FlowCadenceValueInt128Value, FlowCadenceValueInt16Value, FlowCadenceValueInt256Value, FlowCadenceValueInt32Value, FlowCadenceValueInt64Value, FlowCadenceValueInt8Value, FlowCadenceValueOptionalValue, FlowCadenceValuePathValue, FlowCadencePath, FlowCadencePathDomain, FlowCadenceValueStringValue, FlowCadenceValueStructValue, FlowCadenceValueTypeValue, FlowCadenceKind, FlowCadenceTypeEntry, FlowCadenceValueUFix64Value, FlowCadenceValueUIntValue, FlowCadenceValueUInt128Value, FlowCadenceValueUInt16Value, FlowCadenceValueUInt256Value, FlowCadenceValueUInt32Value, FlowCadenceValueUInt64Value, FlowCadenceValueUInt8Value, FlowCadenceValueVoidValue, FlowCadenceValueWord16Value, FlowCadenceValueWord32Value, FlowCadenceValueWord64Value, FlowCadenceValueWord8Value, FlowCadenceCompositeAttributeCompanion, FlowCadenceCompositeAttribute, FlowCadenceCompositeValueCompanion, FlowKotlinPair<__covariant A, __covariant B>, FlowCadenceDictionaryFieldEntryCompanion, FlowCadenceKindCompanion, FlowCadencePathCompanion, FlowCadencePathDomainCompanion, FlowCadenceTypeCompanion, FlowKotlinx_serialization_jsonJson, FlowCadenceTypeEntryCompanion, FlowCadenceValueCompanion, FlowCadenceValueAddressValueCompanion, FlowCadenceValueArrayValueCompanion, FlowCadenceValueBooleanValueCompanion, FlowCadenceValueCapabilityValueCompanion, FlowKotlinx_serialization_jsonJsonElement, FlowCadenceValueContractValueCompanion, FlowCadenceValueDictionaryValueCompanion, FlowCadenceValueEnumValueCompanion, FlowCadenceValueEnumValue, FlowCadenceValueEventValueCompanion, FlowCadenceValueEventValue, FlowCadenceValueFix64ValueCompanion, FlowCadenceValueInt128ValueCompanion, FlowCadenceValueInt16ValueCompanion, FlowCadenceValueInt256ValueCompanion, FlowCadenceValueInt32ValueCompanion, FlowCadenceValueInt64ValueCompanion, FlowCadenceValueInt8ValueCompanion, FlowCadenceValueIntValueCompanion, FlowCadenceValueOptionalValueCompanion, FlowCadenceValuePathValueCompanion, FlowCadenceValueResourceValueCompanion, FlowCadenceValueResourceValue, FlowCadenceValueStringValueCompanion, FlowCadenceValueStructValueCompanion, FlowCadenceValueTypeValueCompanion, FlowCadenceValueUFix64ValueCompanion, FlowCadenceValueUInt128ValueCompanion, FlowCadenceValueUInt16ValueCompanion, FlowCadenceValueUInt256ValueCompanion, FlowCadenceValueUInt32ValueCompanion, FlowCadenceValueUInt64ValueCompanion, FlowCadenceValueUInt8ValueCompanion, FlowCadenceValueUIntValueCompanion, FlowKotlinUnit, FlowCadenceValueVoidValueCompanion, FlowCadenceValueWord16ValueCompanion, FlowCadenceValueWord32ValueCompanion, FlowCadenceValueWord64ValueCompanion, FlowCadenceValueWord8ValueCompanion, FlowCadenceErrorCodeCompanion, FlowCadenceErrorCode, FlowCadenceTypeSerializer, FlowDoubleCadenceSerializer, FlowFixedPointFormatter, FlowIntCadenceSerializer, FlowLongCadenceSerializer, FlowSafeStringSerializer, FlowSafeUIntCadenceSerializer, FlowSafeULongCadenceSerializer, FlowShortCadenceSerializer, FlowUByteCadenceSerializer, FlowUIntCadenceSerializer, FlowULongCadenceSerializer, FlowUShortCadenceSerializer, FlowAccountExpandable, FlowAccountPublicKey, FlowLinks, FlowAccountCompanion, FlowAccountExpandableCompanion, FlowAccountPublicKeyCompanion, FlowAggregatedSignatureCompanion, FlowAggregatedSignature, FlowBase64HexSerializer, FlowBase64UFT8Serializer, FlowBlockExpandable, FlowBlockPayload, FlowBlockCompanion, FlowEvent, FlowBlockEventsCompanion, FlowBlockExpandableCompanion, FlowBlockHeaderCompanion, FlowCollectionGuarantee, FlowBlockSeal, FlowBlockPayloadCompanion, FlowBlockSealCompanion, FlowBlockStatusCompanion, FlowCadenceBase64Serializer, FlowChunkCompanion, FlowChunk, FlowCollectionExpandable, FlowCollectionCompanion, FlowCollectionExpandableCompanion, FlowCollectionGuaranteeCompanion, FlowDomainTag, FlowDomainTagAccountProof, FlowDomainTagCustom, FlowDomainTagTransaction, FlowDomainTagUser, FlowKotlinThrowable, FlowKotlinException, FlowErrorCompanion, FlowEventCompanion, FlowExecutionResultCompanion, FlowFlowAddressCompanion, FlowHashingAlgorithmCompanion, FlowLinksCompanion, FlowProposalKeyCompanion, FlowProposalKey, FlowScriptsErrorResponseCompanion, FlowScriptsErrorResponse, FlowScriptsPostRequestCompanion, FlowScriptsPostRequest, FlowScriptsPostResponseCompanion, FlowScriptsPostResponse, FlowSigningAlgorithmCompanion, FlowStringIntSerializer, FlowTransactionSignature, FlowTransactionExpandable, FlowTransactionCompanion, FlowTransactionBuilder, FlowTransactionExecutionCompanion, FlowTransactionExecution, FlowTransactionExpandableCompanion, FlowTransactionStatus, FlowTransactionResultCompanion, FlowTransactionSignatureCompanion, FlowTransactionStatusCompanion, FlowKotlinRuntimeException, FlowKotlinIllegalArgumentException, FlowRLPType, FlowRLPElement, FlowRLPList, FlowAccountStatusPayloadCompanion, FlowAccountStatusPayload, FlowApprovalSignatureCompanion, FlowApprovalSignature, FlowCollectionGuarantee_, FlowBlockSeal_, FlowBlockDetailsCompanion, FlowBlockDetails, FlowBlockDigestCollectionCompanion, FlowBlockDigestCollection, FlowBlockDigestPayloadCompanion, FlowBlockDigestPayload, FlowBlockEventPayloadCompanion, FlowBlockEventPayload, FlowBlockHeaderPayloadCompanion, FlowBlockHeaderPayload, FlowBlockSeal_Companion, FlowCollectionGuarantee_Companion, FlowEventsPayloadCompanion, FlowEventsPayload, FlowFlowWebSocketClientCompanion, FlowFlowWebSocketSubscription, FlowFlowWebSocketClientSubscriptionResult, FlowFlowWebSocketErrorCompanion, FlowFlowWebSocketError, FlowFlowWebSocketRequestCompanion, FlowFlowWebSocketRequest, FlowFlowWebSocketResponseCompanion, FlowFlowWebSocketResponse, FlowFlowWebSocketSubscriptionCompanion, FlowFlowWebSocketSubscriptionListCompanion, FlowFlowWebSocketSubscriptionList, FlowFlowWebSocketTopicCompanion, FlowFlowWebSocketTopic, FlowSendTransactionStatusPayloadCompanion, FlowSendTransactionStatusPayload, FlowTransactionStatusPayloadCompanion, FlowTransactionStatusPayload, FlowBignumBigIntegerCompanion, FlowBignumBigIntegerQuotientAndRemainder, FlowBignumSign, FlowBignumBigIntegerBigIntegerRange, FlowBignumBigIntegerSqareRootAndRemainder, FlowBignumModularBigInteger, FlowKotlinByteIterator, FlowFlowApi, FlowTransactionDSLBuilder, FlowScriptBuilder, FlowKotlinRegex, FlowKotlinIllegalStateException, FlowKtor_client_coreHttpClientEngineConfig, FlowKtor_client_coreHttpClientConfig<T>, FlowKtor_eventsEvents, FlowKtor_client_coreHttpReceivePipeline, FlowKtor_client_coreHttpRequestPipeline, FlowKtor_client_coreHttpResponsePipeline, FlowKtor_client_coreHttpSendPipeline, FlowKotlinx_serialization_coreSerializersModule, FlowKotlinx_serialization_coreSerialKind, FlowKotlinNothing, FlowBignumBigDecimalCompanion, FlowBignumDecimalMode, FlowBignumRoundingMode, FlowKotlinx_serialization_jsonJsonDefault, FlowKotlinx_serialization_jsonJsonConfiguration, FlowKotlinx_serialization_jsonJsonElementCompanion, FlowBignumModularBigIntegerCompanion, FlowBignumModularQuotientAndRemainder, FlowKotlinRegexOption, FlowKotlinRegexCompanion, FlowKtor_client_coreHttpRequestData, FlowKtor_client_coreHttpResponseData, FlowKotlinx_coroutines_coreCoroutineDispatcher, FlowKtor_client_coreProxyConfig, FlowKtor_utilsAttributeKey<T>, FlowKtor_eventsEventDefinition<T>, FlowKtor_utilsPipelinePhase, FlowKtor_utilsPipeline<TSubject, TContext>, FlowKtor_client_coreHttpReceivePipelinePhases, FlowKtor_client_coreHttpResponse, FlowKtor_client_coreHttpRequestPipelinePhases, FlowKtor_client_coreHttpRequestBuilder, FlowKtor_client_coreHttpResponsePipelinePhases, FlowKtor_client_coreHttpResponseContainer, FlowKtor_client_coreHttpClientCall, FlowKtor_client_coreHttpSendPipelinePhases, FlowBignumDecimalModeCompanion, FlowKotlinx_serialization_jsonClassDiscriminatorMode, FlowKotlinMatchResultDestructured, FlowKotlinIntRange, FlowKtor_httpUrl, FlowKtor_httpHttpMethod, FlowKtor_httpOutgoingContent, FlowKtor_httpHttpStatusCode, FlowKtor_utilsGMTDate, FlowKtor_httpHttpProtocolVersion, FlowKotlinAbstractCoroutineContextElement, FlowKotlinx_coroutines_coreCoroutineDispatcherKey, FlowKtor_httpHeadersBuilder, FlowKtor_client_coreHttpRequestBuilderCompanion, FlowKtor_httpURLBuilder, FlowKtor_utilsTypeInfo, FlowKtor_client_coreHttpClientCallCompanion, FlowKotlinMatchGroup, FlowKotlinIntProgressionCompanion, FlowKotlinIntIterator, FlowKotlinIntProgression, FlowKotlinIntRangeCompanion, FlowKtor_httpUrlCompanion, FlowKtor_httpURLProtocol, FlowKtor_httpHttpMethodCompanion, FlowKtor_httpContentType, FlowKotlinCancellationException, FlowKtor_httpHttpStatusCodeCompanion, FlowKtor_utilsGMTDateCompanion, FlowKtor_utilsWeekDay, FlowKtor_utilsMonth, FlowKtor_httpHttpProtocolVersionCompanion, FlowKotlinAbstractCoroutineContextKey<B, E>, FlowKtor_ioMemory, FlowKtor_ioChunkBuffer, FlowKtor_ioBuffer, FlowKtor_ioByteReadPacket, FlowKtor_utilsStringValuesBuilderImpl, FlowKtor_httpURLBuilderCompanion, FlowKtor_httpURLProtocolCompanion, FlowKtor_httpHeaderValueParam, FlowKtor_httpHeaderValueWithParametersCompanion, FlowKtor_httpHeaderValueWithParameters, FlowKtor_httpContentTypeCompanion, FlowKtor_utilsWeekDayCompanion, FlowKtor_utilsMonthCompanion, FlowKtor_ioMemoryCompanion, FlowKtor_ioBufferCompanion, FlowKtor_ioChunkBufferCompanion, FlowKtor_ioInputCompanion, FlowKtor_ioInput, FlowKtor_ioByteReadPacketCompanion, FlowKotlinKTypeProjection, FlowKotlinKVariance, FlowKotlinKTypeProjectionCompanion;
 
-@protocol FlowChainIdProvider, FlowKotlinx_serialization_coreEncoder, FlowKotlinx_serialization_coreSerialDescriptor, FlowKotlinx_serialization_coreSerializationStrategy, FlowKotlinx_serialization_coreDecoder, FlowKotlinx_serialization_coreDeserializationStrategy, FlowKotlinx_serialization_coreKSerializer, FlowKotlinComparable, FlowKotlinComparator, FlowSigner, FlowBignumBigNumber, FlowBignumBigNumberCreator, FlowBignumBitwiseCapable, FlowBignumByteArraySerializable, FlowKotlinCoroutineContext, FlowKotlinx_coroutines_coreCoroutineScope, FlowKtor_ioCloseable, FlowKtor_client_coreHttpClientEngine, FlowKtor_client_coreHttpClientEngineCapability, FlowKtor_utilsAttributes, FlowKotlinx_serialization_coreCompositeEncoder, FlowKotlinAnnotation, FlowKotlinx_serialization_coreCompositeDecoder, FlowKotlinIterator, FlowKotlinx_serialization_coreSerialFormat, FlowKotlinx_serialization_coreStringFormat, FlowBignumBigNumberUtil, FlowBignumByteArrayDeserializable, FlowKotlinClosedRange, FlowKotlinIterable, FlowKotlinCoroutineContextElement, FlowKotlinCoroutineContextKey, FlowKtor_client_coreHttpClientPlugin, FlowKotlinx_coroutines_coreDisposableHandle, FlowKotlinSuspendFunction2, FlowKotlinx_serialization_coreSerializersModuleCollector, FlowKotlinKClass, FlowKotlinx_serialization_jsonJsonNamingStrategy, FlowKtor_httpHeaders, FlowKotlinx_coroutines_coreJob, FlowKotlinContinuation, FlowKotlinContinuationInterceptor, FlowKotlinx_coroutines_coreRunnable, FlowKotlinFunction, FlowKtor_httpHttpMessage, FlowKtor_ioByteReadChannel, FlowKtor_httpHttpMessageBuilder, FlowKtor_client_coreHttpRequest, FlowKotlinKDeclarationContainer, FlowKotlinKAnnotatedElement, FlowKotlinKClassifier, FlowKtor_httpParameters, FlowKotlinMapEntry, FlowKtor_utilsStringValues, FlowKotlinx_coroutines_coreChildHandle, FlowKotlinx_coroutines_coreChildJob, FlowKotlinSequence, FlowKotlinx_coroutines_coreSelectClause0, FlowKotlinKType, FlowKotlinx_io_coreSource, FlowKtor_utilsStringValuesBuilder, FlowKtor_httpParametersBuilder, FlowKotlinx_coroutines_coreParentJob, FlowKotlinx_coroutines_coreSelectInstance, FlowKotlinx_coroutines_coreSelectClause, FlowKotlinx_io_coreRawSink, FlowKotlinAutoCloseable, FlowKotlinx_io_coreRawSource, FlowKotlinx_io_coreSink;
+@protocol FlowChainIdProvider, FlowKotlinComparable, FlowKotlinx_serialization_coreKSerializer, FlowSigner, FlowKotlinx_serialization_coreEncoder, FlowKotlinx_serialization_coreSerialDescriptor, FlowKotlinx_serialization_coreSerializationStrategy, FlowKotlinx_serialization_coreDecoder, FlowKotlinx_serialization_coreDeserializationStrategy, FlowCadenceLoaderProtocol, FlowKotlinx_coroutines_coreFlow, FlowFlowWebSocketMessage, FlowBignumBigNumber, FlowBignumBigNumberCreator, FlowBignumBitwiseCapable, FlowBignumByteArraySerializable, FlowKotlinIterator, FlowKotlinCoroutineContext, FlowKotlinx_coroutines_coreCoroutineScope, FlowKtor_ioCloseable, FlowKtor_client_coreHttpClientEngine, FlowKtor_client_coreHttpClientEngineCapability, FlowKtor_utilsAttributes, FlowKotlinx_serialization_coreCompositeEncoder, FlowKotlinAnnotation, FlowKotlinx_serialization_coreCompositeDecoder, FlowKotlinx_serialization_coreSerialFormat, FlowKotlinx_serialization_coreStringFormat, FlowKotlinx_coroutines_coreFlowCollector, FlowBignumBigNumberUtil, FlowBignumByteArrayDeserializable, FlowKotlinClosedRange, FlowKotlinIterable, FlowKotlinMatchResult, FlowKotlinSequence, FlowKotlinCoroutineContextElement, FlowKotlinCoroutineContextKey, FlowKtor_client_coreHttpClientPlugin, FlowKotlinx_coroutines_coreDisposableHandle, FlowKotlinSuspendFunction2, FlowKotlinx_serialization_coreSerializersModuleCollector, FlowKotlinKClass, FlowKotlinx_serialization_jsonJsonNamingStrategy, FlowKotlinMatchGroupCollection, FlowKtor_httpHeaders, FlowKotlinx_coroutines_coreJob, FlowKotlinContinuation, FlowKotlinContinuationInterceptor, FlowKotlinx_coroutines_coreRunnable, FlowKotlinFunction, FlowKtor_httpHttpMessage, FlowKtor_ioByteReadChannel, FlowKtor_httpHttpMessageBuilder, FlowKtor_client_coreHttpRequest, FlowKotlinKDeclarationContainer, FlowKotlinKAnnotatedElement, FlowKotlinKClassifier, FlowKotlinCollection, FlowKotlinOpenEndRange, FlowKtor_httpParameters, FlowKotlinMapEntry, FlowKtor_utilsStringValues, FlowKotlinx_coroutines_coreChildHandle, FlowKotlinx_coroutines_coreChildJob, FlowKotlinx_coroutines_coreSelectClause0, FlowKtor_ioReadSession, FlowKotlinSuspendFunction1, FlowKotlinAppendable, FlowKtor_utilsStringValuesBuilder, FlowKtor_httpParametersBuilder, FlowKotlinKType, FlowKotlinx_coroutines_coreParentJob, FlowKotlinx_coroutines_coreSelectInstance, FlowKotlinx_coroutines_coreSelectClause, FlowKtor_ioObjectPool;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -150,14 +150,14 @@ __attribute__((swift_name("AddressRegistry")))
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (class, readonly, getter=companion) FlowAddressRegistryCompanion *companion __attribute__((swift_name("companion")));
-- (FlowFlowAddress * _Nullable)addressOfContract:(NSString *)contract chainId:(FlowChainId *)chainId __attribute__((swift_name("addressOf(contract:chainId:)")));
+- (FlowFlowAddress * _Nullable)addressOfContract:(NSString *)contract chainId:(id<FlowChainIdProvider>)chainId __attribute__((swift_name("addressOf(contract:chainId:)")));
 - (FlowAddressRegistry *)clear __attribute__((swift_name("clear()")));
-- (FlowAddressRegistry *)deregisterContract:(NSString *)contract chainId:(FlowChainId *)chainId __attribute__((swift_name("deregister(contract:chainId:)")));
-- (NSString *)processScriptScript:(NSString *)script chainId:(FlowChainId *)chainId addresses:(NSDictionary<NSString *, FlowFlowAddress *> *)addresses __attribute__((swift_name("processScript(script:chainId:addresses:)")));
+- (FlowAddressRegistry *)deregisterContract:(NSString *)contract chainId:(id<FlowChainIdProvider>)chainId __attribute__((swift_name("deregister(contract:chainId:)")));
+- (NSString *)processScriptScript:(NSString *)script chainId:(id<FlowChainIdProvider>)chainId addresses:(NSDictionary<NSString *, FlowFlowAddress *> *)addresses __attribute__((swift_name("processScript(script:chainId:addresses:)")));
 - (FlowAddressRegistry *)registerJsonString:(NSString *)jsonString __attribute__((swift_name("register(jsonString:)")));
-- (FlowAddressRegistry *)registerContract:(NSString *)contract address:(FlowFlowAddress *)address chainId:(FlowChainId *)chainId __attribute__((swift_name("register(contract:address:chainId:)")));
+- (FlowAddressRegistry *)registerContract:(NSString *)contract address:(FlowFlowAddress *)address chainId:(id<FlowChainIdProvider>)chainId __attribute__((swift_name("register(contract:address:chainId:)")));
 - (FlowAddressRegistry *)registerDefaults __attribute__((swift_name("registerDefaults()")));
-@property FlowChainIdMainnet *defaultChainId __attribute__((swift_name("defaultChainId")));
+@property id<FlowChainIdProvider> defaultChainId __attribute__((swift_name("defaultChainId")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -167,10 +167,12 @@ __attribute__((swift_name("AddressRegistry.Companion")))
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowAddressRegistryCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) NSString *EVM __attribute__((swift_name("EVM")));
 @property (readonly) NSString *FLOW_FEES __attribute__((swift_name("FLOW_FEES")));
 @property (readonly) NSString *FLOW_TABLE_STAKING __attribute__((swift_name("FLOW_TABLE_STAKING")));
 @property (readonly) NSString *FLOW_TOKEN __attribute__((swift_name("FLOW_TOKEN")));
 @property (readonly) NSString *FUNGIBLE_TOKEN __attribute__((swift_name("FUNGIBLE_TOKEN")));
+@property (readonly) NSString *HYBRID_CUSTODY __attribute__((swift_name("HYBRID_CUSTODY")));
 @property (readonly) NSString *LOCKED_TOKENS __attribute__((swift_name("LOCKED_TOKENS")));
 @property (readonly) NSString *NFT_STOREFRONT __attribute__((swift_name("NFT_STOREFRONT")));
 @property (readonly) NSString *NON_FUNGIBLE_TOKEN __attribute__((swift_name("NON_FUNGIBLE_TOKEN")));
@@ -178,15 +180,61 @@ __attribute__((swift_name("AddressRegistry.Companion")))
 @property (readonly) NSString *TOKEN_FORWARDING __attribute__((swift_name("TOKEN_FORWARDING")));
 @end
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CadenceTarget")))
+@interface FlowCadenceTarget : FlowBase
+- (instancetype)initWithCadenceBase64:(NSString *)cadenceBase64 type:(FlowCadenceTargetType *)type arguments:(NSArray<FlowCadenceValue *> *)arguments __attribute__((swift_name("init(cadenceBase64:type:arguments:)"))) __attribute__((objc_designated_initializer));
+- (FlowCadenceTarget *)doCopyCadenceBase64:(NSString *)cadenceBase64 type:(FlowCadenceTargetType *)type arguments:(NSArray<FlowCadenceValue *> *)arguments __attribute__((swift_name("doCopy(cadenceBase64:type:arguments:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSArray<FlowCadenceValue *> *arguments __attribute__((swift_name("arguments")));
+@property (readonly) NSString *cadenceBase64 __attribute__((swift_name("cadenceBase64")));
+@property (readonly) FlowCadenceTargetType *type __attribute__((swift_name("type")));
+@end
+
+__attribute__((swift_name("KotlinComparable")))
+@protocol FlowKotlinComparable
+@required
+- (int32_t)compareToOther:(id _Nullable)other __attribute__((swift_name("compareTo(other:)")));
+@end
+
+__attribute__((swift_name("KotlinEnum")))
+@interface FlowKotlinEnum<E> : FlowBase <FlowKotlinComparable>
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowKotlinEnumCompanion *companion __attribute__((swift_name("companion")));
+- (int32_t)compareToOther:(E)other __attribute__((swift_name("compareTo(other:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString *name __attribute__((swift_name("name")));
+@property (readonly) int32_t ordinal __attribute__((swift_name("ordinal")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CadenceTargetType")))
+@interface FlowCadenceTargetType : FlowKotlinEnum<FlowCadenceTargetType *>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (class, readonly) FlowCadenceTargetType *query __attribute__((swift_name("query")));
+@property (class, readonly) FlowCadenceTargetType *transaction __attribute__((swift_name("transaction")));
++ (FlowKotlinArray<FlowCadenceTargetType *> *)values __attribute__((swift_name("values()")));
+@property (class, readonly) NSArray<FlowCadenceTargetType *> *entries __attribute__((swift_name("entries")));
+@end
+
 __attribute__((swift_name("ChainIdProvider")))
 @protocol FlowChainIdProvider
 @required
 @property (readonly) NSString *baseUrl __attribute__((swift_name("baseUrl")));
 @property (readonly) NSString *description_ __attribute__((swift_name("description_")));
+@property (readonly) NSString *id __attribute__((swift_name("id")));
 @end
 
 __attribute__((swift_name("ChainId")))
 @interface FlowChainId : FlowBase <FlowChainIdProvider>
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (class, readonly, getter=companion) FlowChainIdCompanion *companion __attribute__((swift_name("companion")));
 @end
 
@@ -195,10 +243,13 @@ __attribute__((swift_name("ChainId.Canary")))
 @interface FlowChainIdCanary : FlowChainId
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 + (instancetype)canary __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowChainIdCanary *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *baseUrl __attribute__((swift_name("baseUrl")));
 @property (readonly) NSString *description_ __attribute__((swift_name("description_")));
+@property (readonly) NSString *id __attribute__((swift_name("id")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -214,13 +265,16 @@ __attribute__((swift_name("ChainId.Companion")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("ChainId.Custom")))
 @interface FlowChainIdCustom : FlowChainId
-- (instancetype)initWithBaseUrl:(NSString *)baseUrl description:(NSString *)description __attribute__((swift_name("init(baseUrl:description:)"))) __attribute__((objc_designated_initializer));
-- (FlowChainIdCustom *)doCopyBaseUrl:(NSString *)baseUrl description:(NSString *)description __attribute__((swift_name("doCopy(baseUrl:description:)")));
+- (instancetype)initWithId:(NSString *)id baseUrl:(NSString *)baseUrl description:(NSString *)description __attribute__((swift_name("init(id:baseUrl:description:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (FlowChainIdCustom *)doCopyId:(NSString *)id baseUrl:(NSString *)baseUrl description:(NSString *)description __attribute__((swift_name("doCopy(id:baseUrl:description:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) NSString *baseUrl __attribute__((swift_name("baseUrl")));
 @property (readonly) NSString *description_ __attribute__((swift_name("description_")));
+@property (readonly) NSString *id __attribute__((swift_name("id")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -228,10 +282,13 @@ __attribute__((swift_name("ChainId.Emulator")))
 @interface FlowChainIdEmulator : FlowChainId
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 + (instancetype)emulator __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowChainIdEmulator *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *baseUrl __attribute__((swift_name("baseUrl")));
 @property (readonly) NSString *description_ __attribute__((swift_name("description_")));
+@property (readonly) NSString *id __attribute__((swift_name("id")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -239,10 +296,13 @@ __attribute__((swift_name("ChainId.Mainnet")))
 @interface FlowChainIdMainnet : FlowChainId
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 + (instancetype)mainnet __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowChainIdMainnet *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *baseUrl __attribute__((swift_name("baseUrl")));
 @property (readonly) NSString *description_ __attribute__((swift_name("description_")));
+@property (readonly) NSString *id __attribute__((swift_name("id")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -250,10 +310,13 @@ __attribute__((swift_name("ChainId.Testnet")))
 @interface FlowChainIdTestnet : FlowChainId
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 + (instancetype)testnet __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowChainIdTestnet *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *baseUrl __attribute__((swift_name("baseUrl")));
 @property (readonly) NSString *description_ __attribute__((swift_name("description_")));
+@property (readonly) NSString *id __attribute__((swift_name("id")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -265,25 +328,25 @@ __attribute__((swift_name("FlowApi")))
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)executeScriptScript:(NSString *)script arguments:(NSArray<FlowCadenceValue *> * _Nullable)arguments blockId:(NSString * _Nullable)blockId blockHeight:(NSString * _Nullable)blockHeight completionHandler:(void (^)(FlowCadenceValue * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("executeScript(script:arguments:blockId:blockHeight:completionHandler:)")));
+- (void)executeScriptScript:(NSString *)script arguments:(NSArray<FlowCadenceValue *> * _Nullable)arguments blockId:(NSString * _Nullable)blockId blockHeight:(NSString * _Nullable)blockHeight blockStatus:(FlowBlockStatus *)blockStatus completionHandler:(void (^)(FlowCadenceValue * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("executeScript(script:arguments:blockId:blockHeight:blockStatus:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)getAccountAddress:(NSString *)address blockHeight:(NSString * _Nullable)blockHeight sealed:(BOOL)sealed completionHandler:(void (^)(FlowAccount * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getAccount(address:blockHeight:sealed:completionHandler:)")));
+- (void)getAccountAddress:(NSString *)address blockHeight:(NSString * _Nullable)blockHeight blockStatus:(FlowBlockStatus *)blockStatus completionHandler:(void (^)(FlowAccount * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getAccount(address:blockHeight:blockStatus:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)getBlockId:(NSString * _Nullable)id blockHeight:(NSString * _Nullable)blockHeight sealed:(BOOL)sealed completionHandler:(void (^)(FlowBlock * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getBlock(id:blockHeight:sealed:completionHandler:)")));
+- (void)getBlockId:(NSString * _Nullable)id blockHeight:(NSString * _Nullable)blockHeight blockStatus:(FlowBlockStatus *)blockStatus completionHandler:(void (^)(FlowBlock * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getBlock(id:blockHeight:blockStatus:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)getBlockHeaderId:(NSString * _Nullable)id blockHeight:(NSString * _Nullable)blockHeight sealed:(BOOL)sealed completionHandler:(void (^)(FlowBlockHeader * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getBlockHeader(id:blockHeight:sealed:completionHandler:)")));
+- (void)getBlockHeaderId:(NSString * _Nullable)id blockHeight:(NSString * _Nullable)blockHeight blockStatus:(FlowBlockStatus *)blockStatus completionHandler:(void (^)(FlowBlockHeader * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getBlockHeader(id:blockHeight:blockStatus:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
@@ -326,7 +389,52 @@ __attribute__((swift_name("FlowApi")))
  * Other uncaught Kotlin exceptions are fatal.
 */
 - (void)sendTransactionRequest:(FlowTransaction *)request completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("sendTransaction(request:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)waitForSealTransactionId:(NSString *)transactionId completionHandler:(void (^)(FlowTransactionResult * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("waitForSeal(transactionId:completionHandler:)")));
 @property (readonly) id<FlowChainIdProvider> chainId __attribute__((swift_name("chainId")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ScriptBuilder")))
+@interface FlowScriptBuilder : FlowBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (BOOL)argArgument:(FlowCadenceValue *(^)(void))argument __attribute__((swift_name("arg(argument:)")));
+- (BOOL)argArgument_:(FlowCadenceValue *)argument __attribute__((swift_name("arg(argument_:)")));
+- (void)argsArguments:(FlowKotlinArray<FlowCadenceValue *> *)arguments __attribute__((swift_name("args(arguments:)")));
+- (void)argsArguments_:(NSMutableArray<FlowCadenceValue *> *(^)(void))arguments __attribute__((swift_name("args(arguments_:)")));
+- (void)argumentsArguments:(NSMutableArray<FlowCadenceValue *> *)arguments __attribute__((swift_name("arguments(arguments:)")));
+- (void)scriptCode:(FlowKotlinByteArray *)code __attribute__((swift_name("script(code:)")));
+- (void)scriptCode_:(NSString *(^)(void))code __attribute__((swift_name("script(code_:)")));
+- (void)scriptScript:(NSString *)script __attribute__((swift_name("script(script:)")));
+@property NSMutableArray<FlowCadenceValue *> *arguments __attribute__((swift_name("arguments")));
+@property NSString *script __attribute__((swift_name("script")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("TransactionDSLBuilder")))
+@interface FlowTransactionDSLBuilder : FlowBase
+- (void)argsArguments:(FlowKotlinArray<FlowCadenceValue *> *)arguments __attribute__((swift_name("args(arguments:)")));
+- (void)argumentArgument:(FlowCadenceValue *)argument __attribute__((swift_name("argument(argument:)")));
+- (void)argumentsArguments:(NSArray<FlowCadenceValue *> *(^)(void))arguments __attribute__((swift_name("arguments(arguments:)")));
+- (void)authorizersAddresses:(FlowKotlinArray<NSString *> *)addresses __attribute__((swift_name("authorizers(addresses:)")));
+- (void)authorizersAddresses_:(NSArray<NSString *> *(^)(void))addresses __attribute__((swift_name("authorizers(addresses_:)")));
+- (void)authorizersAddresses__:(NSArray<FlowFlowAddress *> *)addresses __attribute__((swift_name("authorizers(addresses__:)")));
+- (void)cadenceCode:(NSString *(^)(void))code __attribute__((swift_name("cadence(code:)")));
+- (void)cadenceCode_:(NSString *)code __attribute__((swift_name("cadence(code_:)")));
+- (void)gasLimitLimit:(FlowBignumBigInteger *)limit __attribute__((swift_name("gasLimit(limit:)")));
+- (void)gasLimitLimit_:(int32_t)limit __attribute__((swift_name("gasLimit(limit_:)")));
+- (void)payerAddress:(NSString *)address __attribute__((swift_name("payer(address:)")));
+- (void)payerAddress_:(FlowFlowAddress *)address __attribute__((swift_name("payer(address_:)")));
+- (void)proposerAddress:(NSString *)address __attribute__((swift_name("proposer(address:)")));
+- (void)proposerAddress:(NSString *)address keyIndex:(int32_t)keyIndex sequenceNumber:(FlowBignumBigInteger *)sequenceNumber __attribute__((swift_name("proposer(address:keyIndex:sequenceNumber:)")));
+- (void)proposerAddress:(FlowFlowAddress *)address keyIndex:(int32_t)keyIndex sequenceNumber_:(FlowBignumBigInteger *)sequenceNumber __attribute__((swift_name("proposer(address:keyIndex:sequenceNumber_:)")));
+- (void)refBlockId:(NSString * _Nullable)id __attribute__((swift_name("refBlock(id:)")));
+- (void)scriptCode:(NSString *)code __attribute__((swift_name("script(code:)")));
 @end
 
 __attribute__((swift_name("ApiBase")))
@@ -334,6 +442,186 @@ __attribute__((swift_name("ApiBase")))
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (class, readonly, getter=companion) FlowApiBaseCompanion *companion __attribute__((swift_name("companion")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ScriptsApi")))
+@interface FlowScriptsApi : FlowApiBase
+- (instancetype)initWithBaseUrl:(NSString *)baseUrl __attribute__((swift_name("init(baseUrl:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+@property (readonly) NSString *baseUrl __attribute__((swift_name("baseUrl")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ChildAccountMetadata")))
+@interface FlowChildAccountMetadata : FlowBase
+- (instancetype)initWithName:(NSString * _Nullable)name description:(NSString * _Nullable)description address:(NSString * _Nullable)address thumbnail:(FlowChildAccountThumbnail * _Nullable)thumbnail __attribute__((swift_name("init(name:description:address:thumbnail:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowChildAccountMetadataCompanion *companion __attribute__((swift_name("companion")));
+- (FlowChildAccountMetadata *)doCopyName:(NSString * _Nullable)name description:(NSString * _Nullable)description address:(NSString * _Nullable)address thumbnail:(FlowChildAccountThumbnail * _Nullable)thumbnail __attribute__((swift_name("doCopy(name:description:address:thumbnail:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString * _Nullable address __attribute__((swift_name("address")));
+@property (readonly) NSString * _Nullable description_ __attribute__((swift_name("description_")));
+@property (readonly) NSString * _Nullable name __attribute__((swift_name("name")));
+@property (readonly) FlowChildAccountThumbnail * _Nullable thumbnail __attribute__((swift_name("thumbnail")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ChildAccountMetadata.Companion")))
+@interface FlowChildAccountMetadataCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowChildAccountMetadataCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ChildAccountThumbnail")))
+@interface FlowChildAccountThumbnail : FlowBase
+- (instancetype)initWithUrl:(NSString * _Nullable)url __attribute__((swift_name("init(url:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowChildAccountThumbnailCompanion *companion __attribute__((swift_name("companion")));
+- (FlowChildAccountThumbnail *)doCopyUrl:(NSString * _Nullable)url __attribute__((swift_name("doCopy(url:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString * _Nullable url __attribute__((swift_name("url")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ChildAccountThumbnail.Companion")))
+@interface FlowChildAccountThumbnailCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowChildAccountThumbnailCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("StakingNode")))
+@interface FlowStakingNode : FlowBase
+- (instancetype)initWithId:(int32_t)id nodeID:(NSString *)nodeID tokensCommitted:(double)tokensCommitted tokensStaked:(double)tokensStaked tokensUnstaking:(double)tokensUnstaking tokensRewarded:(double)tokensRewarded tokensUnstaked:(double)tokensUnstaked tokensRequestedToUnstake:(double)tokensRequestedToUnstake __attribute__((swift_name("init(id:nodeID:tokensCommitted:tokensStaked:tokensUnstaking:tokensRewarded:tokensUnstaked:tokensRequestedToUnstake:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowStakingNodeCompanion *companion __attribute__((swift_name("companion")));
+- (FlowStakingNode *)doCopyId:(int32_t)id nodeID:(NSString *)nodeID tokensCommitted:(double)tokensCommitted tokensStaked:(double)tokensStaked tokensUnstaking:(double)tokensUnstaking tokensRewarded:(double)tokensRewarded tokensUnstaked:(double)tokensUnstaked tokensRequestedToUnstake:(double)tokensRequestedToUnstake __attribute__((swift_name("doCopy(id:nodeID:tokensCommitted:tokensStaked:tokensUnstaking:tokensRewarded:tokensUnstaked:tokensRequestedToUnstake:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) int32_t id __attribute__((swift_name("id")));
+@property (readonly) NSString *nodeID __attribute__((swift_name("nodeID")));
+@property (readonly) double stakingCount __attribute__((swift_name("stakingCount")));
+@property (readonly) double tokensCommitted __attribute__((swift_name("tokensCommitted")));
+@property (readonly) double tokensRequestedToUnstake __attribute__((swift_name("tokensRequestedToUnstake")));
+@property (readonly) double tokensRewarded __attribute__((swift_name("tokensRewarded")));
+@property (readonly) double tokensStaked __attribute__((swift_name("tokensStaked")));
+@property (readonly) double tokensUnstaked __attribute__((swift_name("tokensUnstaked")));
+@property (readonly) double tokensUnstaking __attribute__((swift_name("tokensUnstaking")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("StakingNode.Companion")))
+@interface FlowStakingNodeCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowStakingNodeCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Crypto")))
+@interface FlowCrypto : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)crypto __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowCrypto *shared __attribute__((swift_name("shared")));
+- (FlowPrivateKey *)decodePrivateKeyKey:(NSString *)key algo:(FlowSigningAlgorithm *)algo __attribute__((swift_name("decodePrivateKey(key:algo:)")));
+- (FlowKeyPair *)generateKeyPairAlgo:(FlowSigningAlgorithm *)algo __attribute__((swift_name("generateKeyPair(algo:)")));
+- (id<FlowSigner>)getSignerPrivateKey:(FlowPrivateKey *)privateKey hashAlgo:(FlowHashingAlgorithm *)hashAlgo __attribute__((swift_name("getSigner(privateKey:hashAlgo:)")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KeyPair")))
+@interface FlowKeyPair : FlowBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+@property (readonly, getter=private) FlowPrivateKey *private_ __attribute__((swift_name("private_")));
+@property (readonly, getter=public) FlowPublicKey *public_ __attribute__((swift_name("public_")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PrivateKey")))
+@interface FlowPrivateKey : FlowBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+@property (readonly) FlowSigningAlgorithm *algo __attribute__((swift_name("algo")));
+@property (readonly) NSString *hex __attribute__((swift_name("hex")));
+@property (readonly) id key __attribute__((swift_name("key")));
+@property (readonly) FlowPublicKey *publicKey __attribute__((swift_name("publicKey")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PublicKey")))
+@interface FlowPublicKey : FlowBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (BOOL)verifySignature:(FlowKotlinByteArray *)signature message:(FlowKotlinByteArray *)message hashAlgo:(FlowHashingAlgorithm *)hashAlgo __attribute__((swift_name("verify(signature:message:hashAlgo:)")));
+@property (readonly) FlowSigningAlgorithm *algo __attribute__((swift_name("algo")));
+@property (readonly) NSString *hex __attribute__((swift_name("hex")));
+@property (readonly) id key __attribute__((swift_name("key")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("EVMManager")))
+@interface FlowEVMManager : FlowBase
+- (instancetype)initWithChainId:(FlowChainId *)chainId __attribute__((swift_name("init(chainId:)"))) __attribute__((objc_designated_initializer));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)callEVMContractProposer:(FlowFlowAddress *)proposer payer:(FlowFlowAddress *)payer toEVMAddressHex:(NSString *)toEVMAddressHex amount:(double)amount data:(FlowKotlinByteArray *)data gasLimit:(uint64_t)gasLimit signers:(NSArray<id<FlowSigner>> *)signers completionHandler:(void (^)(NSString * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("callEVMContract(proposer:payer:toEVMAddressHex:amount:data:gasLimit:signers:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)createCOAAccountProposer:(FlowFlowAddress *)proposer payer:(FlowFlowAddress *)payer amount:(double)amount signers:(NSArray<id<FlowSigner>> *)signers completionHandler:(void (^)(NSString * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("createCOAAccount(proposer:payer:amount:signers:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getChildAccountMetadataFlowAddress:(FlowFlowAddress *)flowAddress completionHandler:(void (^)(NSDictionary<NSString *, FlowChildAccountMetadata *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getChildAccountMetadata(flowAddress:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getEVMAddressFlowAddress:(FlowFlowAddress *)flowAddress completionHandler:(void (^)(NSString * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getEVMAddress(flowAddress:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)runEVMTransactionProposer:(FlowFlowAddress *)proposer payer:(FlowFlowAddress *)payer rlpEncodedTransaction:(FlowKotlinByteArray *)rlpEncodedTransaction coinbaseAddress:(NSString *)coinbaseAddress signers:(NSArray<id<FlowSigner>> *)signers completionHandler:(void (^)(NSString * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("runEVMTransaction(proposer:payer:rlpEncodedTransaction:coinbaseAddress:signers:completionHandler:)")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -649,24 +937,6 @@ __attribute__((swift_name("Cadence.PathCompanion")))
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 @end
 
-__attribute__((swift_name("KotlinComparable")))
-@protocol FlowKotlinComparable
-@required
-- (int32_t)compareToOther:(id _Nullable)other __attribute__((swift_name("compareTo(other:)")));
-@end
-
-__attribute__((swift_name("KotlinEnum")))
-@interface FlowKotlinEnum<E> : FlowBase <FlowKotlinComparable>
-- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer));
-@property (class, readonly, getter=companion) FlowKotlinEnumCompanion *companion __attribute__((swift_name("companion")));
-- (int32_t)compareToOther:(E)other __attribute__((swift_name("compareTo(other:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) NSString *name __attribute__((swift_name("name")));
-@property (readonly) int32_t ordinal __attribute__((swift_name("ordinal")));
-@end
-
 
 /**
  * @note annotations
@@ -797,6 +1067,9 @@ __attribute__((swift_name("Cadence.TypeEntryCompanion")))
 */
 __attribute__((swift_name("Cadence.Value")))
 @interface FlowCadenceValue : FlowBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) FlowCadenceValueCompanion *companion __attribute__((swift_name("companion")));
 
 /**
@@ -822,6 +1095,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueAddressValue")))
 @interface FlowCadenceValueAddressValue : FlowCadenceValue
 - (instancetype)initWithValue:(NSString *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueAddressValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueAddressValue *)doCopyValue:(NSString *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -850,6 +1126,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueArrayValue")))
 @interface FlowCadenceValueArrayValue : FlowCadenceValue
 - (instancetype)initWithValue:(NSArray<FlowCadenceValue *> *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueArrayValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueArrayValue *)doCopyValue:(NSArray<FlowCadenceValue *> *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -878,6 +1157,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueBooleanValue")))
 @interface FlowCadenceValueBooleanValue : FlowCadenceValue
 - (instancetype)initWithValue:(BOOL)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueBooleanValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueBooleanValue *)doCopyValue:(BOOL)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -906,6 +1188,9 @@ __attribute__((swift_name("Cadence.ValueCapabilityValue")))
 @interface FlowCadenceValueCapabilityValue : FlowCadenceValue
 - (instancetype)initWithValue:(FlowCadenceCapability *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithSeen0:(int32_t)seen0 value:(FlowCadenceCapability * _Nullable)value serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:value:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueCapabilityValueCompanion *companion __attribute__((swift_name("companion")));
 @property (readonly) FlowCadenceCapability *value __attribute__((swift_name("value")));
 @end
@@ -945,6 +1230,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueContractValue")))
 @interface FlowCadenceValueContractValue : FlowCadenceValue
 - (instancetype)initWithValue:(FlowCadenceCompositeValue *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueContractValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueContractValue *)doCopyValue:(FlowCadenceCompositeValue *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -973,6 +1261,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueDictionaryValue")))
 @interface FlowCadenceValueDictionaryValue : FlowCadenceValue
 - (instancetype)initWithValue:(NSArray<FlowCadenceDictionaryFieldEntry *> *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueDictionaryValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueDictionaryValue *)doCopyValue:(NSArray<FlowCadenceDictionaryFieldEntry *> *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1001,6 +1292,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueEnumValue")))
 @interface FlowCadenceValueEnumValue : FlowCadenceValue
 - (instancetype)initWithValue:(FlowCadenceCompositeValue *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueEnumValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueEnumValue *)doCopyValue:(FlowCadenceCompositeValue *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1029,6 +1323,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueEventValue")))
 @interface FlowCadenceValueEventValue : FlowCadenceValue
 - (instancetype)initWithValue:(FlowCadenceCompositeValue *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueEventValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueEventValue *)doCopyValue:(FlowCadenceCompositeValue *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1057,6 +1354,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueFix64Value")))
 @interface FlowCadenceValueFix64Value : FlowCadenceValue
 - (instancetype)initWithValue:(double)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueFix64ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueFix64Value *)doCopyValue:(double)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1090,6 +1390,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueInt128Value")))
 @interface FlowCadenceValueInt128Value : FlowCadenceValue
 - (instancetype)initWithValue:(FlowBignumBigInteger *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueInt128ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueInt128Value *)doCopyValue:(FlowBignumBigInteger *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1123,6 +1426,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueInt16Value")))
 @interface FlowCadenceValueInt16Value : FlowCadenceValue
 - (instancetype)initWithValue:(int16_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueInt16ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueInt16Value *)doCopyValue:(int16_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1156,6 +1462,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueInt256Value")))
 @interface FlowCadenceValueInt256Value : FlowCadenceValue
 - (instancetype)initWithValue:(FlowBignumBigInteger *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueInt256ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueInt256Value *)doCopyValue:(FlowBignumBigInteger *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1189,6 +1498,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueInt32Value")))
 @interface FlowCadenceValueInt32Value : FlowCadenceValue
 - (instancetype)initWithValue:(int32_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueInt32ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueInt32Value *)doCopyValue:(int32_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1222,6 +1534,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueInt64Value")))
 @interface FlowCadenceValueInt64Value : FlowCadenceValue
 - (instancetype)initWithValue:(int64_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueInt64ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueInt64Value *)doCopyValue:(int64_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1255,6 +1570,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueInt8Value")))
 @interface FlowCadenceValueInt8Value : FlowCadenceValue
 - (instancetype)initWithValue:(int8_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueInt8ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueInt8Value *)doCopyValue:(int8_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1288,6 +1606,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueIntValue")))
 @interface FlowCadenceValueIntValue : FlowCadenceValue
 - (instancetype)initWithValue:(int32_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueIntValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueIntValue *)doCopyValue:(int32_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1321,6 +1642,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueOptionalValue")))
 @interface FlowCadenceValueOptionalValue : FlowCadenceValue
 - (instancetype)initWithValue:(FlowCadenceValue * _Nullable)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueOptionalValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueOptionalValue *)doCopyValue:(FlowCadenceValue * _Nullable)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1349,6 +1673,9 @@ __attribute__((swift_name("Cadence.ValuePathValue")))
 @interface FlowCadenceValuePathValue : FlowCadenceValue
 - (instancetype)initWithValue:(FlowCadencePath *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithSeen0:(int32_t)seen0 value:(FlowCadencePath * _Nullable)value serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:value:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValuePathValueCompanion *companion __attribute__((swift_name("companion")));
 @property (readonly) FlowCadencePath *value __attribute__((swift_name("value")));
 @end
@@ -1373,6 +1700,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueResourceValue")))
 @interface FlowCadenceValueResourceValue : FlowCadenceValue
 - (instancetype)initWithValue:(FlowCadenceCompositeValue *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueResourceValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueResourceValue *)doCopyValue:(FlowCadenceCompositeValue *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1401,6 +1731,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueStringValue")))
 @interface FlowCadenceValueStringValue : FlowCadenceValue
 - (instancetype)initWithValue:(NSString *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueStringValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueStringValue *)doCopyValue:(NSString *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1429,6 +1762,9 @@ __attribute__((swift_name("Cadence.ValueStructValue")))
 @interface FlowCadenceValueStructValue : FlowCadenceValue
 - (instancetype)initWithValue:(FlowCadenceCompositeValue *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithSeen0:(int32_t)seen0 value:(FlowCadenceCompositeValue * _Nullable)value serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:value:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueStructValueCompanion *companion __attribute__((swift_name("companion")));
 @property (readonly) FlowCadenceCompositeValue *value __attribute__((swift_name("value")));
 @end
@@ -1453,6 +1789,9 @@ __attribute__((swift_name("Cadence.ValueTypeValue")))
 @interface FlowCadenceValueTypeValue : FlowCadenceValue
 - (instancetype)initWithValue:(FlowCadenceTypeEntry *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithSeen0:(int32_t)seen0 value:(FlowCadenceTypeEntry * _Nullable)value serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:value:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueTypeValueCompanion *companion __attribute__((swift_name("companion")));
 @property (readonly) FlowCadenceTypeEntry *value __attribute__((swift_name("value")));
 @end
@@ -1477,6 +1816,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueUFix64Value")))
 @interface FlowCadenceValueUFix64Value : FlowCadenceValue
 - (instancetype)initWithValue:(double)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueUFix64ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueUFix64Value *)doCopyValue:(double)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1510,6 +1852,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueUInt128Value")))
 @interface FlowCadenceValueUInt128Value : FlowCadenceValue
 - (instancetype)initWithValue:(FlowBignumBigInteger *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueUInt128ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueUInt128Value *)doCopyValue:(FlowBignumBigInteger *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1543,6 +1888,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueUInt16Value")))
 @interface FlowCadenceValueUInt16Value : FlowCadenceValue
 - (instancetype)initWithValue:(uint16_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueUInt16ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueUInt16Value *)doCopyValue:(uint16_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1576,6 +1924,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueUInt256Value")))
 @interface FlowCadenceValueUInt256Value : FlowCadenceValue
 - (instancetype)initWithValue:(FlowBignumBigInteger *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueUInt256ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueUInt256Value *)doCopyValue:(FlowBignumBigInteger *)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1609,6 +1960,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueUInt32Value")))
 @interface FlowCadenceValueUInt32Value : FlowCadenceValue
 - (instancetype)initWithValue:(uint32_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueUInt32ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueUInt32Value *)doCopyValue:(uint32_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1642,6 +1996,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueUInt64Value")))
 @interface FlowCadenceValueUInt64Value : FlowCadenceValue
 - (instancetype)initWithValue:(uint64_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueUInt64ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueUInt64Value *)doCopyValue:(uint64_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1650,7 +2007,7 @@ __attribute__((swift_name("Cadence.ValueUInt64Value")))
 
 /**
  * @note annotations
- *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/ULongCadenceSerializer))
+ *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/SafeULongCadenceSerializer))
 */
 @property (readonly) FlowULong *value __attribute__((swift_name("value")));
 @end
@@ -1675,6 +2032,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueUInt8Value")))
 @interface FlowCadenceValueUInt8Value : FlowCadenceValue
 - (instancetype)initWithValue:(uint8_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueUInt8ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueUInt8Value *)doCopyValue:(uint8_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1708,6 +2068,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueUIntValue")))
 @interface FlowCadenceValueUIntValue : FlowCadenceValue
 - (instancetype)initWithValue:(uint32_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueUIntValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueUIntValue *)doCopyValue:(uint32_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1716,7 +2079,7 @@ __attribute__((swift_name("Cadence.ValueUIntValue")))
 
 /**
  * @note annotations
- *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/UIntCadenceSerializer))
+ *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/SafeUIntCadenceSerializer))
 */
 @property (readonly) FlowUInt *value __attribute__((swift_name("value")));
 @end
@@ -1741,6 +2104,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueVoidValue")))
 @interface FlowCadenceValueVoidValue : FlowCadenceValue
 - (instancetype)initWithValue:(FlowKotlinUnit * _Nullable)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueVoidValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueVoidValue *)doCopyValue:(FlowKotlinUnit * _Nullable)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1769,6 +2135,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueWord16Value")))
 @interface FlowCadenceValueWord16Value : FlowCadenceValue
 - (instancetype)initWithValue:(uint16_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueWord16ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueWord16Value *)doCopyValue:(uint16_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1802,6 +2171,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueWord32Value")))
 @interface FlowCadenceValueWord32Value : FlowCadenceValue
 - (instancetype)initWithValue:(uint32_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueWord32ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueWord32Value *)doCopyValue:(uint32_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1810,7 +2182,7 @@ __attribute__((swift_name("Cadence.ValueWord32Value")))
 
 /**
  * @note annotations
- *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/UIntCadenceSerializer))
+ *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/SafeUIntCadenceSerializer))
 */
 @property (readonly) FlowUInt *value __attribute__((swift_name("value")));
 @end
@@ -1835,6 +2207,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueWord64Value")))
 @interface FlowCadenceValueWord64Value : FlowCadenceValue
 - (instancetype)initWithValue:(uint64_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueWord64ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueWord64Value *)doCopyValue:(uint64_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1843,7 +2218,7 @@ __attribute__((swift_name("Cadence.ValueWord64Value")))
 
 /**
  * @note annotations
- *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/ULongCadenceSerializer))
+ *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/SafeULongCadenceSerializer))
 */
 @property (readonly) FlowULong *value __attribute__((swift_name("value")));
 @end
@@ -1868,6 +2243,9 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Cadence.ValueWord8Value")))
 @interface FlowCadenceValueWord8Value : FlowCadenceValue
 - (instancetype)initWithValue:(uint8_t)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithSeen0:(int32_t)seen0 serializationConstructorMarker:(id _Nullable)serializationConstructorMarker __attribute__((swift_name("init(seen0:serializationConstructorMarker:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowCadenceValueWord8ValueCompanion *companion __attribute__((swift_name("companion")));
 - (FlowCadenceValueWord8Value *)doCopyValue:(uint8_t)value __attribute__((swift_name("doCopy(value:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
@@ -1889,6 +2267,60 @@ __attribute__((swift_name("Cadence.ValueWord8ValueCompanion")))
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowCadenceValueWord8ValueCompanion *shared __attribute__((swift_name("shared")));
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CadenceErrorCode")))
+@interface FlowCadenceErrorCode : FlowKotlinEnum<FlowCadenceErrorCode *>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (class, readonly, getter=companion) FlowCadenceErrorCodeCompanion *companion __attribute__((swift_name("companion")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidtxbytesizeerror __attribute__((swift_name("flowErrorInvalidtxbytesizeerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidreferenceblockerror __attribute__((swift_name("flowErrorInvalidreferenceblockerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorExpiredtransactionerror __attribute__((swift_name("flowErrorExpiredtransactionerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidscripterror __attribute__((swift_name("flowErrorInvalidscripterror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidgaslimiterror __attribute__((swift_name("flowErrorInvalidgaslimiterror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidproposalsignatureerror __attribute__((swift_name("flowErrorInvalidproposalsignatureerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidproposalseqnumbererror __attribute__((swift_name("flowErrorInvalidproposalseqnumbererror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidpayloadsignatureerror __attribute__((swift_name("flowErrorInvalidpayloadsignatureerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidenvelopesignatureerror __attribute__((swift_name("flowErrorInvalidenvelopesignatureerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorFvminternalerror __attribute__((swift_name("flowErrorFvminternalerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorValueerror __attribute__((swift_name("flowErrorValueerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidargumenterror __attribute__((swift_name("flowErrorInvalidargumenterror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidaddresserror __attribute__((swift_name("flowErrorInvalidaddresserror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorInvalidlocationerror __attribute__((swift_name("flowErrorInvalidlocationerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorAccountauthorizationerror __attribute__((swift_name("flowErrorAccountauthorizationerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorOperationauthorizationerror __attribute__((swift_name("flowErrorOperationauthorizationerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorOperationnotsupportederror __attribute__((swift_name("flowErrorOperationnotsupportederror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorCadenceruntimeerror __attribute__((swift_name("flowErrorCadenceruntimeerror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorEncodingunsupportedvalue __attribute__((swift_name("flowErrorEncodingunsupportedvalue")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorStoragecapacityexceeded __attribute__((swift_name("flowErrorStoragecapacityexceeded")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorGaslimitexceedederror __attribute__((swift_name("flowErrorGaslimitexceedederror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorEventlimitexceedederror __attribute__((swift_name("flowErrorEventlimitexceedederror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorLedgerintractionlimitexceedederror __attribute__((swift_name("flowErrorLedgerintractionlimitexceedederror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorStatekeysizelimiterror __attribute__((swift_name("flowErrorStatekeysizelimiterror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorStatevaluesizelimiterror __attribute__((swift_name("flowErrorStatevaluesizelimiterror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorTransactionfeedeductionfailederror __attribute__((swift_name("flowErrorTransactionfeedeductionfailederror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorAccountnotfounderror __attribute__((swift_name("flowErrorAccountnotfounderror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorAccountpublickeynotfounderror __attribute__((swift_name("flowErrorAccountpublickeynotfounderror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorAccountalreadyexistserror __attribute__((swift_name("flowErrorAccountalreadyexistserror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorFrozenaccounterror __attribute__((swift_name("flowErrorFrozenaccounterror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorContractnotfounderror __attribute__((swift_name("flowErrorContractnotfounderror")));
+@property (class, readonly) FlowCadenceErrorCode *flowErrorContractnamesnotfounderror __attribute__((swift_name("flowErrorContractnamesnotfounderror")));
++ (FlowKotlinArray<FlowCadenceErrorCode *> *)values __attribute__((swift_name("values()")));
+@property (class, readonly) NSArray<FlowCadenceErrorCode *> *entries __attribute__((swift_name("entries")));
+@property (readonly) int32_t code __attribute__((swift_name("code")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CadenceErrorCode.Companion")))
+@interface FlowCadenceErrorCodeCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowCadenceErrorCodeCompanion *shared __attribute__((swift_name("shared")));
+- (FlowCadenceErrorCode * _Nullable)forErrorCodeCode:(int32_t)code __attribute__((swift_name("forErrorCode(code:)")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -1950,6 +2382,42 @@ __attribute__((swift_name("LongCadenceSerializer")))
 @end
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SafeStringSerializer")))
+@interface FlowSafeStringSerializer : FlowBase <FlowKotlinx_serialization_coreKSerializer>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)safeStringSerializer __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowSafeStringSerializer *shared __attribute__((swift_name("shared")));
+- (NSString *)deserializeDecoder:(id<FlowKotlinx_serialization_coreDecoder>)decoder __attribute__((swift_name("deserialize(decoder:)")));
+- (void)serializeEncoder:(id<FlowKotlinx_serialization_coreEncoder>)encoder value:(NSString *)value __attribute__((swift_name("serialize(encoder:value:)")));
+@property (readonly) id<FlowKotlinx_serialization_coreSerialDescriptor> descriptor __attribute__((swift_name("descriptor")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SafeUIntCadenceSerializer")))
+@interface FlowSafeUIntCadenceSerializer : FlowBase <FlowKotlinx_serialization_coreKSerializer>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)safeUIntCadenceSerializer __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowSafeUIntCadenceSerializer *shared __attribute__((swift_name("shared")));
+- (FlowUInt *)deserializeDecoder:(id<FlowKotlinx_serialization_coreDecoder>)decoder __attribute__((swift_name("deserialize(decoder:)")));
+- (void)serializeEncoder:(id<FlowKotlinx_serialization_coreEncoder>)encoder value:(FlowUInt *)value __attribute__((swift_name("serialize(encoder:value:)")));
+@property (readonly) id<FlowKotlinx_serialization_coreSerialDescriptor> descriptor __attribute__((swift_name("descriptor")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SafeULongCadenceSerializer")))
+@interface FlowSafeULongCadenceSerializer : FlowBase <FlowKotlinx_serialization_coreKSerializer>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)safeULongCadenceSerializer __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowSafeULongCadenceSerializer *shared __attribute__((swift_name("shared")));
+- (FlowULong *)deserializeDecoder:(id<FlowKotlinx_serialization_coreDecoder>)decoder __attribute__((swift_name("deserialize(decoder:)")));
+- (void)serializeEncoder:(id<FlowKotlinx_serialization_coreEncoder>)encoder value:(FlowULong *)value __attribute__((swift_name("serialize(encoder:value:)")));
+@property (readonly) id<FlowKotlinx_serialization_coreSerialDescriptor> descriptor __attribute__((swift_name("descriptor")));
+@end
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("ShortCadenceSerializer")))
 @interface FlowShortCadenceSerializer : FlowBase <FlowKotlinx_serialization_coreKSerializer>
 + (instancetype)alloc __attribute__((unavailable));
@@ -2007,6 +2475,43 @@ __attribute__((swift_name("UShortCadenceSerializer")))
 - (FlowUShort *)deserializeDecoder:(id<FlowKotlinx_serialization_coreDecoder>)decoder __attribute__((swift_name("deserialize(decoder:)")));
 - (void)serializeEncoder:(id<FlowKotlinx_serialization_coreEncoder>)encoder value:(FlowUShort *)value __attribute__((swift_name("serialize(encoder:value:)")));
 @property (readonly) id<FlowKotlinx_serialization_coreSerialDescriptor> descriptor __attribute__((swift_name("descriptor")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CadenceLoader")))
+@interface FlowCadenceLoader : FlowBase
+- (instancetype)initWithChainId:(FlowChainId *)chainId __attribute__((swift_name("init(chainId:)"))) __attribute__((objc_designated_initializer));
+- (NSString *)loadScriptPath:(NSString *)path __attribute__((swift_name("loadScript(path:)")));
+@end
+
+__attribute__((swift_name("CadenceLoaderProtocol")))
+@protocol FlowCadenceLoaderProtocol
+@required
+@property (readonly) NSString *directory __attribute__((swift_name("directory")));
+@property (readonly) NSString *filename __attribute__((swift_name("filename")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CadenceScriptLoader")))
+@interface FlowCadenceScriptLoader : FlowBase
+- (instancetype)initWithChainId:(FlowChainId *)chainId __attribute__((swift_name("init(chainId:)"))) __attribute__((objc_designated_initializer));
+- (NSString *)loadPath:(id<FlowCadenceLoaderProtocol>)path __attribute__((swift_name("load(path:)")));
+- (NSString *)loadName:(NSString *)name directory:(NSString *)directory __attribute__((swift_name("load(name:directory:)")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ContractAddressRegister")))
+@interface FlowContractAddressRegister : FlowBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (BOOL)contractExistsContract:(NSString *)contract network:(FlowChainId *)network __attribute__((swift_name("contractExists(contract:network:)")));
+- (NSString * _Nullable)getAddressContract:(NSString *)contract network:(FlowChainId *)network __attribute__((swift_name("getAddress(contract:network:)")));
+- (NSDictionary<NSString *, NSString *> *)getAddressesNetwork:(FlowChainId *)network __attribute__((swift_name("getAddresses(network:)")));
+- (NSArray<FlowChainId *> *)getNetworks __attribute__((swift_name("getNetworks()")));
+- (void)importAddressesNetwork:(FlowChainId *)network json:(NSString *)json __attribute__((swift_name("importAddresses(network:json:)")));
+- (void)importAddressesNetwork:(FlowChainId *)network dict:(NSDictionary<NSString *, NSString *> *)dict __attribute__((swift_name("importAddresses(network:dict:)")));
+- (NSString *)resolveImportsCode:(NSString *)code network:(FlowChainId *)network __attribute__((swift_name("resolveImports(code:network:)")));
+@property (readonly) FlowMutableDictionary<FlowChainId *, FlowMutableDictionary<NSString *, NSString *> *> *addresses __attribute__((swift_name("addresses")));
 @end
 
 
@@ -2471,39 +2976,6 @@ __attribute__((swift_name("BlockHeader.Companion")))
  *   kotlinx.serialization.Serializable
 */
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("BlockHeightOneOf")))
-@interface FlowBlockHeightOneOf : FlowKotlinEnum<FlowBlockHeightOneOf *>
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-@property (class, readonly, getter=companion) FlowBlockHeightOneOfCompanion *companion __attribute__((swift_name("companion")));
-@property (class, readonly) FlowBlockHeightOneOf *final __attribute__((swift_name("final")));
-@property (class, readonly) FlowBlockHeightOneOf *sealed __attribute__((swift_name("sealed")));
-+ (FlowKotlinArray<FlowBlockHeightOneOf *> *)values __attribute__((swift_name("values()")));
-@property (class, readonly) NSArray<FlowBlockHeightOneOf *> *entries __attribute__((swift_name("entries")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) NSString *value __attribute__((swift_name("value")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("BlockHeightOneOf.Companion")))
-@interface FlowBlockHeightOneOfCompanion : FlowBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) FlowBlockHeightOneOfCompanion *shared __attribute__((swift_name("shared")));
-- (FlowBlockHeightOneOf * _Nullable)decodeData:(id _Nullable)data __attribute__((swift_name("decode(data:)")));
-- (NSString * _Nullable)encodeData:(id _Nullable)data __attribute__((swift_name("encode(data:)")));
-- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
-- (id<FlowKotlinx_serialization_coreKSerializer>)serializerTypeParamsSerializers:(FlowKotlinArray<id<FlowKotlinx_serialization_coreKSerializer>> *)typeParamsSerializers __attribute__((swift_name("serializer(typeParamsSerializers:)")));
-@end
-
-
-/**
- * @note annotations
- *   kotlinx.serialization.Serializable
-*/
-__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("BlockPayload")))
 @interface FlowBlockPayload : FlowBase
 - (instancetype)initWithCollectionGuarantees:(NSArray<FlowCollectionGuarantee *> *)collectionGuarantees blockSeals:(NSArray<FlowBlockSeal *> *)blockSeals __attribute__((swift_name("init(collectionGuarantees:blockSeals:)"))) __attribute__((objc_designated_initializer));
@@ -2590,6 +3062,39 @@ __attribute__((swift_name("BlockSeal.Companion")))
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowBlockSealCompanion *shared __attribute__((swift_name("shared")));
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockStatus")))
+@interface FlowBlockStatus : FlowKotlinEnum<FlowBlockStatus *>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (class, readonly, getter=companion) FlowBlockStatusCompanion *companion __attribute__((swift_name("companion")));
+@property (class, readonly) FlowBlockStatus *final __attribute__((swift_name("final")));
+@property (class, readonly) FlowBlockStatus *sealed __attribute__((swift_name("sealed")));
++ (FlowKotlinArray<FlowBlockStatus *> *)values __attribute__((swift_name("values()")));
+@property (class, readonly) NSArray<FlowBlockStatus *> *entries __attribute__((swift_name("entries")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString *value __attribute__((swift_name("value")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockStatus.Companion")))
+@interface FlowBlockStatusCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowBlockStatusCompanion *shared __attribute__((swift_name("shared")));
+- (FlowBlockStatus * _Nullable)decodeData:(id _Nullable)data __attribute__((swift_name("decode(data:)")));
+- (NSString * _Nullable)encodeData:(id _Nullable)data __attribute__((swift_name("encode(data:)")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializerTypeParamsSerializers:(FlowKotlinArray<id<FlowKotlinx_serialization_coreKSerializer>> *)typeParamsSerializers __attribute__((swift_name("serializer(typeParamsSerializers:)")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -2684,6 +3189,7 @@ __attribute__((swift_name("Chunk")))
 /**
  * @note annotations
  *   kotlinx.serialization.SerialName(value="total_computation_used")
+ *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/SafeStringSerializer))
  *   kotlinx.serialization.Required
 */
 @property (readonly) NSString *totalComputationUsed __attribute__((swift_name("totalComputationUsed")));
@@ -2830,32 +3336,10 @@ __attribute__((swift_name("CollectionGuarantee.Companion")))
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 @end
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("CompareTransactionSignature")))
-@interface FlowCompareTransactionSignature : FlowBase
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
-+ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-@property (class, readonly, getter=companion) FlowCompareTransactionSignatureCompanion *companion __attribute__((swift_name("companion")));
-@end
-
-__attribute__((swift_name("KotlinComparator")))
-@protocol FlowKotlinComparator
-@required
-- (int32_t)compareA:(id _Nullable)a b:(id _Nullable)b __attribute__((swift_name("compare(a:b:)")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("CompareTransactionSignature.Companion")))
-@interface FlowCompareTransactionSignatureCompanion : FlowBase <FlowKotlinComparator>
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) FlowCompareTransactionSignatureCompanion *shared __attribute__((swift_name("shared")));
-- (int32_t)compareA:(FlowTransactionSignature *)a b:(FlowTransactionSignature *)b __attribute__((swift_name("compare(a:b:)")));
-@end
-
 __attribute__((swift_name("DomainTag")))
 @interface FlowDomainTag : FlowBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @property (readonly) FlowKotlinByteArray *bytes __attribute__((swift_name("bytes")));
 @property (readonly) NSString *tag __attribute__((swift_name("tag")));
 @end
@@ -2865,6 +3349,8 @@ __attribute__((swift_name("DomainTag.AccountProof")))
 @interface FlowDomainTagAccountProof : FlowDomainTag
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 + (instancetype)accountProof __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowDomainTagAccountProof *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *tag __attribute__((swift_name("tag")));
@@ -2874,6 +3360,8 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("DomainTag.Custom")))
 @interface FlowDomainTagCustom : FlowDomainTag
 - (instancetype)initWithTag:(NSString *)tag __attribute__((swift_name("init(tag:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 - (FlowDomainTagCustom *)doCopyTag:(NSString *)tag __attribute__((swift_name("doCopy(tag:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
@@ -2886,6 +3374,8 @@ __attribute__((swift_name("DomainTag.Transaction")))
 @interface FlowDomainTagTransaction : FlowDomainTag
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 + (instancetype)transaction __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowDomainTagTransaction *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *tag __attribute__((swift_name("tag")));
@@ -2896,9 +3386,40 @@ __attribute__((swift_name("DomainTag.User")))
 @interface FlowDomainTagUser : FlowDomainTag
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 + (instancetype)user __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowDomainTagUser *shared __attribute__((swift_name("shared")));
 @property (readonly) NSString *tag __attribute__((swift_name("tag")));
+@end
+
+__attribute__((swift_name("KotlinThrowable")))
+@interface FlowKotlinThrowable : FlowBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithCause:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
+
+/**
+ * @note annotations
+ *   kotlin.experimental.ExperimentalNativeApi
+*/
+- (FlowKotlinArray<NSString *> *)getStackTrace __attribute__((swift_name("getStackTrace()")));
+- (void)printStackTrace __attribute__((swift_name("printStackTrace()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) FlowKotlinThrowable * _Nullable cause __attribute__((swift_name("cause")));
+@property (readonly) NSString * _Nullable message __attribute__((swift_name("message")));
+- (NSError *)asError __attribute__((swift_name("asError()")));
+@end
+
+__attribute__((swift_name("KotlinException")))
+@interface FlowKotlinException : FlowKotlinThrowable
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithCause:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
 @end
 
 
@@ -2908,13 +3429,14 @@ __attribute__((swift_name("DomainTag.User")))
 */
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Error")))
-@interface FlowError : FlowBase
+@interface FlowError : FlowKotlinException
 - (instancetype)initWithCode:(FlowInt * _Nullable)code message:(NSString * _Nullable)message __attribute__((swift_name("init(code:message:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
+- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (instancetype)initWithCause:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowErrorCompanion *companion __attribute__((swift_name("companion")));
-- (FlowError *)doCopyCode:(FlowInt * _Nullable)code message:(NSString * _Nullable)message __attribute__((swift_name("doCopy(code:message:)")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
 
 /**
  * @note annotations
@@ -2957,6 +3479,7 @@ __attribute__((swift_name("Event")))
 /**
  * @note annotations
  *   kotlinx.serialization.SerialName(value="event_index")
+ *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/SafeStringSerializer))
  *   kotlinx.serialization.Required
 */
 @property (readonly) NSString *eventIndex __attribute__((swift_name("eventIndex")));
@@ -2979,6 +3502,7 @@ __attribute__((swift_name("Event")))
 /**
  * @note annotations
  *   kotlinx.serialization.SerialName(value="transaction_index")
+ *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/SafeStringSerializer))
  *   kotlinx.serialization.Required
 */
 @property (readonly) NSString *transactionIndex __attribute__((swift_name("transactionIndex")));
@@ -3074,6 +3598,7 @@ __attribute__((swift_name("ExecutionResult.Companion")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("FlowAddress")))
 @interface FlowFlowAddress : FlowBase
+- (instancetype)initWithBytes:(FlowKotlinByteArray *)bytes __attribute__((swift_name("init(bytes:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithHex:(NSString *)hex __attribute__((swift_name("init(hex:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) FlowFlowAddressCompanion *companion __attribute__((swift_name("companion")));
 - (FlowFlowAddress *)doCopyBytes:(FlowKotlinByteArray *)bytes __attribute__((swift_name("doCopy(bytes:)")));
@@ -3083,6 +3608,7 @@ __attribute__((swift_name("FlowAddress")))
 @property (readonly) NSString *base16Value __attribute__((swift_name("base16Value")));
 @property (readonly) FlowKotlinByteArray *bytes __attribute__((swift_name("bytes")));
 @property (readonly) NSString *formatted __attribute__((swift_name("formatted")));
+@property (readonly) NSString *hex __attribute__((swift_name("hex")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -3116,6 +3642,7 @@ __attribute__((swift_name("HashingAlgorithm")))
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowHashingAlgorithmCompanion *companion __attribute__((swift_name("companion")));
+@property (class, readonly) FlowHashingAlgorithm *unknown __attribute__((swift_name("unknown")));
 @property (class, readonly) FlowHashingAlgorithm *sha2256 __attribute__((swift_name("sha2256")));
 @property (class, readonly) FlowHashingAlgorithm *sha2384 __attribute__((swift_name("sha2384")));
 @property (class, readonly) FlowHashingAlgorithm *sha3256 __attribute__((swift_name("sha3256")));
@@ -3124,6 +3651,8 @@ __attribute__((swift_name("HashingAlgorithm")))
 + (FlowKotlinArray<FlowHashingAlgorithm *> *)values __attribute__((swift_name("values()")));
 @property (class, readonly) NSArray<FlowHashingAlgorithm *> *entries __attribute__((swift_name("entries")));
 - (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString *algorithm __attribute__((swift_name("algorithm")));
+@property (readonly) int32_t cadenceIndex __attribute__((swift_name("cadenceIndex")));
 @property (readonly) NSString *value __attribute__((swift_name("value")));
 @end
 
@@ -3136,6 +3665,7 @@ __attribute__((swift_name("HashingAlgorithm.Companion")))
 @property (class, readonly, getter=shared) FlowHashingAlgorithmCompanion *shared __attribute__((swift_name("shared")));
 - (FlowHashingAlgorithm * _Nullable)decodeData:(id _Nullable)data __attribute__((swift_name("decode(data:)")));
 - (NSString * _Nullable)encodeData:(id _Nullable)data __attribute__((swift_name("encode(data:)")));
+- (FlowHashingAlgorithm *)fromCadenceIndexIndex:(int32_t)index __attribute__((swift_name("fromCadenceIndex(index:)")));
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializerTypeParamsSerializers:(FlowKotlinArray<id<FlowKotlinx_serialization_coreKSerializer>> *)typeParamsSerializers __attribute__((swift_name("serializer(typeParamsSerializers:)")));
 @end
@@ -3227,6 +3757,34 @@ __attribute__((swift_name("ProposalKey.Companion")))
  *   kotlinx.serialization.Serializable
 */
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ScriptsErrorResponse")))
+@interface FlowScriptsErrorResponse : FlowBase
+- (instancetype)initWithCode:(FlowInt * _Nullable)code message:(NSString * _Nullable)message __attribute__((swift_name("init(code:message:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowScriptsErrorResponseCompanion *companion __attribute__((swift_name("companion")));
+- (FlowScriptsErrorResponse *)doCopyCode:(FlowInt * _Nullable)code message:(NSString * _Nullable)message __attribute__((swift_name("doCopy(code:message:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) FlowInt * _Nullable code __attribute__((swift_name("code")));
+@property (readonly) NSString * _Nullable message __attribute__((swift_name("message")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ScriptsErrorResponse.Companion")))
+@interface FlowScriptsErrorResponseCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowScriptsErrorResponseCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("ScriptsPostRequest")))
 @interface FlowScriptsPostRequest : FlowBase
 - (instancetype)initWithScript:(NSString * _Nullable)script arguments:(NSArray<NSString *> * _Nullable)arguments __attribute__((swift_name("init(script:arguments:)"))) __attribute__((objc_designated_initializer));
@@ -3299,19 +3857,13 @@ __attribute__((swift_name("Signer")))
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)signBytes:(FlowKotlinByteArray *)bytes completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("sign(bytes:completionHandler:)")));
+- (void)signBytes:(FlowKotlinByteArray *)bytes transaction:(FlowTransaction * _Nullable)transaction completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("sign(bytes:transaction:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)signTransaction:(FlowTransaction *)transaction bytes:(FlowKotlinByteArray *)bytes completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("sign(transaction:bytes:completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)signAsTransactionBytes:(FlowKotlinByteArray *)bytes completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signAsTransaction(bytes:completionHandler:)")));
+- (void)signAsTransactionBytes:(FlowKotlinByteArray *)bytes transaction:(FlowTransaction * _Nullable)transaction completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signAsTransaction(bytes:transaction:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
@@ -3323,7 +3875,7 @@ __attribute__((swift_name("Signer")))
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)signWithDomainBytes:(FlowKotlinByteArray *)bytes domain:(FlowKotlinByteArray *)domain completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signWithDomain(bytes:domain:completionHandler:)")));
+- (void)signWithDomainBytes:(FlowKotlinByteArray *)bytes domain:(FlowKotlinByteArray *)domain transaction:(FlowTransaction * _Nullable)transaction completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signWithDomain(bytes:domain:transaction:completionHandler:)")));
 @property NSString *address __attribute__((swift_name("address")));
 @property int32_t keyIndex __attribute__((swift_name("keyIndex")));
 @end
@@ -3340,12 +3892,14 @@ __attribute__((swift_name("SigningAlgorithm")))
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowSigningAlgorithmCompanion *companion __attribute__((swift_name("companion")));
-@property (class, readonly) FlowSigningAlgorithm *blsBls12381 __attribute__((swift_name("blsBls12381")));
 @property (class, readonly) FlowSigningAlgorithm *ecdsaP256 __attribute__((swift_name("ecdsaP256")));
 @property (class, readonly) FlowSigningAlgorithm *ecdsaSecp256k1 __attribute__((swift_name("ecdsaSecp256k1")));
 + (FlowKotlinArray<FlowSigningAlgorithm *> *)values __attribute__((swift_name("values()")));
 @property (class, readonly) NSArray<FlowSigningAlgorithm *> *entries __attribute__((swift_name("entries")));
 - (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString *algorithm __attribute__((swift_name("algorithm")));
+@property (readonly) int32_t cadenceIndex __attribute__((swift_name("cadenceIndex")));
+@property (readonly) NSString *curve __attribute__((swift_name("curve")));
 @property (readonly) NSString *value __attribute__((swift_name("value")));
 @end
 
@@ -3384,6 +3938,18 @@ __attribute__((swift_name("Transaction")))
 @interface FlowTransaction : FlowBase
 - (instancetype)initWithId:(NSString * _Nullable)id script:(NSString *)script arguments:(NSArray<FlowCadenceValue *> *)arguments referenceBlockId:(NSString *)referenceBlockId gasLimit:(FlowBignumBigInteger *)gasLimit payer:(NSString *)payer proposalKey:(FlowProposalKey *)proposalKey authorizers:(NSArray<NSString *> *)authorizers payloadSignatures:(NSArray<FlowTransactionSignature *> *)payloadSignatures envelopeSignatures:(NSArray<FlowTransactionSignature *> *)envelopeSignatures expandable:(FlowTransactionExpandable * _Nullable)expandable result:(FlowTransactionResult * _Nullable)result links:(FlowLinks * _Nullable)links __attribute__((swift_name("init(id:script:arguments:referenceBlockId:gasLimit:payer:proposalKey:authorizers:payloadSignatures:envelopeSignatures:expandable:result:links:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) FlowTransactionCompanion *companion __attribute__((swift_name("companion")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)addEnvelopeSignatureAddress:(NSString *)address keyIndex:(int32_t)keyIndex signer:(id<FlowSigner>)signer completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("addEnvelopeSignature(address:keyIndex:signer:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)addPayloadSignatureAddress:(NSString *)address keyIndex:(int32_t)keyIndex signer:(id<FlowSigner>)signer completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("addPayloadSignature(address:keyIndex:signer:completionHandler:)")));
 - (FlowTransaction *)doCopyId:(NSString * _Nullable)id script:(NSString *)script arguments:(NSArray<FlowCadenceValue *> *)arguments referenceBlockId:(NSString *)referenceBlockId gasLimit:(FlowBignumBigInteger *)gasLimit payer:(NSString *)payer proposalKey:(FlowProposalKey *)proposalKey authorizers:(NSArray<NSString *> *)authorizers payloadSignatures:(NSArray<FlowTransactionSignature *> *)payloadSignatures envelopeSignatures:(NSArray<FlowTransactionSignature *> *)envelopeSignatures expandable:(FlowTransactionExpandable * _Nullable)expandable result:(FlowTransactionResult * _Nullable)result links:(FlowLinks * _Nullable)links __attribute__((swift_name("doCopy(id:script:arguments:referenceBlockId:gasLimit:payer:proposalKey:authorizers:payloadSignatures:envelopeSignatures:expandable:result:links:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
@@ -3393,18 +3959,6 @@ __attribute__((swift_name("Transaction")))
  * Other uncaught Kotlin exceptions are fatal.
 */
 - (void)signSigners:(NSArray<id<FlowSigner>> *)signers completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("sign(signers:completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)signEnvelopeSigners:(NSArray<id<FlowSigner>> *)signers completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signEnvelope(signers:completionHandler:)")));
-
-/**
- * @note This method converts instances of CancellationException to errors.
- * Other uncaught Kotlin exceptions are fatal.
-*/
-- (void)signPayloadSigners:(NSArray<id<FlowSigner>> *)signers completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signPayload(signers:completionHandler:)")));
 - (NSString *)description __attribute__((swift_name("description()")));
 
 /**
@@ -3498,7 +4052,6 @@ __attribute__((swift_name("Transaction")))
  *   kotlinx.serialization.Required
 */
 @property (readonly) NSString *script __attribute__((swift_name("script")));
-@property (readonly) NSDictionary<NSString *, FlowInt *> *signers __attribute__((swift_name("signers")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -3509,6 +4062,24 @@ __attribute__((swift_name("Transaction.Companion")))
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowTransactionCompanion *shared __attribute__((swift_name("shared")));
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("TransactionBuilder")))
+@interface FlowTransactionBuilder : FlowBase
+- (instancetype)initWithScript:(NSString *)script arguments:(NSArray<FlowCadenceValue *> *)arguments gasLimit:(FlowBignumBigInteger *)gasLimit __attribute__((swift_name("init(script:arguments:gasLimit:)"))) __attribute__((objc_designated_initializer));
+- (FlowTransaction *)build __attribute__((swift_name("build()")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)buildAndSignWithCompletionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("buildAndSign(completionHandler:)")));
+- (FlowTransactionBuilder *)withAuthorizersAuthorizers:(NSArray<NSString *> *)authorizers __attribute__((swift_name("withAuthorizers(authorizers:)")));
+- (FlowTransactionBuilder *)withPayerPayer:(NSString *)payer __attribute__((swift_name("withPayer(payer:)")));
+- (FlowTransactionBuilder *)withProposalKeyAddress:(NSString *)address keyIndex:(int32_t)keyIndex sequenceNumber:(FlowBignumBigInteger *)sequenceNumber __attribute__((swift_name("withProposalKey(address:keyIndex:sequenceNumber:)")));
+- (FlowTransactionBuilder *)withReferenceBlockIdBlockId:(NSString *)blockId __attribute__((swift_name("withReferenceBlockId(blockId:)")));
+- (FlowTransactionBuilder *)withSignersSigners:(NSArray<id<FlowSigner>> *)signers __attribute__((swift_name("withSigners(signers:)")));
 @end
 
 
@@ -3585,9 +4156,9 @@ __attribute__((swift_name("TransactionExpandable.Companion")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("TransactionResult")))
 @interface FlowTransactionResult : FlowBase
-- (instancetype)initWithBlockId:(NSString *)blockId status:(FlowTransactionStatus *)status statusCode:(int32_t)statusCode errorMessage:(NSString *)errorMessage computationUsed:(NSString *)computationUsed events:(NSArray<FlowEvent *> *)events execution:(FlowTransactionExecution * _Nullable)execution links:(FlowLinks * _Nullable)links __attribute__((swift_name("init(blockId:status:statusCode:errorMessage:computationUsed:events:execution:links:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithBlockId:(NSString *)blockId status:(FlowTransactionStatus * _Nullable)status statusCode:(int32_t)statusCode errorMessage:(NSString *)errorMessage computationUsed:(NSString *)computationUsed events:(NSArray<FlowEvent *> *)events execution:(FlowTransactionExecution * _Nullable)execution links:(FlowLinks * _Nullable)links __attribute__((swift_name("init(blockId:status:statusCode:errorMessage:computationUsed:events:execution:links:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) FlowTransactionResultCompanion *companion __attribute__((swift_name("companion")));
-- (FlowTransactionResult *)doCopyBlockId:(NSString *)blockId status:(FlowTransactionStatus *)status statusCode:(int32_t)statusCode errorMessage:(NSString *)errorMessage computationUsed:(NSString *)computationUsed events:(NSArray<FlowEvent *> *)events execution:(FlowTransactionExecution * _Nullable)execution links:(FlowLinks * _Nullable)links __attribute__((swift_name("doCopy(blockId:status:statusCode:errorMessage:computationUsed:events:execution:links:)")));
+- (FlowTransactionResult *)doCopyBlockId:(NSString *)blockId status:(FlowTransactionStatus * _Nullable)status statusCode:(int32_t)statusCode errorMessage:(NSString *)errorMessage computationUsed:(NSString *)computationUsed events:(NSArray<FlowEvent *> *)events execution:(FlowTransactionExecution * _Nullable)execution links:(FlowLinks * _Nullable)links __attribute__((swift_name("doCopy(blockId:status:statusCode:errorMessage:computationUsed:events:execution:links:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
@@ -3602,6 +4173,7 @@ __attribute__((swift_name("TransactionResult")))
 /**
  * @note annotations
  *   kotlinx.serialization.SerialName(value="computation_used")
+ *   kotlinx.serialization.Serializable(with=NormalClass(value=org/onflow/flow/infrastructure/SafeStringSerializer))
  *   kotlinx.serialization.Required
 */
 @property (readonly) NSString *computationUsed __attribute__((swift_name("computationUsed")));
@@ -3635,9 +4207,8 @@ __attribute__((swift_name("TransactionResult")))
 /**
  * @note annotations
  *   kotlinx.serialization.SerialName(value="status")
- *   kotlinx.serialization.Required
 */
-@property (readonly) FlowTransactionStatus *status __attribute__((swift_name("status")));
+@property (readonly) FlowTransactionStatus * _Nullable status __attribute__((swift_name("status")));
 
 /**
  * @note annotations
@@ -3665,9 +4236,9 @@ __attribute__((swift_name("TransactionResult.Companion")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("TransactionSignature")))
 @interface FlowTransactionSignature : FlowBase
-- (instancetype)initWithAddress:(NSString *)address keyIndex:(int32_t)keyIndex signature:(NSString *)signature signerIndex:(int32_t)signerIndex __attribute__((swift_name("init(address:keyIndex:signature:signerIndex:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithAddress:(NSString *)address keyIndex:(int32_t)keyIndex signature:(NSString *)signature __attribute__((swift_name("init(address:keyIndex:signature:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) FlowTransactionSignatureCompanion *companion __attribute__((swift_name("companion")));
-- (FlowTransactionSignature *)doCopyAddress:(NSString *)address keyIndex:(int32_t)keyIndex signature:(NSString *)signature signerIndex:(int32_t)signerIndex __attribute__((swift_name("doCopy(address:keyIndex:signature:signerIndex:)")));
+- (FlowTransactionSignature *)doCopyAddress:(NSString *)address keyIndex:(int32_t)keyIndex signature:(NSString *)signature __attribute__((swift_name("doCopy(address:keyIndex:signature:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
@@ -3694,7 +4265,6 @@ __attribute__((swift_name("TransactionSignature")))
  *   kotlinx.serialization.Required
 */
 @property (readonly) NSString *signature __attribute__((swift_name("signature")));
-@property int32_t signerIndex __attribute__((swift_name("signerIndex")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -3719,6 +4289,8 @@ __attribute__((swift_name("TransactionStatus")))
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly, getter=companion) FlowTransactionStatusCompanion *companion __attribute__((swift_name("companion")));
+@property (class, readonly) FlowTransactionStatus *empty __attribute__((swift_name("empty")));
+@property (class, readonly) FlowTransactionStatus *unknown __attribute__((swift_name("unknown")));
 @property (class, readonly) FlowTransactionStatus *pending __attribute__((swift_name("pending")));
 @property (class, readonly) FlowTransactionStatus *finalized __attribute__((swift_name("finalized")));
 @property (class, readonly) FlowTransactionStatus *executed __attribute__((swift_name("executed")));
@@ -3741,35 +4313,6 @@ __attribute__((swift_name("TransactionStatus.Companion")))
 - (NSString * _Nullable)encodeData:(id _Nullable)data __attribute__((swift_name("encode(data:)")));
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializerTypeParamsSerializers:(FlowKotlinArray<id<FlowKotlinx_serialization_coreKSerializer>> *)typeParamsSerializers __attribute__((swift_name("serializer(typeParamsSerializers:)")));
-@end
-
-__attribute__((swift_name("KotlinThrowable")))
-@interface FlowKotlinThrowable : FlowBase
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
-+ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithCause:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
-
-/**
- * @note annotations
- *   kotlin.experimental.ExperimentalNativeApi
-*/
-- (FlowKotlinArray<NSString *> *)getStackTrace __attribute__((swift_name("getStackTrace()")));
-- (void)printStackTrace __attribute__((swift_name("printStackTrace()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) FlowKotlinThrowable * _Nullable cause __attribute__((swift_name("cause")));
-@property (readonly) NSString * _Nullable message __attribute__((swift_name("message")));
-- (NSError *)asError __attribute__((swift_name("asError()")));
-@end
-
-__attribute__((swift_name("KotlinException")))
-@interface FlowKotlinException : FlowKotlinThrowable
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
-+ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (instancetype)initWithMessage:(NSString * _Nullable)message __attribute__((swift_name("init(message:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithCause:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(cause:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithMessage:(NSString * _Nullable)message cause:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("init(message:cause:)"))) __attribute__((objc_designated_initializer));
 @end
 
 __attribute__((swift_name("KotlinRuntimeException")))
@@ -3803,12 +4346,16 @@ __attribute__((swift_name("IllegalRLPException")))
 
 __attribute__((swift_name("RLPType")))
 @interface FlowRLPType : FlowBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @end
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("RLPElement")))
 @interface FlowRLPElement : FlowRLPType
 - (instancetype)initWithBytes:(FlowKotlinByteArray *)bytes __attribute__((swift_name("init(bytes:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 - (FlowRLPElement *)doCopyBytes:(FlowKotlinByteArray *)bytes __attribute__((swift_name("doCopy(bytes:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
@@ -3820,11 +4367,774 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("RLPList")))
 @interface FlowRLPList : FlowRLPType
 - (instancetype)initWithElement:(NSArray<FlowRLPType *> *)element __attribute__((swift_name("init(element:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 - (FlowRLPList *)doCopyElement:(NSArray<FlowRLPType *> *)element __attribute__((swift_name("doCopy(element:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) NSArray<FlowRLPType *> *element __attribute__((swift_name("element")));
+@end
+
+__attribute__((swift_name("Wallet")))
+@protocol FlowWallet
+@required
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signMessageMessage:(FlowKotlinByteArray *)message completionHandler:(void (^)(FlowKotlinByteArray * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signMessage(message:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signTransactionTransaction:(FlowTransaction *)transaction completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signTransaction(transaction:completionHandler:)")));
+@property (readonly) NSString *address __attribute__((swift_name("address")));
+@property (readonly) id<FlowSigner> signer __attribute__((swift_name("signer")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("AccountStatusPayload")))
+@interface FlowAccountStatusPayload : FlowBase
+- (instancetype)initWithBlockId:(NSString *)blockId blockHeight:(int64_t)blockHeight messageIndex:(int64_t)messageIndex accountEvents:(NSDictionary<NSString *, NSArray<FlowEvent *> *> *)accountEvents __attribute__((swift_name("init(blockId:blockHeight:messageIndex:accountEvents:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowAccountStatusPayloadCompanion *companion __attribute__((swift_name("companion")));
+- (FlowAccountStatusPayload *)doCopyBlockId:(NSString *)blockId blockHeight:(int64_t)blockHeight messageIndex:(int64_t)messageIndex accountEvents:(NSDictionary<NSString *, NSArray<FlowEvent *> *> *)accountEvents __attribute__((swift_name("doCopy(blockId:blockHeight:messageIndex:accountEvents:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="account_events")
+*/
+@property (readonly) NSDictionary<NSString *, NSArray<FlowEvent *> *> *accountEvents __attribute__((swift_name("accountEvents")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="height")
+*/
+@property (readonly) int64_t blockHeight __attribute__((swift_name("blockHeight")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="block_id")
+*/
+@property (readonly) NSString *blockId __attribute__((swift_name("blockId")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="message_index")
+*/
+@property (readonly) int64_t messageIndex __attribute__((swift_name("messageIndex")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("AccountStatusPayload.Companion")))
+@interface FlowAccountStatusPayloadCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowAccountStatusPayloadCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ApprovalSignature")))
+@interface FlowApprovalSignature : FlowBase
+- (instancetype)initWithVerifierSignatures:(NSArray<NSString *> *)verifierSignatures signerIds:(NSArray<NSString *> *)signerIds __attribute__((swift_name("init(verifierSignatures:signerIds:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowApprovalSignatureCompanion *companion __attribute__((swift_name("companion")));
+- (FlowApprovalSignature *)doCopyVerifierSignatures:(NSArray<NSString *> *)verifierSignatures signerIds:(NSArray<NSString *> *)signerIds __attribute__((swift_name("doCopy(verifierSignatures:signerIds:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="signer_ids")
+*/
+@property (readonly) NSArray<NSString *> *signerIds __attribute__((swift_name("signerIds")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="verifier_signatures")
+*/
+@property (readonly) NSArray<NSString *> *verifierSignatures __attribute__((swift_name("verifierSignatures")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ApprovalSignature.Companion")))
+@interface FlowApprovalSignatureCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowApprovalSignatureCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockDetails")))
+@interface FlowBlockDetails : FlowBase
+- (instancetype)initWithCollectionGuarantees:(NSArray<FlowCollectionGuarantee_ *> *)collectionGuarantees blockSeals:(NSArray<FlowBlockSeal_ *> *)blockSeals __attribute__((swift_name("init(collectionGuarantees:blockSeals:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowBlockDetailsCompanion *companion __attribute__((swift_name("companion")));
+- (FlowBlockDetails *)doCopyCollectionGuarantees:(NSArray<FlowCollectionGuarantee_ *> *)collectionGuarantees blockSeals:(NSArray<FlowBlockSeal_ *> *)blockSeals __attribute__((swift_name("doCopy(collectionGuarantees:blockSeals:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="block_seals")
+*/
+@property (readonly) NSArray<FlowBlockSeal_ *> *blockSeals __attribute__((swift_name("blockSeals")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="collection_guarantees")
+*/
+@property (readonly) NSArray<FlowCollectionGuarantee_ *> *collectionGuarantees __attribute__((swift_name("collectionGuarantees")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockDetails.Companion")))
+@interface FlowBlockDetailsCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowBlockDetailsCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockDigestCollection")))
+@interface FlowBlockDigestCollection : FlowBase
+- (instancetype)initWithCollectionId:(NSString *)collectionId __attribute__((swift_name("init(collectionId:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowBlockDigestCollectionCompanion *companion __attribute__((swift_name("companion")));
+- (FlowBlockDigestCollection *)doCopyCollectionId:(NSString *)collectionId __attribute__((swift_name("doCopy(collectionId:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="collection_id")
+*/
+@property (readonly) NSString *collectionId __attribute__((swift_name("collectionId")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockDigestCollection.Companion")))
+@interface FlowBlockDigestCollectionCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowBlockDigestCollectionCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockDigestPayload")))
+@interface FlowBlockDigestPayload : FlowBase
+- (instancetype)initWithBlockId:(NSString *)blockId finalState:(NSString * _Nullable)finalState collections:(NSArray<FlowBlockDigestCollection *> *)collections __attribute__((swift_name("init(blockId:finalState:collections:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowBlockDigestPayloadCompanion *companion __attribute__((swift_name("companion")));
+- (FlowBlockDigestPayload *)doCopyBlockId:(NSString *)blockId finalState:(NSString * _Nullable)finalState collections:(NSArray<FlowBlockDigestCollection *> *)collections __attribute__((swift_name("doCopy(blockId:finalState:collections:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="block_id")
+*/
+@property (readonly) NSString *blockId __attribute__((swift_name("blockId")));
+@property (readonly) NSArray<FlowBlockDigestCollection *> *collections __attribute__((swift_name("collections")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="final_state")
+*/
+@property (readonly) NSString * _Nullable finalState __attribute__((swift_name("finalState")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockDigestPayload.Companion")))
+@interface FlowBlockDigestPayloadCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowBlockDigestPayloadCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockEventPayload")))
+@interface FlowBlockEventPayload : FlowBase
+- (instancetype)initWithHeader:(FlowBlockHeader *)header payload:(FlowBlockDetails *)payload __attribute__((swift_name("init(header:payload:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowBlockEventPayloadCompanion *companion __attribute__((swift_name("companion")));
+- (FlowBlockEventPayload *)doCopyHeader:(FlowBlockHeader *)header payload:(FlowBlockDetails *)payload __attribute__((swift_name("doCopy(header:payload:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) FlowBlockHeader *header __attribute__((swift_name("header")));
+@property (readonly) FlowBlockDetails *payload __attribute__((swift_name("payload")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockEventPayload.Companion")))
+@interface FlowBlockEventPayloadCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowBlockEventPayloadCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockHeaderPayload")))
+@interface FlowBlockHeaderPayload : FlowBase
+- (instancetype)initWithId:(NSString *)id parentId:(NSString *)parentId height:(int64_t)height timestamp:(NSString *)timestamp parentVoterSignature:(NSString *)parentVoterSignature __attribute__((swift_name("init(id:parentId:height:timestamp:parentVoterSignature:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowBlockHeaderPayloadCompanion *companion __attribute__((swift_name("companion")));
+- (FlowBlockHeaderPayload *)doCopyId:(NSString *)id parentId:(NSString *)parentId height:(int64_t)height timestamp:(NSString *)timestamp parentVoterSignature:(NSString *)parentVoterSignature __attribute__((swift_name("doCopy(id:parentId:height:timestamp:parentVoterSignature:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) int64_t height __attribute__((swift_name("height")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="id")
+*/
+@property (readonly) NSString *id __attribute__((swift_name("id")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="parent_id")
+*/
+@property (readonly) NSString *parentId __attribute__((swift_name("parentId")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="parent_voter_signature")
+*/
+@property (readonly) NSString *parentVoterSignature __attribute__((swift_name("parentVoterSignature")));
+@property (readonly) NSString *timestamp __attribute__((swift_name("timestamp")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockHeaderPayload.Companion")))
+@interface FlowBlockHeaderPayloadCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowBlockHeaderPayloadCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockSeal_")))
+@interface FlowBlockSeal_ : FlowBase
+- (instancetype)initWithBlockId:(NSString *)blockId resultId:(NSString *)resultId finalState:(NSString *)finalState aggregatedApprovalSignatures:(NSArray<FlowApprovalSignature *> *)aggregatedApprovalSignatures __attribute__((swift_name("init(blockId:resultId:finalState:aggregatedApprovalSignatures:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowBlockSeal_Companion *companion __attribute__((swift_name("companion")));
+- (FlowBlockSeal_ *)doCopyBlockId:(NSString *)blockId resultId:(NSString *)resultId finalState:(NSString *)finalState aggregatedApprovalSignatures:(NSArray<FlowApprovalSignature *> *)aggregatedApprovalSignatures __attribute__((swift_name("doCopy(blockId:resultId:finalState:aggregatedApprovalSignatures:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="aggregated_approval_signatures")
+*/
+@property (readonly) NSArray<FlowApprovalSignature *> *aggregatedApprovalSignatures __attribute__((swift_name("aggregatedApprovalSignatures")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="block_id")
+*/
+@property (readonly) NSString *blockId __attribute__((swift_name("blockId")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="final_state")
+*/
+@property (readonly) NSString *finalState __attribute__((swift_name("finalState")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="result_id")
+*/
+@property (readonly) NSString *resultId __attribute__((swift_name("resultId")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("BlockSeal_.Companion")))
+@interface FlowBlockSeal_Companion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowBlockSeal_Companion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CollectionGuarantee_")))
+@interface FlowCollectionGuarantee_ : FlowBase
+- (instancetype)initWithCollectionId:(NSString *)collectionId signerIndices:(NSString *)signerIndices signature:(NSString *)signature __attribute__((swift_name("init(collectionId:signerIndices:signature:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowCollectionGuarantee_Companion *companion __attribute__((swift_name("companion")));
+- (FlowCollectionGuarantee_ *)doCopyCollectionId:(NSString *)collectionId signerIndices:(NSString *)signerIndices signature:(NSString *)signature __attribute__((swift_name("doCopy(collectionId:signerIndices:signature:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="collection_id")
+*/
+@property (readonly) NSString *collectionId __attribute__((swift_name("collectionId")));
+@property (readonly) NSString *signature __attribute__((swift_name("signature")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="signer_indices")
+*/
+@property (readonly) NSString *signerIndices __attribute__((swift_name("signerIndices")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CollectionGuarantee_.Companion")))
+@interface FlowCollectionGuarantee_Companion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowCollectionGuarantee_Companion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("EventsPayload")))
+@interface FlowEventsPayload : FlowBase
+- (instancetype)initWithBlockId:(NSString *)blockId blockHeight:(int64_t)blockHeight blockTimestamp:(NSString *)blockTimestamp events:(NSArray<FlowEvent *> *)events __attribute__((swift_name("init(blockId:blockHeight:blockTimestamp:events:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowEventsPayloadCompanion *companion __attribute__((swift_name("companion")));
+- (FlowEventsPayload *)doCopyBlockId:(NSString *)blockId blockHeight:(int64_t)blockHeight blockTimestamp:(NSString *)blockTimestamp events:(NSArray<FlowEvent *> *)events __attribute__((swift_name("doCopy(blockId:blockHeight:blockTimestamp:events:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="block_height")
+*/
+@property (readonly) int64_t blockHeight __attribute__((swift_name("blockHeight")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="block_id")
+*/
+@property (readonly) NSString *blockId __attribute__((swift_name("blockId")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="block_timestamp")
+*/
+@property (readonly) NSString *blockTimestamp __attribute__((swift_name("blockTimestamp")));
+@property (readonly) NSArray<FlowEvent *> *events __attribute__((swift_name("events")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("EventsPayload.Companion")))
+@interface FlowEventsPayloadCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowEventsPayloadCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketClient")))
+@interface FlowFlowWebSocketClient : FlowBase
+- (instancetype)initWithClient:(FlowKtor_client_coreHttpClient *)client json:(FlowKotlinx_serialization_jsonJson *)json __attribute__((swift_name("init(client:json:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowFlowWebSocketClientCompanion *companion __attribute__((swift_name("companion")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)closeWithCompletionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("close(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)connectUrl:(NSString *)url completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("connect(url:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)listSubscriptionsWithCompletionHandler:(void (^)(NSArray<FlowFlowWebSocketSubscription *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("listSubscriptions(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)subscribeTopic:(NSString *)topic arguments:(NSDictionary<NSString *, FlowKotlinx_serialization_jsonJsonElement *> * _Nullable)arguments completionHandler:(void (^)(FlowFlowWebSocketClientSubscriptionResult * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("subscribe(topic:arguments:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)subscribeWithStringsTopic:(NSString *)topic arguments:(NSDictionary<NSString *, NSString *> * _Nullable)arguments completionHandler:(void (^)(FlowFlowWebSocketClientSubscriptionResult * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("subscribeWithStrings(topic:arguments:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)unsubscribeSubscriptionId:(NSString *)subscriptionId completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("unsubscribe(subscriptionId:completionHandler:)")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketClient.Companion")))
+@interface FlowFlowWebSocketClientCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowFlowWebSocketClientCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) NSString *MAINNET_WS_URL __attribute__((swift_name("MAINNET_WS_URL")));
+@property (readonly) NSString *TESTNET_WS_URL __attribute__((swift_name("TESTNET_WS_URL")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketClient.SubscriptionResult")))
+@interface FlowFlowWebSocketClientSubscriptionResult : FlowBase
+- (instancetype)initWithSubscriptionId:(NSString *)subscriptionId events:(id<FlowKotlinx_coroutines_coreFlow>)events __attribute__((swift_name("init(subscriptionId:events:)"))) __attribute__((objc_designated_initializer));
+- (FlowFlowWebSocketClientSubscriptionResult *)doCopySubscriptionId:(NSString *)subscriptionId events:(id<FlowKotlinx_coroutines_coreFlow>)events __attribute__((swift_name("doCopy(subscriptionId:events:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) id<FlowKotlinx_coroutines_coreFlow> events __attribute__((swift_name("events")));
+@property (readonly) NSString *subscriptionId __attribute__((swift_name("subscriptionId")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketError")))
+@interface FlowFlowWebSocketError : FlowBase
+- (instancetype)initWithCode:(int32_t)code message:(NSString *)message __attribute__((swift_name("init(code:message:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowFlowWebSocketErrorCompanion *companion __attribute__((swift_name("companion")));
+- (FlowFlowWebSocketError *)doCopyCode:(int32_t)code message:(NSString *)message __attribute__((swift_name("doCopy(code:message:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) int32_t code __attribute__((swift_name("code")));
+@property (readonly) NSString *message __attribute__((swift_name("message")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketError.Companion")))
+@interface FlowFlowWebSocketErrorCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowFlowWebSocketErrorCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+__attribute__((swift_name("FlowWebSocketMessage")))
+@protocol FlowFlowWebSocketMessage
+@required
+@property (readonly) NSString * _Nullable subscriptionId __attribute__((swift_name("subscriptionId")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketRequest")))
+@interface FlowFlowWebSocketRequest : FlowBase <FlowFlowWebSocketMessage>
+- (instancetype)initWithSubscriptionId:(NSString * _Nullable)subscriptionId action:(NSString *)action topic:(NSString * _Nullable)topic arguments:(NSDictionary<NSString *, FlowKotlinx_serialization_jsonJsonElement *> * _Nullable)arguments __attribute__((swift_name("init(subscriptionId:action:topic:arguments:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowFlowWebSocketRequestCompanion *companion __attribute__((swift_name("companion")));
+- (FlowFlowWebSocketRequest *)doCopySubscriptionId:(NSString * _Nullable)subscriptionId action:(NSString *)action topic:(NSString * _Nullable)topic arguments:(NSDictionary<NSString *, FlowKotlinx_serialization_jsonJsonElement *> * _Nullable)arguments __attribute__((swift_name("doCopy(subscriptionId:action:topic:arguments:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString *action __attribute__((swift_name("action")));
+@property (readonly) NSDictionary<NSString *, FlowKotlinx_serialization_jsonJsonElement *> * _Nullable arguments __attribute__((swift_name("arguments")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="subscription_id")
+*/
+@property (readonly) NSString * _Nullable subscriptionId __attribute__((swift_name("subscriptionId")));
+@property (readonly) NSString * _Nullable topic __attribute__((swift_name("topic")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketRequest.Companion")))
+@interface FlowFlowWebSocketRequestCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowFlowWebSocketRequestCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketResponse")))
+@interface FlowFlowWebSocketResponse : FlowBase <FlowFlowWebSocketMessage>
+- (instancetype)initWithSubscriptionId:(NSString * _Nullable)subscriptionId action:(NSString * _Nullable)action topic:(NSString * _Nullable)topic payload:(FlowKotlinx_serialization_jsonJsonElement * _Nullable)payload error:(FlowFlowWebSocketError * _Nullable)error __attribute__((swift_name("init(subscriptionId:action:topic:payload:error:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowFlowWebSocketResponseCompanion *companion __attribute__((swift_name("companion")));
+- (FlowFlowWebSocketResponse *)doCopySubscriptionId:(NSString * _Nullable)subscriptionId action:(NSString * _Nullable)action topic:(NSString * _Nullable)topic payload:(FlowKotlinx_serialization_jsonJsonElement * _Nullable)payload error:(FlowFlowWebSocketError * _Nullable)error __attribute__((swift_name("doCopy(subscriptionId:action:topic:payload:error:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSString * _Nullable action __attribute__((swift_name("action")));
+@property (readonly) FlowFlowWebSocketError * _Nullable error __attribute__((swift_name("error")));
+@property (readonly) FlowKotlinx_serialization_jsonJsonElement * _Nullable payload __attribute__((swift_name("payload")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="subscription_id")
+*/
+@property (readonly) NSString * _Nullable subscriptionId __attribute__((swift_name("subscriptionId")));
+@property (readonly) NSString * _Nullable topic __attribute__((swift_name("topic")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketResponse.Companion")))
+@interface FlowFlowWebSocketResponseCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowFlowWebSocketResponseCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketSubscription")))
+@interface FlowFlowWebSocketSubscription : FlowBase
+- (instancetype)initWithSubscriptionId:(NSString *)subscriptionId topic:(NSString *)topic arguments:(NSDictionary<NSString *, NSString *> *)arguments __attribute__((swift_name("init(subscriptionId:topic:arguments:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowFlowWebSocketSubscriptionCompanion *companion __attribute__((swift_name("companion")));
+- (FlowFlowWebSocketSubscription *)doCopySubscriptionId:(NSString *)subscriptionId topic:(NSString *)topic arguments:(NSDictionary<NSString *, NSString *> *)arguments __attribute__((swift_name("doCopy(subscriptionId:topic:arguments:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSDictionary<NSString *, NSString *> *arguments __attribute__((swift_name("arguments")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="subscription_id")
+*/
+@property (readonly) NSString *subscriptionId __attribute__((swift_name("subscriptionId")));
+@property (readonly) NSString *topic __attribute__((swift_name("topic")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketSubscription.Companion")))
+@interface FlowFlowWebSocketSubscriptionCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowFlowWebSocketSubscriptionCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketSubscriptionList")))
+@interface FlowFlowWebSocketSubscriptionList : FlowBase
+- (instancetype)initWithSubscriptions:(NSArray<FlowFlowWebSocketSubscription *> *)subscriptions __attribute__((swift_name("init(subscriptions:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowFlowWebSocketSubscriptionListCompanion *companion __attribute__((swift_name("companion")));
+- (FlowFlowWebSocketSubscriptionList *)doCopySubscriptions:(NSArray<FlowFlowWebSocketSubscription *> *)subscriptions __attribute__((swift_name("doCopy(subscriptions:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSArray<FlowFlowWebSocketSubscription *> *subscriptions __attribute__((swift_name("subscriptions")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketSubscriptionList.Companion")))
+@interface FlowFlowWebSocketSubscriptionListCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowFlowWebSocketSubscriptionListCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketTopic")))
+@interface FlowFlowWebSocketTopic : FlowKotlinEnum<FlowFlowWebSocketTopic *>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (class, readonly, getter=companion) FlowFlowWebSocketTopicCompanion *companion __attribute__((swift_name("companion")));
+@property (class, readonly) FlowFlowWebSocketTopic *blockDigests __attribute__((swift_name("blockDigests")));
+@property (class, readonly) FlowFlowWebSocketTopic *blockHeaders __attribute__((swift_name("blockHeaders")));
+@property (class, readonly) FlowFlowWebSocketTopic *blocks __attribute__((swift_name("blocks")));
+@property (class, readonly) FlowFlowWebSocketTopic *events __attribute__((swift_name("events")));
+@property (class, readonly) FlowFlowWebSocketTopic *accountStatuses __attribute__((swift_name("accountStatuses")));
+@property (class, readonly) FlowFlowWebSocketTopic *transactionStatuses __attribute__((swift_name("transactionStatuses")));
+@property (class, readonly) FlowFlowWebSocketTopic *sendAndGetTransactionStatuses __attribute__((swift_name("sendAndGetTransactionStatuses")));
++ (FlowKotlinArray<FlowFlowWebSocketTopic *> *)values __attribute__((swift_name("values()")));
+@property (class, readonly) NSArray<FlowFlowWebSocketTopic *> *entries __attribute__((swift_name("entries")));
+@property (readonly) NSString *value __attribute__((swift_name("value")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("FlowWebSocketTopic.Companion")))
+@interface FlowFlowWebSocketTopicCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowFlowWebSocketTopicCompanion *shared __attribute__((swift_name("shared")));
+- (FlowFlowWebSocketTopic * _Nullable)fromStringValue:(NSString *)value __attribute__((swift_name("fromString(value:)")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SendTransactionStatusPayload")))
+@interface FlowSendTransactionStatusPayload : FlowBase
+- (instancetype)initWithTransactionResult:(FlowTransactionResult *)transactionResult messageIndex:(int64_t)messageIndex __attribute__((swift_name("init(transactionResult:messageIndex:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowSendTransactionStatusPayloadCompanion *companion __attribute__((swift_name("companion")));
+- (FlowSendTransactionStatusPayload *)doCopyTransactionResult:(FlowTransactionResult *)transactionResult messageIndex:(int64_t)messageIndex __attribute__((swift_name("doCopy(transactionResult:messageIndex:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="message_index")
+*/
+@property (readonly) int64_t messageIndex __attribute__((swift_name("messageIndex")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="transaction_result")
+*/
+@property (readonly) FlowTransactionResult *transactionResult __attribute__((swift_name("transactionResult")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("SendTransactionStatusPayload.Companion")))
+@interface FlowSendTransactionStatusPayloadCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowSendTransactionStatusPayloadCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.Serializable
+*/
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("TransactionStatusPayload")))
+@interface FlowTransactionStatusPayload : FlowBase
+- (instancetype)initWithTransactionResult:(FlowTransactionResult *)transactionResult messageIndex:(int64_t)messageIndex __attribute__((swift_name("init(transactionResult:messageIndex:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowTransactionStatusPayloadCompanion *companion __attribute__((swift_name("companion")));
+- (FlowTransactionStatusPayload *)doCopyTransactionResult:(FlowTransactionResult *)transactionResult messageIndex:(int64_t)messageIndex __attribute__((swift_name("doCopy(transactionResult:messageIndex:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="message_index")
+*/
+@property (readonly) int64_t messageIndex __attribute__((swift_name("messageIndex")));
+
+/**
+ * @note annotations
+ *   kotlinx.serialization.SerialName(value="transaction_result")
+*/
+@property (readonly) FlowTransactionResult *transactionResult __attribute__((swift_name("transactionResult")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("TransactionStatusPayload.Companion")))
+@interface FlowTransactionStatusPayloadCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowTransactionStatusPayloadCompanion *shared __attribute__((swift_name("shared")));
+- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 @end
 
 __attribute__((swift_name("BignumBigNumber")))
@@ -3966,6 +5276,7 @@ __attribute__((swift_name("KotlinByteArray")))
 
 @interface FlowKotlinByteArray (Extensions)
 - (NSString *)bytesToHex __attribute__((swift_name("bytesToHex()")));
+- (NSString *)bytesToHex_ __attribute__((swift_name("bytesToHex_()")));
 - (FlowRLPType *)decodeRLP __attribute__((swift_name("decodeRLP()")));
 - (FlowKotlinByteArray *)paddingZeroLeftBlockSize:(int32_t)blockSize __attribute__((swift_name("paddingZeroLeft(blockSize:)")));
 - (FlowKotlinByteArray *)paddingZeroRightBlockSize:(int32_t)blockSize __attribute__((swift_name("paddingZeroRight(blockSize:)")));
@@ -3981,7 +5292,79 @@ __attribute__((swift_name("KotlinByteArray")))
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
+- (void)buildTransactionChainId:(id<FlowChainIdProvider>)chainId addressRegistry:(FlowAddressRegistry *)addressRegistry builder:(void (^)(FlowTransactionDSLBuilder *))builder completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("buildTransaction(chainId:addressRegistry:builder:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
 - (void)getAccountAddress:(NSString *)address completionHandler:(void (^)(FlowAccount * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getAccount(address:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getChildAccountMetadataParent:(FlowFlowAddress *)parent completionHandler:(void (^)(NSDictionary<NSString *, FlowChildAccountMetadata *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getChildAccountMetadata(parent:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getChildAddressesParent:(FlowFlowAddress *)parent completionHandler:(void (^)(NSArray<NSString *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getChildAddresses(parent:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getCreatedAccountAddressTxId:(NSString *)txId completionHandler:(void (^)(NSString * _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("getCreatedAccountAddress(txId:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getDelegatorInfoAddress:(FlowFlowAddress *)address completionHandler:(void (^)(NSArray<FlowStakingNode *> * _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("getDelegatorInfo(address:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)getTokenBalancesAddress:(FlowFlowAddress *)address completionHandler:(void (^)(NSDictionary<NSString *, FlowDouble *> * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("getTokenBalances(address:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)queryBlock:(void (^)(FlowScriptBuilder *))block completionHandler:(void (^)(FlowCadenceValue * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("query(block:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)queryTarget:(FlowCadenceTarget *)target completionHandler:(void (^)(FlowCadenceValue * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("query(target:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)sendTransactionSigners:(NSArray<id<FlowSigner>> *)signers chainId:(id<FlowChainIdProvider>)chainId addressRegistry:(FlowAddressRegistry *)addressRegistry builder:(void (^)(FlowTransactionDSLBuilder *))builder completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("sendTransaction(signers:chainId:addressRegistry:builder:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)sendTransactionTarget:(FlowCadenceTarget *)target signers:(NSArray<id<FlowSigner>> *)signers chainId:(id<FlowChainIdProvider>)chainId addressRegistry:(FlowAddressRegistry *)addressRegistry builder:(void (^)(FlowTransactionDSLBuilder *))builder completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("sendTransaction(target:signers:chainId:addressRegistry:builder:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)signTransactionUnsignedTransaction:(FlowTransaction *)unsignedTransaction signers:(NSArray<id<FlowSigner>> *)signers completionHandler:(void (^)(FlowTransaction * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("signTransaction(unsignedTransaction:signers:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)waitForCreatedAccountAddressTxId:(NSString *)txId completionHandler:(void (^)(NSString * _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("waitForCreatedAccountAddress(txId:completionHandler:)")));
 @end
 
 @interface FlowCadenceCompositeValue (Extensions)
@@ -3989,11 +5372,28 @@ __attribute__((swift_name("KotlinByteArray")))
 - (NSDictionary<NSString *, id> *)toMap __attribute__((swift_name("toMap()")));
 @end
 
+@interface FlowCadenceValue (Extensions)
+- (NSString *)getTypeName __attribute__((swift_name("getTypeName()")));
+@end
+
+@interface FlowCadenceValueStructValue (Extensions)
+- (NSDictionary<NSString *, FlowKotlinx_serialization_jsonJsonElement *> *)toJsonObject __attribute__((swift_name("toJsonObject()")));
+@end
+
+@interface FlowEvent (Extensions)
+- (id _Nullable)getFieldName:(NSString *)name __attribute__((swift_name("getField(name:)")));
+@end
+
 @interface FlowTransaction (Extensions)
+- (FlowKotlinByteArray *)completeEnvelopeMessage __attribute__((swift_name("completeEnvelopeMessage()")));
 - (FlowKotlinByteArray *)envelopeMessage __attribute__((swift_name("envelopeMessage()")));
 - (NSArray<FlowRLPType *> *)payload __attribute__((swift_name("payload()")));
 - (FlowKotlinByteArray *)payloadMessage __attribute__((swift_name("payloadMessage()")));
-- (FlowRLPElement *)toRLP __attribute__((swift_name("toRLP()")));
+@end
+
+@interface FlowTransactionResult (Extensions)
+- (FlowEvent * _Nullable)findEventType:(NSString *)type __attribute__((swift_name("findEvent(type:)")));
+- (NSString * _Nullable)getCreatedAddress __attribute__((swift_name("getCreatedAddress()")));
 @end
 
 @interface FlowRLPElement (Extensions)
@@ -4027,6 +5427,7 @@ __attribute__((swift_name("CadenceDecodeKt")))
 @interface FlowCadenceDecodeKt : FlowBase
 + (NSString *)addHexPrefix:(NSString *)receiver __attribute__((swift_name("addHexPrefix(_:)")));
 + (NSArray<id> *)decode:(NSArray<FlowCadenceValue *> *)receiver __attribute__((swift_name("decode(_:)")));
++ (id _Nullable)decodeCadenceStructStruct:(FlowCadenceValueStructValue *)struct_ __attribute__((swift_name("decodeCadenceStruct(struct:)")));
 + (NSArray<id> *)decodeToAny:(NSArray<FlowCadenceValue *> *)receiver __attribute__((swift_name("decodeToAny(_:)")));
 + (NSArray<NSString *> *)encodeBase64:(NSArray<FlowCadenceValue *> *)receiver __attribute__((swift_name("encodeBase64(_:)")));
 + (NSString *)removeHexPrefix:(NSString *)receiver __attribute__((swift_name("removeHexPrefix(_:)")));
@@ -4107,6 +5508,45 @@ __attribute__((swift_name("CadenceTypeKt")))
 @end
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ErrorCodesKt")))
+@interface FlowErrorCodesKt : FlowBase
++ (FlowInt * _Nullable)parseErrorCodeMessage:(NSString *)message __attribute__((swift_name("parseErrorCode(message:)")));
+@property (class, readonly) FlowKotlinRegex *ERROR_CODE_REGEX __attribute__((swift_name("ERROR_CODE_REGEX")));
+@property (class, readonly) int32_t FlowErrorCodeAccountAlreadyExistsError __attribute__((swift_name("FlowErrorCodeAccountAlreadyExistsError")));
+@property (class, readonly) int32_t FlowErrorCodeAccountAuthorizationError __attribute__((swift_name("FlowErrorCodeAccountAuthorizationError")));
+@property (class, readonly) int32_t FlowErrorCodeAccountNotFoundError __attribute__((swift_name("FlowErrorCodeAccountNotFoundError")));
+@property (class, readonly) int32_t FlowErrorCodeAccountPublicKeyNotFoundError __attribute__((swift_name("FlowErrorCodeAccountPublicKeyNotFoundError")));
+@property (class, readonly) int32_t FlowErrorCodeCadenceRunTimeError __attribute__((swift_name("FlowErrorCodeCadenceRunTimeError")));
+@property (class, readonly) int32_t FlowErrorCodeContractNamesNotFoundError __attribute__((swift_name("FlowErrorCodeContractNamesNotFoundError")));
+@property (class, readonly) int32_t FlowErrorCodeContractNotFoundError __attribute__((swift_name("FlowErrorCodeContractNotFoundError")));
+@property (class, readonly) int32_t FlowErrorCodeEncodingUnsupportedValue __attribute__((swift_name("FlowErrorCodeEncodingUnsupportedValue")));
+@property (class, readonly) int32_t FlowErrorCodeEventLimitExceededError __attribute__((swift_name("FlowErrorCodeEventLimitExceededError")));
+@property (class, readonly) int32_t FlowErrorCodeExpiredTransactionError __attribute__((swift_name("FlowErrorCodeExpiredTransactionError")));
+@property (class, readonly) int32_t FlowErrorCodeFVMInternalError __attribute__((swift_name("FlowErrorCodeFVMInternalError")));
+@property (class, readonly) int32_t FlowErrorCodeFrozenAccountError __attribute__((swift_name("FlowErrorCodeFrozenAccountError")));
+@property (class, readonly) int32_t FlowErrorCodeGasLimitExceededError __attribute__((swift_name("FlowErrorCodeGasLimitExceededError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidAddressError __attribute__((swift_name("FlowErrorCodeInvalidAddressError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidArgumentError __attribute__((swift_name("FlowErrorCodeInvalidArgumentError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidEnvelopeSignatureError __attribute__((swift_name("FlowErrorCodeInvalidEnvelopeSignatureError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidGasLimitError __attribute__((swift_name("FlowErrorCodeInvalidGasLimitError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidLocationError __attribute__((swift_name("FlowErrorCodeInvalidLocationError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidPayloadSignatureError __attribute__((swift_name("FlowErrorCodeInvalidPayloadSignatureError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidProposalSeqNumberError __attribute__((swift_name("FlowErrorCodeInvalidProposalSeqNumberError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidProposalSignatureError __attribute__((swift_name("FlowErrorCodeInvalidProposalSignatureError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidReferenceBlockError __attribute__((swift_name("FlowErrorCodeInvalidReferenceBlockError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidScriptError __attribute__((swift_name("FlowErrorCodeInvalidScriptError")));
+@property (class, readonly) int32_t FlowErrorCodeInvalidTxByteSizeError __attribute__((swift_name("FlowErrorCodeInvalidTxByteSizeError")));
+@property (class, readonly) int32_t FlowErrorCodeLedgerIntractionLimitExceededError __attribute__((swift_name("FlowErrorCodeLedgerIntractionLimitExceededError")));
+@property (class, readonly) int32_t FlowErrorCodeOperationAuthorizationError __attribute__((swift_name("FlowErrorCodeOperationAuthorizationError")));
+@property (class, readonly) int32_t FlowErrorCodeOperationNotSupportedError __attribute__((swift_name("FlowErrorCodeOperationNotSupportedError")));
+@property (class, readonly) int32_t FlowErrorCodeStateKeySizeLimitError __attribute__((swift_name("FlowErrorCodeStateKeySizeLimitError")));
+@property (class, readonly) int32_t FlowErrorCodeStateValueSizeLimitError __attribute__((swift_name("FlowErrorCodeStateValueSizeLimitError")));
+@property (class, readonly) int32_t FlowErrorCodeStorageCapacityExceeded __attribute__((swift_name("FlowErrorCodeStorageCapacityExceeded")));
+@property (class, readonly) int32_t FlowErrorCodeTransactionFeeDeductionFailedError __attribute__((swift_name("FlowErrorCodeTransactionFeeDeductionFailedError")));
+@property (class, readonly) int32_t FlowErrorCodeValueError __attribute__((swift_name("FlowErrorCodeValueError")));
+@end
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("ExtensionKt")))
 @interface FlowExtensionKt : FlowBase
 + (FlowKotlinByteArray *)fixedSizeBytes:(FlowKotlinByteArray *)bytes size:(int32_t)size __attribute__((swift_name("fixedSize(bytes:size:)")));
@@ -4122,6 +5562,45 @@ __attribute__((swift_name("RLPTypeConverterKt")))
 + (FlowRLPElement *)toRLP_:(int32_t)receiver __attribute__((swift_name("toRLP(__:)")));
 + (FlowRLPElement *)toRLP__:(NSString *)receiver __attribute__((swift_name("toRLP(___:)")));
 + (FlowRLPElement *)toRLP___:(NSArray<FlowRLPType *> *)receiver __attribute__((swift_name("toRLP(____:)")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("ScriptDSLKt")))
+@interface FlowScriptDSLKt : FlowBase
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
++ (void)flowQueryChainId:(FlowChainId *)chainId block:(void (^)(FlowScriptBuilder *))block completionHandler:(void (^)(FlowCadenceValue * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("flowQuery(chainId:block:completionHandler:)")));
++ (FlowScriptBuilder *)flowScriptBlock:(void (^)(FlowScriptBuilder *))block __attribute__((swift_name("flowScript(block:)")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("UtilsKt")))
+@interface FlowUtilsKt : FlowBase
++ (FlowKotlinByteArray *)hexToBytes:(NSString *)receiver __attribute__((swift_name("hexToBytes(_:)")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinEnumCompanion")))
+@interface FlowKotlinEnumCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKotlinEnumCompanion *shared __attribute__((swift_name("shared")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinArray")))
+@interface FlowKotlinArray<T> : FlowBase
++ (instancetype)arrayWithSize:(int32_t)size init:(T _Nullable (^)(FlowInt *))init __attribute__((swift_name("init(size:init:)")));
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (T _Nullable)getIndex:(int32_t)index __attribute__((swift_name("get(index:)")));
+- (id<FlowKotlinIterator>)iterator __attribute__((swift_name("iterator()")));
+- (void)setIndex:(int32_t)index value:(T _Nullable)value __attribute__((swift_name("set(index:value:)")));
+@property (readonly) int32_t size __attribute__((swift_name("size")));
 @end
 
 __attribute__((swift_name("KotlinIllegalStateException")))
@@ -4406,27 +5885,6 @@ __attribute__((swift_name("KotlinPair")))
 @property (readonly) B _Nullable second __attribute__((swift_name("second")));
 @end
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("KotlinEnumCompanion")))
-@interface FlowKotlinEnumCompanion : FlowBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) FlowKotlinEnumCompanion *shared __attribute__((swift_name("shared")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("KotlinArray")))
-@interface FlowKotlinArray<T> : FlowBase
-+ (instancetype)arrayWithSize:(int32_t)size init:(T _Nullable (^)(FlowInt *))init __attribute__((swift_name("init(size:init:)")));
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-- (T _Nullable)getIndex:(int32_t)index __attribute__((swift_name("get(index:)")));
-- (id<FlowKotlinIterator>)iterator __attribute__((swift_name("iterator()")));
-- (void)setIndex:(int32_t)index value:(T _Nullable)value __attribute__((swift_name("set(index:value:)")));
-@property (readonly) int32_t size __attribute__((swift_name("size")));
-@end
-
 __attribute__((swift_name("Kotlinx_serialization_coreSerialFormat")))
 @protocol FlowKotlinx_serialization_coreSerialFormat
 @required
@@ -4471,6 +5929,17 @@ __attribute__((swift_name("KotlinUnit")))
 + (instancetype)unit __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowKotlinUnit *shared __attribute__((swift_name("shared")));
 - (NSString *)description __attribute__((swift_name("description()")));
+@end
+
+__attribute__((swift_name("Kotlinx_coroutines_coreFlow")))
+@protocol FlowKotlinx_coroutines_coreFlow
+@required
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)collectCollector:(id<FlowKotlinx_coroutines_coreFlowCollector>)collector completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("collect(collector:completionHandler:)")));
 @end
 
 __attribute__((swift_name("BignumBigNumberCreator")))
@@ -4667,6 +6136,45 @@ __attribute__((swift_name("KotlinByteIterator")))
 - (int8_t)nextByte __attribute__((swift_name("nextByte()")));
 @end
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinRegex")))
+@interface FlowKotlinRegex : FlowBase
+- (instancetype)initWithPattern:(NSString *)pattern __attribute__((swift_name("init(pattern:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithPattern:(NSString *)pattern options:(NSSet<FlowKotlinRegexOption *> *)options __attribute__((swift_name("init(pattern:options:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithPattern:(NSString *)pattern option:(FlowKotlinRegexOption *)option __attribute__((swift_name("init(pattern:option:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowKotlinRegexCompanion *companion __attribute__((swift_name("companion")));
+- (BOOL)containsMatchInInput:(id)input __attribute__((swift_name("containsMatchIn(input:)")));
+- (id<FlowKotlinMatchResult> _Nullable)findInput:(id)input startIndex:(int32_t)startIndex __attribute__((swift_name("find(input:startIndex:)")));
+- (id<FlowKotlinSequence>)findAllInput:(id)input startIndex:(int32_t)startIndex __attribute__((swift_name("findAll(input:startIndex:)")));
+
+/**
+ * @note annotations
+ *   kotlin.SinceKotlin(version="1.7")
+*/
+- (id<FlowKotlinMatchResult> _Nullable)matchAtInput:(id)input index:(int32_t)index __attribute__((swift_name("matchAt(input:index:)")));
+- (id<FlowKotlinMatchResult> _Nullable)matchEntireInput:(id)input __attribute__((swift_name("matchEntire(input:)")));
+- (BOOL)matchesInput:(id)input __attribute__((swift_name("matches(input:)")));
+
+/**
+ * @note annotations
+ *   kotlin.SinceKotlin(version="1.7")
+*/
+- (BOOL)matchesAtInput:(id)input index:(int32_t)index __attribute__((swift_name("matchesAt(input:index:)")));
+- (NSString *)replaceInput:(id)input transform:(id (^)(id<FlowKotlinMatchResult>))transform __attribute__((swift_name("replace(input:transform:)")));
+- (NSString *)replaceInput:(id)input replacement:(NSString *)replacement __attribute__((swift_name("replace(input:replacement:)")));
+- (NSString *)replaceFirstInput:(id)input replacement:(NSString *)replacement __attribute__((swift_name("replaceFirst(input:replacement:)")));
+- (NSArray<NSString *> *)splitInput:(id)input limit:(int32_t)limit __attribute__((swift_name("split(input:limit:)")));
+
+/**
+ * @note annotations
+ *   kotlin.SinceKotlin(version="1.6")
+*/
+- (id<FlowKotlinSequence>)splitToSequenceInput:(id)input limit:(int32_t)limit __attribute__((swift_name("splitToSequence(input:limit:)")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) NSSet<FlowKotlinRegexOption *> *options __attribute__((swift_name("options")));
+@property (readonly) NSString *pattern __attribute__((swift_name("pattern")));
+@end
+
 
 /**
  * @note annotations
@@ -4700,10 +6208,9 @@ __attribute__((swift_name("Ktor_client_coreHttpClientEngineConfig")))
 @interface FlowKtor_client_coreHttpClientEngineConfig : FlowBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-@property FlowKotlinx_coroutines_coreCoroutineDispatcher * _Nullable dispatcher __attribute__((swift_name("dispatcher")));
 @property BOOL pipelining __attribute__((swift_name("pipelining")));
 @property FlowKtor_client_coreProxyConfig * _Nullable proxy __attribute__((swift_name("proxy")));
-@property int32_t threadsCount __attribute__((swift_name("threadsCount"))) __attribute__((unavailable("The [threadsCount] property is deprecated. Consider setting [dispatcher] instead.")));
+@property int32_t threadsCount __attribute__((swift_name("threadsCount"))) __attribute__((deprecated("The [threadsCount] property is deprecated. The [Dispatchers.IO] is used by default.")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -4717,7 +6224,7 @@ __attribute__((swift_name("Ktor_client_coreHttpClientConfig")))
 - (void)installPlugin:(id<FlowKtor_client_coreHttpClientPlugin>)plugin configure:(void (^)(id))configure __attribute__((swift_name("install(plugin:configure:)")));
 - (void)installKey:(NSString *)key block:(void (^)(FlowKtor_client_coreHttpClient *))block __attribute__((swift_name("install(key:block:)")));
 - (void)plusAssignOther:(FlowKtor_client_coreHttpClientConfig<T> *)other __attribute__((swift_name("plusAssign(other:)")));
-@property BOOL developmentMode __attribute__((swift_name("developmentMode"))) __attribute__((deprecated("Development mode is no longer required. The property will be removed in the future.")));
+@property BOOL developmentMode __attribute__((swift_name("developmentMode")));
 @property BOOL expectSuccess __attribute__((swift_name("expectSuccess")));
 @property BOOL followRedirects __attribute__((swift_name("followRedirects")));
 @property BOOL useDefaultTransformers __attribute__((swift_name("useDefaultTransformers")));
@@ -4771,7 +6278,6 @@ __attribute__((swift_name("Ktor_utilsPipeline")))
 - (void)mergeFrom:(FlowKtor_utilsPipeline<TSubject, TContext> *)from __attribute__((swift_name("merge(from:)")));
 - (void)mergePhasesFrom:(FlowKtor_utilsPipeline<TSubject, TContext> *)from __attribute__((swift_name("mergePhases(from:)")));
 - (void)resetFromFrom:(FlowKtor_utilsPipeline<TSubject, TContext> *)from __attribute__((swift_name("resetFrom(from:)")));
-- (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) id<FlowKtor_utilsAttributes> attributes __attribute__((swift_name("attributes")));
 @property (readonly) BOOL developmentMode __attribute__((swift_name("developmentMode")));
 @property (readonly, getter=isEmpty_) BOOL isEmpty __attribute__((swift_name("isEmpty")));
@@ -5088,6 +6594,17 @@ __attribute__((swift_name("Kotlinx_serialization_jsonJsonElement.Companion")))
 - (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
 @end
 
+__attribute__((swift_name("Kotlinx_coroutines_coreFlowCollector")))
+@protocol FlowKotlinx_coroutines_coreFlowCollector
+@required
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)emitValue:(id _Nullable)value completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("emit(value:completionHandler:)")));
+@end
+
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("BignumModularBigInteger.Companion")))
 @interface FlowBignumModularBigIntegerCompanion : FlowBase
@@ -5116,6 +6633,52 @@ __attribute__((swift_name("BignumModularQuotientAndRemainder")))
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) FlowBignumModularBigInteger *quotient __attribute__((swift_name("quotient")));
 @property (readonly) FlowBignumModularBigInteger *remainder __attribute__((swift_name("remainder")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinRegexOption")))
+@interface FlowKotlinRegexOption : FlowKotlinEnum<FlowKotlinRegexOption *>
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (class, readonly) FlowKotlinRegexOption *ignoreCase __attribute__((swift_name("ignoreCase")));
+@property (class, readonly) FlowKotlinRegexOption *multiline __attribute__((swift_name("multiline")));
+@property (class, readonly) FlowKotlinRegexOption *literal __attribute__((swift_name("literal")));
+@property (class, readonly) FlowKotlinRegexOption *unixLines __attribute__((swift_name("unixLines")));
+@property (class, readonly) FlowKotlinRegexOption *comments __attribute__((swift_name("comments")));
+@property (class, readonly) FlowKotlinRegexOption *dotMatchesAll __attribute__((swift_name("dotMatchesAll")));
+@property (class, readonly) FlowKotlinRegexOption *canonEq __attribute__((swift_name("canonEq")));
++ (FlowKotlinArray<FlowKotlinRegexOption *> *)values __attribute__((swift_name("values()")));
+@property (class, readonly) NSArray<FlowKotlinRegexOption *> *entries __attribute__((swift_name("entries")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinRegex.Companion")))
+@interface FlowKotlinRegexCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKotlinRegexCompanion *shared __attribute__((swift_name("shared")));
+- (NSString *)escapeLiteral:(NSString *)literal __attribute__((swift_name("escape(literal:)")));
+- (NSString *)escapeReplacementLiteral:(NSString *)literal __attribute__((swift_name("escapeReplacement(literal:)")));
+- (FlowKotlinRegex *)fromLiteralLiteral:(NSString *)literal __attribute__((swift_name("fromLiteral(literal:)")));
+@end
+
+__attribute__((swift_name("KotlinMatchResult")))
+@protocol FlowKotlinMatchResult
+@required
+- (id<FlowKotlinMatchResult> _Nullable)next __attribute__((swift_name("next()")));
+@property (readonly) FlowKotlinMatchResultDestructured *destructured __attribute__((swift_name("destructured")));
+@property (readonly) NSArray<NSString *> *groupValues __attribute__((swift_name("groupValues")));
+@property (readonly) id<FlowKotlinMatchGroupCollection> groups __attribute__((swift_name("groups")));
+@property (readonly) FlowKotlinIntRange *range __attribute__((swift_name("range")));
+@property (readonly) NSString *value __attribute__((swift_name("value")));
+@end
+
+__attribute__((swift_name("KotlinSequence")))
+@protocol FlowKotlinSequence
+@required
+- (id<FlowKotlinIterator>)iterator __attribute__((swift_name("iterator()")));
 @end
 
 __attribute__((swift_name("KotlinCoroutineContextElement")))
@@ -5220,13 +6783,7 @@ __attribute__((swift_name("Ktor_client_coreHttpClientPlugin")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Ktor_utilsAttributeKey")))
 @interface FlowKtor_utilsAttributeKey<T> : FlowBase
-
-/**
- * @note annotations
- *   kotlin.jvm.JvmOverloads
-*/
-- (instancetype)initWithName:(NSString *)name type:(FlowKtor_utilsTypeInfo *)type __attribute__((swift_name("init(name:type:)"))) __attribute__((objc_designated_initializer));
-- (FlowKtor_utilsAttributeKey<T> *)doCopyName:(NSString *)name type:(FlowKtor_utilsTypeInfo *)type __attribute__((swift_name("doCopy(name:type:)")));
+- (instancetype)initWithName:(NSString *)name __attribute__((swift_name("init(name:)"))) __attribute__((objc_designated_initializer));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
 - (NSString *)description __attribute__((swift_name("description()")));
@@ -5293,7 +6850,7 @@ __attribute__((swift_name("Ktor_client_coreHttpResponse")))
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) FlowKtor_client_coreHttpClientCall *call __attribute__((swift_name("call")));
-@property (readonly) id<FlowKtor_ioByteReadChannel> rawContent __attribute__((swift_name("rawContent")));
+@property (readonly) id<FlowKtor_ioByteReadChannel> content __attribute__((swift_name("content")));
 @property (readonly) FlowKtor_utilsGMTDate *requestTime __attribute__((swift_name("requestTime")));
 @property (readonly) FlowKtor_utilsGMTDate *responseTime __attribute__((swift_name("responseTime")));
 @property (readonly) FlowKtor_httpHttpStatusCode *status __attribute__((swift_name("status")));
@@ -5504,6 +7061,86 @@ __attribute__((swift_name("Kotlinx_serialization_jsonJsonNamingStrategy")))
 @end
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinMatchResultDestructured")))
+@interface FlowKotlinMatchResultDestructured : FlowBase
+- (NSString *)component1 __attribute__((swift_name("component1()")));
+- (NSString *)component10 __attribute__((swift_name("component10()")));
+- (NSString *)component2 __attribute__((swift_name("component2()")));
+- (NSString *)component3 __attribute__((swift_name("component3()")));
+- (NSString *)component4 __attribute__((swift_name("component4()")));
+- (NSString *)component5 __attribute__((swift_name("component5()")));
+- (NSString *)component6 __attribute__((swift_name("component6()")));
+- (NSString *)component7 __attribute__((swift_name("component7()")));
+- (NSString *)component8 __attribute__((swift_name("component8()")));
+- (NSString *)component9 __attribute__((swift_name("component9()")));
+- (NSArray<NSString *> *)toList __attribute__((swift_name("toList()")));
+@property (readonly) id<FlowKotlinMatchResult> match __attribute__((swift_name("match")));
+@end
+
+__attribute__((swift_name("KotlinCollection")))
+@protocol FlowKotlinCollection <FlowKotlinIterable>
+@required
+- (BOOL)containsElement:(id _Nullable)element __attribute__((swift_name("contains(element:)")));
+- (BOOL)containsAllElements:(id)elements __attribute__((swift_name("containsAll(elements:)")));
+- (BOOL)isEmpty __attribute__((swift_name("isEmpty()")));
+@property (readonly) int32_t size __attribute__((swift_name("size")));
+@end
+
+__attribute__((swift_name("KotlinMatchGroupCollection")))
+@protocol FlowKotlinMatchGroupCollection <FlowKotlinCollection>
+@required
+- (FlowKotlinMatchGroup * _Nullable)getIndex:(int32_t)index __attribute__((swift_name("get(index:)")));
+@end
+
+__attribute__((swift_name("KotlinIntProgression")))
+@interface FlowKotlinIntProgression : FlowBase <FlowKotlinIterable>
+@property (class, readonly, getter=companion) FlowKotlinIntProgressionCompanion *companion __attribute__((swift_name("companion")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (BOOL)isEmpty __attribute__((swift_name("isEmpty()")));
+- (FlowKotlinIntIterator *)iterator __attribute__((swift_name("iterator()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) int32_t first __attribute__((swift_name("first")));
+@property (readonly) int32_t last __attribute__((swift_name("last")));
+@property (readonly) int32_t step __attribute__((swift_name("step")));
+@end
+
+
+/**
+ * @note annotations
+ *   kotlin.SinceKotlin(version="1.9")
+*/
+__attribute__((swift_name("KotlinOpenEndRange")))
+@protocol FlowKotlinOpenEndRange
+@required
+- (BOOL)containsValue_:(id)value __attribute__((swift_name("contains(value_:)")));
+- (BOOL)isEmpty __attribute__((swift_name("isEmpty()")));
+@property (readonly) id endExclusive __attribute__((swift_name("endExclusive")));
+@property (readonly) id start __attribute__((swift_name("start")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinIntRange")))
+@interface FlowKotlinIntRange : FlowKotlinIntProgression <FlowKotlinClosedRange, FlowKotlinOpenEndRange>
+- (instancetype)initWithStart:(int32_t)start endInclusive:(int32_t)endInclusive __attribute__((swift_name("init(start:endInclusive:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowKotlinIntRangeCompanion *companion __attribute__((swift_name("companion")));
+- (BOOL)containsValue:(FlowInt *)value __attribute__((swift_name("contains(value:)")));
+- (BOOL)containsValue_:(FlowInt *)value __attribute__((swift_name("contains(value_:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (BOOL)isEmpty __attribute__((swift_name("isEmpty()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+
+/**
+ * @note annotations
+ *   kotlin.SinceKotlin(version="1.9")
+*/
+@property (readonly) FlowInt *endExclusive __attribute__((swift_name("endExclusive"))) __attribute__((deprecated("Can throw an exception when it's impossible to represent the value with Int type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")));
+@property (readonly) FlowInt *endInclusive __attribute__((swift_name("endInclusive")));
+@property (readonly) FlowInt *start __attribute__((swift_name("start")));
+@end
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Ktor_httpUrl")))
 @interface FlowKtor_httpUrl : FlowBase
 @property (class, readonly, getter=companion) FlowKtor_httpUrlCompanion *companion __attribute__((swift_name("companion")));
@@ -5520,12 +7157,9 @@ __attribute__((swift_name("Ktor_httpUrl")))
 @property (readonly) NSString *host __attribute__((swift_name("host")));
 @property (readonly) id<FlowKtor_httpParameters> parameters __attribute__((swift_name("parameters")));
 @property (readonly) NSString * _Nullable password __attribute__((swift_name("password")));
-@property (readonly) NSArray<NSString *> *pathSegments __attribute__((swift_name("pathSegments"))) __attribute__((deprecated("\n        `pathSegments` is deprecated.\n\n        This property will contain an empty path segment at the beginning for URLs with a hostname,\n        and an empty path segment at the end for the URLs with a trailing slash. If you need to keep this behaviour please\n        use [rawSegments]. If you only need to access the meaningful parts of the path, consider using [segments] instead.\n             \n        Please decide if you need [rawSegments] or [segments] explicitly.\n        ")));
+@property (readonly) NSArray<NSString *> *pathSegments __attribute__((swift_name("pathSegments")));
 @property (readonly) int32_t port __attribute__((swift_name("port")));
 @property (readonly) FlowKtor_httpURLProtocol *protocol __attribute__((swift_name("protocol")));
-@property (readonly) FlowKtor_httpURLProtocol * _Nullable protocolOrNull __attribute__((swift_name("protocolOrNull")));
-@property (readonly) NSArray<NSString *> *rawSegments __attribute__((swift_name("rawSegments")));
-@property (readonly) NSArray<NSString *> *segments __attribute__((swift_name("segments")));
 @property (readonly) int32_t specifiedPort __attribute__((swift_name("specifiedPort")));
 @property (readonly) BOOL trailingQuery __attribute__((swift_name("trailingQuery")));
 @property (readonly) NSString * _Nullable user __attribute__((swift_name("user")));
@@ -5632,18 +7266,11 @@ __attribute__((swift_name("Ktor_httpHttpStatusCode")))
 @property (readonly) int32_t value __attribute__((swift_name("value")));
 @end
 
-
-/**
- * @note annotations
- *   kotlinx.serialization.Serializable
-*/
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Ktor_utilsGMTDate")))
 @interface FlowKtor_utilsGMTDate : FlowBase <FlowKotlinComparable>
-- (instancetype)initWithSeconds:(int32_t)seconds minutes:(int32_t)minutes hours:(int32_t)hours dayOfWeek:(FlowKtor_utilsWeekDay *)dayOfWeek dayOfMonth:(int32_t)dayOfMonth dayOfYear:(int32_t)dayOfYear month:(FlowKtor_utilsMonth *)month year:(int32_t)year timestamp:(int64_t)timestamp __attribute__((swift_name("init(seconds:minutes:hours:dayOfWeek:dayOfMonth:dayOfYear:month:year:timestamp:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) FlowKtor_utilsGMTDateCompanion *companion __attribute__((swift_name("companion")));
 - (int32_t)compareToOther:(FlowKtor_utilsGMTDate *)other __attribute__((swift_name("compareTo(other:)")));
-- (FlowKtor_utilsGMTDate *)doCopy __attribute__((swift_name("doCopy()")));
 - (FlowKtor_utilsGMTDate *)doCopySeconds:(int32_t)seconds minutes:(int32_t)minutes hours:(int32_t)hours dayOfWeek:(FlowKtor_utilsWeekDay *)dayOfWeek dayOfMonth:(int32_t)dayOfMonth dayOfYear:(int32_t)dayOfYear month:(FlowKtor_utilsMonth *)month year:(int32_t)year timestamp:(int64_t)timestamp __attribute__((swift_name("doCopy(seconds:minutes:hours:dayOfWeek:dayOfMonth:dayOfYear:month:year:timestamp:)")));
 - (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
 - (NSUInteger)hash __attribute__((swift_name("hash()")));
@@ -5717,18 +7344,6 @@ __attribute__((swift_name("Kotlinx_coroutines_coreRunnable")))
 - (void)run __attribute__((swift_name("run()")));
 @end
 
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_utilsTypeInfo")))
-@interface FlowKtor_utilsTypeInfo : FlowBase
-- (instancetype)initWithType:(id<FlowKotlinKClass>)type kotlinType:(id<FlowKotlinKType> _Nullable)kotlinType __attribute__((swift_name("init(type:kotlinType:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithType:(id<FlowKotlinKClass>)type reifiedType:(id<FlowKotlinKType>)reifiedType kotlinType:(id<FlowKotlinKType> _Nullable)kotlinType __attribute__((swift_name("init(type:reifiedType:kotlinType:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("Use constructor without reifiedType parameter.")));
-- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
-- (NSUInteger)hash __attribute__((swift_name("hash()")));
-- (NSString *)description __attribute__((swift_name("description()")));
-@property (readonly) id<FlowKotlinKType> _Nullable kotlinType __attribute__((swift_name("kotlinType")));
-@property (readonly) id<FlowKotlinKClass> type __attribute__((swift_name("type")));
-@end
-
 __attribute__((swift_name("Ktor_ioByteReadChannel")))
 @protocol FlowKtor_ioByteReadChannel
 @required
@@ -5737,11 +7352,147 @@ __attribute__((swift_name("Ktor_ioByteReadChannel")))
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)awaitContentMin:(int32_t)min completionHandler:(void (^)(FlowBoolean * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("awaitContent(min:completionHandler:)")));
-- (void)cancelCause_:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("cancel(cause_:)")));
+- (void)awaitContentWithCompletionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("awaitContent(completionHandler:)")));
+- (BOOL)cancelCause_:(FlowKotlinThrowable * _Nullable)cause __attribute__((swift_name("cancel(cause_:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)discardMax:(int64_t)max completionHandler:(void (^)(FlowLong * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("discard(max:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)peekToDestination:(FlowKtor_ioMemory *)destination destinationOffset:(int64_t)destinationOffset offset:(int64_t)offset min:(int64_t)min max:(int64_t)max completionHandler:(void (^)(FlowLong * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("peekTo(destination:destinationOffset:offset:min:max:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readAvailableDst:(FlowKtor_ioChunkBuffer *)dst completionHandler:(void (^)(FlowInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readAvailable(dst:completionHandler:)")));
+- (int32_t)readAvailableMin:(int32_t)min block:(void (^)(FlowKtor_ioBuffer *))block __attribute__((swift_name("readAvailable(min:block:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readAvailableDst:(FlowKotlinByteArray *)dst offset:(int32_t)offset length:(int32_t)length completionHandler:(void (^)(FlowInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readAvailable(dst:offset:length:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readAvailableDst:(void *)dst offset:(int32_t)offset length:(int32_t)length completionHandler_:(void (^)(FlowInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readAvailable(dst:offset:length:completionHandler_:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readAvailableDst:(void *)dst offset:(int64_t)offset length:(int64_t)length completionHandler__:(void (^)(FlowInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readAvailable(dst:offset:length:completionHandler__:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readBooleanWithCompletionHandler:(void (^)(FlowBoolean * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readBoolean(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readByteWithCompletionHandler:(void (^)(FlowByte * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readByte(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readDoubleWithCompletionHandler:(void (^)(FlowDouble * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readDouble(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readFloatWithCompletionHandler:(void (^)(FlowFloat * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readFloat(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readFullyDst:(FlowKtor_ioChunkBuffer *)dst n:(int32_t)n completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("readFully(dst:n:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readFullyDst:(FlowKotlinByteArray *)dst offset:(int32_t)offset length:(int32_t)length completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("readFully(dst:offset:length:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readFullyDst:(void *)dst offset:(int32_t)offset length:(int32_t)length completionHandler_:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("readFully(dst:offset:length:completionHandler_:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readFullyDst:(void *)dst offset:(int64_t)offset length:(int64_t)length completionHandler__:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("readFully(dst:offset:length:completionHandler__:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readIntWithCompletionHandler:(void (^)(FlowInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readInt(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readLongWithCompletionHandler:(void (^)(FlowLong * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readLong(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readPacketSize:(int32_t)size completionHandler:(void (^)(FlowKtor_ioByteReadPacket * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readPacket(size:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readRemainingLimit:(int64_t)limit completionHandler:(void (^)(FlowKtor_ioByteReadPacket * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readRemaining(limit:completionHandler:)")));
+- (void)readSessionConsumer:(void (^)(id<FlowKtor_ioReadSession>))consumer __attribute__((swift_name("readSession(consumer:)"))) __attribute__((deprecated("Use read { } instead.")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readShortWithCompletionHandler:(void (^)(FlowShort * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readShort(completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readSuspendableSessionConsumer:(id<FlowKotlinSuspendFunction1>)consumer completionHandler:(void (^)(NSError * _Nullable))completionHandler __attribute__((swift_name("readSuspendableSession(consumer:completionHandler:)"))) __attribute__((deprecated("Use read { } instead.")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readUTF8LineLimit:(int32_t)limit completionHandler:(void (^)(NSString * _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("readUTF8Line(limit:completionHandler:)")));
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)readUTF8LineToOut:(id<FlowKotlinAppendable>)out limit:(int32_t)limit completionHandler:(void (^)(FlowBoolean * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("readUTF8LineTo(out:limit:completionHandler:)")));
+@property (readonly) int32_t availableForRead __attribute__((swift_name("availableForRead")));
 @property (readonly) FlowKotlinThrowable * _Nullable closedCause __attribute__((swift_name("closedCause")));
 @property (readonly) BOOL isClosedForRead __attribute__((swift_name("isClosedForRead")));
-@property (readonly) id<FlowKotlinx_io_coreSource> readBuffer __attribute__((swift_name("readBuffer")));
+@property (readonly) BOOL isClosedForWrite __attribute__((swift_name("isClosedForWrite")));
+@property (readonly) int64_t totalBytesRead __attribute__((swift_name("totalBytesRead")));
 @end
 
 __attribute__((swift_name("Ktor_utilsStringValuesBuilder")))
@@ -5837,7 +7588,7 @@ __attribute__((swift_name("Ktor_client_coreHttpRequestBuilder.Companion")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Ktor_httpURLBuilder")))
 @interface FlowKtor_httpURLBuilder : FlowBase
-- (instancetype)initWithProtocol:(FlowKtor_httpURLProtocol * _Nullable)protocol host:(NSString *)host port:(int32_t)port user:(NSString * _Nullable)user password:(NSString * _Nullable)password pathSegments:(NSArray<NSString *> *)pathSegments parameters:(id<FlowKtor_httpParameters>)parameters fragment:(NSString *)fragment trailingQuery:(BOOL)trailingQuery __attribute__((swift_name("init(protocol:host:port:user:password:pathSegments:parameters:fragment:trailingQuery:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithProtocol:(FlowKtor_httpURLProtocol *)protocol host:(NSString *)host port:(int32_t)port user:(NSString * _Nullable)user password:(NSString * _Nullable)password pathSegments:(NSArray<NSString *> *)pathSegments parameters:(id<FlowKtor_httpParameters>)parameters fragment:(NSString *)fragment trailingQuery:(BOOL)trailingQuery __attribute__((swift_name("init(protocol:host:port:user:password:pathSegments:parameters:fragment:trailingQuery:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) FlowKtor_httpURLBuilderCompanion *companion __attribute__((swift_name("companion")));
 - (FlowKtor_httpUrl *)build __attribute__((swift_name("build()")));
 - (NSString *)buildString __attribute__((swift_name("buildString()")));
@@ -5854,9 +7605,21 @@ __attribute__((swift_name("Ktor_httpURLBuilder")))
 @property NSArray<NSString *> *pathSegments __attribute__((swift_name("pathSegments")));
 @property int32_t port __attribute__((swift_name("port")));
 @property FlowKtor_httpURLProtocol *protocol __attribute__((swift_name("protocol")));
-@property FlowKtor_httpURLProtocol * _Nullable protocolOrNull __attribute__((swift_name("protocolOrNull")));
 @property BOOL trailingQuery __attribute__((swift_name("trailingQuery")));
 @property NSString * _Nullable user __attribute__((swift_name("user")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_utilsTypeInfo")))
+@interface FlowKtor_utilsTypeInfo : FlowBase
+- (instancetype)initWithType:(id<FlowKotlinKClass>)type reifiedType:(id<FlowKotlinKType>)reifiedType kotlinType:(id<FlowKotlinKType> _Nullable)kotlinType __attribute__((swift_name("init(type:reifiedType:kotlinType:)"))) __attribute__((objc_designated_initializer));
+- (FlowKtor_utilsTypeInfo *)doCopyType:(id<FlowKotlinKClass>)type reifiedType:(id<FlowKotlinKType>)reifiedType kotlinType:(id<FlowKotlinKType> _Nullable)kotlinType __attribute__((swift_name("doCopy(type:reifiedType:kotlinType:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) id<FlowKotlinKType> _Nullable kotlinType __attribute__((swift_name("kotlinType")));
+@property (readonly) id<FlowKotlinKType> reifiedType __attribute__((swift_name("reifiedType")));
+@property (readonly) id<FlowKotlinKClass> type __attribute__((swift_name("type")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -5866,6 +7629,7 @@ __attribute__((swift_name("Ktor_client_coreHttpClientCall.Companion")))
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
 @property (class, readonly, getter=shared) FlowKtor_client_coreHttpClientCallCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) FlowKtor_utilsAttributeKey<id> *CustomResponse __attribute__((swift_name("CustomResponse"))) __attribute__((unavailable("This is going to be removed. Please file a ticket with clarification why and what for do you need it.")));
 @end
 
 __attribute__((swift_name("Ktor_client_coreHttpRequest")))
@@ -5876,6 +7640,46 @@ __attribute__((swift_name("Ktor_client_coreHttpRequest")))
 @property (readonly) FlowKtor_httpOutgoingContent *content __attribute__((swift_name("content")));
 @property (readonly) FlowKtor_httpHttpMethod *method __attribute__((swift_name("method")));
 @property (readonly) FlowKtor_httpUrl *url __attribute__((swift_name("url")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinMatchGroup")))
+@interface FlowKotlinMatchGroup : FlowBase
+- (instancetype)initWithValue:(NSString *)value range:(FlowKotlinIntRange *)range __attribute__((swift_name("init(value:range:)"))) __attribute__((objc_designated_initializer));
+- (FlowKotlinMatchGroup *)doCopyValue:(NSString *)value range:(FlowKotlinIntRange *)range __attribute__((swift_name("doCopy(value:range:)")));
+- (BOOL)isEqual:(id _Nullable)other __attribute__((swift_name("isEqual(_:)")));
+- (NSUInteger)hash __attribute__((swift_name("hash()")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@property (readonly) FlowKotlinIntRange *range __attribute__((swift_name("range")));
+@property (readonly) NSString *value __attribute__((swift_name("value")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinIntProgression.Companion")))
+@interface FlowKotlinIntProgressionCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKotlinIntProgressionCompanion *shared __attribute__((swift_name("shared")));
+- (FlowKotlinIntProgression *)fromClosedRangeRangeStart:(int32_t)rangeStart rangeEnd:(int32_t)rangeEnd step:(int32_t)step __attribute__((swift_name("fromClosedRange(rangeStart:rangeEnd:step:)")));
+@end
+
+__attribute__((swift_name("KotlinIntIterator")))
+@interface FlowKotlinIntIterator : FlowBase <FlowKotlinIterator>
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (FlowInt *)next __attribute__((swift_name("next()")));
+- (int32_t)nextInt __attribute__((swift_name("nextInt()")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinIntRange.Companion")))
+@interface FlowKotlinIntRangeCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKotlinIntRangeCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) FlowKotlinIntRange *EMPTY __attribute__((swift_name("EMPTY")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -5998,12 +7802,6 @@ __attribute__((swift_name("Kotlinx_coroutines_coreChildJob")))
 - (void)parentCancelledParentJob:(id<FlowKotlinx_coroutines_coreParentJob>)parentJob __attribute__((swift_name("parentCancelled(parentJob:)")));
 @end
 
-__attribute__((swift_name("KotlinSequence")))
-@protocol FlowKotlinSequence
-@required
-- (id<FlowKotlinIterator>)iterator __attribute__((swift_name("iterator()")));
-@end
-
 
 /**
  * @note annotations
@@ -6088,6 +7886,16 @@ __attribute__((swift_name("Ktor_httpHttpStatusCode.Companion")))
 @end
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_utilsGMTDate.Companion")))
+@interface FlowKtor_utilsGMTDateCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKtor_utilsGMTDateCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) FlowKtor_utilsGMTDate *START __attribute__((swift_name("START")));
+@end
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Ktor_utilsWeekDay")))
 @interface FlowKtor_utilsWeekDay : FlowKotlinEnum<FlowKtor_utilsWeekDay *>
 + (instancetype)alloc __attribute__((unavailable));
@@ -6102,7 +7910,6 @@ __attribute__((swift_name("Ktor_utilsWeekDay")))
 @property (class, readonly) FlowKtor_utilsWeekDay *saturday __attribute__((swift_name("saturday")));
 @property (class, readonly) FlowKtor_utilsWeekDay *sunday __attribute__((swift_name("sunday")));
 + (FlowKotlinArray<FlowKtor_utilsWeekDay *> *)values __attribute__((swift_name("values()")));
-@property (class, readonly) NSArray<FlowKtor_utilsWeekDay *> *entries __attribute__((swift_name("entries")));
 @property (readonly) NSString *value __attribute__((swift_name("value")));
 @end
 
@@ -6126,19 +7933,7 @@ __attribute__((swift_name("Ktor_utilsMonth")))
 @property (class, readonly) FlowKtor_utilsMonth *november __attribute__((swift_name("november")));
 @property (class, readonly) FlowKtor_utilsMonth *december __attribute__((swift_name("december")));
 + (FlowKotlinArray<FlowKtor_utilsMonth *> *)values __attribute__((swift_name("values()")));
-@property (class, readonly) NSArray<FlowKtor_utilsMonth *> *entries __attribute__((swift_name("entries")));
 @property (readonly) NSString *value __attribute__((swift_name("value")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_utilsGMTDate.Companion")))
-@interface FlowKtor_utilsGMTDateCompanion : FlowBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) FlowKtor_utilsGMTDateCompanion *shared __attribute__((swift_name("shared")));
-- (id<FlowKotlinx_serialization_coreKSerializer>)serializer __attribute__((swift_name("serializer()")));
-@property (readonly) FlowKtor_utilsGMTDate *START __attribute__((swift_name("START")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -6157,6 +7952,183 @@ __attribute__((swift_name("Ktor_httpHttpProtocolVersion.Companion")))
 @property (readonly) FlowKtor_httpHttpProtocolVersion *SPDY_3 __attribute__((swift_name("SPDY_3")));
 @end
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_ioMemory")))
+@interface FlowKtor_ioMemory : FlowBase
+- (instancetype)initWithPointer:(void *)pointer size:(int64_t)size __attribute__((swift_name("init(pointer:size:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) FlowKtor_ioMemoryCompanion *companion __attribute__((swift_name("companion")));
+- (void)doCopyToDestination:(FlowKtor_ioMemory *)destination offset:(int32_t)offset length:(int32_t)length destinationOffset:(int32_t)destinationOffset __attribute__((swift_name("doCopyTo(destination:offset:length:destinationOffset:)")));
+- (void)doCopyToDestination:(FlowKtor_ioMemory *)destination offset:(int64_t)offset length:(int64_t)length destinationOffset_:(int64_t)destinationOffset __attribute__((swift_name("doCopyTo(destination:offset:length:destinationOffset_:)")));
+- (int8_t)loadAtIndex:(int32_t)index __attribute__((swift_name("loadAt(index:)")));
+- (int8_t)loadAtIndex_:(int64_t)index __attribute__((swift_name("loadAt(index_:)")));
+- (FlowKtor_ioMemory *)sliceOffset:(int32_t)offset length:(int32_t)length __attribute__((swift_name("slice(offset:length:)")));
+- (FlowKtor_ioMemory *)sliceOffset:(int64_t)offset length_:(int64_t)length __attribute__((swift_name("slice(offset:length_:)")));
+- (void)storeAtIndex:(int32_t)index value:(int8_t)value __attribute__((swift_name("storeAt(index:value:)")));
+- (void)storeAtIndex:(int64_t)index value_:(int8_t)value __attribute__((swift_name("storeAt(index:value_:)")));
+@property (readonly) void *pointer __attribute__((swift_name("pointer")));
+@property (readonly) int64_t size __attribute__((swift_name("size")));
+@property (readonly) int32_t size32 __attribute__((swift_name("size32")));
+@end
+
+__attribute__((swift_name("Ktor_ioBuffer")))
+@interface FlowKtor_ioBuffer : FlowBase
+- (instancetype)initWithMemory:(FlowKtor_ioMemory *)memory __attribute__((swift_name("init(memory:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("\n    We're migrating to the new kotlinx-io library.\n    This declaration is deprecated and will be removed in Ktor 4.0.0\n    If you have any problems with migration, please contact us in \n    https://youtrack.jetbrains.com/issue/KTOR-6030/Migrate-to-new-kotlinx.io-library\n    ")));
+@property (class, readonly, getter=companion) FlowKtor_ioBufferCompanion *companion __attribute__((swift_name("companion")));
+- (void)commitWrittenCount:(int32_t)count __attribute__((swift_name("commitWritten(count:)")));
+- (void)discardExactCount:(int32_t)count __attribute__((swift_name("discardExact(count:)")));
+- (FlowKtor_ioBuffer *)duplicate __attribute__((swift_name("duplicate()")));
+
+/**
+ * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
+*/
+- (void)duplicateToCopy:(FlowKtor_ioBuffer *)copy __attribute__((swift_name("duplicateTo(copy:)")));
+- (int8_t)readByte __attribute__((swift_name("readByte()")));
+- (void)reserveEndGapEndGap:(int32_t)endGap __attribute__((swift_name("reserveEndGap(endGap:)")));
+- (void)reserveStartGapStartGap:(int32_t)startGap __attribute__((swift_name("reserveStartGap(startGap:)")));
+- (void)reset __attribute__((swift_name("reset()")));
+- (void)resetForRead __attribute__((swift_name("resetForRead()")));
+- (void)resetForWrite __attribute__((swift_name("resetForWrite()")));
+- (void)resetForWriteLimit:(int32_t)limit __attribute__((swift_name("resetForWrite(limit:)")));
+- (void)rewindCount:(int32_t)count __attribute__((swift_name("rewind(count:)")));
+- (NSString *)description __attribute__((swift_name("description()")));
+- (int32_t)tryPeekByte __attribute__((swift_name("tryPeekByte()")));
+- (int32_t)tryReadByte __attribute__((swift_name("tryReadByte()")));
+- (void)writeByteValue:(int8_t)value __attribute__((swift_name("writeByte(value:)")));
+@property (readonly) int32_t capacity __attribute__((swift_name("capacity")));
+@property (readonly) int32_t endGap __attribute__((swift_name("endGap")));
+@property (readonly) int32_t limit __attribute__((swift_name("limit")));
+@property (readonly) FlowKtor_ioMemory *memory __attribute__((swift_name("memory")));
+@property (readonly) int32_t readPosition __attribute__((swift_name("readPosition")));
+@property (readonly) int32_t readRemaining __attribute__((swift_name("readRemaining")));
+@property (readonly) int32_t startGap __attribute__((swift_name("startGap")));
+@property (readonly) int32_t writePosition __attribute__((swift_name("writePosition")));
+@property (readonly) int32_t writeRemaining __attribute__((swift_name("writeRemaining")));
+@end
+
+__attribute__((swift_name("Ktor_ioChunkBuffer")))
+@interface FlowKtor_ioChunkBuffer : FlowKtor_ioBuffer
+- (instancetype)initWithMemory:(FlowKtor_ioMemory *)memory origin:(FlowKtor_ioChunkBuffer * _Nullable)origin parentPool:(id<FlowKtor_ioObjectPool> _Nullable)parentPool __attribute__((swift_name("init(memory:origin:parentPool:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("\n    We're migrating to the new kotlinx-io library.\n    This declaration is deprecated and will be removed in Ktor 4.0.0\n    If you have any problems with migration, please contact us in \n    https://youtrack.jetbrains.com/issue/KTOR-6030/Migrate-to-new-kotlinx.io-library\n    ")));
+- (instancetype)initWithMemory:(FlowKtor_ioMemory *)memory __attribute__((swift_name("init(memory:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (class, readonly, getter=companion) FlowKtor_ioChunkBufferCompanion *companion __attribute__((swift_name("companion")));
+- (FlowKtor_ioChunkBuffer * _Nullable)cleanNext __attribute__((swift_name("cleanNext()")));
+- (FlowKtor_ioChunkBuffer *)duplicate __attribute__((swift_name("duplicate()")));
+- (void)releasePool:(id<FlowKtor_ioObjectPool>)pool __attribute__((swift_name("release(pool:)")));
+- (void)reset __attribute__((swift_name("reset()")));
+@property (getter=next_) FlowKtor_ioChunkBuffer * _Nullable next __attribute__((swift_name("next")));
+@property (readonly) FlowKtor_ioChunkBuffer * _Nullable origin __attribute__((swift_name("origin")));
+@property (readonly) int32_t referenceCount __attribute__((swift_name("referenceCount")));
+@end
+
+__attribute__((swift_name("Ktor_ioInput")))
+@interface FlowKtor_ioInput : FlowBase <FlowKtor_ioCloseable>
+- (instancetype)initWithHead:(FlowKtor_ioChunkBuffer *)head remaining:(int64_t)remaining pool:(id<FlowKtor_ioObjectPool>)pool __attribute__((swift_name("init(head:remaining:pool:)"))) __attribute__((objc_designated_initializer)) __attribute__((deprecated("\n    We're migrating to the new kotlinx-io library.\n    This declaration is deprecated and will be removed in Ktor 4.0.0\n    If you have any problems with migration, please contact us in \n    https://youtrack.jetbrains.com/issue/KTOR-6030/Migrate-to-new-kotlinx.io-library\n    ")));
+@property (class, readonly, getter=companion) FlowKtor_ioInputCompanion *companion __attribute__((swift_name("companion")));
+- (BOOL)canRead __attribute__((swift_name("canRead()")));
+- (void)close __attribute__((swift_name("close()")));
+
+/**
+ * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
+*/
+- (void)closeSource __attribute__((swift_name("closeSource()")));
+- (int32_t)discardN:(int32_t)n __attribute__((swift_name("discard(n:)")));
+- (int64_t)discardN_:(int64_t)n __attribute__((swift_name("discard(n_:)")));
+- (void)discardExactN:(int32_t)n __attribute__((swift_name("discardExact(n:)")));
+
+/**
+ * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
+*/
+- (FlowKtor_ioChunkBuffer * _Nullable)fill __attribute__((swift_name("fill()")));
+
+/**
+ * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
+*/
+- (int32_t)fillDestination:(FlowKtor_ioMemory *)destination offset:(int32_t)offset length:(int32_t)length __attribute__((swift_name("fill(destination:offset:length:)")));
+- (BOOL)hasBytesN:(int32_t)n __attribute__((swift_name("hasBytes(n:)")));
+
+/**
+ * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
+*/
+- (void)markNoMoreChunksAvailable __attribute__((swift_name("markNoMoreChunksAvailable()")));
+- (int32_t)peekToBuffer:(FlowKtor_ioChunkBuffer *)buffer __attribute__((swift_name("peekTo(buffer:)")));
+- (int64_t)peekToDestination:(FlowKtor_ioMemory *)destination destinationOffset:(int64_t)destinationOffset offset:(int64_t)offset min:(int64_t)min max:(int64_t)max __attribute__((swift_name("peekTo(destination:destinationOffset:offset:min:max:)")));
+- (int8_t)readByte __attribute__((swift_name("readByte()")));
+- (NSString *)readTextMin:(int32_t)min max:(int32_t)max __attribute__((swift_name("readText(min:max:)")));
+- (int32_t)readTextOut:(id<FlowKotlinAppendable>)out min:(int32_t)min max:(int32_t)max __attribute__((swift_name("readText(out:min:max:)")));
+- (NSString *)readTextExactExactCharacters:(int32_t)exactCharacters __attribute__((swift_name("readTextExact(exactCharacters:)")));
+- (void)readTextExactOut:(id<FlowKotlinAppendable>)out exactCharacters:(int32_t)exactCharacters __attribute__((swift_name("readTextExact(out:exactCharacters:)")));
+- (void)release_ __attribute__((swift_name("release()")));
+- (int32_t)tryPeek __attribute__((swift_name("tryPeek()")));
+@property (readonly) BOOL endOfInput __attribute__((swift_name("endOfInput")));
+@property (readonly) id<FlowKtor_ioObjectPool> pool __attribute__((swift_name("pool")));
+@property (readonly) int64_t remaining __attribute__((swift_name("remaining")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_ioByteReadPacket")))
+@interface FlowKtor_ioByteReadPacket : FlowKtor_ioInput
+- (instancetype)initWithHead:(FlowKtor_ioChunkBuffer *)head pool:(id<FlowKtor_ioObjectPool>)pool __attribute__((swift_name("init(head:pool:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithHead:(FlowKtor_ioChunkBuffer *)head remaining:(int64_t)remaining pool:(id<FlowKtor_ioObjectPool>)pool __attribute__((swift_name("init(head:remaining:pool:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
+@property (class, readonly, getter=companion) FlowKtor_ioByteReadPacketCompanion *companion __attribute__((swift_name("companion")));
+
+/**
+ * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
+*/
+- (void)closeSource __attribute__((swift_name("closeSource()")));
+- (FlowKtor_ioByteReadPacket *)doCopy __attribute__((swift_name("doCopy()")));
+
+/**
+ * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
+*/
+- (FlowKtor_ioChunkBuffer * _Nullable)fill __attribute__((swift_name("fill()")));
+
+/**
+ * @note This method has protected visibility in Kotlin source and is intended only for use by subclasses.
+*/
+- (int32_t)fillDestination:(FlowKtor_ioMemory *)destination offset:(int32_t)offset length:(int32_t)length __attribute__((swift_name("fill(destination:offset:length:)")));
+- (NSString *)description __attribute__((swift_name("description()")));
+@end
+
+__attribute__((swift_name("Ktor_ioReadSession")))
+@protocol FlowKtor_ioReadSession
+@required
+- (int32_t)discardN:(int32_t)n __attribute__((swift_name("discard(n:)")));
+- (FlowKtor_ioChunkBuffer * _Nullable)requestAtLeast:(int32_t)atLeast __attribute__((swift_name("request(atLeast:)")));
+@property (readonly) int32_t availableForRead __attribute__((swift_name("availableForRead")));
+@end
+
+__attribute__((swift_name("KotlinSuspendFunction1")))
+@protocol FlowKotlinSuspendFunction1 <FlowKotlinFunction>
+@required
+
+/**
+ * @note This method converts instances of CancellationException to errors.
+ * Other uncaught Kotlin exceptions are fatal.
+*/
+- (void)invokeP1:(id _Nullable)p1 completionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("invoke(p1:completionHandler:)")));
+@end
+
+__attribute__((swift_name("KotlinAppendable")))
+@protocol FlowKotlinAppendable
+@required
+- (id<FlowKotlinAppendable>)appendValue:(unichar)value __attribute__((swift_name("append(value:)")));
+- (id<FlowKotlinAppendable>)appendValue_:(id _Nullable)value __attribute__((swift_name("append(value_:)")));
+- (id<FlowKotlinAppendable>)appendValue:(id _Nullable)value startIndex:(int32_t)startIndex endIndex:(int32_t)endIndex __attribute__((swift_name("append(value:startIndex:endIndex:)")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_httpURLBuilder.Companion")))
+@interface FlowKtor_httpURLBuilderCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKtor_httpURLBuilderCompanion *shared __attribute__((swift_name("shared")));
+@end
+
+__attribute__((swift_name("Ktor_httpParametersBuilder")))
+@protocol FlowKtor_httpParametersBuilder <FlowKtor_utilsStringValuesBuilder>
+@required
+@end
+
 __attribute__((swift_name("KotlinKType")))
 @protocol FlowKotlinKType
 @required
@@ -6173,60 +8145,6 @@ __attribute__((swift_name("KotlinKType")))
 */
 @property (readonly) id<FlowKotlinKClassifier> _Nullable classifier __attribute__((swift_name("classifier")));
 @property (readonly) BOOL isMarkedNullable __attribute__((swift_name("isMarkedNullable")));
-@end
-
-
-/**
- * @note annotations
- *   kotlin.SinceKotlin(version="2.0")
-*/
-__attribute__((swift_name("KotlinAutoCloseable")))
-@protocol FlowKotlinAutoCloseable
-@required
-- (void)close __attribute__((swift_name("close()")));
-@end
-
-__attribute__((swift_name("Kotlinx_io_coreRawSource")))
-@protocol FlowKotlinx_io_coreRawSource <FlowKotlinAutoCloseable>
-@required
-- (int64_t)readAtMostToSink:(FlowKotlinx_io_coreBuffer *)sink byteCount:(int64_t)byteCount __attribute__((swift_name("readAtMostTo(sink:byteCount:)")));
-@end
-
-__attribute__((swift_name("Kotlinx_io_coreSource")))
-@protocol FlowKotlinx_io_coreSource <FlowKotlinx_io_coreRawSource>
-@required
-- (BOOL)exhausted __attribute__((swift_name("exhausted()")));
-- (id<FlowKotlinx_io_coreSource>)peek __attribute__((swift_name("peek()")));
-- (int32_t)readAtMostToSink:(FlowKotlinByteArray *)sink startIndex:(int32_t)startIndex endIndex:(int32_t)endIndex __attribute__((swift_name("readAtMostTo(sink:startIndex:endIndex:)")));
-- (int8_t)readByte __attribute__((swift_name("readByte()")));
-- (int32_t)readInt __attribute__((swift_name("readInt()")));
-- (int64_t)readLong __attribute__((swift_name("readLong()")));
-- (int16_t)readShort __attribute__((swift_name("readShort()")));
-- (void)readToSink:(id<FlowKotlinx_io_coreRawSink>)sink byteCount:(int64_t)byteCount __attribute__((swift_name("readTo(sink:byteCount:)")));
-- (BOOL)requestByteCount:(int64_t)byteCount __attribute__((swift_name("request(byteCount:)")));
-- (void)requireByteCount:(int64_t)byteCount __attribute__((swift_name("require(byteCount:)")));
-- (void)skipByteCount:(int64_t)byteCount __attribute__((swift_name("skip(byteCount:)")));
-- (int64_t)transferToSink:(id<FlowKotlinx_io_coreRawSink>)sink __attribute__((swift_name("transferTo(sink:)")));
-
-/**
- * @note annotations
- *   kotlinx.io.InternalIoApi
-*/
-@property (readonly) FlowKotlinx_io_coreBuffer *buffer __attribute__((swift_name("buffer")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Ktor_httpURLBuilder.Companion")))
-@interface FlowKtor_httpURLBuilderCompanion : FlowBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) FlowKtor_httpURLBuilderCompanion *shared __attribute__((swift_name("shared")));
-@end
-
-__attribute__((swift_name("Ktor_httpParametersBuilder")))
-@protocol FlowKtor_httpParametersBuilder <FlowKtor_utilsStringValuesBuilder>
-@required
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -6332,6 +8250,67 @@ __attribute__((swift_name("Ktor_utilsMonth.Companion")))
 - (FlowKtor_utilsMonth *)fromValue:(NSString *)value __attribute__((swift_name("from(value:)")));
 @end
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_ioMemory.Companion")))
+@interface FlowKtor_ioMemoryCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKtor_ioMemoryCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) FlowKtor_ioMemory *Empty __attribute__((swift_name("Empty")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_ioBuffer.Companion")))
+@interface FlowKtor_ioBufferCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKtor_ioBufferCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) FlowKtor_ioBuffer *Empty __attribute__((swift_name("Empty")));
+@property (readonly) int32_t ReservedSize __attribute__((swift_name("ReservedSize")));
+@end
+
+__attribute__((swift_name("Ktor_ioObjectPool")))
+@protocol FlowKtor_ioObjectPool <FlowKtor_ioCloseable>
+@required
+- (id)borrow __attribute__((swift_name("borrow()")));
+- (void)dispose __attribute__((swift_name("dispose()")));
+- (void)recycleInstance:(id)instance __attribute__((swift_name("recycle(instance:)")));
+@property (readonly) int32_t capacity __attribute__((swift_name("capacity")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_ioChunkBuffer.Companion")))
+@interface FlowKtor_ioChunkBufferCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKtor_ioChunkBufferCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) FlowKtor_ioChunkBuffer *Empty __attribute__((swift_name("Empty")));
+@property (readonly) id<FlowKtor_ioObjectPool> EmptyPool __attribute__((swift_name("EmptyPool")));
+@property (readonly) id<FlowKtor_ioObjectPool> Pool __attribute__((swift_name("Pool")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_ioInput.Companion")))
+@interface FlowKtor_ioInputCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKtor_ioInputCompanion *shared __attribute__((swift_name("shared")));
+@end
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Ktor_ioByteReadPacket.Companion")))
+@interface FlowKtor_ioByteReadPacketCompanion : FlowBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) FlowKtor_ioByteReadPacketCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) FlowKtor_ioByteReadPacket *Empty __attribute__((swift_name("Empty")));
+@end
+
 
 /**
  * @note annotations
@@ -6348,87 +8327,6 @@ __attribute__((swift_name("KotlinKTypeProjection")))
 - (NSString *)description __attribute__((swift_name("description()")));
 @property (readonly) id<FlowKotlinKType> _Nullable type __attribute__((swift_name("type")));
 @property (readonly) FlowKotlinKVariance * _Nullable variance __attribute__((swift_name("variance")));
-@end
-
-__attribute__((swift_name("Kotlinx_io_coreRawSink")))
-@protocol FlowKotlinx_io_coreRawSink <FlowKotlinAutoCloseable>
-@required
-- (void)flush __attribute__((swift_name("flush()")));
-- (void)writeSource:(FlowKotlinx_io_coreBuffer *)source byteCount:(int64_t)byteCount __attribute__((swift_name("write(source:byteCount:)")));
-@end
-
-__attribute__((swift_name("Kotlinx_io_coreSink")))
-@protocol FlowKotlinx_io_coreSink <FlowKotlinx_io_coreRawSink>
-@required
-- (void)emit __attribute__((swift_name("emit()")));
-
-/**
- * @note annotations
- *   kotlinx.io.InternalIoApi
-*/
-- (void)hintEmit __attribute__((swift_name("hintEmit()")));
-- (int64_t)transferFromSource:(id<FlowKotlinx_io_coreRawSource>)source __attribute__((swift_name("transferFrom(source:)")));
-- (void)writeSource:(id<FlowKotlinx_io_coreRawSource>)source byteCount_:(int64_t)byteCount __attribute__((swift_name("write(source:byteCount_:)")));
-- (void)writeSource:(FlowKotlinByteArray *)source startIndex:(int32_t)startIndex endIndex:(int32_t)endIndex __attribute__((swift_name("write(source:startIndex:endIndex:)")));
-- (void)writeByteByte:(int8_t)byte __attribute__((swift_name("writeByte(byte:)")));
-- (void)writeIntInt:(int32_t)int_ __attribute__((swift_name("writeInt(int:)")));
-- (void)writeLongLong:(int64_t)long_ __attribute__((swift_name("writeLong(long:)")));
-- (void)writeShortShort:(int16_t)short_ __attribute__((swift_name("writeShort(short:)")));
-
-/**
- * @note annotations
- *   kotlinx.io.InternalIoApi
-*/
-@property (readonly) FlowKotlinx_io_coreBuffer *buffer __attribute__((swift_name("buffer")));
-@end
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Kotlinx_io_coreBuffer")))
-@interface FlowKotlinx_io_coreBuffer : FlowBase <FlowKotlinx_io_coreSource, FlowKotlinx_io_coreSink>
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
-+ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (void)clear __attribute__((swift_name("clear()")));
-- (void)close __attribute__((swift_name("close()")));
-- (FlowKotlinx_io_coreBuffer *)doCopy __attribute__((swift_name("doCopy()")));
-- (void)doCopyToOut:(FlowKotlinx_io_coreBuffer *)out startIndex:(int64_t)startIndex endIndex:(int64_t)endIndex __attribute__((swift_name("doCopyTo(out:startIndex:endIndex:)")));
-- (void)emit __attribute__((swift_name("emit()")));
-- (BOOL)exhausted __attribute__((swift_name("exhausted()")));
-- (void)flush __attribute__((swift_name("flush()")));
-- (int8_t)getPosition:(int64_t)position __attribute__((swift_name("get(position:)")));
-
-/**
- * @note annotations
- *   kotlinx.io.InternalIoApi
-*/
-- (void)hintEmit __attribute__((swift_name("hintEmit()")));
-- (id<FlowKotlinx_io_coreSource>)peek __attribute__((swift_name("peek()")));
-- (int64_t)readAtMostToSink:(FlowKotlinx_io_coreBuffer *)sink byteCount:(int64_t)byteCount __attribute__((swift_name("readAtMostTo(sink:byteCount:)")));
-- (int32_t)readAtMostToSink:(FlowKotlinByteArray *)sink startIndex:(int32_t)startIndex endIndex:(int32_t)endIndex __attribute__((swift_name("readAtMostTo(sink:startIndex:endIndex:)")));
-- (int8_t)readByte __attribute__((swift_name("readByte()")));
-- (int32_t)readInt __attribute__((swift_name("readInt()")));
-- (int64_t)readLong __attribute__((swift_name("readLong()")));
-- (int16_t)readShort __attribute__((swift_name("readShort()")));
-- (void)readToSink:(id<FlowKotlinx_io_coreRawSink>)sink byteCount:(int64_t)byteCount __attribute__((swift_name("readTo(sink:byteCount:)")));
-- (BOOL)requestByteCount:(int64_t)byteCount __attribute__((swift_name("request(byteCount:)")));
-- (void)requireByteCount:(int64_t)byteCount __attribute__((swift_name("require(byteCount:)")));
-- (void)skipByteCount:(int64_t)byteCount __attribute__((swift_name("skip(byteCount:)")));
-- (NSString *)description __attribute__((swift_name("description()")));
-- (int64_t)transferFromSource:(id<FlowKotlinx_io_coreRawSource>)source __attribute__((swift_name("transferFrom(source:)")));
-- (int64_t)transferToSink:(id<FlowKotlinx_io_coreRawSink>)sink __attribute__((swift_name("transferTo(sink:)")));
-- (void)writeSource:(FlowKotlinx_io_coreBuffer *)source byteCount:(int64_t)byteCount __attribute__((swift_name("write(source:byteCount:)")));
-- (void)writeSource:(id<FlowKotlinx_io_coreRawSource>)source byteCount_:(int64_t)byteCount __attribute__((swift_name("write(source:byteCount_:)")));
-- (void)writeSource:(FlowKotlinByteArray *)source startIndex:(int32_t)startIndex endIndex:(int32_t)endIndex __attribute__((swift_name("write(source:startIndex:endIndex:)")));
-- (void)writeByteByte:(int8_t)byte __attribute__((swift_name("writeByte(byte:)")));
-- (void)writeIntInt:(int32_t)int_ __attribute__((swift_name("writeInt(int:)")));
-- (void)writeLongLong:(int64_t)long_ __attribute__((swift_name("writeLong(long:)")));
-- (void)writeShortShort:(int16_t)short_ __attribute__((swift_name("writeShort(short:)")));
-
-/**
- * @note annotations
- *   kotlinx.io.InternalIoApi
-*/
-@property (readonly) FlowKotlinx_io_coreBuffer *buffer __attribute__((swift_name("buffer")));
-@property (readonly) int64_t size __attribute__((swift_name("size")));
 @end
 
 

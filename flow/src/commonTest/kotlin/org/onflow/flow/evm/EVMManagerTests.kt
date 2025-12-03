@@ -18,6 +18,9 @@ class EVMManagerTests {
     private val transactionsApi = TransactionsApi(baseUrl)
     private val evmManager = EVMManager(ChainId.Mainnet)
 
+    private val transactionsTestnetApi = TransactionsApi(ChainId.Testnet.baseUrl)
+    private val evmTestnetManager = EVMManager(ChainId.Testnet)
+
     @Test
     fun testCreateCOAAccount() {
         runBlocking {
@@ -33,19 +36,18 @@ class EVMManagerTests {
                 keyIndex = 0
             }
 
-            val ex = assertFailsWith<RuntimeException> {
-                // triggers the Cadence script; we *expect* it to abort
-                val txId = evmManager.createCOAAccount(
-                    proposer = FlowAddress(cleanAccountAddress),
-                    payer = FlowAddress(cleanAccountAddress),
-                    amount = 0.1,
-                    signers = listOf(signer)
-                )
-                transactionsApi.waitForSeal(txId)   // will throw
-            }
+
+            // triggers the Cadence script; we *expect* it to abort
+            val txId = evmTestnetManager.createCOAAccount(
+                proposer = FlowAddress(cleanAccountAddress),
+                payer = FlowAddress(cleanAccountAddress),
+                amount = 0.1,
+                signers = listOf(signer)
+            )
+            val ex = transactionsTestnetApi.waitForSeal(txId)  // will throw
 
             assertTrue(
-                ex.message?.contains("already stores an object") == true,
+                ex.errorMessage.contains("already stores an object") == true,
                 "Error should mention that /storage/evm already stores an object"
             )
         }
